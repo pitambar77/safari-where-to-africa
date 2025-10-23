@@ -1,6 +1,6 @@
 import React from "react";
 import heroImage from "../../assets/where-home-banner.webp"; 
-import "./home.css";
+
 import Homepack from "../homePage/Homepack";
 import Founder from "../homePage/Founder";
 import WhyTravel from "../homePage/WhyTravel";
