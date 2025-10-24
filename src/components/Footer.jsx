@@ -165,7 +165,7 @@ const Footer = () => {
         </div>
       </div>
      <div className=" bg-black/80 py-6 flex gap-4 justify-center font-quicksand">
-        <p>AlI rights reserved© 2025 Where To Africa Travel Pty Ltd</p>
+        <p>AlI rights reserved © 2025 Safari Marketing Pro</p>
         <ul className=" flex gap-4">
                     <li><a href="#" className=" text-amber-300/80">Privacy Policy</a></li>
                     <li><a href="#" className="write_teram">Website Terms of Use</a></li>
