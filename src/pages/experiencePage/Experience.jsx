@@ -3,9 +3,10 @@ import Banner from '../../components/Banner'
 import Overview from '../../components/Overview'
 import SouthAfricaAreas from './SouthAfricaAreas'
 import Itinarary from './Itinarary'
-import ExperienceCarousel from './experienceCarousel'
+import ExperienceCarousel from './ExperienceCarousel'
 import OvernightAccommodations from './OvernightAccommodations'
 import JourneyCollection from './JourneyCollection'
+
 
 const Experience = () => {
   return (

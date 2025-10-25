@@ -76,7 +76,7 @@ const ExperienceCarousel = () => {
        
       </div>
 
-      {/* --- Swiper Section --- */}
+    
       <div className="relative  ">
         <Swiper
           modules={[Navigation]}
