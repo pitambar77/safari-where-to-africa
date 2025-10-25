@@ -37,6 +37,7 @@ import Layout from './Layout';
 import AccomodationLanding from './pages/Accomodation/LandingPage/AccomodationLanding';
 import Home from './pages/homePage/Home';
 import AccomodationDetails from './pages/Accomodation/AccomodationDetails/AccomodationDetails';
+import Experience from './pages/experiencePage/Experience';
 
 
 
@@ -49,6 +50,7 @@ const App = () => {
         <Route path="" element={<Home/>}/>
 
         <Route path="itinerary" element={<SafariItinerary />}/>
+        <Route path="experience" element={<Experience />}/>
         <Route path="accomodation-landing" element={<AccomodationLanding/>}/>
         <Route path="accomodation-details" element={<AccomodationDetails/>}/>
 

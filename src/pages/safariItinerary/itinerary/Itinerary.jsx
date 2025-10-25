@@ -136,6 +136,8 @@
 
 // export default Itinerary;
 
+
+
 // animation 
 
 import React, { useState } from "react";
@@ -162,7 +164,7 @@ const Itinerary = ({ data = [], title = "Trip Itinerary" }) => {
 
   return (
     <div className="bg-[#f6f1e9] font-cormorant">
-      <div className="max-w-[1320px] mx-auto py-16 px-4">
+      <div className=" max-w-[1320px] mx-auto py-16 px-4">
         {/* --- HEADER --- */}
         <h2 className="text-3xl font-bold text-gray-900 mb-6">{title}</h2>
 
@@ -278,3 +280,8 @@ const Itinerary = ({ data = [], title = "Trip Itinerary" }) => {
 };
 
 export default Itinerary;
+
+
+
+
+

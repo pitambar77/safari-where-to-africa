@@ -65,7 +65,7 @@ const Header = () => {
     <header className="py-4 shadow-sm bg-white">
       
       {/* Container - Replaces 'mani-con_africa' */}
-      <div className="max-w-[1320px] mx-auto ">
+      <div className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28 ">
         
         {/* Row - Replaces 'row align-items-center' */}
         {/* Uses flexbox with vertical alignment */}

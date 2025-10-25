@@ -12,7 +12,7 @@ const Banner = ({ title, subtitle, imageUrl }) => {
       <div className="absolute inset-0 bg-black opacity-40"></div>
 
       {/* Text Content */}
-      <div className=" container mx-auto absolute inset-0 flex flex-col justify-center  text-white/80 px-4  ">
+      <div className=" px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28 absolute inset-0 flex flex-col justify-center  text-white/80   ">
         <div className="  font-cormorant text-[60px] mb-4 font-semibold  capitalize">
           {title}
         </div>
