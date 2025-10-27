@@ -38,6 +38,8 @@ import AccomodationLanding from './pages/Accomodation/LandingPage/AccomodationLa
 import Home from './pages/homePage/Home';
 import AccomodationDetails from './pages/Accomodation/AccomodationDetails/AccomodationDetails';
 import Experience from './pages/experiencePage/Experience';
+import ExperienceDetails from './pages/experiencePage/experienceDetails/ExperienceDetails';
+import DestinationDetails from './pages/destinationPage/destinationDetailsPage/DestinationDetails';
 
 
 
@@ -51,6 +53,9 @@ const App = () => {
 
         <Route path="itinerary" element={<SafariItinerary />}/>
         <Route path="experience" element={<Experience />}/>
+        <Route path="experience-details" element={<ExperienceDetails />}/>
+        <Route path="destination-details" element={<DestinationDetails />}/>
+
         <Route path="accomodation-landing" element={<AccomodationLanding/>}/>
         <Route path="accomodation-details" element={<AccomodationDetails/>}/>
 

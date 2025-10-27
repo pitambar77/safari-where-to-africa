@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { FaArrowLeftLong,FaArrowRightLong } from "react-icons/fa6";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -59,7 +58,7 @@ const ExperienceCarousel = () => {
   const [isEnd, setIsEnd] = useState(false);
 
   return (
-    <section className="bg-[#faf6ef] py-16 px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28 relative font-serif">
+    <section className="bg-[#faf6ef] py-16 pl-4 md:pl-10 lg:pl-16 xl:pl-20 2xl:pl-28 relative ">
       {/* --- Quote Section --- */}
       <div className="max-w-3xl mx-auto text-center mb-14">
         <p className="text-3xl font-cormorant tracking-[2px] uppercase text-[#a89f82] mb-4">
@@ -80,7 +79,7 @@ const ExperienceCarousel = () => {
       <div className="relative  ">
         <Swiper
           modules={[Navigation]}
-          slidesPerView={2}
+          slidesPerView={2.5}
           slidesPerGroup={2}
           spaceBetween={24}
           navigation={{
@@ -89,7 +88,7 @@ const ExperienceCarousel = () => {
           }}
           breakpoints={{
             0: { slidesPerView: 1, slidesPerGroup: 1 },
-            768: { slidesPerView: 2, slidesPerGroup: 2 },
+            768: { slidesPerView: 2.5, slidesPerGroup: 2 },
           }}
           onInit={(swiper) => {
             const total = Math.ceil(
@@ -116,7 +115,7 @@ const ExperienceCarousel = () => {
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-[340px] xl:h-[400px] 2xl:h-[460px] object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-[300px]  object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-8">
@@ -131,25 +130,25 @@ const ExperienceCarousel = () => {
 
         {/* --- Side Navigation Buttons --- */}
         <button
-          className={`swiper-prev absolute -left-6 top-1/2 -translate-y-1/2 bg-white shadow-md p-3 rounded-full transition z-10 ${
+          className={`swiper-prev absolute -left-10 top-1/2 -translate-y-1/2 bg-white shadow-md p-3 rounded-full transition z-10 ${
             isBeginning
               ? "opacity-40 cursor-not-allowed"
               : "hover:bg-gray-100 cursor-pointer"
           }`}
           disabled={isBeginning}
         >
-          <IoIosArrowBack className="text-[#a89f82]" size={24} />
+          <FaArrowLeftLong className="text-[#a89f82]" size={18} />
         </button>
 
         <button
-          className={`swiper-next absolute -right-6 top-1/2 -translate-y-1/2 bg-white shadow-md p-3 rounded-full transition z-10 ${
+          className={`swiper-next absolute right-1/6  top-1/2 -translate-y-1/2 bg-white shadow-md p-3 rounded-full transition z-10 ${
             isEnd
               ? "opacity-40 cursor-not-allowed"
               : "hover:bg-gray-100 cursor-pointer"
           }`}
           disabled={isEnd}
         >
-          <IoIosArrowForward className="text-[#a89f82]" size={24} />
+          <FaArrowRightLong className="text-[#a89f82]" size={18} />
         </button>
       </div>
 
@@ -166,11 +165,13 @@ const ExperienceCarousel = () => {
           <FaArrowLeftLong className=" w-8 h-5 "  />
         </button>
 
-        <div className="text-lg font-quicksand font-light">
+        <div className="text-lg font-quicksand font-light flex items-center">
           {String(currentPage).padStart(2, "0")}{" "}
-          <span className="text-gray-400 ">--</span>{" "}
+          <span className="text-gray-400 "> <div className=" w-16 flex-1 h-[1px] bg-[#a89f82] mx-3"></div></span>{" "}
           {String(totalPages).padStart(2, "0")}
-        </div>
+        </div> 
+
+   
 
         <button
           className={`swiper-next rounded-full  transition ${
@@ -188,5 +189,6 @@ const ExperienceCarousel = () => {
 };
 
 export default ExperienceCarousel;
+
 
 

@@ -1,5 +1,6 @@
 import React from "react";
 
+
 const Banner = ({ title, subtitle, imageUrl }) => {
   return (
     <div className="relative md:h-screen h-[550px]">

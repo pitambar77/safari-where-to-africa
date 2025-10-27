@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SafariCard from '../Accomodation/LandingPage/SafariCard';
-import safarisData from "../../data/safaris.json"; // Retain data import as we're keeping data logic here
+// import safarisData from "../../data/safaris.json"; // Retain data import as we're keeping data logic here
+import { safarisData } from '../../data/safariData';
 
 const Itinarary = () => {
   // Retain only the state necessary for pagination
@@ -32,7 +33,7 @@ const Itinarary = () => {
 
           {/* Cards Grid */}
           {currentCards.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6 gap-6 mt-16">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7 2xl:gap-8 mt-16">
               {currentCards.map((safari) => (
                 <SafariCard key={safari.id} safari={safari} />
               ))}

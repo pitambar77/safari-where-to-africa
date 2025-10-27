@@ -102,13 +102,16 @@ const OvernightAccommodations = () => {
                 </h3>
                 <p className="text-sm text-gray-500 font-quicksand ">{item.location}</p>
 
-                <button className="flex items-center text-[#a79353] text-sm font-medium mt-3 group">
+<div className=" justify-end">
+ <button className="flex items-center text-[#a79353] text-sm  font-medium mt-3 group">
                   Learn More
                   <IoArrowForward
                     size={16}
                     className="ml-1 transform group-hover:translate-x-1 transition"
                   />
                 </button>
+</div>
+               
               </div>
             </div>
           ))}

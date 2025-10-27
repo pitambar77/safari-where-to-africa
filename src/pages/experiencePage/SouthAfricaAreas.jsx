@@ -14,7 +14,7 @@ const areas = [
       "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/0b/d3/5c/d0.jpg",
     alt: "A leopard resting in the grass",
   },
-  {
+    {
     name: "WINELANDS",
     image:
       "https://images.squarespace-cdn.com/content/v1/5f1ab4309bd4b45e29ec3e4b/1638810289461-RQXPK2PDW8QI2CKZ1OJ7/Cape+Winelands+South+Africa",
@@ -55,20 +55,22 @@ const areas = [
       "https://waybird.imgix.net/regions/kodak_images/000/000/044/original/0-cederberg-south-africa-timbuktu-travel.jpg?q=50&auto=format&crop=fill&w=1024&h=576",
     alt: "Mountainous rock formations",
   },
+    
+
 ];
 
 
 const SouthAfricaAreas = () => {
   return (
-    <div className="bg-[#fcfaf5] px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28 py-16">
+    <div className="bg-[#faf5e9] mx-auto justify-center  px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28 py-16">
       <div className="">
       
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-y-4 lg:gap-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-4 lg:gap-y-8 ">
           {areas.map((area, index) => (
      
             <div
               key={area.name}
-              className="flex items-center bg-white shadow-sm hover:shadow-md transition duration-300 cursor-pointer h-24 sm:h-28 lg:h-32 mr-0 lg:mr-4 xl:mr-8"
+              className="flex items-center rounded-[3px] bg-white transition duration-300 cursor-pointer h-24 sm:h-28 lg:h-24 "
           
               style={
                 index % 3 === 0 || index % 3 === 1
@@ -77,18 +79,18 @@ const SouthAfricaAreas = () => {
               }
             >
            
-              <div className="flex-shrink-0 w-24 sm:w-28 h-full">
+              <div className="flex-shrink-0 w-24 sm:w-24 h-full">
              
                 <img
                   src={area.image} 
                   alt={area.alt}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-l-[3px]"
                 />
               </div>
 
            
-              <div className="flex-grow p-4 font-cormorant">
-                <p className="text-sm sm:text-base font-medium tracking-wider text-gray-700">
+              <div className="flex-grow p-4 font-quicksand  ">
+                <p className="text-sm sm:text-base font-semibold tracking-[2px] text-[#252525]">
                   {area.name}
                 </p>
               </div>
