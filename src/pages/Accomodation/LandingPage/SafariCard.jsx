@@ -7,7 +7,7 @@ const SafariCard = ({ safari }) => {
   const [liked, setLiked] = useState(false);
 
   return (
-    <div className="relative rounded-md overflow-hidden shadow-md hover:shadow-lg transition-all  duration-300">
+    <div className="relative rounded-sm overflow-hidden shadow-md hover:shadow-lg transition-all  duration-300">
       <img
         src={safari.image}
         alt={safari.title}

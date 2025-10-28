@@ -197,6 +197,7 @@ import { Navigation } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import "swiper/css";
 import "swiper/css/navigation";
+import elephantg1 from '../../../assets/elephantg1.webp'
 
 const gameDriveOptions = [
   {
@@ -208,8 +209,8 @@ const gameDriveOptions = [
   },
   {
     image:
-      "https://capetowndaytours.checkfront.com/media/L468-1--1614785510749032.jpg",
-    title: "Elephants",
+     elephantg1,
+      title: "Chobe National Park",
     description:
       "Chobe National park is renowned for its vast elephant population, diverse wildlife.",
   },
@@ -234,7 +235,7 @@ const GameDriveCard = ({ image, title, description }) => (
       <img
         src={image}
         alt={title}
-        className="w-full h-auto object-cover rounded-md aspect-[3.5/5] shadow-sm"
+        className="w-full h-auto object-cover rounded-sm aspect-[3.5/5] shadow-sm"
       />
     </div>
     <h3 className="text-2xl font-cormorant font-semibold text-gray-800 mb-2 leading-tight">
@@ -246,7 +247,7 @@ const GameDriveCard = ({ image, title, description }) => (
 
 const GameDriveHighlights = () => {
   return (
-    <section className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-48 py-16 relative">
+    <section className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28 py-16 relative">
       {/* Heading */}
       <h2 className="text-6xl mb-16 text-[#636363] capitalize font-cormorant text-center">
         Chobe Game Drive Highlights
@@ -256,7 +257,7 @@ const GameDriveHighlights = () => {
       <div className="relative group">
         <Swiper
           modules={[Navigation]}
-          spaceBetween={24}
+          spaceBetween={32}
           slidesPerView={1}
           navigation={{
             nextEl: ".custom-next",

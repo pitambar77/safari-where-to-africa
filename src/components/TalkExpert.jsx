@@ -105,7 +105,7 @@ const TalkExpert = () => {
           {experts.map((expert, index) => (
             <div
               key={index}
-              className="group relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-500"
+              className="group relative rounded-sm overflow-hidden shadow-md hover:shadow-lg transition-all duration-500"
             >
               {/* Image with zoom effect */}
               <img

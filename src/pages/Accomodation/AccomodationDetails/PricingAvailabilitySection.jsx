@@ -5,7 +5,7 @@ import { FaPlayCircle } from "react-icons/fa";
 
 const PricingAvailabilitySection = () => {
   return (
-    <div className=" max-w-[1320px] mx-auto px-4">
+    <div className=" px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28">
       <div className="flex flex-col items-center py-16 bg-white ">
         <div className=" font-cormorant text-center ">
           <h2 className=" text-3xl text-[#a89f82] uppercase"> Your Journey</h2>

@@ -267,7 +267,7 @@ const JourneysCarousel = () => {
   };
 
   return (
-    <div className="flex flex-col items-center bg-white py-16 font-serif">
+    <div className="flex flex-col items-center bg-white py-16 ">
   
      <div className="font-cormorant text-center">
           <h2 className="text-3xl text-[#a89f82] uppercase"> Related Journeys</h2>
@@ -278,7 +278,7 @@ const JourneysCarousel = () => {
         </div>
 
       {/* Carousel Container */}
-      <div className="relative w-full max-w-[1320px] mx-auto px-4  mt-5">
+      <div className="relative w-full px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28  mt-5">
         
         {/* Viewport container with overflow hidden */}
         <div className="overflow-hidden">
@@ -296,7 +296,7 @@ const JourneysCarousel = () => {
            
               <div 
                 key={journey.id} 
-                className="relative flex-shrink-0 rounded-lg overflow-hidden "
+                className="relative flex-shrink-0 rounded-sm overflow-hidden "
                 // For two items (50% each) with gap-x-8, the card width needs to be slightly less than 50%
                 style={{ width: `calc(${baseCardPercentage}% - 1rem)` }} 
               >
@@ -324,7 +324,7 @@ const JourneysCarousel = () => {
         
         <div
           onClick={goToPreviousPage}
-          className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 md:-translate-x-1/4 bg-[#a89f82] p-3 rounded-full shadow-md hover:bg-[#f25922] cursor-pointer transition-colors hidden md:block"
+          className="absolute top-1/2 left-14 -translate-y-1/2 -translate-x-1/2 md:-translate-x-1/4 bg-[#a89f82] p-3 rounded-full shadow-md hover:bg-[#f25922] cursor-pointer transition-colors hidden md:block"
           aria-label="Previous Journey"
         >
           <ChevronLeft className="w-6 h-6 text-white" />
@@ -332,7 +332,7 @@ const JourneysCarousel = () => {
 
         <div
           onClick={goToNextPage}
-          className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 md:translate-x-1/4 bg-[#a89f82] p-3 rounded-full shadow-md hover:bg-[#f25922] cursor-pointer transition-colors hidden md:block"
+          className="absolute top-1/2 right-14 -translate-y-1/2 translate-x-1/2 md:translate-x-1/4 bg-[#a89f82] p-3 rounded-full shadow-md hover:bg-[#f25922] cursor-pointer transition-colors hidden md:block"
           aria-label="Next Journey"
         >
           <ChevronRight className="w-6 h-6 text-white" />

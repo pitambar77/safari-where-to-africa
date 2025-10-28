@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import safarisData from "../data/safaris.json";
 import SafariCard from "../pages/Accomodation/LandingPage/SafariCard";
 import Filters from "./Filters";
+import Overview from "./Overview";
 
 const SafariList = () => {
   const [filteredSafaris, setFilteredSafaris] = useState([]);
@@ -64,8 +65,13 @@ const SafariList = () => {
   }, []);
 
   return (
-    <div className=" py-12 bg-[#f8f5f0] min-h-screen">
-        <div className=" max-w-[1320px] mx-auto px-4">
+    <div className=" pb-16 bg-[#fbf6ea] ">
+        <Overview
+         title='Welcome To Africa'
+         subtitle='African landscapes parading with the circle of life promise magical moments unlike any you have imagined before. You will find them...'
+         description='Here at Newmark, we have an incredible variety of restaurants and bars across our beautiful properties, from ocean-side dining to city-chic Asian tapas and whimsical bougainvillea-clad courtyards. Find out more information below'
+         />
+        <div className=" px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28">
 
     
       {/* Header */}

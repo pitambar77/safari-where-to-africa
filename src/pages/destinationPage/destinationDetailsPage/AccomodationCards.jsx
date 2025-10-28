@@ -149,16 +149,8 @@ const AccomodationCards = () => {
 
   return (
     <div className="pb-16">
-      <div className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-48">
-        {/* Optional Heading */}
-        {/* 
-        <div className="font-cormorant text-center">
-          <h2 className="text-3xl text-[#a89f82] uppercase">Your Journeys</h2>
-          <h5 className="text-6xl mb-8 mt-4 text-[#636363] capitalize font-normal">
-            South Africa Trips to Inspire
-          </h5>
-        </div> 
-        */}
+      <div className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28">
+   
 
         {/* Cards Grid */}
         {allSafaris.length > 0 ? (

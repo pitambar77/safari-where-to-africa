@@ -1,4 +1,5 @@
 import React from 'react';
+import elephant from '../../../assets/elephant.webp'
 
 /**
  * Data for each game drive option.
@@ -7,7 +8,7 @@ import React from 'react';
  */
 const gameDriveOptions = [
   {
-    image: 'https://serengetisteppe.com/storage/images/484ca97c-cc29-4ade-9ed4-e4068bc35ebb.jpg',
+    image: elephant,
     title: 'Afternoon game drive',
     price: '$48.00',
   },
@@ -38,7 +39,7 @@ const GameDriveCard = ({ image, title, price }) => {
         <img
           src={image}
           alt={title}
-          className="w-full h-auto object-cover rounded-md aspect-[3/5]  shadow-sm"
+          className="w-full h-auto object-cover rounded-sm aspect-[3/5]  shadow-sm"
         />
       </div>
       <h3 className="text-lg font-quicksand font-semibold text-gray-800 mb-1 leading-tight">
@@ -54,7 +55,7 @@ const GameDriveCard = ({ image, title, price }) => {
  */
 const GameDriveOption = () => {
   return (
-    <section className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-48 py-16">
+    <section className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28 py-16">
       <h2 className="text-6xl  mb-16  text-[#636363] capitalize font-cormorant text-center ">
             Chobe game drive options
           </h2>

@@ -57,7 +57,7 @@ const ThingsToDO = () => {
   const [isEnd, setIsEnd] = useState(false);
 
   return (
-    <section className="bg-[#faf6ef] py-16 pl-4 md:pl-10 lg:pl-16 xl:pl-20 2xl:pl-28 relative ">
+    <section className=" py-16  relative ">
       {/* --- Quote Section --- */}
       <div className="text-center max-w-6xl mx-auto  mb-14 font-cormorant">
         <p className="text-center text-2xl md:text-3xl font-normal  text-[#a89f82] uppercase mb-6">
@@ -90,7 +90,7 @@ const ThingsToDO = () => {
         </p>
       </div>
 
-      <div className="relative  ">
+      <div className="relative pl-4 md:pl-10 lg:pl-16 xl:pl-20 2xl:pl-28 ">
         <Swiper
           modules={[Navigation]}
           slidesPerView={2.5}
@@ -125,11 +125,11 @@ const ThingsToDO = () => {
         >
           {guestFavorites.map((item, index) => (
             <SwiperSlide key={index}>
-              <div className="relative group overflow-hidden rounded-md shadow-lg">
+              <div className="relative group overflow-hidden rounded-sm ">
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-[300px]  object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-96  object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-8">
@@ -144,7 +144,7 @@ const ThingsToDO = () => {
 
         {/* --- Side Navigation Buttons --- */}
         <button
-          className={`swiper-prev absolute -left-10 top-1/2 -translate-y-1/2 bg-white shadow-md p-3 rounded-full transition z-10 ${
+          className={`swiper-prev absolute left-9 top-1/2 -translate-y-1/2 bg-white shadow-md p-3 rounded-full transition z-10 ${
             isBeginning
               ? "opacity-40 cursor-not-allowed"
               : "hover:bg-gray-100 cursor-pointer"
@@ -155,7 +155,7 @@ const ThingsToDO = () => {
         </button>
 
         <button
-          className={`swiper-next absolute right-1/6  top-1/2 -translate-y-1/2 bg-white shadow-md p-3 rounded-full transition z-10 ${
+          className={`swiper-next absolute right-1/6   top-1/2 -translate-y-1/2 bg-white shadow-md p-3 rounded-full transition z-10 ${
             isEnd
               ? "opacity-40 cursor-not-allowed"
               : "hover:bg-gray-100 cursor-pointer"

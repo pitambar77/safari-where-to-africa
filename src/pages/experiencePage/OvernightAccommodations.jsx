@@ -73,11 +73,11 @@ const OvernightAccommodations = () => {
         </h2>
 
         {/* --- Grid Layout --- */}
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4  2xl:grid-cols-6 " >
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 " >
           {accommodations.map((item) => (
             <div
               key={item.id}
-              className="bg-white rounded-md shadow-md hover:shadow-lg transition overflow-hidden"
+              className="bg-white rounded-sm hover:shadow-lg transition overflow-hidden"
             >
               <div className="relative">
                 <img
@@ -94,16 +94,16 @@ const OvernightAccommodations = () => {
 
               {/* --- Card Text --- */}
               <div className="p-5 space-y-2">
-                <p className="text-xs tracking-widest text-gray-600 uppercase">
+                <p className="text-sm font-semibold tracking-widest text-gray-600 uppercase">
                   {item.nights}
                 </p>
-                <h3 className="text-base md:text-lg font-medium text-[#a79353] leading-snug">
+                <h3 className=" text-xl font-medium text-[#a79353] leading-snug">
                   {item.title}
                 </h3>
-                <p className="text-sm text-gray-500 font-quicksand ">{item.location}</p>
+                <p className=" text-gray-500  font-quicksand  ">{item.location}</p>
 
-<div className=" justify-end">
- <button className="flex items-center text-[#a79353] text-sm  font-medium mt-3 group">
+<div className=" flex justify-end">
+ <button className="flex items-center text-[#a79353]   font-medium mt-3 group">
                   Learn More
                   <IoArrowForward
                     size={16}

@@ -58,9 +58,12 @@ const ExperienceCarousel = () => {
   const [isEnd, setIsEnd] = useState(false);
 
   return (
-    <section className="bg-[#faf6ef] py-16 pl-4 md:pl-10 lg:pl-16 xl:pl-20 2xl:pl-28 relative ">
+    <section className=" py-16 pl-4 md:pl-10 lg:pl-16 xl:pl-20 2xl:pl-28 relative ">
       {/* --- Quote Section --- */}
-      <div className="max-w-3xl mx-auto text-center mb-14">
+
+<div className="absolute inset-0 before:absolute before:top-0 before:left-0 before:w-full before:h-2/3 before:bg-[#faf6ef] before:z-0"></div>
+
+      <div className="max-w-3xl mx-auto text-center mb-14 relative">
         <p className="text-3xl font-cormorant tracking-[2px] uppercase text-[#a89f82] mb-4">
           Guest Favorites in South Africa
         </p>
@@ -71,6 +74,10 @@ const ExperienceCarousel = () => {
           made this experience a joy for all of us. The animals we saw and the
           places we visited were amazing. Thank you for making this so special
           for me."
+        </p>
+
+        <p className="font-quicksand text-[#636363] text-lg md:text-xl leading-relaxed mb-4">
+          Carol K
         </p>
        
       </div>
@@ -111,11 +118,11 @@ const ExperienceCarousel = () => {
         >
           {guestFavorites.map((item, index) => (
             <SwiperSlide key={index}>
-              <div className="relative group overflow-hidden rounded-md shadow-lg">
+              <div className="relative group overflow-hidden rounded-sm shadow-lg">
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-[300px]  object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-96  object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-8">

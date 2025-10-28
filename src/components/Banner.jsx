@@ -3,7 +3,7 @@ import React from "react";
 
 const Banner = ({ title, subtitle, imageUrl }) => {
   return (
-    <div className="relative md:h-screen h-[550px]">
+    <div className="relative  md:h-[650px] 2xl:h-[750]">
       {/* Background Image */}
       <img
         src={imageUrl}

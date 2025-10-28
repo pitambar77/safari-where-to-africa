@@ -24,14 +24,14 @@ const requirementsData = [
 const AccordionSection = () => {
   return (
    <>
-   <div className=' max-w-[1320px] mx-auto flex justify-center py-10'>
+   <div className=' px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28 flex justify-center py-10'>
     <FAQSectionContainer
     title={"About Booking This Tour"}
     items={bookingData}
     />
     
    </div>
-   <div className=' max-w-[1320px] mx-auto flex justify-center py-10'>
+   <div className=' px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28 flex justify-center py-10'>
     <FAQSectionContainer
     title={"Travel Requirement for this tour"}
     items={requirementsData}

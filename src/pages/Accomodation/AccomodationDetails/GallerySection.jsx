@@ -62,9 +62,9 @@ const GallerySectionExactWidths = () => {
   };
 
   return (
-    <div className=" max-w-[1320px] mx-auto px-4 flex flex-col items-center bg-white py-16 font-serif">
+    <div className=" flex flex-col items-center bg-white py-16 font-serif">
       {/* GALLERY Header */}
-      <div className=" font-cormorant text-center">
+      <div className=" font-cormorant text-center px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28">
         <h2 className="text-3xl text-[#a89f82] uppercase"> Gallery</h2>
 
         <h5 className=" text-6xl  mb-8 mt-4 text-[#636363] capitalize font-normal">Picture yourself here</h5>
@@ -76,9 +76,9 @@ const GallerySectionExactWidths = () => {
         </div>
       </div>
       {/* Image Gallery Container */}
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden ">
         {/* The actual image row. Uses flex. Adjust gap between images if needed */}
-        <div className="flex justify-center items-center gap-x-4">
+        <div className="flex justify-center items-center gap-x-6">
           {" "}
           {/* Using gap-x-4 for spacing */}
           {/* Left Image (Narrower) */}
@@ -88,17 +88,17 @@ const GallerySectionExactWidths = () => {
             <img
               src={getImageAtIndex(-1).src}
               alt={getImageAtIndex(-1).alt}
-              className="w-full h-[450px]  object-cover"
+              className="w-full h-[550px]  object-cover"
             />
           </div>
           {/* Center (Main) Image (Wider) */}
-          <div className="flex-shrink-0 w-1/2">
+          <div className="flex-shrink-0 w-1/2 ">
             {" "}
             {/* Adjusted width for middle image */}
             <img
               src={images[currentIndex].src}
               alt={images[currentIndex].alt}
-              className="w-full h-[450px]  object-cover"
+              className="w-full h-[550px]  object-cover"
             />
           </div>
           {/* Right Image (Narrower) */}
@@ -108,7 +108,7 @@ const GallerySectionExactWidths = () => {
             <img
               src={getImageAtIndex(1).src}
               alt={getImageAtIndex(1).alt}
-              className="w-full h-[450px] object-cover"
+              className="w-full h-[550px] object-cover"
             />
           </div>
         </div>
@@ -116,7 +116,7 @@ const GallerySectionExactWidths = () => {
         {/* Navigation Arrows */}
         <div
           onClick={goToPrevious}
-          className="absolute top-1/2 left-0 -translate-y-1/2 translate-x-1/2 bg-[#a89f82] p-3 rounded-full shadow-md hover:bg-[#7a7870] transition-colors"
+          className="absolute top-1/2 left-1/6 -translate-y-1/2 translate-x-1/2 bg-[#a89f82] p-3 rounded-full shadow-md hover:bg-[#7a7870] transition-colors"
           aria-label="Previous image"
         >
           <ChevronLeft className="w-6 h-6 text-white" />
@@ -124,7 +124,7 @@ const GallerySectionExactWidths = () => {
 
         <div
           onClick={goToNext}
-          className="absolute top-1/2 cursor-pointer right-0 -translate-y-1/2 -translate-x-1/2 bg-[#a89f82] p-3 rounded-full shadow-md hover:bg-[#7a7870] transition-colors"
+          className="absolute top-1/2 cursor-pointer right-1/6 -translate-y-1/2 -translate-x-1/2 bg-[#a89f82] p-3 rounded-full shadow-md hover:bg-[#7a7870] transition-colors"
           aria-label="Next image"
         >
           <ChevronRight className="w-6 h-6 text-white" />

@@ -88,7 +88,7 @@ const TripHighlights = () => {
 
   return (
     <section className="bg-white py-12 font-cormorant">
-      <div className="max-w-[1320px] mx-auto px-4">
+      <div className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28">
         {/* Header + Navigation */}
         
           <div className=" text-center">

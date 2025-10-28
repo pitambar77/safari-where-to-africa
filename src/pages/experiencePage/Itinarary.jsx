@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SafariCard from '../Accomodation/LandingPage/SafariCard';
-// import safarisData from "../../data/safaris.json"; // Retain data import as we're keeping data logic here
-import { safarisData } from '../../data/safariData';
+import safarisData from "../../data/safaris.json"; // Retain data import as we're keeping data logic here
+// import { safarisData } from '../../data/safariData';
 
 const Itinarary = () => {
   // Retain only the state necessary for pagination
@@ -20,7 +20,7 @@ const Itinarary = () => {
 
   return (
     <>
-      <div className="py-12 bg-[#f8f5f0] ">
+      <div className="py-12  ">
         <div className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28">
 
              <div className="font-cormorant text-center  ">

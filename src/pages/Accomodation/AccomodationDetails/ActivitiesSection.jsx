@@ -1,6 +1,7 @@
 import React from "react";
 import { FaSailboat } from "react-icons/fa6";
 import {  FaDove, FaHelicopter, FaPlane, FaFish, FaGolfBall, FaHiking, FaChild, FaUtensils, FaCity, FaMountain, FaSpa, FaWineBottle } from "react-icons/fa"; // example icons
+import Overview from "../../../components/Overview";
 
 const activities = [
   { icon: <FaSailboat size={22} color="white" />, label: "Boat Trip" },
@@ -20,8 +21,13 @@ const activities = [
 
 const ActivitiesSection = () => {
   return (
-    <div className="bg-[#f6f1e9]">
-      <div className="max-w-[1320px] mx-auto px-4 pb-16 pt-5">
+    <div className="bg-[#faf5e9]">
+       <Overview
+          title="Welcome To Africa"
+          subtitle="African landscapes parading with the circle of life promise magical moments unlike any you have imagined before. You'll find them..."
+          description="Here at Newmark, we have an incredible variety of restaurants and bars across our beautiful properties, from ocean-side dining to city-chic Asian tapas and whimsical bougainvillea-clad courtyards. Find out more information below"
+        />
+      <div className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28 pb-16 ">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-10 justify-center ">
           {activities.map((item, index) => (
             <div

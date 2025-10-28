@@ -86,7 +86,7 @@ const PositiveImpact = () => {
 
         {/* The stars and boy are part of the main background image in the original.
             If you wanted to add the stars as overlays for a dynamic look: */}
-        <div className="absolute right-1/4 top-1/4 animate-pulse text-yellow-300 text-3xl hidden md:block">
+        {/* <div className="absolute right-1/4 top-1/4 animate-pulse text-yellow-300 text-3xl hidden md:block">
             ⭐️ 
         </div>
         <div className="absolute right-10 top-1/3 animate-pulse text-yellow-300 text-3xl hidden md:block">
@@ -94,7 +94,7 @@ const PositiveImpact = () => {
         </div>
         <div className="absolute right-1/4 bottom-1/4 animate-pulse text-yellow-300 text-3xl hidden md:block">
             ✨
-        </div>
+        </div> */}
 
       </div>
     </div>

@@ -7,6 +7,7 @@ import WhyTravel from "../homePage/WhyTravel";
 import PositiveImpact from "../homePage/PositiveImpact";
 import Banner from "../../components/Banner";
 import Overview from "../../components/Overview";
+import DestinationSelector from "../../components/DestinationSelector";
 const Home = () => {
   return (
     <div>
@@ -24,15 +25,15 @@ const Home = () => {
           </div>
         </div>
      </div> */}
-     <Banner
+     {/* <Banner
      imageUrl={heroImage}
      title="Where can we take you?"
-     />
-     <Overview
-     title={"Welcome To Africa"}
-     subtitle={"African landscapes parading with the circle of life promise magical moments unlike any you have imagined before. You'll find them..."}
-     description={"... while tasting wines carefully cultivated and expertly poured. At safari lodges, tented camps and members' clubs luxuriously appoint..."}
-     />
+     /> */}
+     <DestinationSelector/>
+     <div className=" bg-[#fbf6ea]">
+
+     </div>
+     
      <Homepack />
      <Founder />
      <WhyTravel />

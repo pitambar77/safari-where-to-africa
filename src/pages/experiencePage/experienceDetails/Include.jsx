@@ -32,6 +32,7 @@ const inclusionData = [
   { text: "Return road transfers", icon: PiBusLight, isIncluded: true },
   { text: "Tea & coffee", icon: PiCoffeeLight, isIncluded: true },
   { text: "US$15 National Park fee", icon: LiaTimesCircleSolid, isIncluded: false },
+    { text: "Water and soft drinks", icon: IoSnowOutline, isIncluded: true },
 ];
 
 const InclusionCard = ({ text, Icon, isIncluded }) => {
@@ -59,7 +60,7 @@ const InclusionCard = ({ text, Icon, isIncluded }) => {
 
 const Include = () => {
   return (
-    <section className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-48 pb-16">
+    <section className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28 pb-16">
       <h2 className="text-6xl  mb-16  text-[#636363] capitalize font-cormorant text-center ">
         What's Included
       </h2>

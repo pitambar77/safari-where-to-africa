@@ -8,20 +8,20 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-import safari1 from "../../assets/safari1.webp";
 import safari2 from "../../assets/safari2.webp";
 import safari3 from "../../assets/safari3.webp";
 import safari4 from "../../assets/safari4.webp";
 import safari5 from "../../assets/safari5.webp";
+import Overview from "../../components/Overview";
 
 const safariData = [
-  { id: 1, image: safari1, title: "Big Five Safaris", link: "#" },
+  { id: 1, image: safari3, title: "Big Five Safaris", link: "#" },
   { id: 2, image: safari2, title: "Serengeti Adventure", link: "#" },
   { id: 3, image: safari3, title: "Wildlife Safari", link: "#" },
   { id: 4, image: safari4, title: "Safari Honeymoon", link: "#" },
   { id: 5, image: safari5, title: "Photography Safari", link: "#" },
-  { id: 1, image: safari1, title: "Big Five Safaris", link: "#" },
-  { id: 2, image: safari2, title: "Serengeti Adventure", link: "#" },
+  { id: 1, image: safari2, title: "Big Five Safaris", link: "#" },
+  { id: 2, image: safari4, title: "Serengeti Adventure", link: "#" },
   { id: 3, image: safari3, title: "Wildlife Safari", link: "#" },
   { id: 4, image: safari4, title: "Safari Honeymoon", link: "#" },
   { id: 5, image: safari5, title: "Photography Safari", link: "#" },
@@ -29,19 +29,13 @@ const safariData = [
 
 const Homepack = () => {
   return (
-    <section className="bg-[#f9f5ea] py-10">
+    <section className="bg-[#fbf6ea] pb-16">
+      <Overview
+           title={"Welcome To Africa"}
+           subtitle={"African landscapes parading with the circle of life promise magical moments unlike any you have imagined before. You'll find them..."}
+           description={"... while tasting wines carefully cultivated and expertly poured. At safari lodges, tented camps and members' clubs luxuriously appoint..."}
+           />
       <div className=" max-w-[1320px] mx-auto px-4">
-        {/* <div className="common-heading">
-          <h2>Welcome To Africa</h2>
-          <h5>
-            African landscapes parading with the circle of life promise magical
-            moments unlike any you have imagined before. You'll find them...
-          </h5>
-          <p className=" font-quicksand max-w-xl mx-auto">
-            ... while tasting wines carefully cultivated and expertly poured. At
-            safari lodges, tented camps and members' clubs luxuriously appoint...
-          </p>
-        </div> */}
         <div className="home-pack_main">
           <div className="main-pack_fill">
             <ul className="filderlist">

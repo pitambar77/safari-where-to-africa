@@ -52,11 +52,11 @@ const JourneyCollection = () => {
             } items-center md:items-start gap-6`}
           >
             {/* Image */}
-            <div className="w-full md:w-1/2">
+            <div className="w-full md:w-1/2 ">
               <img
                 src={item.image}
                 alt={item.title}
-                className="w-full h-64 md:h-48 object-cover  shadow-sm"
+                className="w-full h-64 md:h-48 object-cover rounded-sm  "
               />
             </div>
 
