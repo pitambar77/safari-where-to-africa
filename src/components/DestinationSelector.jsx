@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 const destinations = [
   { name: "Japan", image: "https://tanzania-specialist.com/wp-content/uploads/2023/07/10-Days-Tanzania-safari-all-northern-parks-in-1-trip-wildebeest-migration.jpg", path: "/japan" },
   { name: "Greece", image: "https://theincidentaltourist.com/wp-content/uploads/2024/08/Tanzania-Grumeti-Serengeti-River-Lodge-Experiences-safari-game-drive-sundowners-drinks-_5_-Collections-3000w-scaled.jpg", path: "/greece" },
@@ -14,7 +15,7 @@ const destinations = [
   { name: "Tanzania", image: "https://yellowzebrasafaris.com/media/40203/tanzania-fanjove-island-aerial-of-island.jpg?width=2048&height=1024&format=jpg&v=1da5e17bffa6d90", path: "/tanzania" },
 ];
 
-export default function DestinationHero({ speed = 20, resumeDelay = 3000 }) {
+export default function DestinationHero({ speed = 15, resumeDelay = 3000 }) {
   const navigate = useNavigate();
   const listRef = useRef(null);
   const rafRef = useRef(null);
@@ -46,28 +47,70 @@ export default function DestinationHero({ speed = 20, resumeDelay = 3000 }) {
   }, []);
 
   // Infinite scroll
-  useEffect(() => {
-    lastTimeRef.current = null;
-    const step = (ts) => {
-      if (lastTimeRef.current == null) lastTimeRef.current = ts;
-      const dt = (ts - lastTimeRef.current) / 1000;
-      lastTimeRef.current = ts;
+  // useEffect(() => {
+  //   lastTimeRef.current = null;
+  //   const step = (ts) => {
+  //     if (lastTimeRef.current == null) lastTimeRef.current = ts;
+  //     const dt = (ts - lastTimeRef.current) / 1000;
+  //     lastTimeRef.current = ts;
 
-      if (!isPaused) {
-        setOffset((prev) => {
-          const next = prev + speed * dt;
-          const wrapped = next >= totalHeight ? next - totalHeight : next;
-          const newIndex = Math.floor((wrapped % totalHeight) / itemHeight);
-          setActiveIndex(newIndex);
-          setInputValue(destinations[newIndex].name);
-          return wrapped;
+  //     if (!isPaused) {
+  //       setOffset((prev) => {
+  //         const next = prev + speed * dt;
+  //         const wrapped = next >= totalHeight ? next - totalHeight : next;
+  //         const newIndex = Math.floor((wrapped % totalHeight) / itemHeight);
+  //         setActiveIndex(newIndex);
+  //         setInputValue(destinations[newIndex].name);
+  //         return wrapped;
+  //       });
+  //     }
+  //     rafRef.current = requestAnimationFrame(step);
+  //   };
+  //   rafRef.current = requestAnimationFrame(step);
+  //   return () => cancelAnimationFrame(rafRef.current);
+  // }, [isPaused, speed, totalHeight, itemHeight]);
+
+  // Infinite scroll - update when destination aligns with input box center
+useEffect(() => {
+  lastTimeRef.current = null;
+
+  const step = (ts) => {
+    if (lastTimeRef.current == null) lastTimeRef.current = ts;
+    const dt = (ts - lastTimeRef.current) / 1000;
+    lastTimeRef.current = ts;
+
+    if (!isPaused) {
+      setOffset((prev) => {
+        const next = prev + speed * dt;
+        const wrapped = next >= totalHeight ? next - totalHeight : next;
+
+        // Calculate center offset (half of visible container height)
+        const visibleHeight = 320; // your "h-80" = 20rem = 320px
+        const centerOffset = wrapped + visibleHeight / 2;
+
+        // Find which item is currently aligned with the input (center)
+        const currentIndex = Math.floor(centerOffset / itemHeight) % destinations.length;
+
+        // Update only if it changed (avoid flicker)
+        setActiveIndex((prevIndex) => {
+          if (prevIndex !== currentIndex) {
+            setInputValue(destinations[currentIndex].name);
+            return currentIndex;
+          }
+          return prevIndex;
         });
-      }
-      rafRef.current = requestAnimationFrame(step);
-    };
+
+        return wrapped;
+      });
+    }
+
     rafRef.current = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(rafRef.current);
-  }, [isPaused, speed, totalHeight, itemHeight]);
+  };
+
+  rafRef.current = requestAnimationFrame(step);
+  return () => cancelAnimationFrame(rafRef.current);
+}, [isPaused, speed, totalHeight, itemHeight]);
+
 
   // Input typing & autocomplete
   const handleInputChange = (e) => {
@@ -181,17 +224,20 @@ export default function DestinationHero({ speed = 20, resumeDelay = 3000 }) {
         className="absolute inset-0 bg-cover bg-center transition-all duration-700"
         style={{ backgroundImage: `url(${bgImage})` }}
       />
+
+
+
       <div className="absolute inset-0 bg-black/40" />
 
       {/* Content */}
       <div className="relative z-10 flex h-full">
-        <div className="flex flex-col justify-center ml-24 text-white">
+        <div className="flex flex-col justify-center px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28 text-white">
           <h1 className="text-4xl md:text-5xl font-cormorant font-semibold mb-12">
             WHERE CAN WE TAKE YOU?
           </h1>
 
           {/* Scrolling List */}
-          <div className="relative h-80 w-72 overflow-hidden">
+          <div className="relative h-80  overflow-hidden">
             <div
               className="absolute top-0 left-0"
               style={{
@@ -205,7 +251,7 @@ export default function DestinationHero({ speed = 20, resumeDelay = 3000 }) {
                     idx % destinations.length ===
                     activeIndex % destinations.length;
                   return (
-                    <div key={idx} data-item className="py-2">
+                    <div key={idx} data-item className="py-2 ml-4">
                       <span
                         onMouseEnter={() => setIsPaused(true)}
                         onMouseLeave={() => setIsPaused(false)}
@@ -234,8 +280,8 @@ export default function DestinationHero({ speed = 20, resumeDelay = 3000 }) {
                   onBlur={handleInputBlur}
                   onChange={handleInputChange}
                   onKeyDown={handleKeyDown}
-                  placeholder="Search destination..."
-                  className="bg-[#f8f4e8]/90 text-black px-4 py-2 w-96 focus:outline-none pointer-events-auto"
+                  placeholder="Tell us your destination ...."
+                  className="bg-[#f8f4e8] text-black px-4 py-2 w-96 focus:outline-none pointer-events-auto font-quicksand "
                 />
                 <button
                   onClick={handleGo}

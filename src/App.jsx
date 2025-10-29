@@ -40,6 +40,8 @@ import AccomodationDetails from './pages/Accomodation/AccomodationDetails/Accomo
 import Experience from './pages/experiencePage/Experience';
 import ExperienceDetails from './pages/experiencePage/experienceDetails/ExperienceDetails';
 import DestinationDetails from './pages/destinationPage/destinationDetailsPage/DestinationDetails';
+import AboutUs from './pages/AboutUs/AboutUs';
+import ImpactPage from './pages/Impact/ImpactPage';
 
 
 
@@ -58,6 +60,9 @@ const App = () => {
 
         <Route path="accomodation-landing" element={<AccomodationLanding/>}/>
         <Route path="accomodation-details" element={<AccomodationDetails/>}/>
+        <Route path='about-us' element={<AboutUs/>}/>
+        <Route path='conservation' element={<ImpactPage/>}/>
+
 
 
        </Route>

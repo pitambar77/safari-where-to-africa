@@ -91,9 +91,9 @@ const Header = () => {
                 <li><a href="#" className="text-gray-600 hover:text-indigo-600 transition duration-150 text-sm font-medium">Journey</a></li>
                 <li><a href="#" className="text-gray-600 hover:text-indigo-600 transition duration-150 text-sm font-medium">Retreats</a></li>
                 <li><a href="#" className="text-gray-600 hover:text-indigo-600 transition duration-150 text-sm font-medium">Experiences</a></li>
-                <li><a href="#" className="text-gray-600 hover:text-indigo-600 transition duration-150 text-sm font-medium">About Us</a></li>
+                <li><a href="about-us" className="text-gray-600 hover:text-indigo-600 transition duration-150 text-sm font-medium">About Us</a></li>
                 <li><a href="#" className="text-gray-600 hover:text-indigo-600 transition duration-150 text-sm font-medium">Blogs</a></li>
-                <li><a href="#" className="text-gray-600 hover:text-indigo-600 transition duration-150 text-sm font-medium">Conservation</a></li>
+                <li><a href="conservation" className="text-gray-600 hover:text-indigo-600 transition duration-150 text-sm font-medium">Conservation</a></li>
               </ul>
             </nav>
           </div>
