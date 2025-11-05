@@ -20,132 +20,197 @@ const SafariItinerary = () => {
     title: "Cape Town Arrival",
     location: "Cape Town",
     description:
-      "Welcome to Africa! Your adventure begins in the stunning city of Cape Town, known for its scenic beauty and vibrant culture.",
+      "Welcome to Africa! Your adventure begins in the stunning city of Cape Town, known for its scenic beauty and vibrant culture. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district.",
     lodge: "Waterfront Breakwater Lodge (or similar)",
     images: [
       "https://www.backtoafricasafaris.com/wp-content/uploads/2024/04/tanzania-safari-itinerary.jpg",
      
     ],
-    activities: [
-      {
-        time: "Morning",
-        title: "Arrival & Transfer",
-        details:
-          "Arrive at Cape Town International Airport and transfer to your hotel near the V&A Waterfront.",
-      },
-      {
-        time: "Evening",
-        title: "Welcome Dinner",
-        details:
-          "Meet your fellow travelers and enjoy a delicious dinner overlooking the harbor.",
-      },
-    ],
+   
   },
   {
     id: 2,
     day: "Day 2",
     title: "Cape Town City Tour",
     location: "Cape Town",
+    lodge: "Waterfront Breakwater Lodge (or similar)",
     description:
       "Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district.",
     images: [
       "https://images.squarespace-cdn.com/content/v1/562cfd50e4b0db46045fb676/1705703664229-F5COPDMP83G9TP9S533T/image-asset.jpeg?format=1500w",
     ],
-    activities: [
-      {
-        time: "Morning",
-        title: "Table Mountain Visit",
-        details:
-          "Take the cable car up Table Mountain for panoramic views of the city and the ocean.",
-      },
-      {
-        time: "Afternoon",
-        title: "City Exploration",
-        details:
-          "Visit landmarks like Greenmarket Square and the Castle of Good Hope.",
-      },
-    ],
+ 
   },
   {
     id: 3,
     day: "Day 3",
     title: "Africa Town City Tour",
     location: "Africa Town",
+    lodge: "Waterfront Breakwater Lodge (or similar)",
     description:
       "Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district.",
     images: [
       "https://cdn.kimkim.com/files/a/images/f848f3cc681da843f1eaf53d51ff801d537374cc/original-db81b0010461934f8ff9db8ce3e36ea5.jpg",
     ],
-    activities: [
-      {
-        time: "Morning",
-        title: "Table Mountain Visit",
-        details:
-          "Take the cable car up Table Mountain for panoramic views of the city and the ocean.",
-      },
-      {
-        time: "Afternoon",
-        title: "City Exploration",
-        details:
-          "Visit landmarks like Greenmarket Square and the Castle of Good Hope.",
-      },
-      {
-        time: "Evening",
-        title: "City Exploration",
-        details:
-          "Visit landmarks like Greenmarket Square and the Castle of Good Hope.",
-      },
-    ],
+  
   },
   {
     id: 4,
     day: "Day 4",
     title: " Town City Tour",
     location: "Cape Town",
+    lodge: "Waterfront Breakwater Lodge (or similar)",
     description:
-      "Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district.",
+      "Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. ",
     images: [
       "https://images.squarespace-cdn.com/content/v1/562cfd50e4b0db46045fb676/1705676270084-WSF2FRI3I7Z7AJX1HM4K/GettyImages-852006468.jpg",
     ],
-    activities: [
-      {
-        time: "Morning",
-        title: "Table Mountain Visit",
-        details:
-          "Take the cable car up Table Mountain for panoramic views of the city and the ocean.",
-      },
-      {
-        time: "Afternoon",
-        title: "City Exploration",
-        details:
-          "Visit landmarks like Greenmarket Square and the Castle of Good Hope.",
-      },
-    ],
+ 
   },
   {
     id: 5,
     day: "Day 5",
     title: " City Tour",
     location: "Cape africa Town",
+    lodge: "Waterfront Breakwater Lodge (or similar)",
     description:
       "Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district.",
     images: [
       "https://d22eux7aqicogj.cloudfront.net/assets/hero-sliders/kenya-kids.webp",
     ],
-    activities: [
-      {
-        time: "Morning",
-        title: "Table Mountain Visit",
-        details:
-          "Take the cable car up Table Mountain for panoramic views of the city and the ocean.",
-      },
-      {
-        time: "Afternoon",
-        title: "City Exploration",
-        details:
-          "Visit landmarks like Greenmarket Square and the Castle of Good Hope.",
-      },
+   
+  },
+  {
+    id: 6,
+    day: "Day 6",
+    title: "Cape Town Arrival",
+    location: "Cape Town",
+    description:
+      "Welcome to Africa! Your adventure begins in the stunning city of Cape Town, known for its scenic beauty and vibrant culture. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district.",
+    lodge: "Waterfront Breakwater Lodge (or similar)",
+    images: [
+      "https://www.backtoafricasafaris.com/wp-content/uploads/2024/04/tanzania-safari-itinerary.jpg",
+     
     ],
+   
+  },
+  {
+    id: 7,
+    day: "Day 7",
+    title: "Cape Town City Tour",
+    location: "Cape Town",
+    lodge: "Waterfront Breakwater Lodge (or similar)",
+    description:
+      "Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district.",
+    images: [
+      "https://images.squarespace-cdn.com/content/v1/562cfd50e4b0db46045fb676/1705703664229-F5COPDMP83G9TP9S533T/image-asset.jpeg?format=1500w",
+    ],
+ 
+  },
+  {
+    id: 8,
+    day: "Day 8",
+    title: "Africa Town City Tour",
+    location: "Africa Town",
+    lodge: "Waterfront Breakwater Lodge (or similar)",
+    description:
+      "Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district.",
+    images: [
+      "https://cdn.kimkim.com/files/a/images/f848f3cc681da843f1eaf53d51ff801d537374cc/original-db81b0010461934f8ff9db8ce3e36ea5.jpg",
+    ],
+  
+  },
+  {
+    id: 9,
+    day: "Day 9",
+    title: " Town City Tour",
+    location: "Cape Town",
+    lodge: "Waterfront Breakwater Lodge (or similar)",
+    description:
+      "Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. ",
+    images: [
+      "https://images.squarespace-cdn.com/content/v1/562cfd50e4b0db46045fb676/1705676270084-WSF2FRI3I7Z7AJX1HM4K/GettyImages-852006468.jpg",
+    ],
+ 
+  },
+  {
+    id: 10,
+    day: "Day 10",
+    title: " City Tour",
+    location: "Cape africa Town",
+    lodge: "Waterfront Breakwater Lodge (or similar)",
+    description:
+      "Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district.",
+    images: [
+      "https://d22eux7aqicogj.cloudfront.net/assets/hero-sliders/kenya-kids.webp",
+    ],
+   
+  },
+  {
+    id: 11,
+    day: "Day 11",
+    title: "Cape Town Arrival",
+    location: "Cape Town",
+    description:
+      "Welcome to Africa! Your adventure begins in the stunning city of Cape Town, known for its scenic beauty and vibrant culture. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district.",
+    lodge: "Waterfront Breakwater Lodge (or similar)",
+    images: [
+      "https://www.backtoafricasafaris.com/wp-content/uploads/2024/04/tanzania-safari-itinerary.jpg",
+     
+    ],
+   
+  },
+  {
+    id: 12,
+    day: "Day 12",
+    title: "Cape Town City Tour",
+    location: "Cape Town",
+    lodge: "Waterfront Breakwater Lodge (or similar)",
+    description:
+      "Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district.",
+    images: [
+      "https://images.squarespace-cdn.com/content/v1/562cfd50e4b0db46045fb676/1705703664229-F5COPDMP83G9TP9S533T/image-asset.jpeg?format=1500w",
+    ],
+ 
+  },
+  {
+    id: 13,
+    day: "Day 13",
+    title: "Africa Town City Tour",
+    location: "Africa Town",
+    lodge: "Waterfront Breakwater Lodge (or similar)",
+    description:
+      "Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district.",
+    images: [
+      "https://cdn.kimkim.com/files/a/images/f848f3cc681da843f1eaf53d51ff801d537374cc/original-db81b0010461934f8ff9db8ce3e36ea5.jpg",
+    ],
+  
+  },
+  {
+    id: 14,
+    day: "Day 14",
+    title: " Town City Tour",
+    location: "Cape Town",
+    lodge: "Waterfront Breakwater Lodge (or similar)",
+    description:
+      "Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district. ",
+    images: [
+      "https://images.squarespace-cdn.com/content/v1/562cfd50e4b0db46045fb676/1705676270084-WSF2FRI3I7Z7AJX1HM4K/GettyImages-852006468.jpg",
+    ],
+ 
+  },
+  {
+    id: 15,
+    day: "Day 15",
+    title: " City Tour",
+    location: "Cape africa Town",
+    lodge: "Waterfront Breakwater Lodge (or similar)",
+    description:
+      "Explore the highlights of Cape Town including Table Mountain, Company Gardens, and the colorful Bo-Kaap district.",
+    images: [
+      "https://d22eux7aqicogj.cloudfront.net/assets/hero-sliders/kenya-kids.webp",
+    ],
+   
   },
 ];
 

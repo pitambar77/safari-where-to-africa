@@ -32,7 +32,7 @@ const MeetOurTeam = () => {
   return (
     <section className="py-16 bg-white px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-28">
       <div className="text-center mb-20">
-        <h2 className="text-6xl   text-[#636363] capitalize font-normal">Meet our team</h2>
+        <h2 className="text-6xl   text-[#636363] capitalize font-cormorant ">Meet our team</h2>
         
        
       </div>

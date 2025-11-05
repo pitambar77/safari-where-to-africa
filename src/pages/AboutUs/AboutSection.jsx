@@ -1,6 +1,8 @@
 import React from "react";
 
 const AboutSection = () => {
+
+
   return (
     <section className="bg-[#f6f1e9] text-[#1a1a1a] py-16 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-28">
       {/* Top Row */}

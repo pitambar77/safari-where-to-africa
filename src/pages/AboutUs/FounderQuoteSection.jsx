@@ -59,7 +59,7 @@ const FounderQuoteSection = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <div className="relative w-[90%] md:w-[70%] lg:w-[60%] aspect-video rounded-lg overflow-hidden shadow-lg">
+            <div className="relative w-[90%] md:w-[80%] aspect-video rounded-lg overflow-hidden shadow-lg">
               <iframe
                 className="w-full h-full"
                 src="https://www.youtube.com/embed/Scxs7L0vhZ4?autoplay=1"

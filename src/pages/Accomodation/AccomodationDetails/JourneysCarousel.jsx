@@ -348,9 +348,19 @@ const JourneysCarousel = () => {
         >
           <ArrowLeft className="w-5 h-5" />
         </button>
-        <span className="text-lg font-quicksand font-light">
-          {`${(currentPage + 1).toString().padStart(2, '0')}`} <span className="text-gray-400">—</span> {`${totalPages.toString().padStart(2, '0')}`}
-        </span>
+        {/* <span className="text-lg font-quicksand font-light">
+          {`${(currentPage + 1).toString().padStart(2, '0')}`} <span className="text-gray-400"><div className=" w-16 flex-1 h-[1px] bg-[#a89f82] mx-3"></div></span> {`${totalPages.toString().padStart(2, '0')}`}
+        </span> */}
+
+<div className="flex items-center text-lg font-quicksand font-light">
+  <span>{(currentPage + 1).toString().padStart(2, "0")}</span>
+  <span className="mx-3 w-16 h-[1px] bg-[#a89f82] inline-block"></span>
+  <span className="text-gray-400">
+    {totalPages.toString().padStart(2, "0")}
+  </span>
+</div>
+
+
         <button 
           onClick={goToNextPage} 
           className="p-2 hover:bg-gray-100 rounded-full transition-colors"

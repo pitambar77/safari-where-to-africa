@@ -1,7 +1,7 @@
 import React from "react";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { GiBrickWall } from "react-icons/gi";
-import ActivitySection from "./ActivitySection";
+// import ActivitySection from "./ActivitySection";
 
 const DayDetailContent = ({
   title,
@@ -9,7 +9,7 @@ const DayDetailContent = ({
   description,
   lodge,
   images = [],
-  activities = [], // array of { time, title, details }
+  // activities = [], // array of { time, title, details }
 }) => {
   return (
     <div className="flex flex-col gap-8 p-6 md:flex-row md:justify-between md:items-center ">
@@ -17,7 +17,7 @@ const DayDetailContent = ({
       <div className="md:w-1/2">
         {/* Location & Overview */}
         <div className="flex items-start mb-4">
-          <MdOutlineLocationOn className="w-8 h-8 text-[#aaa086] mr-3" />
+          <MdOutlineLocationOn className="w-8 h-8 text-[#aaa086] mr-3 flex-shrink-0" />
           <div>
             <h3 className="text-xl font-bold text-[#827659] mb-2">{title}</h3>
             {description && (
@@ -31,13 +31,13 @@ const DayDetailContent = ({
         {/* Lodge Info */}
         {lodge && (
           <div className="flex items-center text-gray-600 mt-6">
-            <GiBrickWall className="w-5 h-5 mr-2 text-[#aaa086]" />
-            <span className="font-medium">{lodge}</span>
+            <GiBrickWall className="w-8 h-5 mr-3 text-[#aaa086] flex-shrink-0" />
+            <span className="font-medium text-lg">{lodge}</span>
           </div>
         )}
 
         {/* Activities / Schedule */}
-        {activities.length > 0 && (
+        {/* {activities.length > 0 && (
           <div className="mt-8 space-y-6">
             <h4 className="text-lg font-semibold text-[#827659] mb-2">
               Daily Highlights
@@ -46,7 +46,7 @@ const DayDetailContent = ({
               <ActivitySection key={idx} {...activity} />
             ))}
           </div>
-        )}
+        )} */}
       </div>
 
       {/* RIGHT SIDE */}

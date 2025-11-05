@@ -22,10 +22,11 @@ const AboutUs = () => {
           description="Here at Newmark, we have an incredible variety of restaurants and bars across our beautiful properties, from ocean-side dining to city-chic Asian tapas and whimsical bougainvillea-clad courtyards. Find out more information below"
         />
        <AboutSection/>
-       <FounderQuoteSection/>
+      
      
         
       </div>
+       <FounderQuoteSection/>
         <div className='py-16 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-28'>
  <div className="bg-white/5 rounded-sm overflow-hidden shadow-sm">
           <div className="relative">

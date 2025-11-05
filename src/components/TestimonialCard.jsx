@@ -13,7 +13,7 @@ const TestimonialCard = ({ profile, travelername, mainquote, para }) => {
         <div className="col-md-9">
           <div className="review_main_rig_con">
             <h4>{travelername}</h4>
-            <h5>{mainquote}</h5>
+            <h5 >{mainquote}</h5>
             <ul className="rating-star_review">
               {[...Array(5)].map((_, index) => (
                 <li key={index}>
