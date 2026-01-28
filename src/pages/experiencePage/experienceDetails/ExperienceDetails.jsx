@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Overview from '../../../components/Overview'
 import Include from './Include'
 import GameDriveOption from './GameDriveOption'
@@ -7,54 +7,74 @@ import GameDriveHighlights from './GameDriveHighlights'
 import GallerySectionExactWidths from '../../Accomodation/AccomodationDetails/GallerySection'
 import JourneysCarousel from '../../Accomodation/AccomodationDetails/JourneysCarousel'
 import JourneyOverview from '../../../components/JourneyOverview'
+import { useParams } from 'react-router-dom'
+import axiosInstance from '../../../api/axiosInstance'
+import GallerySection from '../../Accomodation/AccomodationDetails/GallerySection'
 
 const ExperienceDetails = () => {
+
+
+const { id } = useParams(); // 👈 get trip id from URL
+  const [experience, setExperience] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchExperience = async () => {
+      try {
+        const res = await axiosInstance.get(`/api/experience/${id}`); // 👈 Adjust your backend route if needed
+        setExperience(res.data);
+      } catch (err) {
+        console.error("Failed to load experience:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchExperience();
+  }, [id]);
+
+  if (loading) return <p className="text-center py-10">Loading experience...</p>;
+  if (!experience) return <p className="text-center py-10">Experience not found.</p>;
+
+  console.log(experience)
+
+
   return (
     <>
-   
-    {/* <div className='px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28 py-10'>
-         <div className=" font-cormorant text-center mb-10 ">
-            <h2 className=" text-[#aaa086] text-[24px] uppercase">Experience</h2>
-            <div className=" max-w-xl mx-auto my-3">
-              <h5 className=" text-[64px] font-medium text-center leading-[1.2] text-[#686868]">
-                Chobe Gamedrive
-              </h5>
-            </div>
-            <p className=' tracking-wider uppercase font-quicksand '>Experience the thrill of the world with a chobe game drive</p>
-          </div>
-            <img
-              src="https://iso.500px.com/wp-content/uploads/2014/08/2048-5.jpg"
-              alt=""
-              className=" h-[650px] w-full"
-            />
-
-
-    </div> */}
-
 <JourneyOverview
       subtitle="Experience"
-      title="Chobe Gamedrive"
-      description="Experience the thrill of the world with a chobe game drive"
-      image="https://sustainabletravel.org/wp-content/uploads/Asian-Elephant-bathing-1200x675-1.jpg"
-      days="8"
-      price="$5,890 USD"
-      journeyType="River Cruising"
-      timeOfYear="Oct"
-      cities="Amsterdam, Basel, Baden-Baden, Lucerne, Köln"
+  title={experience.bannerTitle}
+  description={experience.bannerDescription}
+  image={experience.bannerImage}
+  days={experience.experienceInfo?.days}
+  price={`$${experience.experienceInfo?.pricePerPerson} USD`}
+  journeyType={experience.experienceInfo?.journeyType}
+  timeOfYear="Oct-7"
+  cities={experience.experienceInfo?.location}
     />
 
     <div className="bg-[#f6f1e9]">
         <Overview
-          title="Welcome To Africa"
-          subtitle="African landscapes parading with the circle of life promise magical moments unlike any you have imagined before. You'll find them..."
-          description="Here at Newmark, we have an incredible variety of restaurants and bars across our beautiful properties, from ocean-side dining to city-chic Asian tapas and whimsical bougainvillea-clad courtyards. Find out more information below"
+          title={experience.overview.title}
+          subtitle={experience.overview.subTitle}
+          description={experience.overview.description}
         />
         <Include/>
       </div>
-      <GameDriveOption/>
+      <GameDriveOption 
+      gameDrives={experience.gameDrives}   />
       <PricingAvailabilitySection/>
-      <GameDriveHighlights/>
-      <GallerySectionExactWidths/>
+      <GameDriveHighlights
+      gamehighLight={experience.highlights}
+        sectionTitle="Chobe Game Drive Highlights"
+      />
+      {/* <GallerySectionExactWidths/> */}
+       <GallerySection
+    title="Gallery"
+    subtitle="Picture yourself here"
+    description={experience.gallery.description}
+    images={experience.gallery.images}
+  />
       <JourneysCarousel/>
  </>
   )

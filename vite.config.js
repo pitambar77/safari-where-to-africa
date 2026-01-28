@@ -8,4 +8,10 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  server: {
+    host: true, // important for domain / subdomain access
+    allowedHosts: [
+      'where-to-africa-safari-backend.manoramaseoservice.com'
+    ]
+  }
 })

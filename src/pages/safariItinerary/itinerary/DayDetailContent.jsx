@@ -7,8 +7,8 @@ const DayDetailContent = ({
   title,
   location,
   description,
-  lodge,
-  images = [],
+  accommodationName,
+  image,
   // activities = [], // array of { time, title, details }
 }) => {
   return (
@@ -29,10 +29,10 @@ const DayDetailContent = ({
         </div>
 
         {/* Lodge Info */}
-        {lodge && (
+        {accommodationName && (
           <div className="flex items-center text-gray-600 mt-6">
             <GiBrickWall className="w-8 h-5 mr-3 text-[#aaa086] flex-shrink-0" />
-            <span className="font-medium text-lg">{lodge}</span>
+            <span className="font-medium text-lg">{accommodationName}</span>
           </div>
         )}
 
@@ -50,9 +50,9 @@ const DayDetailContent = ({
       </div>
 
       {/* RIGHT SIDE */}
-      {images.length > 0 && (
+      {/* {image.length > 0 && (
         <div className=" md:w-1/2">
-          {images.map((img, index) => (
+          {image.map((img, index) => (
             <div
               key={index}
               className="rounded-md overflow-hidden shadow-md bg-gray-200"
@@ -64,8 +64,23 @@ const DayDetailContent = ({
               />
             </div>
           ))}
+          
         </div>
-      )}
+      )} */}
+
+{image && (
+  <div className="md:w-1/2">
+    <div className="rounded-md overflow-hidden shadow-md bg-gray-200">
+      <img
+        src={image}
+        alt="Itinerary"
+        className="object-cover w-full h-[400px]"
+      />
+    </div>
+  </div>
+)}
+
+
     </div>
   );
 };

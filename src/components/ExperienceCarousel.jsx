@@ -17,6 +17,7 @@ const ExperienceCarousel = ({
   data = [],
   slidesPerView = 2.5,
   slidesPerGroup = 2,
+  onCardClick
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(Math.ceil(data.length / slidesPerGroup));
@@ -78,8 +79,13 @@ const ExperienceCarousel = ({
           className="pb-10"
         >
           {data.map((item, index) => (
-            <SwiperSlide key={index}>
-              <div className="relative group overflow-hidden rounded-sm shadow-lg">
+            <SwiperSlide >
+              <div 
+              key={item.id}
+   
+onClick={() => onCardClick && onCardClick(item.id)}
+              className="relative group overflow-hidden rounded-sm shadow-lg cursor-pointer"
+              >
                 <img
                   src={item.image}
                   alt={item.title}

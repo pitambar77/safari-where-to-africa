@@ -1,3 +1,4 @@
+import { div } from "framer-motion/client";
 import React from "react";
 
 const PackageCardGridSection = ({ 
@@ -5,7 +6,8 @@ const PackageCardGridSection = ({
   subtitle, 
   data = [], 
   CardComponent, 
-  emptyMessage = "No items found." 
+  emptyMessage = "No items found." ,
+  onCardClick, // 👈 Added missing prop
 }) => {
   return (
     <section className="py-12">
@@ -25,7 +27,14 @@ const PackageCardGridSection = ({
         {data.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7 2xl:gap-8 mt-16">
             {data.map((item, index) => (
-              <CardComponent key={item.id || index} item={item} />
+              <div 
+              key={item.id}
+    className="cursor-pointer"
+    onClick={() => onCardClick && onCardClick(item.id)}
+              >
+ <CardComponent key={item.id || index} item={item} />
+              </div>
+             
             ))}
           </div>
         ) : (

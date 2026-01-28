@@ -35,7 +35,7 @@ const Homepack = () => {
            subtitle={"African landscapes parading with the circle of life promise magical moments unlike any you have imagined before. You'll find them..."}
            description={"... while tasting wines carefully cultivated and expertly poured. At safari lodges, tented camps and members' clubs luxuriously appoint..."}
            />
-      <div className=" max-w-[1320px] mx-auto px-4">
+      <div className=" px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-28">
         <div className="home-pack_main">
           <div className="main-pack_fill">
             <ul className="filderlist">
@@ -49,7 +49,7 @@ const Homepack = () => {
         </div>
       </div>
       <div >
- <div className="home-africa-pack">
+ <div className="home-africa-pack ">
         <Swiper
           modules={[Navigation, Pagination]}
           spaceBetween={20}

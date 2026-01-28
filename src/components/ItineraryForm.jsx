@@ -166,6 +166,7 @@ import React, { useState, useEffect } from "react";
 import DayForm from "./DayForm";
 import { createItinerary, updateItinerary } from "../api/itineraryAPI";
 import { deleteItineraryImage } from "../api/itineraryAPI";
+import { getAllDestinations } from "../api/destinationAPI"; // ✅ import destinations
 
 import { toast } from "react-toastify";
 
@@ -175,12 +176,24 @@ const ItineraryForm = ({ refreshList, editItem, clearEdit }) => {
     { day: "", title: "", location: "", description: "", accommodationName: "", image: null },
   ]);
 
+  const [destinations, setDestinations] = useState([]); // ✅ for dropdown
+  const [selectedDestinationId, setSelectedDestinationId] = useState(""); // ✅ selected ID
+
+
   useEffect(() => {
     if (editItem) {
       setName(editItem.name);
       setDays(editItem.days || []);
     }
+     fetchDestinations();
   }, [editItem]);
+
+  const fetchDestinations = async () => {
+    const { data } = await getAllDestinations();
+    setDestinations(data);
+  };
+
+
 
   const handleChange = (e, index, isFile = false) => {
     const updatedDays = [...days];
@@ -202,8 +215,17 @@ const ItineraryForm = ({ refreshList, editItem, clearEdit }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!selectedDestinationId) {
+      alert("Please select a destination!");
+      return;
+    }
+
     try {
       const formData = new FormData();
+
+      formData.append("destinationId", selectedDestinationId);
+
       formData.append("name", name);
 
       // Create stripped-down version of days (excluding image files)
@@ -265,6 +287,23 @@ const ItineraryForm = ({ refreshList, editItem, clearEdit }) => {
 
   return (
     <form onSubmit={handleSubmit} className="bg-white shadow-lg rounded-xl p-6 space-y-4">
+
+<div>
+          <h3 className="font-semibold text-lg mb-2">Select Destination</h3>
+          <select
+            className="border p-2 w-full"
+            value={selectedDestinationId}
+            onChange={(e) => setSelectedDestinationId(e.target.value)}
+          >
+            <option value="">-- Select Destination --</option>
+            {destinations.map((dest) => (
+              <option key={dest._id} value={dest._id}>
+                {dest.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
       <h2 className="text-xl font-semibold mb-2">
         {editItem ? "Edit Itinerary" : "Add New Itinerary"}
       </h2>

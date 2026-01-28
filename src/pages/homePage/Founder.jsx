@@ -1,11 +1,11 @@
-import "./Founder.css";
+
 import founder from "../../assets/fonder.webp";
 
 const Founder = () => {
   return (
  
     <>
-      <div className=" px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-48 py-16 ">
+      <div className=" px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-28 py-16 ">
         <div className=" grid grid-cols-1 md:grid-cols-2 gap-32 ">
           <div className="">
             <h2 className=" font-cormorant mb-4 text-lg uppercase text-[#aaa086]">
@@ -37,9 +37,9 @@ const Founder = () => {
           </div>
           <div>
             <div className=" ">
-              <div className="">
-                <img src={founder} alt="" className=" w-full  object-cover " />
-              </div>
+            
+                <img src={founder} alt="" className=" w-full  object-cover rounded-sm " />
+           
             </div>
           </div>
         </div>

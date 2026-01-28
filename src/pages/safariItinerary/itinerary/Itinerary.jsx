@@ -347,8 +347,8 @@ const Itinerary = ({ data = [], title = "Trip Itinerary" }) => {
                         title={item.title}
                         location={item.location}
                         description={item.description}
-                        lodge={item.lodge}
-                        images={item.images}
+                        accommodationName={item.accommodationName}
+                        image={item.image}
                         activities={item.activities}
                       />
                     </motion.div>

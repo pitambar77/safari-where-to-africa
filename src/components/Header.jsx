@@ -4,26 +4,39 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaChevronDown } from "react-icons/fa6";
 import logo from "../assets/whereto-logo.webp";
 
+import { getAllDestinations } from "../api/destinationApi"; // ✅ use this
+
+
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [hoverTimeout, setHoverTimeout] = useState(null);
 
-  const destinations = [
-     { name: "South Africa", path: "/south-africa" },
-     { name: "Botswana", path: "/botswana" },
-     { name: "Namibia", path: "/namibia" },
-        { name: "Zimbabwe", path: "/zimbabwe" },
-     { name: "Zambia", path: "/zambia" },
-     { name: "Mozambique", path: "/mozambique" },   
-    { name: "Kenya", path: "/kenya" },
-    { name: "Tanzania", path: "/tanzania" },
-   
-    
-    
- 
-  ];
+  const [destinations, setDestinations] = useState([]);
 
+  // const destinations = [
+  //    { name: "South Africa", path: "/south-africa" },
+  //    { name: "Botswana", path: "/botswana" },
+  //    { name: "Namibia", path: "/namibia" },
+  //       { name: "Zimbabwe", path: "/zimbabwe" },
+  //    { name: "Zambia", path: "/zambia" },
+  //    { name: "Mozambique", path: "/mozambique" },   
+  //   { name: "Kenya", path: "/kenya" },
+  //   { name: "Tanzania", path: "/tanzania" },
+  // ];
+
+ 
+  useEffect(() => {
+    const fetchDestinations = async () => {
+      try {
+        const res = await getAllDestinations();
+        setDestinations(res.data);
+      } catch (err) {
+        console.error("Failed to fetch destinations", err);
+      }
+    };
+    fetchDestinations();
+  }, []);
   // Detect screen size
   useEffect(() => {
     const handleResize = () => {
@@ -79,7 +92,7 @@ const Header = () => {
                 />
               </button>
 
-              {/* Dropdown Menu */}
+         
               <AnimatePresence>
                 {isOpen && (
                   <motion.ul
@@ -89,21 +102,39 @@ const Header = () => {
                     transition={{ duration: 0.2 }}
                     className="absolute left-0 top-full mt-0 w-56 bg-white pt-2 rounded-lg  z-50"
                   >
-                    {destinations.map((item, index) => (
-                      <li key={index}>
-                        <Link
-                          to={item.path}
-                          className="block px-5 py-2.5 hover:bg-[#f25922]/10 hover:text-[#f25922] transition-colors"
-                          onClick={() => setIsOpen(false)}
-                        >
-                          {item.name}
-                        </Link>
-                      </li>
-                    ))}
+                  
+                    {destinations.map((d) => (
+                <li key={d._id}>
+                  <Link
+                    to={`/destination/${d.slug}`}
+                     onClick={() => setIsOpen(false)}
+                    className="block px-5 py-2.5 hover:bg-[#f25922]/10 hover:text-[#f25922] transition-colors"
+                  >
+                    {d.name}
+                  </Link>
+                </li>
+              ))}
                   </motion.ul>
                 )}
               </AnimatePresence>
             </div>
+
+            {/* <div className="inline-block relative group">
+            <button className="hover:text-amber-700">Destinations ▾</button>
+            <ul className="absolute hidden group-hover:block bg-white shadow-md mt-2 rounded">
+              {destinations.map((d) => (
+                <li key={d._id}>
+                  <Link
+                    to={`/destination/${d.slug}`}
+                     onClick={() => setIsOpen(false)}
+                    className="block px-5 py-2.5 hover:bg-[#f25922]/10 hover:text-[#f25922] transition-colors"
+                  >
+                    {d.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div> */}
 
             {/* Other Nav Items */}
             <Link to="/journey" className="hover:text-[#f25922] transition-colors">
@@ -157,3 +188,66 @@ const Header = () => {
 };
 
 export default Header;
+
+
+
+// // components/Header.jsx
+// import { useEffect, useState } from "react";
+// import { Link } from "react-router-dom";
+// import { getAllDestinations } from "../api/destinationApi"; // ✅ use this
+// import logo from "../assets/whereto-logo.webp";
+// import { FaChevronDown } from "react-icons/fa6";
+
+// const Header = () => {
+//   const [destinations, setDestinations] = useState([]);
+
+//   useEffect(() => {
+//     const fetchDestinations = async () => {
+//       try {
+//         const res = await getAllDestinations();
+//         setDestinations(res.data);
+//       } catch (err) {
+//         console.error("Failed to fetch destinations", err);
+//       }
+//     };
+//     fetchDestinations();
+//   }, []);
+
+//   return (
+//     <header className="bg-white shadow-sm sticky top-0 z-50">
+//       <div className="px-6 py-4 flex justify-between items-center">
+//         <Link to="/">
+//           <img src={logo} alt="WhereToAfrica" className="w-36" />
+//         </Link>
+
+//         <nav className="space-x-6">
+//           <Link to="/" className="hover:text-amber-700">Home</Link>
+
+//           {/* Dropdown */}
+//           <div className="inline-block relative group">
+//             <button className="hover:text-amber-700 flex items-center gap-1">
+//               Destinations <FaChevronDown className="text-xs" />
+//             </button>
+//             <ul className="absolute hidden group-hover:block bg-white shadow-md mt-2 rounded w-48">
+//               {destinations.map((d) => (
+//                 <li key={d._id}>
+//                   <Link
+//                     to={`/destination/${d.slug}`}
+//                     className="block px-4 py-2 hover:bg-gray-100"
+//                   >
+//                     {d.name}
+//                   </Link>
+//                 </li>
+//               ))}
+//             </ul>
+//           </div>
+
+//           <Link to="/journey" className="hover:text-amber-700">Journey</Link>
+//           <Link to="/retreats" className="hover:text-amber-700">Retreats</Link>
+//         </nav>
+//       </div>
+//     </header>
+//   );
+// };
+
+// export default Header;
