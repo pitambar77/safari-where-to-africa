@@ -457,7 +457,7 @@ import {
   getAllExperiences,
   deleteExperience,
 } from "../api/experienceAPI";
-import { getAllDestinations } from "../api/destinationAPI";
+import { getAllDestinations } from "../api/destinationAPI.js";
 
 const Experiences = () => {
   // Basic state

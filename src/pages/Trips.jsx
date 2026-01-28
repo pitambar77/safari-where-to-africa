@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from "react";
-import { createTrip, getAllTrips, deleteTrip, updateTrip } from "../api/tripAPI";
-import { getAllDestinations } from "../api/destinationAPI";
+import { createTrip, getAllTrips, deleteTrip, updateTrip } from "../api/tripAPI.js";
+import { getAllDestinations } from "../api/destinationAPI.js";
 import QnASection from "../components/QnASection";
 
 const Trips = () => {

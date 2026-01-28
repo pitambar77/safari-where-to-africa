@@ -379,7 +379,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getRegionBySlug } from "../../../api/destinationAPI";
+import { getRegionBySlug } from "../../../api/destinationAPI.js";
 import JourneyOverview from "../../../components/JourneyOverview";
 import Overview from "../../../components/Overview";
 import ParticularDestinationPackage from "../../../components/ParticularDestinationPackage";

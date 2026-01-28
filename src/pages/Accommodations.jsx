@@ -989,7 +989,7 @@ import {
   getAllAccommodations,
   deleteAccommodation,
 } from "../api/accommodationAPI";
-import { getAllDestinations }  from '../api/destinationAPI'
+import { getAllDestinations }  from '../api/destinationAPI.js'
 
 const Accommodations = () => {
   // 🔹 Dropdown States

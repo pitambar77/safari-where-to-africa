@@ -4,7 +4,7 @@ import {
   createItinerary,
   updateItinerary,
   deleteItinerary,
-} from "../api/itineraryAPI";
+} from "../api/itineraryAPI.js";
 import ItineraryForm from "../components/ItineraryForm";
 
 const AdminItinerary = () => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllExperiences, deleteExperience } from "../../api/experienceAPI";
+import { getAllExperiences, deleteExperience } from "../../api/experienceAPI.js";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 

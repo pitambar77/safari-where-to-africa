@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getItineraries } from "../api/itineraryAPI";
+import { getItineraries } from "../api/itineraryAPI.js";
 
 const ViewItineraries = () => {
   const [itineraries, setItineraries] = useState([]);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getExperienceById, updateExperience } from "../../api/experienceAPI";
+import { getExperienceById, updateExperience } from "../../api/experienceAPI.js";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import ExperienceForm from "../../components/ExperienceBackend/ExperienceForm";

@@ -8,7 +8,7 @@ import GallerySectionExactWidths from '../../Accomodation/AccomodationDetails/Ga
 import JourneysCarousel from '../../Accomodation/AccomodationDetails/JourneysCarousel'
 import JourneyOverview from '../../../components/JourneyOverview'
 import { useParams } from 'react-router-dom'
-import axiosInstance from '../../../api/axiosInstance'
+import axiosInstance from '../../../api/axiosInstance.js'
 import GallerySection from '../../Accomodation/AccomodationDetails/GallerySection'
 
 const ExperienceDetails = () => {
