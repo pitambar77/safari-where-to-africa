@@ -3,7 +3,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:8000/api/accommodation",
+  baseURL: "http:where-to-africa-safari-backend.manoramaseoservice.com/api/accommodation",
 });
 
 export const createAccommodation = (formData) =>
