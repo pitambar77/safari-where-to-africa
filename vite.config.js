@@ -11,7 +11,7 @@ export default defineConfig({
   server: {
     host: true, // important for domain / subdomain access
     allowedHosts: [
-      'where-to-africa-safari-backend.manoramaseoservice.com'
+      'wheretoafrica.manoramaseoservice.com'
     ]
   }
 })
