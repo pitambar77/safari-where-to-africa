@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaChevronDown } from "react-icons/fa6";
 import logo from "../assets/whereto-logo.webp";
 
-import { getAllDestinations } from "../api/destinationApi"; // ✅ use this
+import { getAllDestinations } from "../api/destinationAPI.js"; // ✅ use this
 
 
 const Header = () => {
