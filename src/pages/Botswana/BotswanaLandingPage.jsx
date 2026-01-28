@@ -265,7 +265,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getDestinationBySlug } from "../../api/destinationApi";
+import { getDestinationBySlug } from "../../api/destinationAPI.js";
 
 import Banner from "../../components/Banner";
 import Overview from "../../components/Overview";
