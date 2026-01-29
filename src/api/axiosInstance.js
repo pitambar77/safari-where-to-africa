@@ -14,6 +14,7 @@ import axios from "axios";
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL || "http://where-to-africa-safari-backend.manoramaseoservice.com",
+  // baseURL: import.meta.env.VITE_API_URL || "http://localhost:8003",
 });
 
 export default axiosInstance;

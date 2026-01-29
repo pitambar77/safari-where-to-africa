@@ -230,8 +230,8 @@ const Trips = () => {
           <input type="text" placeholder="Subtitle" value={subtitle} onChange={(e) => setSubtitle(e.target.value)} className="border p-2" />
           <input type="text" placeholder="Location" value={location} onChange={(e) => setLocation(e.target.value)} className="border p-2" />
           <input type="text" placeholder="Duration" value={duration} onChange={(e) => setDuration(e.target.value)} className="border p-2" />
-          <input type="number" placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} className="border p-2" />
-          <input type="number" placeholder="Rating" value={rating} onChange={(e) => setRating(e.target.value)} className="border p-2" />
+          <input type="text" placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} className="border p-2" />
+          <input type="number" placeholder="Travelers" value={rating} onChange={(e) => setRating(e.target.value)} className="border p-2" />
            
         </div>
 
@@ -242,12 +242,14 @@ const Trips = () => {
              <textarea  placeholder="Overview description" value={overviewDescription} onChange={(e) => setOverviewDescription(e.target.value)} className="border p-2 w-full" />
 
         <div>
-          <label className="block font-medium">Trip Image:</label>
+          {/* trip image - banner image  */}
+          <label className="block font-medium">Banner Image:</label> 
           <input type="file" onChange={(e) => setImage(e.target.files[0])} className="border p-2 w-full" />
         </div>
 
         <div>
-          <label className="block font-medium">Gallery Images:</label>
+          {/* Gallery image - Overview image  */}
+          <label className="block font-medium">Overview Images:</label>
           <input type="file" multiple onChange={(e) => setGallery([...e.target.files])} className="border p-2 w-full" />
         </div>
 

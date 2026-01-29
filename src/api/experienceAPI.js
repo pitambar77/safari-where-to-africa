@@ -32,6 +32,8 @@ import axios from "axios";
 
 const API = axios.create({
   baseURL: "http://where-to-africa-safari-backend.manoramaseoservice.com/api/experience",
+  // baseURL: "http://localhost:8003/api/experience",
+
 });
 
 // CREATE

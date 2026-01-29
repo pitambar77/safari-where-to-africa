@@ -2,7 +2,10 @@ import axios from "axios";
 
 const API = axios.create({
   baseURL: "http://where-to-africa-safari-backend.manoramaseoservice.com/api/trips", // Change to your deployed backend URL in production
+//  baseURL: "http://localhost:8003/api/trips", // Change to your deployed backend URL in production
+
 });
+
 
 export const createTrip = (formData) =>
   API.post("/", formData, {
