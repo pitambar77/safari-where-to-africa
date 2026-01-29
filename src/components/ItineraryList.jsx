@@ -102,7 +102,7 @@
 
 
 import React, { useEffect, useState } from "react";
-import { getItineraries, deleteItinerary } from "../api/itineraryAPI";
+import { getItineraries, deleteItinerary } from "../api/itineraryAPI.js";
 import { toast } from "react-toastify";
 
 const ItineraryList = ({ refresh, onRefresh, onEdit }) => {

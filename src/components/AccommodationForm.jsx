@@ -535,10 +535,10 @@
 
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { createAccommodation } from "../api/accommodationAPI";
+import { createAccommodation } from "../api/accommodationAPI.js";
 import ImageUpload from "./ImageUpload";
 import QnASection from "./QnASection";
-import { getAllDestinations } from "../api/destinationAPI";
+import { getAllDestinations } from "../api/destinationAPI.js";
 
 const DESTINATIONS = ["Africa", "Asia", "Europe", "South America", "North America"];
 const SUBDESTINATIONS = {

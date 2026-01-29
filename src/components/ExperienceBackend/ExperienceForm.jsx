@@ -8,7 +8,7 @@ import {
   deleteGameDriveImage,
   deleteHighlightImage,
   deleteGalleryImage,
-} from "../../api/experienceAPI";
+} from "../../api/experienceAPI.js";
 
 const ExperienceForm = ({ onSubmit, initialData = {} }) => {
   const [form, setForm] = useState(initialData);

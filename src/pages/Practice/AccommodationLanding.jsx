@@ -93,7 +93,7 @@ import React, { useEffect, useState } from "react";
 import {
   getAccommodations,
   getFilteredAccommodations,
-} from "../../api/accommodationAPI";
+} from "../../api/accommodationAPI.js";
 import FilterBar from "../../components/FilterBar";
 import AccommodationCard from "../../components/AccommodationCard";
 

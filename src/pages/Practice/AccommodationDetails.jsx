@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getAccommodationById } from "../../api/accommodationAPI";
+import { getAccommodationById } from "../../api/accommodationAPI.js";
 import Gallery from "../../components/Gallery";
 import QnADisplay from "../../components/QnADisplay";
 

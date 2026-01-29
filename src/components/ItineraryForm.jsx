@@ -164,9 +164,9 @@
 
 import React, { useState, useEffect } from "react";
 import DayForm from "./DayForm";
-import { createItinerary, updateItinerary } from "../api/itineraryAPI";
-import { deleteItineraryImage } from "../api/itineraryAPI";
-import { getAllDestinations } from "../api/destinationAPI"; // ✅ import destinations
+import { createItinerary, updateItinerary } from "../api/itineraryAPI.js";
+import { deleteItineraryImage } from "../api/itineraryAPI.js";
+import { getAllDestinations } from "../api/destinationAPI.js"; // ✅ import destinations
 
 import { toast } from "react-toastify";
 

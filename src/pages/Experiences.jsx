@@ -456,7 +456,7 @@ import {
   createExperience,
   getAllExperiences,
   deleteExperience,
-} from "../api/experienceAPI";
+} from "../api/experienceAPI.js";
 import { getAllDestinations } from "../api/destinationAPI.js";
 
 const Experiences = () => {
