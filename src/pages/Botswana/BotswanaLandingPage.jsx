@@ -335,26 +335,14 @@ const BotswanaLandingPage = () => {
     fetchDestination();
   }, [slug]);
 
+  console.log(destination)
+
   if (loading)
     return <p className="text-center py-20 text-gray-600">Loading...</p>;
   if (error) return <p className="text-center py-20 text-red-500">{error}</p>;
   if (!destination) return <p className="text-center py-20">No data found.</p>;
 
-  // const { hero, regions, trips, experience, accommodations } = destination;
-
-  // ✅ Flatten region data
-
-//   const regions = destination?.regions || [];
-
-// const allTrips = regions?.flatMap((region) => region.trips || []) || [];
-// const allExperiences =
-//   regions?.flatMap((region) => region.experiences || []) || [];
-// const allAccommodations =
-//   regions?.flatMap((region) => region.accommodations || []) || [];
-
-
-//   // Handle nested data safely
-//   const experienceData = experience?.[0];
+  
 
 
 if (!destination) return <p className="text-center py-20">No data found.</p>;

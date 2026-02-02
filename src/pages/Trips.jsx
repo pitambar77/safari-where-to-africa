@@ -1,6 +1,10 @@
-
 import React, { useState, useEffect } from "react";
-import { createTrip, getAllTrips, deleteTrip, updateTrip } from "../api/tripAPI.js";
+import {
+  createTrip,
+  getAllTrips,
+  deleteTrip,
+  updateTrip,
+} from "../api/tripAPI.js";
 import { getAllDestinations } from "../api/destinationAPI.js";
 import QnASection from "../components/QnASection";
 
@@ -26,18 +30,24 @@ const Trips = () => {
   const [overviewSubTitle, setOverviewSubTitle] = useState("");
   const [overviewDescription, setOverviewDescription] = useState("");
 
+  const [aboutBooking, setAboutBooking] = useState([]);
+  const [requirements, setRequirements] = useState([]);
 
-    const [aboutBooking, setAboutBooking] = useState([]);
-    const [requirements, setRequirements] = useState([]);
-
-    // ✅ Trip Highlights
+  // ✅ Trip Highlights
   const [tripHighlights, setTripHighlights] = useState([
     { title: "", description: "", status: "Include", image: null },
   ]);
 
   // Itinerary
   const [itinerary, setItinerary] = useState([
-    { day: "", title: "", location: "", description: "", accommodationName: "", image: null },
+    {
+      day: "",
+      title: "",
+      location: "",
+      description: "",
+      accommodationName: "",
+      image: null,
+    },
   ]);
 
   const [editId, setEditId] = useState(null);
@@ -57,12 +67,21 @@ const Trips = () => {
     setDestinations(data);
   };
 
-  const selectedDestination = destinations.find((d) => d._id === selectedDestinationId);
+  const selectedDestination = destinations.find(
+    (d) => d._id === selectedDestinationId,
+  );
 
   const handleAddItinerary = () => {
     setItinerary([
       ...itinerary,
-      { day: "", title: "", location: "", description: "", accommodationName: "", image: null },
+      {
+        day: "",
+        title: "",
+        location: "",
+        description: "",
+        accommodationName: "",
+        image: null,
+      },
     ]);
   };
 
@@ -72,10 +91,12 @@ const Trips = () => {
     setItinerary(updated);
   };
 
-
   // ✅ Handle Trip Highlights
   const handleAddHighlight = () => {
-    setTripHighlights([...tripHighlights, { title: "", description: "", status: "Include", image: null }]);
+    setTripHighlights([
+      ...tripHighlights,
+      { title: "", description: "", status: "Include", image: null },
+    ]);
   };
 
   const handleHighlightChange = (index, field, value) => {
@@ -110,17 +131,90 @@ const Trips = () => {
     gallery.forEach((img) => formData.append("gallery", img));
 
     // ✅ Itinerary data
-    formData.append("itinerary", JSON.stringify(itinerary));
+ 
+
+//     const cleanedItinerary = itinerary.map(
+//   ({ image, existingImage, ...rest }, index) => ({
+//     ...rest,
+//     image: typeof image === "string" ? image : existingImage || undefined,
+//     imageIndex: image instanceof File ? index : null,
+//   })
+// );
+
+let imageCounter = 0;
+
+const cleanedItinerary = itinerary.map(
+  ({ image, existingImage, ...rest }) => {
+    const currentIndex =
+      image instanceof File ? imageCounter++ : null;
+
+    return {
+      ...rest,
+      image:
+        typeof image === "string" ? image : existingImage || undefined,
+      imageIndex: currentIndex,
+    };
+  }
+);
+
+
+
+    formData.append("itinerary", JSON.stringify(cleanedItinerary));
+
+    // itinerary.forEach((item) => {
+    //   if (item.image) formData.append("itineraryImages", item.image);
+    // });
+
     itinerary.forEach((item) => {
-      if (item.image) formData.append("itineraryImages", item.image);
-    });
+  if (item.image instanceof File) {
+    formData.append("itineraryImages", item.image);
+  }
+});
 
 
     // ✅ Trip Highlights
-    formData.append("tripHighlights", JSON.stringify(tripHighlights));
+    // formData.append("tripHighlights", JSON.stringify(tripHighlights));
+//    const cleanedHighlights = tripHighlights.map(
+//   ({ image, existingImage, ...rest }, index) => ({
+//     ...rest,
+//     tripHighlightImage:
+//       typeof image === "string" ? image : existingImage || undefined,
+//     imageIndex: image instanceof File ? index : null,
+//   })
+// );
+
+
+//     formData.append("tripHighlights", JSON.stringify(cleanedHighlights));
+
+let highlightImageCounter = 0;
+
+const cleanedHighlights = tripHighlights.map(
+  ({ image, existingImage, ...rest }) => {
+    const currentIndex =
+      image instanceof File ? highlightImageCounter++ : null;
+
+    return {
+      ...rest,
+      tripHighlightImage:
+        typeof image === "string" ? image : existingImage || undefined,
+      imageIndex: currentIndex,
+    };
+  }
+);
+
+formData.append("tripHighlights", JSON.stringify(cleanedHighlights));
+
+
+    // tripHighlights.forEach((item) => {
+    //   if (item.image) formData.append("tripHighlightImage", item.image); // ✅ single image field
+    // });
+
     tripHighlights.forEach((item) => {
-      if (item.image) formData.append("tripHighlightImage", item.image); // ✅ single image field
-    });
+  if (item.image instanceof File) {
+    formData.append("tripHighlightImage", item.image);
+  }
+});
+
 
     if (editId) {
       await updateTrip(editId, formData);
@@ -148,16 +242,46 @@ const Trips = () => {
     setOverviewTitle("");
     setOverviewSubTitle("");
     setOverviewDescription("");
-  
+
     setImage(null);
     setGallery([]);
-    setItinerary([{ day: "", title: "", location: "", description: "", accommodationName: "", image: null }]);
-    setTripHighlights([{ title: "", description: "", status: "Include", image: null }]);
+    setItinerary([
+      {
+        day: "",
+        title: "",
+        location: "",
+        description: "",
+        accommodationName: "",
+        image: null,
+      },
+    ]);
+    setTripHighlights([
+      { title: "", description: "", status: "Include", image: null },
+    ]);
   };
+
+  // const handleEdit = (trip) => {
+  //   setEditId(trip._id);
+  //   setSelectedDestinationId(trip.destination?._id || "");
+  //   setTitle(trip.title);
+  //   setSubtitle(trip.subtitle);
+  //   setLocation(trip.location);
+  //   setDuration(trip.duration);
+  //   setPrice(trip.price);
+  //   setRating(trip.rating);
+  //   setDescription(trip.description);
+  //   setOverviewTitle(trip.overviewTitle);
+  //   setOverviewSubTitle(trip.overviewSubTitle);
+  //   setOverviewDescription(trip.overviewDescription);
+  //   setAboutBooking(trip.aboutBooking);
+  //   setRequirements(trip.requirements)
+  //   setTripHighlights(trip.tripHighlights || []);
+  // };
 
   const handleEdit = (trip) => {
     setEditId(trip._id);
     setSelectedDestinationId(trip.destination?._id || "");
+
     setTitle(trip.title);
     setSubtitle(trip.subtitle);
     setLocation(trip.location);
@@ -165,12 +289,33 @@ const Trips = () => {
     setPrice(trip.price);
     setRating(trip.rating);
     setDescription(trip.description);
+
     setOverviewTitle(trip.overviewTitle);
     setOverviewSubTitle(trip.overviewSubTitle);
     setOverviewDescription(trip.overviewDescription);
-    setAboutBooking(trip.aboutBooking);
-    setRequirements(trip.requirements)
-    setTripHighlights(trip.tripHighlights || []);
+
+    setAboutBooking(trip.aboutBooking || []);
+    setRequirements(trip.requirements || []);
+
+    // ✅ FIXED
+    setItinerary(
+      (trip.itinerary || []).map((i) => ({
+        ...i,
+        image: i.image || null, // ✅ KEEP IMAGE
+        existingImage: i.image || "", // preview only
+      })),
+    );
+
+    // ✅ FIXED
+    setTripHighlights(
+      (trip.tripHighlights || []).map((h) => ({
+        title: h.title,
+        description: h.description,
+        status: h.status,
+        image: h.tripHighlightImage || null, // ✅ KEEP IMAGE
+        existingImage: h.tripHighlightImage || "",
+      })),
+    );
   };
 
   const handleDelete = async (id) => {
@@ -182,7 +327,9 @@ const Trips = () => {
 
   return (
     <div className="p-8">
-      <h2 className="text-2xl font-bold mb-6">{editId ? "Update Trip" : "Create Trip"}</h2>
+      <h2 className="text-2xl font-bold mb-6">
+        {editId ? "Update Trip" : "Create Trip"}
+      </h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Destination Dropdown */}
@@ -226,37 +373,103 @@ const Trips = () => {
 
         {/* Trip Fields */}
         <div className="grid grid-cols-2 gap-4">
-          <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} className="border p-2" />
-          <input type="text" placeholder="Subtitle" value={subtitle} onChange={(e) => setSubtitle(e.target.value)} className="border p-2" />
-          <input type="text" placeholder="Location" value={location} onChange={(e) => setLocation(e.target.value)} className="border p-2" />
-          <input type="text" placeholder="Duration" value={duration} onChange={(e) => setDuration(e.target.value)} className="border p-2" />
-          <input type="text" placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} className="border p-2" />
-          <input type="number" placeholder="Travelers" value={rating} onChange={(e) => setRating(e.target.value)} className="border p-2" />
-           
+          <input
+            type="text"
+            placeholder="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="border p-2"
+          />
+          <input
+            type="text"
+            placeholder="Subtitle"
+            value={subtitle}
+            onChange={(e) => setSubtitle(e.target.value)}
+            className="border p-2"
+          />
+          <input
+            type="text"
+            placeholder="Location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            className="border p-2"
+          />
+          <input
+            type="text"
+            placeholder="Duration"
+            value={duration}
+            onChange={(e) => setDuration(e.target.value)}
+            className="border p-2"
+          />
+          <input
+            type="text"
+            placeholder="Price"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            className="border p-2"
+          />
+          <input
+            type="number"
+            placeholder="Travelers"
+            value={rating}
+            onChange={(e) => setRating(e.target.value)}
+            className="border p-2"
+          />
         </div>
 
-        <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} className="border p-2 w-full" />
+        <textarea
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className="border p-2 w-full"
+        />
 
-<input type="text" placeholder="Overview title" value={overviewTitle} onChange={(e) => setOverviewTitle(e.target.value)} className="border p-2 w-full" />
-            <input type="text" placeholder="Overview sub title" value={overviewSubTitle} onChange={(e) => setOverviewSubTitle(e.target.value)} className="border p-2 w-full" />
-             <textarea  placeholder="Overview description" value={overviewDescription} onChange={(e) => setOverviewDescription(e.target.value)} className="border p-2 w-full" />
+        <input
+          type="text"
+          placeholder="Overview title"
+          value={overviewTitle}
+          onChange={(e) => setOverviewTitle(e.target.value)}
+          className="border p-2 w-full"
+        />
+        <input
+          type="text"
+          placeholder="Overview sub title"
+          value={overviewSubTitle}
+          onChange={(e) => setOverviewSubTitle(e.target.value)}
+          className="border p-2 w-full"
+        />
+        <textarea
+          placeholder="Overview description"
+          value={overviewDescription}
+          onChange={(e) => setOverviewDescription(e.target.value)}
+          className="border p-2 w-full"
+        />
 
         <div>
           {/* trip image - banner image  */}
-          <label className="block font-medium">Banner Image:</label> 
-          <input type="file" onChange={(e) => setImage(e.target.files[0])} className="border p-2 w-full" />
+          <label className="block font-medium">Banner Image:</label>
+          <input
+            type="file"
+            onChange={(e) => setImage(e.target.files[0])}
+            className="border p-2 w-full"
+          />
         </div>
 
         <div>
           {/* Gallery image - Overview image  */}
           <label className="block font-medium">Overview Images:</label>
-          <input type="file" multiple onChange={(e) => setGallery([...e.target.files])} className="border p-2 w-full" />
+          <input
+            type="file"
+            multiple
+            onChange={(e) => setGallery([...e.target.files])}
+            className="border p-2 w-full"
+          />
         </div>
 
         {/* Itinerary Section */}
         <div>
           <h3 className="text-lg font-semibold mb-2">Itinerary</h3>
-          {itinerary.map((item, i) => (
+          {/* {itinerary.map((item, i) => (
             <div key={i} className="border p-3 mb-3 rounded">
               <input type="text" placeholder="Day" value={item.day} onChange={(e) => handleItineraryChange(i, "day", e.target.value)} className="border p-2 w-full mb-2" />
               <input type="text" placeholder="Title" value={item.title} onChange={(e) => handleItineraryChange(i, "title", e.target.value)} className="border p-2 w-full mb-2" />
@@ -265,25 +478,100 @@ const Trips = () => {
               <input type="text" placeholder="Accommodation Name" value={item.accommodationName} onChange={(e) => handleItineraryChange(i, "accommodationName", e.target.value)} className="border p-2 w-full mb-2" />
               <input type="file" onChange={(e) => handleItineraryChange(i, "image", e.target.files[0])} className="border p-2 w-full" />
             </div>
+          ))} */}
+          {itinerary.map((item, i) => (
+            <div key={i} className="border p-3 mb-3 rounded">
+              <input
+                type="text"
+                placeholder="Day"
+                value={item.day}
+                onChange={(e) =>
+                  handleItineraryChange(i, "day", e.target.value)
+                }
+                className="border p-2 w-full mb-2"
+              />
+
+              <input
+                type="text"
+                placeholder="Title"
+                value={item.title}
+                onChange={(e) =>
+                  handleItineraryChange(i, "title", e.target.value)
+                }
+                className="border p-2 w-full mb-2"
+              />
+
+              <input
+                type="text"
+                placeholder="Location"
+                value={item.location}
+                onChange={(e) =>
+                  handleItineraryChange(i, "location", e.target.value)
+                }
+                className="border p-2 w-full mb-2"
+              />
+
+              <textarea
+                placeholder="Description"
+                value={item.description}
+                onChange={(e) =>
+                  handleItineraryChange(i, "description", e.target.value)
+                }
+                className="border p-2 w-full mb-2"
+              />
+
+              <input
+                type="text"
+                placeholder="Accommodation Name"
+                value={item.accommodationName}
+                onChange={(e) =>
+                  handleItineraryChange(i, "accommodationName", e.target.value)
+                }
+                className="border p-2 w-full mb-2"
+              />
+
+              {/* ✅ SHOW EXISTING IMAGE */}
+              {item.existingImage && !item.image && (
+                <img
+                  src={item.existingImage}
+                  alt="Itinerary"
+                  className="w-40 h-28 object-cover rounded mb-2"
+                />
+              )}
+
+              {/* ✅ FILE INPUT */}
+              <input
+                type="file"
+                onChange={(e) =>
+                  handleItineraryChange(i, "image", e.target.files[0])
+                }
+                className="border p-2 w-full"
+              />
+            </div>
           ))}
-          <button type="button" onClick={handleAddItinerary} className="text-blue-500 text-sm">
+
+          <button
+            type="button"
+            onClick={handleAddItinerary}
+            className="text-blue-500 text-sm"
+          >
             + Add Itinerary Day
           </button>
         </div>
 
         {/* Q&A Sections */}
-      <QnASection
-        label="About Booking"
-        qna={aboutBooking}
-        setQna={setAboutBooking}
-      />
-      <QnASection
-        label="Requirements"
-        qna={requirements}
-        setQna={setRequirements}
-      />
+        <QnASection
+          label="About Booking"
+          qna={aboutBooking}
+          setQna={setAboutBooking}
+        />
+        <QnASection
+          label="Requirements"
+          qna={requirements}
+          setQna={setRequirements}
+        />
 
-      {/* ✅ Trip Highlights Section */}
+        {/* ✅ Trip Highlights Section */}
         <div>
           <h3 className="text-lg font-semibold mb-2">Trip Highlights</h3>
           {tripHighlights.map((item, i) => (
@@ -292,18 +580,24 @@ const Trips = () => {
                 type="text"
                 placeholder="Highlight Title"
                 value={item.title}
-                onChange={(e) => handleHighlightChange(i, "title", e.target.value)}
+                onChange={(e) =>
+                  handleHighlightChange(i, "title", e.target.value)
+                }
                 className="border p-2 w-full mb-2"
               />
               <textarea
                 placeholder="Highlight Description"
                 value={item.description}
-                onChange={(e) => handleHighlightChange(i, "description", e.target.value)}
+                onChange={(e) =>
+                  handleHighlightChange(i, "description", e.target.value)
+                }
                 className="border p-2 w-full mb-2"
               />
               <select
                 value={item.status}
-                onChange={(e) => handleHighlightChange(i, "status", e.target.value)}
+                onChange={(e) =>
+                  handleHighlightChange(i, "status", e.target.value)
+                }
                 className="border p-2 w-full mb-2"
               >
                 <option value="Include">Include</option>
@@ -311,37 +605,55 @@ const Trips = () => {
               </select>
               <input
                 type="file"
-                onChange={(e) => handleHighlightChange(i, "image", e.target.files[0])}
+                onChange={(e) =>
+                  handleHighlightChange(i, "image", e.target.files[0])
+                }
                 className="border p-2 w-full"
               />
             </div>
           ))}
-          <button type="button" onClick={handleAddHighlight} className="text-blue-500 text-sm">
+          <button
+            type="button"
+            onClick={handleAddHighlight}
+            className="text-blue-500 text-sm"
+          >
             + Add Highlight
           </button>
         </div>
 
-        <button type="submit" className="bg-green-600 text-white px-6 py-2 rounded">
+        <button
+          type="submit"
+          className="bg-green-600 text-white px-6 py-2 rounded"
+        >
           {editId ? "Update Trip" : "Create Trip"}
         </button>
       </form>
-
-
-
-
 
       {/* All Trips */}
       <div className="mt-10">
         <h3 className="text-xl font-semibold mb-4">All Trips</h3>
         {trips.map((trip) => (
-          <div key={trip._id} className="border p-4 mb-3 flex justify-between items-center">
+          <div
+            key={trip._id}
+            className="border p-4 mb-3 flex justify-between items-center"
+          >
             <div>
               <h4 className="font-semibold">{trip.title}</h4>
               <p className="text-sm text-gray-600">{trip.destination?.name}</p>
             </div>
             <div className="flex gap-4">
-              <button onClick={() => handleEdit(trip)} className="text-blue-500">Edit</button>
-              <button onClick={() => handleDelete(trip._id)} className="text-red-500">Delete</button>
+              <button
+                onClick={() => handleEdit(trip)}
+                className="text-blue-500"
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => handleDelete(trip._id)}
+                className="text-red-500"
+              >
+                Delete
+              </button>
             </div>
           </div>
         ))}

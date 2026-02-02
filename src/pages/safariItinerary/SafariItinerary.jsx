@@ -305,7 +305,7 @@ const SafariItinerary = () => {
           <img src={map} alt="" className="w-full" />
         </div>
       </div>
-      <TripHighlights />
+      <TripHighlights highlights={trip.tripHighlights} />
       {/* <Itinerary /> */}
 
       <Itinerary data={trip.itinerary} title="" />
