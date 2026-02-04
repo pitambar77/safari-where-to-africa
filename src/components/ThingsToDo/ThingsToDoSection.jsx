@@ -10,8 +10,8 @@ import ThingsToDoCard from "./ThingsToDoCard";
 const ThingsToDoSection = ({
   title,
   subtitle,
-  description1,
-  description2,
+  descriptions = [],
+
   apiUrl,
   staticData = [],
 }) => {
@@ -45,8 +45,13 @@ const ThingsToDoSection = ({
         <h2 className="text-6xl mb-10 text-[#636363] capitalize font-normal">
           {title}
         </h2>
-        <p className="font-quicksand mb-5">{description1}</p>
-        <p className="font-quicksand">{description2}</p>
+        {descriptions.length > 0 && (
+          <div className="font-quicksand space-y-5">
+            {descriptions.map((block, index) => (
+              <p key={index}>{block.content}</p>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* --- Swiper Section --- */}
@@ -65,7 +70,9 @@ const ThingsToDoSection = ({
             768: { slidesPerView: 2.5, slidesPerGroup: 2 },
           }}
           onInit={(swiper) => {
-            const total = Math.ceil(items.length / swiper.params.slidesPerGroup);
+            const total = Math.ceil(
+              items.length / swiper.params.slidesPerGroup,
+            );
             setTotalPages(total);
             setIsBeginning(swiper.isBeginning);
             setIsEnd(swiper.isEnd);

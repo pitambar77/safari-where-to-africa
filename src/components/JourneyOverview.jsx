@@ -9,7 +9,11 @@ const JourneyOverview = ({
   price,
   journeyType,
   timeOfYear,
-  cities,
+  // cities,
+  level,
+  levelsec,
+  levelthird,
+  levelfourth,
 }) => {
   return (
     <section className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28 mt-10 font-cormorant">
@@ -31,7 +35,7 @@ const JourneyOverview = ({
         {/* Days */}
         <div className="text-center">
           <p className="uppercase text-xl tracking-wide font-medium text-[#9a8f70] mb-4">
-            Days
+           {level}
           </p>
           <p className="text-2xl font-quicksand text-[#686868]">{days}</p>
         </div>
@@ -39,7 +43,7 @@ const JourneyOverview = ({
         {/* From Price */}
         <div className="text-center md:border-l md:border-gray-300 md:pl-8">
           <p className="uppercase text-xl tracking-wide font-medium text-[#9a8f70] mb-4">
-            From (Per Person)
+            {levelsec}
           </p>
           <p className="text-2xl font-quicksand text-[#686868]">{price}</p>
         </div>
@@ -47,7 +51,7 @@ const JourneyOverview = ({
         {/* Journey Type */}
         <div className="text-center md:border-l md:border-gray-300 md:pl-8">
           <p className="uppercase text-xl tracking-wide font-medium text-[#9a8f70] mb-4">
-            Journey Type
+            {levelthird}
           </p>
           <p className="text-2xl font-quicksand text-[#686868]">{journeyType}</p>
         </div>
@@ -55,20 +59,20 @@ const JourneyOverview = ({
         {/* Time of Year */}
         <div className="text-center md:border-l md:border-gray-300 md:pl-8">
           <p className="uppercase text-xl tracking-wide font-medium text-[#9a8f70] mb-4">
-            Time of Year
+            {levelfourth}
           </p>
           <p className="text-2xl font-quicksand text-[#686868]">{timeOfYear}</p>
         </div>
 
         {/* Cities & Landmarks */}
-        <div className="text-center md:border-l md:border-gray-300 md:pl-8 max-w-xs">
+        {/* <div className="text-center md:border-l md:border-gray-300 md:pl-8 max-w-xs">
           <p className="uppercase text-xl tracking-wide font-medium text-[#9a8f70] mb-4">
             Cities & Landmarks
           </p>
           <p className="text-xl font-quicksand text-[#686868] leading-relaxed">
             {cities}
           </p>
-        </div>
+        </div> */}
       </div>
 
       {/* Image */}

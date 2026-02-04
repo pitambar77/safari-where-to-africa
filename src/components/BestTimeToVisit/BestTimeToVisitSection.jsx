@@ -3,6 +3,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import MonthCircle from "./MonthCircle";
 
+
+
+
+
 const BestTimeToVisitSection = ({
   title = "When to go on a Cape Town Trip",
   subtitle = "Best time to visit",
@@ -61,14 +65,24 @@ const BestTimeToVisitSection = ({
 
       {/* Month Selector */}
       <div className="flex flex-wrap justify-between gap-4 border-t border-b border-gray-300 py-6">
-        {monthData.map((month) => (
+        {/* {monthData.map((month) => (
           <MonthCircle
             key={month.name}
             month={month}
             isActive={hoveredMonth?.name === month.name}
             onHover={setHoveredMonth}
           />
-        ))}
+        ))} */}
+
+        {monthData.map((month) => (
+  <MonthCircle
+    key={month.name}
+    month={month}
+    isActive={hoveredMonth?.name === month.name}
+    onHover={setHoveredMonth}
+  />
+))}
+
       </div>
 
       {/* Month Details */}

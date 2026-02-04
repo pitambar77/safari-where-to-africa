@@ -306,15 +306,12 @@
 //   },
 // ];
 
-
 // const DestinationDetails = () => {
 
 //   const { areaName } = useParams();
 
-
 //   return (
 //     <>
-     
 
 // <JourneyOverview
 //       subtitle="Land Journey"
@@ -336,13 +333,12 @@
 //         />
 //         {/* <AccomodationCards/> */}
 //         <ParticularDestinationPackage
-       
+
 //       data={safarisData}
 //       CardComponent={SafariCard}
 //       emptyMessage="No safaris found."
 //         />
 
-       
 //       </div>
 //        {/* <ThingsToDO/> */}
 
@@ -376,7 +372,6 @@
 
 // export default DestinationDetails
 
-
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getRegionBySlug } from "../../../api/destinationAPI.js";
@@ -388,9 +383,10 @@ import ThingsToDoSection from "../../../components/ThingsToDo/ThingsToDoSection"
 import AccommodationGrid from "../../../components/AccommodationGrid";
 import BestTimeToVisitSection from "../../../components/BestTimeToVisit/BestTimeToVisitSection";
 import JourneysCarousel from "../../Accomodation/AccomodationDetails/JourneysCarousel";
+import { title } from "framer-motion/client";
 
 const DestinationDetails = () => {
-const { destinationSlug, regionSlug } = useParams();
+  const { destinationSlug, regionSlug } = useParams();
 
   const navigate = useNavigate();
 
@@ -414,187 +410,228 @@ const { destinationSlug, regionSlug } = useParams();
   //   fetchRegion();
   // }, [areaName]);
 
-useEffect(() => {
-  const fetchRegion = async () => {
-    try {
-      setLoading(true);
-      const res = await getRegionBySlug(destinationSlug, regionSlug);
-      setRegion(res.data);
-    } catch (err) {
-      console.error("Failed to load region:", err);
-      setError("Failed to load region data.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  useEffect(() => {
+    const fetchRegion = async () => {
+      try {
+        setLoading(true);
+        const res = await getRegionBySlug(destinationSlug, regionSlug);
+        setRegion(res.data);
+      } catch (err) {
+        console.error("Failed to load region:", err);
+        setError("Failed to load region data.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  if (destinationSlug && regionSlug) fetchRegion();
-}, [destinationSlug, regionSlug]);
+    if (destinationSlug && regionSlug) fetchRegion();
+  }, [destinationSlug, regionSlug]);
 
-console.log(region)
+  console.log(region);
 
   if (loading)
     return <p className="text-center py-20 text-gray-600">Loading region...</p>;
-  if (error)
-    return <p className="text-center py-20 text-red-500">{error}</p>;
+  if (error) return <p className="text-center py-20 text-red-500">{error}</p>;
   if (!region)
     return <p className="text-center py-20 text-gray-600">No region found.</p>;
 
   // ✅ Destructure region data
-  const { name, description, image, trips, experiences, accommodations } = region;
+  const {
+    name,
+    subtitle,
+    days,
+    highlight,
+    facility,
+    culture,
+    level,
+    levelsec,
+    levelthird,
+    levelfourth,
+    overviewTitle,
+    overviewSubTitle,
+    overviewDescription,
+    description,
+    image,
+    trips,
+    experiences,
+    accommodations,
+    thingstodo, // ✅ ADD THIS
+  } = region;
+
+  // const thingsToDoSections = thingstodo?.[0]?.section || [];
+  const thingsToDo = thingstodo?.[0];
+  const thingsToDoSections = thingsToDo?.section || [];
+  const thingsToDoDescription = thingsToDo?.thingstododescription || [];
+
+  const whenToVisit = region?.whenvisit?.[0];
+
+const whenToVisitMonths =
+  whenToVisit?.months?.map((month) => ({
+    name: month.monthname,
+    season: month.title, // maps to UI heading
+    description: month.description?.map((d) => d.content) || [],
+  })) || [];
+
 
   // ✅ Example static seasonal data
   const monthData = [
-  {
-    name: "Jan",
-    season: "Summer Season",
-    rating: "Excellent",
-    color: "bg-[#A5D6A7]",
-    description: [
-      "January is one of the best months to visit South Africa, with warm temperatures and sunny days perfect for outdoor adventures.",
-      "Enjoy beautiful beaches, safari drives, and vibrant city life in Cape Town and Johannesburg.",
-      "Expect some crowds, as it’s peak travel season for locals and tourists alike.",
-    ],
-  },
-  {
-    name: "Feb",
-    season: "Summer Season",
-    rating: "Excellent",
-    color: "bg-[#A5D6A7]",
-    description: [
-      "February continues the warm, sunny conditions ideal for beach days and game drives.",
-      "Cape Town’s wine festivals and outdoor dining experiences are in full swing.",
-      "It’s a great time to enjoy both the coast and wildlife reserves.",
-    ],
-  },
-  {
-    name: "Mar",
-    season: "Autumn Begins",
-    rating: "Excellent",
-    color: "bg-[#A5D6A7]",
-    description: [
-      "March offers slightly cooler weather, fewer crowds, and amazing scenery.",
-      "Perfect for hiking, safari, and photography with clear skies and lush landscapes.",
-      "Still warm enough for coastal activities and cultural experiences.",
-    ],
-  },
-  {
-    name: "Apr",
-    season: "Autumn",
-    rating: "Good",
-    color: "bg-[#F1F8C0]",
-    description: [
-      "April brings mild temperatures and fewer tourists, great for relaxed travel.",
-      "Wildlife spotting improves as vegetation thins.",
-      "Ideal for exploring cities, vineyards, and nature reserves alike.",
-    ],
-  },
-  {
-    name: "May",
-    season: "Wet Season",
-    rating: "Mixed",
-    color: "bg-[#E1D7F8]",
-    description: [
-      "Expect some rain in Cape Town over the course of a lengthy stay, with day length shortening and temperatures remaining mild.",
-      "The shift in the weather means beach relaxation is not always an option, leaving the many boutique shops and beachfront eateries a must, especially in the nearby coastal towns of St James and Kalk Bay.",
-      "This is the perfect time of year to indulge the taste buds with culinary delights and wine tastings, both readily available with relatively few tourists around.",
-      "The indoor markets bursting with fresh produce and homemade delights combine well with cultural explorations or a trip to the trendy V&A Waterfront.",
-      "If you are wanting a little adventure, the winter months are considered the best for Great White shark cage diving, with the sharks at their most active.",
-    ],
-  },
-  {
-    name: "Jun",
-    season: "Winter",
-    rating: "Mixed",
-    color: "bg-[#E1D7F8]",
-    description: [
-      "Cooler weather makes it perfect for safaris and wildlife spotting.",
-      "Cape Town experiences rain, but landscapes are lush and green.",
-    ],
-  },
-  {
-    name: "Jul",
-    season: "Winter",
-    rating: "Mixed",
-    color: "bg-[#E1D7F8]",
-    description: [
-      "July is ideal for safari lovers as animals gather around water sources.",
-      "Expect chilly evenings and occasional rain in the Cape.",
-    ],
-  },
-  {
-    name: "Aug",
-    season: "Winter",
-    rating: "Good",
-    color: "bg-[#F1F8C0]",
-    description: [
-      "August marks the start of wildflower season in the Western Cape.",
-      "Great time for scenic drives and wildlife safaris.",
-    ],
-  },
-  {
-    name: "Sep",
-    season: "Spring",
-    rating: "Good",
-    color: "bg-[#F1F8C0]",
-    description: [
-      "Spring begins with mild temperatures and blooming landscapes.",
-      "A beautiful time to explore both coastal and inland areas.",
-    ],
-  },
-  {
-    name: "Oct",
-    season: "Spring",
-    rating: "Excellent",
-    color: "bg-[#A5D6A7]",
-    description: [
-      "October offers warm weather and fewer crowds — perfect for adventure and relaxation.",
-      "Ideal for whale watching and outdoor exploration.",
-    ],
-  },
-  {
-    name: "Nov",
-    season: "Early Summer",
-    rating: "Excellent",
-    color: "bg-[#A5D6A7]",
-    description: [
-      "November welcomes summer with long, sunny days and vibrant energy.",
-      "Perfect time for safaris, beaches, and festive events.",
-    ],
-  },
-  {
-    name: "Dec",
-    season: "Summer",
-    rating: "Excellent",
-    color: "bg-[#A5D6A7]",
-    description: [
-      "December is lively and festive, with perfect beach weather.",
-      "Expect crowds and higher prices, but amazing summer vibes.",
-    ],
-  },
-];
+    {
+      name: "Jan",
+      season: "Summer Season",
+      rating: "Excellent",
+      color: "bg-[#A5D6A7]",
+      description: [
+        "January is one of the best months to visit South Africa, with warm temperatures and sunny days perfect for outdoor adventures.",
+        "Enjoy beautiful beaches, safari drives, and vibrant city life in Cape Town and Johannesburg.",
+        "Expect some crowds, as it’s peak travel season for locals and tourists alike.",
+      ],
+    },
+    {
+      name: "Feb",
+      season: "Summer Season",
+      rating: "Excellent",
+      color: "bg-[#A5D6A7]",
+      description: [
+        "February continues the warm, sunny conditions ideal for beach days and game drives.",
+        "Cape Town’s wine festivals and outdoor dining experiences are in full swing.",
+        "It’s a great time to enjoy both the coast and wildlife reserves.",
+      ],
+    },
+    {
+      name: "Mar",
+      season: "Autumn Begins",
+      rating: "Excellent",
+      color: "bg-[#A5D6A7]",
+      description: [
+        "March offers slightly cooler weather, fewer crowds, and amazing scenery.",
+        "Perfect for hiking, safari, and photography with clear skies and lush landscapes.",
+        "Still warm enough for coastal activities and cultural experiences.",
+      ],
+    },
+    {
+      name: "Apr",
+      season: "Autumn",
+      rating: "Good",
+      color: "bg-[#F1F8C0]",
+      description: [
+        "April brings mild temperatures and fewer tourists, great for relaxed travel.",
+        "Wildlife spotting improves as vegetation thins.",
+        "Ideal for exploring cities, vineyards, and nature reserves alike.",
+      ],
+    },
+    {
+      name: "May",
+      season: "Wet Season",
+      rating: "Mixed",
+      color: "bg-[#E1D7F8]",
+      description: [
+        "Expect some rain in Cape Town over the course of a lengthy stay, with day length shortening and temperatures remaining mild.",
+        "The shift in the weather means beach relaxation is not always an option, leaving the many boutique shops and beachfront eateries a must, especially in the nearby coastal towns of St James and Kalk Bay.",
+        "This is the perfect time of year to indulge the taste buds with culinary delights and wine tastings, both readily available with relatively few tourists around.",
+        "The indoor markets bursting with fresh produce and homemade delights combine well with cultural explorations or a trip to the trendy V&A Waterfront.",
+        "If you are wanting a little adventure, the winter months are considered the best for Great White shark cage diving, with the sharks at their most active.",
+      ],
+    },
+    {
+      name: "Jun",
+      season: "Winter",
+      rating: "Mixed",
+      color: "bg-[#E1D7F8]",
+      description: [
+        "Cooler weather makes it perfect for safaris and wildlife spotting.",
+        "Cape Town experiences rain, but landscapes are lush and green.",
+      ],
+    },
+    {
+      name: "Jul",
+      season: "Winter",
+      rating: "Mixed",
+      color: "bg-[#E1D7F8]",
+      description: [
+        "July is ideal for safari lovers as animals gather around water sources.",
+        "Expect chilly evenings and occasional rain in the Cape.",
+      ],
+    },
+    {
+      name: "Aug",
+      season: "Winter",
+      rating: "Good",
+      color: "bg-[#F1F8C0]",
+      description: [
+        "August marks the start of wildflower season in the Western Cape.",
+        "Great time for scenic drives and wildlife safaris.",
+      ],
+    },
+    {
+      name: "Sep",
+      season: "Spring",
+      rating: "Good",
+      color: "bg-[#F1F8C0]",
+      description: [
+        "Spring begins with mild temperatures and blooming landscapes.",
+        "A beautiful time to explore both coastal and inland areas.",
+      ],
+    },
+    {
+      name: "Oct",
+      season: "Spring",
+      rating: "Excellent",
+      color: "bg-[#A5D6A7]",
+      description: [
+        "October offers warm weather and fewer crowds — perfect for adventure and relaxation.",
+        "Ideal for whale watching and outdoor exploration.",
+      ],
+    },
+    {
+      name: "Nov",
+      season: "Early Summer",
+      rating: "Excellent",
+      color: "bg-[#A5D6A7]",
+      description: [
+        "November welcomes summer with long, sunny days and vibrant energy.",
+        "Perfect time for safaris, beaches, and festive events.",
+      ],
+    },
+    {
+      name: "Dec",
+      season: "Summer",
+      rating: "Excellent",
+      color: "bg-[#A5D6A7]",
+      description: [
+        "December is lively and festive, with perfect beach weather.",
+        "Expect crowds and higher prices, but amazing summer vibes.",
+      ],
+    },
+  ];
 
   return (
     <>
       {/* ✅ Hero / Journey Overview */}
       <JourneyOverview
-        subtitle="Region Experience"
+        subtitle={subtitle}
         title={name}
         description={description || "Discover this incredible safari region."}
-        image={image || "https://www.discoverafrica.com/wp-content/uploads/2021/12/kzn_game_2.jpg"}
-        days={trips?.[0]?.duration || "—"}
-        price={trips?.[0]?.price ? `$${trips[0].price} USD` : ""}
-        journeyType="Wildlife Journey"
-        timeOfYear="All Year"
-        cities={region?.destinationId?.name || ""}
+        image={
+          image ||
+          "https://www.discoverafrica.com/wp-content/uploads/2021/12/kzn_game_2.jpg"
+        }
+        days={facility}
+        price={culture}
+        journeyType={days}
+        timeOfYear={highlight}
+        // cities={region?.destinationId?.name || ""}
+        level={level}
+        levelsec={levelsec}
+        levelthird={levelthird}
+        levelfourth={levelfourth}
       />
 
       <div className="bg-[#f6f1e9]">
         {/* ✅ Overview Section */}
         <Overview
-          title={`Welcome to ${name}`}
-          subtitle="Explore this remarkable African region"
-          description={description}
+          title={overviewTitle}
+          subtitle={overviewSubTitle}
+          description={overviewDescription}
         />
 
         {/* ✅ Trips Section */}
@@ -616,7 +653,7 @@ console.log(region)
       </div>
 
       {/* ✅ Experiences Section */}
-      {experiences?.length > 0 && (
+      {/* {experiences?.length > 0 && (
         <ThingsToDoSection
           title={`Things to do in ${name}`}
           subtitle="Unforgettable Experiences"
@@ -625,6 +662,20 @@ console.log(region)
           staticData={experiences.map((exp) => ({
             image: exp.bannerImage,
             title: exp.bannerTitle,
+          }))}
+        />
+      )} */}
+
+      {thingsToDoSections.length > 0 && (
+        <ThingsToDoSection
+          title={thingsToDo?.thinstodoTitle}
+          // subtitle={subtitle}
+          descriptions={thingsToDoDescription} // ✅ NEW (dynamic)
+          staticData={thingsToDoSections.map((item) => ({
+            title: item.title,
+            image:
+              item.image ||
+              "https://www.discoverafrica.com/wp-content/uploads/2021/12/kzn_game_2.jpg",
           }))}
         />
       )}
@@ -646,11 +697,20 @@ console.log(region)
       )}
 
       {/* ✅ Best Time to Visit Section */}
-      <BestTimeToVisitSection
+      {/* <BestTimeToVisitSection
         title={`When to visit ${name}`}
         subtitle="Best time to go"
         staticMonths={monthData}
-      />
+      /> */}
+
+      {whenToVisitMonths.length > 0 && (
+  <BestTimeToVisitSection
+    title={whenToVisit.heading || `When to visit ${name}`}
+    subtitle="Best time to go"
+    staticMonths={whenToVisitMonths}
+  />
+)}
+
 
       {/* ✅ Journey Carousel (optional or static) */}
       <JourneysCarousel />
