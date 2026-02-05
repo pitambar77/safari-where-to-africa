@@ -47,10 +47,14 @@ const { id } = useParams(); // 👈 get trip id from URL
   description={experience.bannerDescription}
   image={experience.bannerImage}
   days={experience.experienceInfo?.days}
-  price={`$${experience.experienceInfo?.pricePerPerson} USD`}
+  price={`${experience.experienceInfo?.pricePerPerson}`}
   journeyType={experience.experienceInfo?.journeyType}
-  timeOfYear="Oct-7"
+  timeOfYear={experience.experienceInfo?.location}
   cities={experience.experienceInfo?.location}
+  level ={"Duration"}
+  levelsec={"Price"}
+  levelthird={"Min/Max person"}
+  levelfourth={`Timing`}
     />
 
     <div className="bg-[#f6f1e9]">
@@ -61,8 +65,8 @@ const { id } = useParams(); // 👈 get trip id from URL
         />
         <Include/>
       </div>
-      <GameDriveOption 
-      gameDrives={experience.gameDrives}   />
+      {/* <GameDriveOption 
+      gameDrives={experience.gameDrives}   /> */}
       <PricingAvailabilitySection/>
       <GameDriveHighlights
       gamehighLight={experience.highlights}

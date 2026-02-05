@@ -25,7 +25,7 @@ import React from "react";
 const getSeasonColor = (seasonText = "") => {
   const text = seasonText.toLowerCase();
 
-  if (text.includes("dry"))
+  if (text.includes("dry") || text.includes("summer"))
     return {
       bg: "bg-[#A5D6A7]",
       text: "text-[#2e7d32]",
