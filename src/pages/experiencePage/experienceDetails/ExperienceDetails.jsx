@@ -63,7 +63,7 @@ const { id } = useParams(); // 👈 get trip id from URL
           subtitle={experience.overview.subTitle}
           description={experience.overview.description}
         />
-        <Include/>
+        <Include includes={experience.includes} />
       </div>
       {/* <GameDriveOption 
       gameDrives={experience.gameDrives}   /> */}

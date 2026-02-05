@@ -415,7 +415,7 @@ const Trips = () => {
             className="border p-2"
           />
           <input
-            type="number"
+            type="text"
             placeholder="Travelers"
             value={rating}
             onChange={(e) => setRating(e.target.value)}

@@ -241,7 +241,7 @@ const SafariItinerary = () => {
             {/* Days */}
             <div className="text-center">
               <p className="uppercase text-xl tracking-wide font-medium text-[#9a8f70] mb-4">
-                Days
+                Travelers
               </p>
               <p className="text-2xl font-quicksand text-[#686868]">
                 {trip.rating}
@@ -254,24 +254,24 @@ const SafariItinerary = () => {
                 From (Per Person)
               </p>
               <p className="text-2xl font-quicksand text-[#686868]">
-                ${trip.price} USD
+                {trip.price} 
               </p>
             </div>
 
             {/* Journey Type */}
-            <div className="text-center md:border-l md:border-gray-300 md:pl-8">
+            {/* <div className="text-center md:border-l md:border-gray-300 md:pl-8">
               <p className="uppercase text-xl tracking-wide font-medium text-[#9a8f70] mb-4">
                 Journey Type
               </p>
               <p className="text-2xl font-quicksand text-[#686868]">
                 River Cruise
               </p>
-            </div>
+            </div> */}
 
             {/* Time of Year */}
             <div className="text-center md:border-l md:border-gray-300 md:pl-8">
               <p className="uppercase text-xl tracking-wide font-medium text-[#9a8f70] mb-4">
-                Time of Year
+                Days
               </p>
               <p className="text-2xl font-quicksand text-[#686868]">
                 {trip.duration}
@@ -281,7 +281,7 @@ const SafariItinerary = () => {
             {/* Cities & Landmarks */}
             <div className="text-center md:border-l md:border-gray-300 md:pl-8 max-w-xs">
               <p className="uppercase text-xl tracking-wide font-medium text-[#9a8f70] mb-4">
-                Cities & Landmarks
+                Places to Visi
               </p>
               <p className="text-xl font-quicksand text-[#686868] leading-relaxed">
                 {/* Amsterdam, Basel, Baden-Baden, Lucerne, Köln */}

@@ -609,10 +609,15 @@ const Experiences = () => {
     formData.append("overview", JSON.stringify(overview));
 
     // Includes, Game Drives, Highlights (JSON)
-    const includesData = includes.map((inc, i) => ({
+    // const includesData = includes.map((inc, i) => ({
+    //   name: inc.name,
+    //   icon: inc.icon ? `includeIcons[${i}]` : "",
+    // }));
+
+    const includesData = includes.map((inc) => ({
       name: inc.name,
-      icon: inc.icon ? `includeIcons[${i}]` : "",
     }));
+
     const gameDriveData = gameDrives.map((g, i) => ({
       name: g.name,
       description: g.description,
@@ -818,7 +823,7 @@ const Experiences = () => {
         </div>
 
         {/* Includes Section */}
-        <div>
+        {/* <div>
           <h3 className="font-semibold text-lg mb-2">Includes</h3>
           {includes.map((inc, i) => (
             <div key={i} className="flex gap-2 mb-2">
@@ -844,8 +849,67 @@ const Experiences = () => {
                   )
                 }
               />
+              {inc.existingIcon && !inc.icon && (
+                <img
+                  src={inc.existingIcon}
+                  alt="existing include icon"
+                  className="w-8 h-8 object-contain border"
+                />
+              )}
             </div>
           ))}
+          <button
+            type="button"
+            onClick={() =>
+              handleAdd(setIncludes, includes, { name: "", icon: null })
+            }
+            className="text-blue-500 text-sm"
+          >
+            + Add Include
+          </button>
+        </div> */}
+
+        {/* Includes Section */}
+        <div>
+          <h3 className="font-semibold text-lg mb-2">Includes</h3>
+
+          {includes.map((inc, i) => (
+            <div key={i} className="flex gap-2 items-center mb-2">
+              <input
+                type="text"
+                placeholder="Include Name"
+                className="border p-2 flex-1"
+                value={inc.name}
+                onChange={(e) =>
+                  handleChange(i, "name", e.target.value, setIncludes, includes)
+                }
+              />
+
+              <input
+                type="file"
+                className="border p-2"
+                onChange={(e) =>
+                  handleChange(
+                    i,
+                    "icon",
+                    e.target.files[0],
+                    setIncludes,
+                    includes,
+                  )
+                }
+              />
+
+              {/* Existing icon preview */}
+              {inc.existingIcon && !inc.icon && (
+                <img
+                  src={inc.existingIcon}
+                  className="w-8 h-8 object-contain"
+                  alt="icon"
+                />
+              )}
+            </div>
+          ))}
+
           <button
             type="button"
             onClick={() =>

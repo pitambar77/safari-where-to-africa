@@ -384,6 +384,7 @@ import AccommodationGrid from "../../../components/AccommodationGrid";
 import BestTimeToVisitSection from "../../../components/BestTimeToVisit/BestTimeToVisitSection";
 import JourneysCarousel from "../../Accomodation/AccomodationDetails/JourneysCarousel";
 import { title } from "framer-motion/client";
+import { getDestinationBySlug } from "../../../api/destinationAPI";
 
 const DestinationDetails = () => {
   const { destinationSlug, regionSlug } = useParams();
@@ -393,6 +394,8 @@ const DestinationDetails = () => {
   const [region, setRegion] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const [destination, setDestination] = useState(null);
 
   // useEffect(() => {
   //   const fetchRegion = async () => {
@@ -429,11 +432,28 @@ const DestinationDetails = () => {
 
   console.log(region);
 
+  useEffect(() => {
+    const fetchDestination = async () => {
+      try {
+        const res = await getDestinationBySlug(destinationSlug);
+        setDestination(res.data);
+      } catch (err) {
+        console.error("Failed to load destination:", err);
+      }
+    };
+
+    if (destinationSlug) fetchDestination();
+  }, [destinationSlug]);
+
   if (loading)
     return <p className="text-center py-20 text-gray-600">Loading region...</p>;
   if (error) return <p className="text-center py-20 text-red-500">{error}</p>;
   if (!region)
     return <p className="text-center py-20 text-gray-600">No region found.</p>;
+
+  // ✅ Related regions (exclude current region)
+  const relatedRegions =
+    destination?.regions?.filter((r) => r.slug !== regionSlug) || [];
 
   // ✅ Destructure region data
   const {
@@ -465,13 +485,12 @@ const DestinationDetails = () => {
 
   const whenToVisit = region?.whenvisit?.[0];
 
-const whenToVisitMonths =
-  whenToVisit?.months?.map((month) => ({
-    name: month.monthname,
-    season: month.title, // maps to UI heading
-    description: month.description?.map((d) => d.content) || [],
-  })) || [];
-
+  const whenToVisitMonths =
+    whenToVisit?.months?.map((month) => ({
+      name: month.monthname,
+      season: month.title, // maps to UI heading
+      description: month.description?.map((d) => d.content) || [],
+    })) || [];
 
   // ✅ Example static seasonal data
   const monthData = [
@@ -696,24 +715,23 @@ const whenToVisitMonths =
         />
       )}
 
-      {/* ✅ Best Time to Visit Section */}
-      {/* <BestTimeToVisitSection
-        title={`When to visit ${name}`}
-        subtitle="Best time to go"
-        staticMonths={monthData}
-      /> */}
-
       {whenToVisitMonths.length > 0 && (
-  <BestTimeToVisitSection
-    title={whenToVisit.heading || `When to visit ${name}`}
-    subtitle="Best time to go"
-    staticMonths={whenToVisitMonths}
-  />
-)}
+        <BestTimeToVisitSection
+          title={whenToVisit.heading || `When to visit ${name}`}
+          subtitle="Best time to go"
+          staticMonths={whenToVisitMonths}
+        />
+      )}
 
+      {/* ✅ Journey Carousel (optional or static)
+      <JourneysCarousel /> */}
 
-      {/* ✅ Journey Carousel (optional or static) */}
-      <JourneysCarousel />
+      {relatedRegions.length > 0 && (
+        <JourneysCarousel
+          journeys={relatedRegions}
+          destinationSlug={destinationSlug}
+        />
+      )}
     </>
   );
 };
