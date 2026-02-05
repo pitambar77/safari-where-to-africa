@@ -131,33 +131,28 @@ const Trips = () => {
     gallery.forEach((img) => formData.append("gallery", img));
 
     // ✅ Itinerary data
- 
 
-//     const cleanedItinerary = itinerary.map(
-//   ({ image, existingImage, ...rest }, index) => ({
-//     ...rest,
-//     image: typeof image === "string" ? image : existingImage || undefined,
-//     imageIndex: image instanceof File ? index : null,
-//   })
-// );
+    //     const cleanedItinerary = itinerary.map(
+    //   ({ image, existingImage, ...rest }, index) => ({
+    //     ...rest,
+    //     image: typeof image === "string" ? image : existingImage || undefined,
+    //     imageIndex: image instanceof File ? index : null,
+    //   })
+    // );
 
-let imageCounter = 0;
+    let imageCounter = 0;
 
-const cleanedItinerary = itinerary.map(
-  ({ image, existingImage, ...rest }) => {
-    const currentIndex =
-      image instanceof File ? imageCounter++ : null;
+    const cleanedItinerary = itinerary.map(
+      ({ image, existingImage, ...rest }) => {
+        const currentIndex = image instanceof File ? imageCounter++ : null;
 
-    return {
-      ...rest,
-      image:
-        typeof image === "string" ? image : existingImage || undefined,
-      imageIndex: currentIndex,
-    };
-  }
-);
-
-
+        return {
+          ...rest,
+          image: typeof image === "string" ? image : existingImage || undefined,
+          imageIndex: currentIndex,
+        };
+      },
+    );
 
     formData.append("itinerary", JSON.stringify(cleanedItinerary));
 
@@ -166,55 +161,51 @@ const cleanedItinerary = itinerary.map(
     // });
 
     itinerary.forEach((item) => {
-  if (item.image instanceof File) {
-    formData.append("itineraryImages", item.image);
-  }
-});
-
+      if (item.image instanceof File) {
+        formData.append("itineraryImages", item.image);
+      }
+    });
 
     // ✅ Trip Highlights
     // formData.append("tripHighlights", JSON.stringify(tripHighlights));
-//    const cleanedHighlights = tripHighlights.map(
-//   ({ image, existingImage, ...rest }, index) => ({
-//     ...rest,
-//     tripHighlightImage:
-//       typeof image === "string" ? image : existingImage || undefined,
-//     imageIndex: image instanceof File ? index : null,
-//   })
-// );
+    //    const cleanedHighlights = tripHighlights.map(
+    //   ({ image, existingImage, ...rest }, index) => ({
+    //     ...rest,
+    //     tripHighlightImage:
+    //       typeof image === "string" ? image : existingImage || undefined,
+    //     imageIndex: image instanceof File ? index : null,
+    //   })
+    // );
 
+    //     formData.append("tripHighlights", JSON.stringify(cleanedHighlights));
 
-//     formData.append("tripHighlights", JSON.stringify(cleanedHighlights));
+    let highlightImageCounter = 0;
 
-let highlightImageCounter = 0;
+    const cleanedHighlights = tripHighlights.map(
+      ({ image, existingImage, ...rest }) => {
+        const currentIndex =
+          image instanceof File ? highlightImageCounter++ : null;
 
-const cleanedHighlights = tripHighlights.map(
-  ({ image, existingImage, ...rest }) => {
-    const currentIndex =
-      image instanceof File ? highlightImageCounter++ : null;
+        return {
+          ...rest,
+          tripHighlightImage:
+            typeof image === "string" ? image : existingImage || undefined,
+          imageIndex: currentIndex,
+        };
+      },
+    );
 
-    return {
-      ...rest,
-      tripHighlightImage:
-        typeof image === "string" ? image : existingImage || undefined,
-      imageIndex: currentIndex,
-    };
-  }
-);
-
-formData.append("tripHighlights", JSON.stringify(cleanedHighlights));
-
+    formData.append("tripHighlights", JSON.stringify(cleanedHighlights));
 
     // tripHighlights.forEach((item) => {
     //   if (item.image) formData.append("tripHighlightImage", item.image); // ✅ single image field
     // });
 
     tripHighlights.forEach((item) => {
-  if (item.image instanceof File) {
-    formData.append("tripHighlightImage", item.image);
-  }
-});
-
+      if (item.image instanceof File) {
+        formData.append("tripHighlightImage", item.image);
+      }
+    });
 
     if (editId) {
       await updateTrip(editId, formData);
@@ -281,6 +272,7 @@ formData.append("tripHighlights", JSON.stringify(cleanedHighlights));
   const handleEdit = (trip) => {
     setEditId(trip._id);
     setSelectedDestinationId(trip.destination?._id || "");
+    setSelectedRegionId(trip.region?._id || ""); // ✅ FIX
 
     setTitle(trip.title);
     setSubtitle(trip.subtitle);
@@ -335,12 +327,26 @@ formData.append("tripHighlights", JSON.stringify(cleanedHighlights));
         {/* Destination Dropdown */}
         <div>
           <h3 className="font-semibold mb-2">Select Destination</h3>
-          <select
+          {/* <select
             className="border p-2 w-full"
             value={selectedDestinationId}
             onChange={(e) => {
               setSelectedDestinationId(e.target.value);
               setSelectedRegionId("");
+            }}
+          > */}
+          <select
+            className="border p-2 w-full"
+            value={selectedDestinationId}
+            onChange={(e) => {
+              const newDestId = e.target.value;
+
+              setSelectedDestinationId(newDestId);
+
+              // ✅ reset region ONLY when user changes destination manually
+              if (!editId) {
+                setSelectedRegionId("");
+              }
             }}
           >
             <option value="">-- Select Destination --</option>
