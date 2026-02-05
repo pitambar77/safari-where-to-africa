@@ -349,7 +349,7 @@ import {
   updateDestination,
 } from "../api/destinationAPI.js";
 
-const emptyContentBlock = [{ type: "paragraph", content: "" }];
+// const emptyContentBlock = [{ type: "paragraph", content: "" }];
 
 const createEmptyContentBlock = () => [{ type: "paragraph", content: "" }];
 
@@ -556,18 +556,40 @@ const Destinations = () => {
 
     if (formData.bannerImage) form.append("bannerImage", formData.bannerImage);
 
-    const regionData = formData.regions.map((r) => {
-      const { image, existingImage, ...rest } = r;
+    // const regionData = formData.regions.map((r) => {
+    //   const { image, existingImage, ...rest } = r;
 
-      return {
-        ...rest,
-        ...(editingId && existingImage ? { image: existingImage } : {}),
-        thingstodo: r.thingstodo.map((t) => ({
-          ...t,
-          section: t.section.map(({ image, ...sec }) => sec),
-        })),
-      };
-    });
+    //   return {
+    //     ...rest,
+    //     ...(editingId && existingImage ? { image: existingImage } : {}),
+    //     thingstodo: r.thingstodo.map((t) => ({
+    //       ...t,
+    //       section: t.section.map(({ image, ...sec }) => sec),
+    //     })),
+    //   };
+    // });
+
+    const regionData = formData.regions.map((r) => {
+  const { image, existingImage, ...rest } = r;
+
+  return {
+    ...rest,
+    image: editingId && !image ? existingImage : undefined,
+
+    thingstodo: r.thingstodo.map((t) => ({
+      ...t,
+      section: t.section.map((s) => ({
+        title: s.title,
+        description: s.description,
+        image:
+          editingId && !s.image
+            ? s.existingImage
+            : undefined,
+      })),
+    })),
+  };
+});
+
 
     form.append("regions", JSON.stringify(regionData));
 
@@ -578,19 +600,7 @@ const Destinations = () => {
       }
     });
 
-    // formData.regions.forEach((r, rIndex) => {
-    //   r.thingstodo.forEach((todo, tIndex) => {
-    //     todo.section.forEach((sec, sIndex) => {
-    //       if (sec.image) {
-    //         // form.append("thingsTodoImages", sec.image);
-    //         form.append(
-    //           `thingsTodoImages[${region.slug}][${todoIndex}][${sectionIndex}]`,
-    //           sec.image,
-    //         );
-    //       }
-    //     });
-    //   });
-    // });
+
 
     formData.regions.forEach((r, rIndex) => {
       r.thingstodo.forEach((todo, tIndex) => {
@@ -673,24 +683,113 @@ const Destinations = () => {
     setFormData({ ...formData, regions });
   };
 
+  // const handleEdit = (dest) => {
+  //   setEditingId(dest._id);
+  //   setFormData({
+  //     name: dest.name,
+  //     slug: dest.slug,
+  //     title: dest.hero?.title || "",
+  //     subtitle: dest.hero?.subtitle || "",
+  //     description: dest.hero?.description || "",
+  //     bannerImage: null,
+  //     regions: dest.regions.map((r) => ({
+  //       ...r,
+  //       image: null, // file input reset
+  //       existingImage: r.image || "", // ✅ keep old image
+  //       thingstodo: r.thingstodo || [],
+  //       whenvisit: r.whenvisit || [],
+  //     })),
+  //   });
+  // };
+
   const handleEdit = (dest) => {
-    setEditingId(dest._id);
-    setFormData({
-      name: dest.name,
-      slug: dest.slug,
-      title: dest.hero?.title || "",
-      subtitle: dest.hero?.subtitle || "",
-      description: dest.hero?.description || "",
-      bannerImage: null,
-      regions: dest.regions.map((r) => ({
-        ...r,
-        image: null, // file input reset
-        existingImage: r.image || "", // ✅ keep old image
-        thingstodo: r.thingstodo || [],
-        whenvisit: r.whenvisit || [],
+  setEditingId(dest._id);
+
+  setFormData({
+    name: dest.name,
+    slug: dest.slug,
+    title: dest.hero?.title || "",
+    subtitle: dest.hero?.subtitle || "",
+    description: dest.hero?.description || "",
+    bannerImage: null,
+
+    regions: dest.regions.map((r) => ({
+      ...r,
+      image: null,
+      existingImage: r.image || "",
+
+      thingstodo: r.thingstodo.map((t) => ({
+        ...t,
+        section: t.section.map((s) => ({
+          ...s,
+          image: null,                  // file input
+          existingImage: s.image || "", // ✅ keep old image
+        })),
       })),
-    });
-  };
+
+      whenvisit: r.whenvisit?.length
+        ? r.whenvisit
+        : [
+            {
+              heading: "",
+              months: [
+                {
+                  monthname: "",
+                  title: "",
+                  description: createEmptyContentBlock(),
+                },
+              ],
+            },
+          ],
+    })),
+  });
+};
+
+
+//   const handleEdit = (dest) => {
+//   setEditingId(dest._id);
+
+//   setFormData({
+//     name: dest.name,
+//     slug: dest.slug,
+//     title: dest.hero?.title || "",
+//     subtitle: dest.hero?.subtitle || "",
+//     description: dest.hero?.description || "",
+//     bannerImage: null,
+
+//     regions: dest.regions.map((r) => ({
+//       ...r,
+//       image: null,
+//       existingImage: r.image || "",
+
+//       thingstodo: r.thingstodo?.length
+//         ? r.thingstodo
+//         : [
+//             {
+//               thinstodoTitle: "",
+//               thingstododescription: createEmptyContentBlock(),
+//               section: [{ title: "", description: "", image: null }],
+//             },
+//           ],
+
+//        whenvisit: r.whenvisit?.length
+//         ? r.whenvisit
+//         : [
+//             {
+//               heading: "",
+//               months: [
+//                 {
+//                   monthname: "",
+//                   title: "",
+//                   description: createEmptyContentBlock(),
+//                 },
+//               ],
+//             },
+//           ],
+//     })),
+//   });
+// };
+
 
   const ContentBlocksEditor = ({ blocks = [], onChange }) => {
 
@@ -787,100 +886,6 @@ const Destinations = () => {
 };
 
 
-//   const ContentBlocksEditor = ({ blocks = [], onChange }) => {
-//     const safeBlocks = Array.isArray(blocks)
-//       ? blocks
-//       : [{ type: "paragraph", content: String(blocks || "") }];
-
-//     const updateBlock = (index, key, value) => {
-//   const updated = structuredClone(blocks);
-//   updated[index][key] = value;
-//   onChange(updated);
-// };
-
-//     const addBlock = (type) => {
-//       onChange([...safeBlocks, { type, content: type === "list" ? [""] : "" }]);
-//     };
-
-//     const removeBlock = (index) => {
-//       const updated = safeBlocks.filter((_, i) => i !== index);
-//       onChange(updated);
-//     };
-
-//     return (
-//       <div className="space-y-3 mt-2">
-//         {safeBlocks.map((block, i) => (
-//           <div key={i} className="border p-3 rounded bg-gray-50">
-//             <div className="flex gap-2 mb-2">
-//               <select
-//                 value={block.type}
-//                 onChange={(e) => updateBlock(i, "type", e.target.value)}
-//                 className="border p-1 rounded"
-//               >
-//                 <option value="header">Header</option>
-//                 <option value="paragraph">Paragraph</option>
-//                 <option value="list">List</option>
-//               </select>
-
-//               <button
-//                 type="button"
-//                 onClick={() => removeBlock(i)}
-//                 className="text-sm bg-red-500 text-white px-2 rounded"
-//               >
-//                 Remove
-//               </button>
-//             </div>
-
-//             {block.type === "header" && (
-//               <input
-//                 value={block.content}
-//                 onChange={(e) => updateBlock(i, "content", e.target.value)}
-//                 className="border p-2 w-full rounded"
-//               />
-//             )}
-
-//             {block.type === "paragraph" && (
-//               <textarea
-//                 value={block.content}
-//                 onChange={(e) => updateBlock(i, "content", e.target.value)}
-//                 className="border p-2 w-full rounded"
-//                 rows={3}
-//               />
-//             )}
-
-//             {block.type === "list" && (
-//               <div className="space-y-2">
-//                 {block.content.map((item, idx) => (
-//                   <input
-//                     key={idx}
-//                     value={item}
-//                     onChange={(e) => {
-//                       const newList = [...block.content];
-//                       newList[idx] = e.target.value;
-//                       updateBlock(i, "content", newList);
-//                     }}
-//                     className="border p-2 w-full rounded"
-//                   />
-//                 ))}
-//               </div>
-//             )}
-//           </div>
-//         ))}
-
-//         <div className="flex gap-2">
-//           <button type="button" onClick={() => addBlock("header")}>
-//             + Header
-//           </button>
-//           <button type="button" onClick={() => addBlock("paragraph")}>
-//             + Paragraph
-//           </button>
-//           <button type="button" onClick={() => addBlock("list")}>
-//             + List
-//           </button>
-//         </div>
-//       </div>
-//     );
-//   };
 
   return (
     <div>
