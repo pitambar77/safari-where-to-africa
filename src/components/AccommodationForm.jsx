@@ -5,6 +5,16 @@ import ImageUpload from "./ImageUpload";
 import QnASection from "./QnASection";
 import { getAllDestinations } from "../api/destinationAPI.js";
 
+import {
+  getAccommodationById,
+  updateAccommodation,
+} from "../api/accommodationAPI";
+
+import {
+  getAccommodations,
+  deleteAccommodation,
+} from "../api/accommodationAPI";
+
 const DESTINATIONS = [
   "Africa",
   "Asia",
@@ -39,12 +49,70 @@ const AccommodationForm = () => {
     { galleryName: "", galleryImage: null },
   ]);
 
+  const [accommodationList, setAccommodationList] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const [editingId, setEditingId] = useState(null);
+  const isEditMode = Boolean(editingId);
+
   const selectedDestination = watch("destination");
 
   // Fetch destinations initially
   useEffect(() => {
     fetchDestinations();
   }, []);
+
+  useEffect(() => {
+    fetchAccommodationList();
+  }, []);
+
+  const fetchAccommodationList = async () => {
+    setLoading(true);
+    try {
+      const { data } = await getAccommodations();
+      setAccommodationList(data);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // useEffect(() => {
+  //   if (!id) return;
+
+  //   const fetchAccommodation = async () => {
+  //     const { data } = await getAccommodationById(id);
+
+  //     // Fill form
+  //     reset(data);
+
+  //     // IDs
+  //     setSelectedDestinationId(data.destinationId);
+  //     setSelectedRegionId(data.regionId);
+
+  //     // Amenities
+  //     setAmenities(
+  //       data.amenities.map((a) => ({
+  //         amenityName: a.amenityName,
+  //         amenityImage: a.amenityImage, // 👈 existing URL
+  //       })),
+  //     );
+
+  //     // Gallery
+  //     setGallery(
+  //       data.gallery.map((g) => ({
+  //         galleryName: g.galleryName,
+  //         galleryImage: g.galleryImage, // 👈 existing URL
+  //       })),
+  //     );
+
+  //     setAboutBooking(data.aboutBooking || []);
+  //     setRequirements(data.requirements || []);
+  //   };
+
+  //   fetchAccommodation();
+  // }, [id]);
 
   const fetchDestinations = async () => {
     try {
@@ -55,6 +123,58 @@ const AccommodationForm = () => {
     }
   };
 
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this accommodation?"))
+      return;
+
+    try {
+      await deleteAccommodation(id);
+      alert("✅ Accommodation deleted");
+      fetchAccommodationList();
+    } catch (err) {
+      console.error(err);
+      alert("❌ Failed to delete");
+    }
+  };
+
+  // edit added
+
+  const handleEdit = async (id) => {
+    try {
+      const { data } = await getAccommodationById(id);
+
+      // Fill form
+      reset(data);
+
+      setEditingId(id);
+
+      setSelectedDestinationId(data.destinationId);
+      setSelectedRegionId(data.regionId);
+
+      setAmenities(
+        data.amenities.map((a) => ({
+          amenityName: a.amenityName,
+          amenityImage: a.amenityImage,
+        })),
+      );
+
+      setGallery(
+        data.gallery.map((g) => ({
+          galleryName: g.galleryName,
+          galleryImage: g.galleryImage,
+        })),
+      );
+
+      setAboutBooking(data.aboutBooking || []);
+      setRequirements(data.requirements || []);
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (err) {
+      console.error(err);
+      alert("Failed to load accommodation");
+    }
+  };
+
   // Handle region update when destination changes
   useEffect(() => {
     const selected = destinations.find((d) => d._id === selectedDestinationId);
@@ -62,36 +182,81 @@ const AccommodationForm = () => {
   }, [selectedDestinationId, destinations]);
 
   // Handle frontend subdestination list (local)
+  // useEffect(() => {
+  //   if (selectedDestination) {
+  //     setSubDestList(SUBDESTINATIONS[selectedDestination] || []);
+  //     setValue("subdestination", "");
+  //   }
+  // }, [selectedDestination, setValue]);
+
   useEffect(() => {
-    if (selectedDestination) {
-      setSubDestList(SUBDESTINATIONS[selectedDestination] || []);
-      setValue("subdestination", "");
-    }
-  }, [selectedDestination, setValue]);
+  if (selectedDestination && !editingId) {
+    setSubDestList(SUBDESTINATIONS[selectedDestination] || []);
+    setValue("subdestination", "");
+  }
+
+  if (editingId && selectedDestination) {
+    setSubDestList(SUBDESTINATIONS[selectedDestination] || []);
+  }
+}, [selectedDestination, editingId, setValue]);
+
+// useEffect(() => {
+//   if (!editingId) return;
+
+//   const selected = destinations.find(
+//     (d) => d._id === selectedDestinationId
+//   );
+
+//   if (selected?.name) {
+//     setValue("destination", selected.name);
+//   }
+// }, [editingId, selectedDestinationId, destinations, setValue]);
+
+
 
   // const onSubmit = async (data) => {
   //   const formData = new FormData();
 
-  //   // ✅ Include destinationId + regionId
+  //   // IDs
   //   formData.append("destinationId", selectedDestinationId);
   //   formData.append("regionId", selectedRegionId);
 
-  //   // Append all text fields
+  //   // Text fields
   //   Object.keys(data).forEach((key) => {
-  //     if (key !== "bannerImages" && key !== "galleryImages") {
+  //     if (!["bannerImages", "landingImage"].includes(key)) {
   //       formData.append(key, data[key]);
   //     }
   //   });
 
-  //   // Append images
+  //   // Banner Images
   //   Array.from(data.bannerImages || []).forEach((file) =>
   //     formData.append("bannerImages", file),
   //   );
-  //   Array.from(data.galleryImages || []).forEach((file) =>
-  //     formData.append("galleryImages", file),
-  //   );
 
-  //   // Append Q&A
+  //   // Landing Image
+  //   if (data.landingImage?.[0]) {
+  //     formData.append("landingImage", data.landingImage[0]);
+  //   }
+
+  //   // Amenities
+  //   formData.append(
+  //     "amenities",
+  //     JSON.stringify(amenities.map(({ amenityName }) => ({ amenityName }))),
+  //   );
+  //   amenities.forEach((a) => {
+  //     if (a.amenityImage) formData.append("amenityImages", a.amenityImage);
+  //   });
+
+  //   // Gallery
+  //   formData.append(
+  //     "gallery",
+  //     JSON.stringify(gallery.map(({ galleryName }) => ({ galleryName }))),
+  //   );
+  //   gallery.forEach((g) => {
+  //     if (g.galleryImage) formData.append("galleryImages", g.galleryImage);
+  //   });
+
+  //   // Q&A
   //   formData.append("aboutBooking", JSON.stringify(aboutBooking));
   //   formData.append("requirements", JSON.stringify(requirements));
 
@@ -99,39 +264,150 @@ const AccommodationForm = () => {
   //     await createAccommodation(formData);
   //     alert("✅ Accommodation added successfully");
   //     reset();
+  //     setAmenities([{ amenityName: "", amenityImage: null }]);
+  //     setGallery([{ galleryName: "", galleryImage: null }]);
   //     setAboutBooking([]);
   //     setRequirements([]);
-  //     setSubDestList([]);
-  //     setSelectedDestinationId("");
-  //     setSelectedRegionId("");
-  //   } catch (error) {
-  //     alert("❌ Error creating accommodation");
-  //     console.error(error);
+  //   } catch (err) {
+  //     console.error(err);
+  //     alert("❌ Failed to create accommodation");
   //   }
   // };
+  
+//   const onSubmit = async (data) => {
+//   const formData = new FormData();
 
-  const onSubmit = async (data) => {
+//   // // IDs (ONLY once)
+//   // formData.append("destinationId", selectedDestinationId);
+//   // formData.append("regionId", selectedRegionId);
+
+//     if (!editingId) {
+//     formData.append("destinationId", selectedDestinationId);
+//     formData.append("regionId", selectedRegionId);
+//   }
+
+//   // Basic fields
+//   formData.append("bannerTitle", data.bannerTitle || "");
+//   formData.append("bannerSubtitle", data.bannerSubtitle || "");
+//   formData.append("bannerDescription", data.bannerDescription || "");
+//   formData.append("overviewTitle", data.overviewTitle || "");
+//   formData.append("overviewSubtitle", data.overviewSubtitle || "");
+//   formData.append("overviewDescription", data.overviewDescription || "");
+//   formData.append("destination", data.destination || "");
+//   formData.append("subdestination", data.subdestination || "");
+//   formData.append("name", data.name || "");
+//   formData.append("location", data.location || "");
+//   formData.append("pricePerPerson", data.pricePerPerson || "");
+//   formData.append("nightsStay", data.nightsStay || "");
+//   formData.append("accommodationType", data.accommodationType || "");
+//   formData.append("checkIn", data.checkIn || "");
+//   formData.append("checkOut", data.checkOut || "");
+
+//   // Banner images
+//   Array.from(data.bannerImages || []).forEach((file) =>
+//     formData.append("bannerImages", file)
+//   );
+
+//   // Landing image
+//   if (data.landingImage?.[0]) {
+//     formData.append("landingImage", data.landingImage[0]);
+//   }
+
+//   // Amenities
+//   formData.append(
+//     "amenities",
+//     JSON.stringify(
+//       amenities.map((a) => ({
+//         amenityName: a.amenityName,
+//         amenityImage:
+//           typeof a.amenityImage === "string" ? a.amenityImage : null,
+//       }))
+//     )
+//   );
+
+//   amenities.forEach((a) => {
+//     if (a.amenityImage instanceof File) {
+//       formData.append("amenityImages", a.amenityImage);
+//     }
+//   });
+
+//   // Gallery
+//   formData.append(
+//     "gallery",
+//     JSON.stringify(
+//       gallery.map((g) => ({
+//         galleryName: g.galleryName,
+//         galleryImage:
+//           typeof g.galleryImage === "string" ? g.galleryImage : null,
+//       }))
+//     )
+//   );
+
+//   gallery.forEach((g) => {
+//     if (g.galleryImage instanceof File) {
+//       formData.append("galleryImages", g.galleryImage);
+//     }
+//   });
+
+//   // QnA
+//   formData.append("aboutBooking", JSON.stringify(aboutBooking));
+//   formData.append("requirements", JSON.stringify(requirements));
+
+//   try {
+//     if (editingId) {
+//       await updateAccommodation(editingId, formData);
+//       alert("✅ Accommodation updated successfully");
+//     } else {
+//       await createAccommodation(formData);
+//       alert("✅ Accommodation added successfully");
+//     }
+
+//     reset();
+//     setEditingId(null);
+//     fetchAccommodationList();
+//   } catch (err) {
+//     console.error(err);
+//     alert("❌ Failed to save accommodation");
+//   }
+// };
+
+const onSubmit = async (data) => {
   const formData = new FormData();
 
-  // IDs
-  formData.append("destinationId", selectedDestinationId);
-  formData.append("regionId", selectedRegionId);
+  // Only for CREATE
+  if (!editingId) {
+    formData.append("destinationId", selectedDestinationId);
+    formData.append("regionId", selectedRegionId);
+    formData.append("destination", data.destination);
+    formData.append("subdestination", data.subdestination);
+  }
 
   // Text fields
-  Object.keys(data).forEach((key) => {
-    if (
-      !["bannerImages", "landingImage"].includes(key)
-    ) {
-      formData.append(key, data[key]);
+  [
+    "bannerTitle",
+    "bannerSubtitle",
+    "bannerDescription",
+    "overviewTitle",
+    "overviewSubtitle",
+    "overviewDescription",
+    "name",
+    "location",
+    "pricePerPerson",
+    "nightsStay",
+    "accommodationType",
+    "checkIn",
+    "checkOut",
+  ].forEach((field) => {
+    if (data[field] !== undefined) {
+      formData.append(field, data[field]);
     }
   });
 
-  // Banner Images
+  // Images
   Array.from(data.bannerImages || []).forEach((file) =>
     formData.append("bannerImages", file)
   );
 
-  // Landing Image
   if (data.landingImage?.[0]) {
     formData.append("landingImage", data.landingImage[0]);
   }
@@ -139,214 +415,330 @@ const AccommodationForm = () => {
   // Amenities
   formData.append(
     "amenities",
-    JSON.stringify(amenities.map(({ amenityName }) => ({ amenityName })))
+    JSON.stringify(
+      amenities.map((a) => ({
+        amenityName: a.amenityName,
+        amenityImage:
+          typeof a.amenityImage === "string" ? a.amenityImage : null,
+      }))
+    )
   );
+
   amenities.forEach((a) => {
-    if (a.amenityImage)
+    if (a.amenityImage instanceof File) {
       formData.append("amenityImages", a.amenityImage);
+    }
   });
 
   // Gallery
   formData.append(
     "gallery",
-    JSON.stringify(gallery.map(({ galleryName }) => ({ galleryName })))
+    JSON.stringify(
+      gallery.map((g) => ({
+        galleryName: g.galleryName,
+        galleryImage:
+          typeof g.galleryImage === "string" ? g.galleryImage : null,
+      }))
+    )
   );
+
   gallery.forEach((g) => {
-    if (g.galleryImage)
+    if (g.galleryImage instanceof File) {
       formData.append("galleryImages", g.galleryImage);
+    }
   });
 
-  // Q&A
   formData.append("aboutBooking", JSON.stringify(aboutBooking));
   formData.append("requirements", JSON.stringify(requirements));
 
   try {
-    await createAccommodation(formData);
-    alert("✅ Accommodation added successfully");
+    if (editingId) {
+      await updateAccommodation(editingId, formData);
+      alert("✅ Accommodation updated successfully");
+    } else {
+      await createAccommodation(formData);
+      alert("✅ Accommodation added successfully");
+    }
+
     reset();
-    setAmenities([{ amenityName: "", amenityImage: null }]);
-    setGallery([{ galleryName: "", galleryImage: null }]);
-    setAboutBooking([]);
-    setRequirements([]);
+    setEditingId(null);
+    fetchAccommodationList();
   } catch (err) {
     console.error(err);
-    alert("❌ Failed to create accommodation");
+    alert("❌ Failed to save accommodation");
   }
 };
 
 
+  
+  // const onSubmit = async (data) => {
+  //   const formData = new FormData();
+
+  //   // IDs
+  //   formData.append("destinationId", selectedDestinationId);
+  //   formData.append("regionId", selectedRegionId);
+
+  //   // Text fields
+  //   // Object.keys(data).forEach((key) => {
+  //   //   if (!["bannerImages", "landingImage"].includes(key)) {
+  //   //     formData.append(key, data[key]);
+  //   //   }
+  //   // });
+
+  //   // Banner Images (new only)
+  //   Array.from(data.bannerImages || []).forEach((file) =>
+  //     formData.append("bannerImages", file),
+  //   );
+
+  //   // Landing Image (new only)
+  //   if (data.landingImage?.[0]) {
+  //     formData.append("landingImage", data.landingImage[0]);
+  //   }
+
+  //   // ===========================
+  //   // ✅ AMENITIES (EDIT SAFE)
+  //   // ===========================
+  //   formData.append(
+  //     "amenities",
+  //     JSON.stringify(
+  //       amenities.map((a) => ({
+  //         amenityName: a.amenityName,
+  //         amenityImage:
+  //           typeof a.amenityImage === "string" ? a.amenityImage : null,
+  //       })),
+  //     ),
+  //   );
+
+  //   amenities.forEach((a) => {
+  //     if (a.amenityImage instanceof File) {
+  //       formData.append("amenityImages", a.amenityImage);
+  //     }
+  //   });
+
+  //   // ===========================
+  //   // ✅ GALLERY (EDIT SAFE)
+  //   // ===========================
+  //   formData.append(
+  //     "gallery",
+  //     JSON.stringify(
+  //       gallery.map((g) => ({
+  //         galleryName: g.galleryName,
+  //         galleryImage:
+  //           typeof g.galleryImage === "string" ? g.galleryImage : null,
+  //       })),
+  //     ),
+  //   );
+
+  //   gallery.forEach((g) => {
+  //     if (g.galleryImage instanceof File) {
+  //       formData.append("galleryImages", g.galleryImage);
+  //     }
+  //   });
+
+  //   // Q&A
+  //   formData.append("aboutBooking", JSON.stringify(aboutBooking));
+  //   formData.append("requirements", JSON.stringify(requirements));
+
+  //   try {
+  //     if (editingId) {
+  //       await updateAccommodation(editingId, formData);
+  //       alert("✅ Accommodation updated successfully");
+  //     } else {
+  //       await createAccommodation(formData);
+  //       alert("✅ Accommodation added successfully");
+  //     }
+
+  //     reset();
+  //     setEditingId(null);
+  //     fetchAccommodationList();
+  //   } catch (err) {
+  //     console.error(err);
+  //     alert("❌ Failed to save accommodation");
+  //   }
+  // };
+
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="max-w-5xl mx-auto bg-white p-6 shadow-lg rounded-lg"
-    >
-      <h2 className="text-2xl font-semibold mb-6">Add Accommodation</h2>
+    <>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="max-w-5xl mx-auto bg-white p-6 shadow-lg rounded-lg"
+      >
+        <h2 className="text-2xl font-semibold mb-6">
+          {editingId ? "Edit Accommodation" : "Add Accommodation"}
+        </h2>
 
-      {/* Destination Dropdown */}
-      <div className="mb-4">
-        <h3 className="font-semibold text-lg mb-2">Select Destination</h3>
-        <select
-          className="border p-2 w-full"
-          value={selectedDestinationId}
-          onChange={(e) => setSelectedDestinationId(e.target.value)}
-        >
-          <option value="">-- Select Destination --</option>
-          {destinations.map((dest) => (
-            <option key={dest._id} value={dest._id}>
-              {dest.name}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {/* ✅ Region Dropdown */}
-      {regions.length > 0 && (
+        {/* Destination Dropdown */}
         <div className="mb-4">
-          <h3 className="font-semibold text-lg mb-2">Select Region</h3>
+          <h3 className="font-semibold text-lg mb-2">Select Destination</h3>
           <select
             className="border p-2 w-full"
-            value={selectedRegionId}
-            onChange={(e) => setSelectedRegionId(e.target.value)}
+            value={selectedDestinationId}
+            onChange={(e) => setSelectedDestinationId(e.target.value)}
           >
-            <option value="">-- Select Region --</option>
-            {regions.map((region) => (
-              <option key={region._id} value={region._id}>
-                {region.name}
+            <option value="">-- Select Destination --</option>
+            {destinations.map((dest) => (
+              <option key={dest._id} value={dest._id}>
+                {dest.name}
               </option>
             ))}
           </select>
         </div>
-      )}
 
-      {/* Banner Section */}
-      <ImageUpload
-        label="Banner Images"
-        name="bannerImages"
-        multiple
-        register={register}
-      />
+        {/* ✅ Region Dropdown */}
+        {regions.length > 0 && (
+          <div className="mb-4">
+            <h3 className="font-semibold text-lg mb-2">Select Region</h3>
+            <select
+              className="border p-2 w-full"
+              value={selectedRegionId}
+              onChange={(e) => setSelectedRegionId(e.target.value)}
+            >
+              <option value="">-- Select Region --</option>
+              {regions.map((region) => (
+                <option key={region._id} value={region._id}>
+                  {region.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
 
-      <input
-        type="text"
-        placeholder="Banner Title"
-        {...register("bannerTitle")}
-        className="w-full border p-2 mb-3 rounded"
-      />
-        <input
-        type="text"
-        placeholder="Banner Sub Title"
-        {...register("bannerSubtitle")}
-        className="w-full border p-2 mb-3 rounded"
-      />
-      <textarea
-        placeholder="Banner Description"
-        {...register("bannerDescription")}
-        className="w-full border p-2 mb-3 rounded"
-      />
+        {/* Banner Section */}
+        <ImageUpload
+          label="Banner Images"
+          name="bannerImages"
+          multiple
+          register={register}
+        />
 
-      {/* Overview */}
-      <input
-        type="text"
-        placeholder="Overview Title"
-        {...register("overviewTitle")}
-        className="w-full border p-2 mb-3 rounded"
-      />
-      <input
-        type="text"
-        placeholder="Overview Subtitle"
-        {...register("overviewSubtitle")}
-        className="w-full border p-2 mb-3 rounded"
-      />
-      <textarea
-        placeholder="Overview Description"
-        {...register("overviewDescription")}
-        className="w-full border p-2 mb-3 rounded"
-      />
+         <ImageUpload
+          label="Landing Image"
+          name="landingImage"
+          register={register}
+        />
 
-      {/* Filters */}
-      <div className="grid grid-cols-2 gap-4 mb-4">
-        <select
-          {...register("destination", { required: true })}
-          className="border p-2 rounded"
-        >
-          <option value="">Select Destination</option>
-          {DESTINATIONS.map((dest) => (
-            <option key={dest} value={dest}>
-              {dest}
-            </option>
-          ))}
-        </select>
-
-        <select
-          {...register("subdestination", { required: true })}
-          className="border p-2 rounded"
-          disabled={!selectedDestination}
-        >
-          <option value="">Select Subdestination</option>
-          {subDestList.map((sub) => (
-            <option key={sub} value={sub}>
-              {sub}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {/* Accommodation Info */}
-      <div className="grid grid-cols-2 gap-4">
         <input
           type="text"
-          placeholder="Accommodation Name"
-          {...register("name", { required: true })}
-          className="border p-2 rounded"
+          placeholder="Banner Title"
+          {...register("bannerTitle")}
+          className="w-full border p-2 mb-3 rounded"
         />
         <input
           type="text"
-          placeholder="Location"
-          {...register("location", { required: true })}
-          className="border p-2 rounded"
+          placeholder="Banner Sub Title"
+          {...register("bannerSubtitle")}
+          className="w-full border p-2 mb-3 rounded"
         />
-        <input
-          type="text"
-          placeholder="Price Per Person"
-          {...register("pricePerPerson", { required: true })}
-          className="border p-2 rounded"
+        <textarea
+          placeholder="Banner Description"
+          {...register("bannerDescription")}
+          className="w-full border p-2 mb-3 rounded"
         />
-        <input
-          type="text"
-          placeholder="Nights Stay"
-          {...register("nightsStay", { required: true })}
-          className="border p-2 rounded"
-        />
-        <input
-          type="text"
-          placeholder="Accommodation Type"
-          {...register("accommodationType", { required: true })}
-          className="border p-2 rounded"
-        />
-        <input
-          type="text"
-          placeholder="Check-In"
-          {...register("checkIn")}
-          className="border p-2 rounded"
-        />
-        <input
-          type="text"
-          placeholder="Check-Out"
-          {...register("checkOut")}
-          className="border p-2 rounded"
-        />
-      </div>
 
-      {/* <input
+        {/* Overview */}
+        <input
+          type="text"
+          placeholder="Overview Title"
+          {...register("overviewTitle")}
+          className="w-full border p-2 mb-3 rounded"
+        />
+        <input
+          type="text"
+          placeholder="Overview Subtitle"
+          {...register("overviewSubtitle")}
+          className="w-full border p-2 mb-3 rounded"
+        />
+        <textarea
+          placeholder="Overview Description"
+          {...register("overviewDescription")}
+          className="w-full border p-2 mb-3 rounded"
+        />
+
+        {/* Filters */}
+        <div className="grid grid-cols-2 gap-4 mb-4">
+          <select
+            {...register("destination", { required: true })}
+            className="border p-2 rounded"
+            
+          >
+            <option value="">Select Destination</option>
+            {DESTINATIONS.map((dest) => (
+              <option key={dest} value={dest}>
+                {dest}
+              </option>
+            ))}
+          </select>
+
+          <select
+            {...register("subdestination", { required: true })}
+            className="border p-2 rounded"
+            // disabled={editingId || !selectedDestination}
+          >
+            <option value="">Select Subdestination</option>
+            {subDestList.map((sub) => (
+              <option key={sub} value={sub}>
+                {sub}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Accommodation Info */}
+        <div className="grid grid-cols-2 gap-4">
+          <input
+            type="text"
+            placeholder="Accommodation Name"
+            {...register("name", { required: true })}
+            className="border p-2 rounded"
+          />
+          <input
+            type="text"
+            placeholder="Category"
+            {...register("location", { required: true })}
+            className="border p-2 rounded"
+          />
+          <input
+            type="text"
+            placeholder="Price Per Person"
+            {...register("pricePerPerson", { required: true })}
+            className="border p-2 rounded"
+          />
+          <input
+            type="text"
+            placeholder="Rating"
+            {...register("nightsStay", { required: true })}
+            className="border p-2 rounded"
+          />
+          <input
+            type="text"
+            placeholder="Accommodation Type"
+            {...register("accommodationType", { required: true })}
+            className="border p-2 rounded"
+          />
+          {/* <input
+            type="text"
+            placeholder="Check-In"
+            {...register("checkIn")}
+            className="border p-2 rounded"
+          />
+          <input
+            type="text"
+            placeholder="Check-Out"
+            {...register("checkOut")}
+            className="border p-2 rounded"
+          /> */}
+        </div>
+
+        {/* <input
         type="text"
         placeholder="Amenities (comma separated)"
         {...register("amenities")}
         className="w-full border p-2 rounded mt-4"
       /> */}
 
-      <h3 className="font-semibold mt-6 mb-2">Amenities</h3>
+        <h3 className="font-semibold mt-6 mb-2">Amenities</h3>
 
-      {amenities.map((item, index) => (
+        {/* {amenities.map((item, index) => (
         <div key={index} className="flex gap-3 mb-3">
           <input
             type="text"
@@ -371,96 +763,207 @@ const AccommodationForm = () => {
             className="border p-2 rounded w-1/2"
           />
         </div>
-      ))}
+      ))} */}
 
-      <button
-        type="button"
-        onClick={() =>
-          setAmenities([...amenities, { amenityName: "", amenityImage: null }])
-        }
-        className="text-blue-600 text-sm"
-      >
-        + Add Amenity
-      </button>
+        {amenities.map((item, index) => (
+          <div key={index} className="flex gap-3 mb-3 items-center">
+            <input
+              type="text"
+              value={item.amenityName}
+              onChange={(e) => {
+                const updated = [...amenities];
+                updated[index].amenityName = e.target.value;
+                setAmenities(updated);
+              }}
+              className="border p-2 rounded w-1/3"
+            />
 
-      {/* Gallery */}
-      {/* <ImageUpload
+            {/* Existing image preview */}
+            {typeof item.amenityImage === "string" && (
+              <img
+                src={item.amenityImage}
+                alt=""
+                className="w-16 h-16 object-cover rounded"
+              />
+            )}
+
+            {/* Replace image */}
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                const updated = [...amenities];
+                updated[index].amenityImage = e.target.files[0]; // 👈 replace
+                setAmenities(updated);
+              }}
+            />
+          </div>
+        ))}
+
+        <button
+          type="button"
+          onClick={() =>
+            setAmenities([
+              ...amenities,
+              { amenityName: "", amenityImage: null },
+            ])
+          }
+          className="text-blue-600 text-sm"
+        >
+          + Add Amenity
+        </button>
+
+        {/* Gallery */}
+        {/* <ImageUpload
         label="Gallery Images"
         name="galleryImages"
         multiple
         register={register}
       /> */}
 
-      <ImageUpload
-  label="Landing Image"
-  name="landingImage"
-  register={register}
-/>
+       
 
-      <h3 className="font-semibold mt-6 mb-2">Gallery</h3>
+        <h3 className="font-semibold mt-6 mb-2">Gallery</h3>
 
-      {gallery.map((item, index) => (
-        <div key={index} className="flex gap-3 mb-3">
-          <input
-            type="text"
-            placeholder="Gallery Name"
-            value={item.galleryName}
-            onChange={(e) => {
-              const updated = [...gallery];
-              updated[index].galleryName = e.target.value;
-              setGallery(updated);
+        {gallery.map((item, index) => (
+          <div key={index} className="flex gap-3 mb-3">
+            <input
+              type="text"
+              placeholder="Gallery Name"
+              value={item.galleryName}
+              onChange={(e) => {
+                const updated = [...gallery];
+                updated[index].galleryName = e.target.value;
+                setGallery(updated);
+              }}
+              className="border p-2 rounded w-1/2"
+            />
+
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                const updated = [...gallery];
+                updated[index].galleryImage = e.target.files[0];
+                setGallery(updated);
+              }}
+              className="border p-2 rounded w-1/2"
+            />
+          </div>
+        ))}
+
+        <button
+          type="button"
+          onClick={() =>
+            setGallery([...gallery, { galleryName: "", galleryImage: null }])
+          }
+          className="text-blue-600 text-sm"
+        >
+          + Add Gallery Image
+        </button>
+
+        {/* <textarea
+          placeholder="Gallery Description"
+          {...register("galleryDescription")}
+          className="w-full border p-2 mb-4 rounded"
+        /> */}
+
+        {/* Q&A Sections */}
+        <QnASection
+          label="About Booking"
+          qna={aboutBooking}
+          setQna={setAboutBooking}
+        />
+        <QnASection
+          label="Requirements"
+          qna={requirements}
+          setQna={setRequirements}
+        />
+
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+        >
+          {editingId ? "Update Accommodation" : "Save Accommodation"}
+        </button>
+
+        {editingId && (
+          <button
+            type="button"
+            onClick={() => {
+              reset();
+              setEditingId(null);
+              setAmenities([{ amenityName: "", amenityImage: null }]);
+              setGallery([{ galleryName: "", galleryImage: null }]);
+              setAboutBooking([]);
+              setRequirements([]);
+              setSelectedDestinationId("");
+              setSelectedRegionId("");
+              setRegions([]);
+              setSubDestList([]);
             }}
-            className="border p-2 rounded w-1/2"
-          />
+            className="w-full mt-2 bg-gray-500 text-white py-2 rounded hover:bg-gray-600"
+          >
+            Cancel Edit
+          </button>
+        )}
 
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => {
-              const updated = [...gallery];
-              updated[index].galleryImage = e.target.files[0];
-              setGallery(updated);
-            }}
-            className="border p-2 rounded w-1/2"
-          />
+        {/* <button
+          type="submit"
+          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+        >
+          Save Accommodation
+        </button> */}
+      </form>
+
+      <hr className="my-10" />
+
+      <h2 className="text-2xl font-semibold mb-4">Accommodation List</h2>
+
+      {loading ? (
+        <p>Loading...</p>
+      ) : accommodationList.length === 0 ? (
+        <p>No accommodations found</p>
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="w-full border border-gray-200 text-sm">
+            <thead className="bg-gray-100">
+              <tr>
+                <th className="border p-2">Name</th>
+                <th className="border p-2">Location</th>
+                <th className="border p-2">Destination</th>
+                <th className="border p-2">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {accommodationList.map((item) => (
+                <tr key={item._id}>
+                  <td className="border p-2">{item.name}</td>
+                  <td className="border p-2">{item.location}</td>
+                  <td className="border p-2">
+                    {item.destination} / {item.subdestination}
+                  </td>
+                  <td className="border p-2 space-x-2">
+                    <button
+                      onClick={() => handleEdit(item._id)}
+                      className="px-3 py-1 bg-yellow-500 text-white rounded"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(item._id)}
+                      className="px-3 py-1 bg-red-600 text-white rounded"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-      ))}
-
-      <button
-        type="button"
-        onClick={() =>
-          setGallery([...gallery, { galleryName: "", galleryImage: null }])
-        }
-        className="text-blue-600 text-sm"
-      >
-        + Add Gallery Image
-      </button>
-
-      <textarea
-        placeholder="Gallery Description"
-        {...register("galleryDescription")}
-        className="w-full border p-2 mb-4 rounded"
-      />
-
-      {/* Q&A Sections */}
-      <QnASection
-        label="About Booking"
-        qna={aboutBooking}
-        setQna={setAboutBooking}
-      />
-      <QnASection
-        label="Requirements"
-        qna={requirements}
-        setQna={setRequirements}
-      />
-
-      <button
-        type="submit"
-        className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-      >
-        Save Accommodation
-      </button>
-    </form>
+      )}
+    </>
   );
 };
 
