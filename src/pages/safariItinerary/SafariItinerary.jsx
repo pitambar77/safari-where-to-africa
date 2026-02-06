@@ -222,18 +222,19 @@ const SafariItinerary = () => {
         <div className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28">
           <div className=" font-cormorant text-center ">
             <h2 className=" text-[#aaa086] text-[24px] uppercase">
-              Land journey
+              {trip.subtitle}
+            
             </h2>
             <div className=" max-w-3xl mx-auto mt-4">
               <h5 className=" text-[64px] font-medium text-center leading-[1.2] text-[#686868]">
                 {/* Wildlife Odyssey: South Africa, Botswana & Zimbabwe */}
-                {trip.title}
+                 {trip.title}
               </h5>
             </div>
             <p className=" max-w-xl mx-auto mt-4 mb-10 tracking-wide font-quicksand text-[#686868] text-lg capitalize">
               {/* All Departures are even smaller groups limited to 18 where to
               africa travel guests */}
-              {trip.subtitle}
+              {trip.description}
             </p>
           </div>
 

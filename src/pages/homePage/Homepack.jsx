@@ -31,9 +31,9 @@ const Homepack = () => {
   return (
     <section className="bg-[#fbf6ea] pb-16">
       <Overview
-           title={"Welcome To Africa"}
-           subtitle={"African landscapes parading with the circle of life promise magical moments unlike any you have imagined before. You'll find them..."}
-           description={"... while tasting wines carefully cultivated and expertly poured. At safari lodges, tented camps and members' clubs luxuriously appoint..."}
+           title={"Welcome to Our Africa"}
+           subtitle={"We promote responsible African Tours that protect wilderness, support local communities, and celebrate culture through thoughtful journey planning"}
+           description={"...travel experiences that help preserve wildlife, strengthen communities, and ensure tourism benefits the places you visit..."}
            />
       <div className=" px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-28">
         <div className="home-pack_main">

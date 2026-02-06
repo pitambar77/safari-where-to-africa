@@ -1,18 +1,55 @@
-
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 const destinations = [
-  { name: "Japan", image: "https://tanzania-specialist.com/wp-content/uploads/2023/07/10-Days-Tanzania-safari-all-northern-parks-in-1-trip-wildebeest-migration.jpg", path: "/japan" },
-  { name: "Greece", image: "https://theincidentaltourist.com/wp-content/uploads/2024/08/Tanzania-Grumeti-Serengeti-River-Lodge-Experiences-safari-game-drive-sundowners-drinks-_5_-Collections-3000w-scaled.jpg", path: "/greece" },
-  { name: "Norway", image: "https://cdn-ajfhi.nitrocdn.com/KGztweKcUtUgsFQkUHxObgZRMXOaBfJI/assets/images/optimized/rev-e4b7f67/tanzania-specialist.com/wp-content/uploads/2025/02/Tanzania-Travel-Tanzania-Specialist-jeep-1960x800.jpg", path: "/norway" },
-  { name: "Ireland", image: "https://www.tanzania-experience.com/wp-content/uploads/2024/01/tanzania-safaris-.jpg", path: "/ireland" },
-  { name: "Kenya", image: "https://www.andbeyond.com/wp-content/uploads/sites/5/Africa-Tanzania-Serengeti-National-Park-hot-air-balloons-Website-1920x1080-fill-gravityauto-Q_AutoBest.jpg", path: "/kenya" },
-  { name: "Australia", image: "https://africanscenicsafaris.com/blog/wp-content/uploads/2025/05/festivals-of-tanzania-discover-cultural-diversity-on-tanzania-safaris-banner-scaled.webp", path: "/australia" },
-  { name: "France", image: "https://www.coxandkings.co.uk/-/media/cox-and-kings/images/page-header-images/destinations/africa/tanzania/zanzibar/zanzibar_0000_tanzania-zanzibar-shutterstock_479712880.jpg?la=en&hash=CD33C503F9B3A9205F2F1AF812700ECB476627C9", path: "/france" },
-  { name: "Italy", image: "https://a.travel-assets.com/findyours-php/viewfinder/images/res70/212000/212540-Zanzibar.jpg", path: "/italy" },
-  { name: "Tanzania", image: "https://yellowzebrasafaris.com/media/40203/tanzania-fanjove-island-aerial-of-island.jpg?width=2048&height=1024&format=jpg&v=1da5e17bffa6d90", path: "/tanzania" },
+  {
+    name: "South Africa",
+    image:
+      "https://tanzania-specialist.com/wp-content/uploads/2023/07/10-Days-Tanzania-safari-all-northern-parks-in-1-trip-wildebeest-migration.jpg",
+    path: "/south-africa",
+  },
+  {
+    name: "Botswana",
+    image:
+      "https://theincidentaltourist.com/wp-content/uploads/2024/08/Tanzania-Grumeti-Serengeti-River-Lodge-Experiences-safari-game-drive-sundowners-drinks-_5_-Collections-3000w-scaled.jpg",
+    path: "/botswana",
+  },
+  {
+    name: "Namibia",
+    image:
+      "https://cdn-ajfhi.nitrocdn.com/KGztweKcUtUgsFQkUHxObgZRMXOaBfJI/assets/images/optimized/rev-e4b7f67/tanzania-specialist.com/wp-content/uploads/2025/02/Tanzania-Travel-Tanzania-Specialist-jeep-1960x800.jpg",
+    path: "/namibia",
+  },
+  {
+    name: "Zimbabwe",
+    image:
+      "https://www.tanzania-experience.com/wp-content/uploads/2024/01/tanzania-safaris-.jpg",
+    path: "/zimbabwe",
+  },
+  {
+    name: "Zambia",
+    image:
+      "https://www.andbeyond.com/wp-content/uploads/sites/5/Africa-Tanzania-Serengeti-National-Park-hot-air-balloons-Website-1920x1080-fill-gravityauto-Q_AutoBest.jpg",
+    path: "/zambia",
+  },
+  {
+    name: "Mozambique",
+    image:
+      "https://africanscenicsafaris.com/blog/wp-content/uploads/2025/05/festivals-of-tanzania-discover-cultural-diversity-on-tanzania-safaris-banner-scaled.webp",
+    path: "/mozambique",
+  },
+  {
+    name: "Kenya",
+    image:
+      "https://www.coxandkings.co.uk/-/media/cox-and-kings/images/page-header-images/destinations/africa/tanzania/zanzibar/zanzibar_0000_tanzania-zanzibar-shutterstock_479712880.jpg?la=en&hash=CD33C503F9B3A9205F2F1AF812700ECB476627C9",
+    path: "/kenya",
+  },
+  {
+    name: "Tanzania",
+    image:
+      "https://a.travel-assets.com/findyours-php/viewfinder/images/res70/212000/212540-Zanzibar.jpg",
+    path: "/kanzania",
+  },
 ];
 
 export default function DestinationHero({ speed = 15, resumeDelay = 3000 }) {
@@ -71,46 +108,46 @@ export default function DestinationHero({ speed = 15, resumeDelay = 3000 }) {
   // }, [isPaused, speed, totalHeight, itemHeight]);
 
   // Infinite scroll - update when destination aligns with input box center
-useEffect(() => {
-  lastTimeRef.current = null;
+  useEffect(() => {
+    lastTimeRef.current = null;
 
-  const step = (ts) => {
-    if (lastTimeRef.current == null) lastTimeRef.current = ts;
-    const dt = (ts - lastTimeRef.current) / 1000;
-    lastTimeRef.current = ts;
+    const step = (ts) => {
+      if (lastTimeRef.current == null) lastTimeRef.current = ts;
+      const dt = (ts - lastTimeRef.current) / 1000;
+      lastTimeRef.current = ts;
 
-    if (!isPaused) {
-      setOffset((prev) => {
-        const next = prev + speed * dt;
-        const wrapped = next >= totalHeight ? next - totalHeight : next;
+      if (!isPaused) {
+        setOffset((prev) => {
+          const next = prev + speed * dt;
+          const wrapped = next >= totalHeight ? next - totalHeight : next;
 
-        // Calculate center offset (half of visible container height)
-        const visibleHeight = 320; // your "h-80" = 20rem = 320px
-        const centerOffset = wrapped + visibleHeight / 2;
+          // Calculate center offset (half of visible container height)
+          const visibleHeight = 320; // your "h-80" = 20rem = 320px
+          const centerOffset = wrapped + visibleHeight / 2;
 
-        // Find which item is currently aligned with the input (center)
-        const currentIndex = Math.floor(centerOffset / itemHeight) % destinations.length;
+          // Find which item is currently aligned with the input (center)
+          const currentIndex =
+            Math.floor(centerOffset / itemHeight) % destinations.length;
 
-        // Update only if it changed (avoid flicker)
-        setActiveIndex((prevIndex) => {
-          if (prevIndex !== currentIndex) {
-            setInputValue(destinations[currentIndex].name);
-            return currentIndex;
-          }
-          return prevIndex;
+          // Update only if it changed (avoid flicker)
+          setActiveIndex((prevIndex) => {
+            if (prevIndex !== currentIndex) {
+              setInputValue(destinations[currentIndex].name);
+              return currentIndex;
+            }
+            return prevIndex;
+          });
+
+          return wrapped;
         });
+      }
 
-        return wrapped;
-      });
-    }
+      rafRef.current = requestAnimationFrame(step);
+    };
 
     rafRef.current = requestAnimationFrame(step);
-  };
-
-  rafRef.current = requestAnimationFrame(step);
-  return () => cancelAnimationFrame(rafRef.current);
-}, [isPaused, speed, totalHeight, itemHeight]);
-
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [isPaused, speed, totalHeight, itemHeight]);
 
   // Input typing & autocomplete
   const handleInputChange = (e) => {
@@ -121,12 +158,15 @@ useEffect(() => {
 
     if (value.trim() === "") {
       setSuggestions([]);
-      resumeTimeoutRef.current = setTimeout(() => setIsPaused(false), resumeDelay);
+      resumeTimeoutRef.current = setTimeout(
+        () => setIsPaused(false),
+        resumeDelay,
+      );
       return;
     }
 
     const filtered = destinations.filter((d) =>
-      d.name.toLowerCase().includes(value.toLowerCase())
+      d.name.toLowerCase().includes(value.toLowerCase()),
     );
     setSuggestions(filtered);
     setHighlightIndex(-1);
@@ -140,7 +180,7 @@ useEffect(() => {
       setHighlightIndex((prev) => (prev + 1) % suggestions.length);
     } else if (e.key === "ArrowUp") {
       setHighlightIndex((prev) =>
-        prev <= 0 ? suggestions.length - 1 : prev - 1
+        prev <= 0 ? suggestions.length - 1 : prev - 1,
       );
     } else if (e.key === "Enter") {
       e.preventDefault();
@@ -148,7 +188,7 @@ useEffect(() => {
         highlightIndex >= 0
           ? suggestions[highlightIndex]
           : destinations.find(
-              (d) => d.name.toLowerCase() === inputValue.trim().toLowerCase()
+              (d) => d.name.toLowerCase() === inputValue.trim().toLowerCase(),
             );
       if (selected) {
         navigate(selected.path);
@@ -161,7 +201,7 @@ useEffect(() => {
 
   const handleSuggestionClick = (name) => {
     const match = destinations.find(
-      (d) => d.name.toLowerCase() === name.toLowerCase()
+      (d) => d.name.toLowerCase() === name.toLowerCase(),
     );
     if (match) {
       navigate(match.path);
@@ -177,7 +217,7 @@ useEffect(() => {
     setInputValue("");
 
     const match = destinations.find(
-      (d) => d.name.toLowerCase() === inputValue.trim().toLowerCase()
+      (d) => d.name.toLowerCase() === inputValue.trim().toLowerCase(),
     );
 
     if (match) {
@@ -225,15 +265,13 @@ useEffect(() => {
         style={{ backgroundImage: `url(${bgImage})` }}
       />
 
-
-
       <div className="absolute inset-0 bg-black/40" />
 
       {/* Content */}
       <div className="relative z-10 flex h-full">
         <div className="flex flex-col justify-center px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28 text-white">
           <h1 className="text-4xl md:text-5xl font-cormorant font-semibold mb-12">
-            WHERE CAN WE TAKE YOU?
+            Where Will Africa Take You?
           </h1>
 
           {/* Scrolling List */}
@@ -255,7 +293,9 @@ useEffect(() => {
                       <span
                         onMouseEnter={() => setIsPaused(true)}
                         onMouseLeave={() => setIsPaused(false)}
-                        onClick={() => handleCityClick(idx % destinations.length)}
+                        onClick={() =>
+                          handleCityClick(idx % destinations.length)
+                        }
                         className={`inline-block cursor-pointer text-lg font-quicksand transition-colors duration-200 ${
                           isActive
                             ? "text-white "
@@ -322,8 +362,3 @@ useEffect(() => {
     </section>
   );
 }
-
-
-
-
-

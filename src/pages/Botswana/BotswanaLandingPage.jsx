@@ -282,14 +282,14 @@ const travelguide = [
     title: "On Safari with Where to Africa",
     description:
       "Experience the wonder of all-inclusive access, expert Tauck Directors, and thoughtfully selected accommodations, for the most authentic safaris.",
-    link: "/safari-experience",
+    link: "/travel-guide",
   },
   {
     image: "https://khwaiexpeditionscamp.com/wp-content/uploads/2024/06/The-African-Elephant.jpg",
     title: "When's the Best Time to Safari",
     description:
       "Every season brings something special, so there's truly no 'best' time – just the time that's right for you.",
-    link: "/best-time",
+    link: "/travel-guide",
   },
   {
     image:
@@ -297,7 +297,7 @@ const travelguide = [
     title: "How to Choose Your Safari",
     description:
       "Each safari has its own distinct highlights – explore all of your options to find the journey that excites you the most!",
-    link: "/choose-your-safari",
+    link: "/travel-guide",
   },
   {
     image:
@@ -305,7 +305,7 @@ const travelguide = [
     title: "Your Essential Safari Packing Guide",
     description:
       "Tips, tricks and must-haves for packing on your upcoming safari adventure.",
-    link: "/packing-guide",
+    link: "/travel-guide",
   },
 ];
 
