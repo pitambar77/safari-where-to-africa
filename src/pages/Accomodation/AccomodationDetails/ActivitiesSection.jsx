@@ -56,34 +56,75 @@
 // export default ActivitiesSection;
 
 
+// import React from "react";
+// import Overview from "../../../components/Overview";
+
+// const ActivitiesSection = ({ title, subtitle, description, activities }) => {
+//   return (
+//     <div className="bg-[#faf5e9]">
+//       <Overview
+//         title={title}
+//         subtitle={subtitle}
+//         description={description}
+//       />
+//       <div className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28 pb-16">
+//         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-10 justify-center">
+//           {activities?.map((item, index) => (
+//             <div
+//               key={index}
+//               className="flex items-center text-center gap-x-4 relative group"
+//             >
+//               {/* Icon Circle */}
+//               <div className="bg-[#a89f82] w-10 h-10 flex items-center justify-center rounded-full mb-3 group-hover:scale-105 transition-transform duration-300">
+//                 {item.icon}
+//               </div>
+
+//               {/* Label */}
+//               <p className="text-[#333] text-lg font-quicksand">{item.label}</p>
+
+//               {/* Divider line */}
+//               <span className="absolute bottom-[-12px] left-0 right-0 h-[1px] bg-[#c8c0a6]"></span>
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default ActivitiesSection;
+
 import React from "react";
 import Overview from "../../../components/Overview";
 
-const ActivitiesSection = ({ title, subtitle, description, activities }) => {
+const ActivitiesSection = ({ title, subtitle, description, activities = [] }) => {
   return (
     <div className="bg-[#faf5e9]">
-      <Overview
-        title={title}
-        subtitle={subtitle}
-        description={description}
-      />
+      <Overview title={title} subtitle={subtitle} description={description} />
+
       <div className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28 pb-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-10 justify-center">
-          {activities?.map((item, index) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-10">
+          {activities.map((item, index) => (
             <div
               key={index}
-              className="flex items-center text-center gap-x-4 relative group"
+              className="flex items-center gap-x-4 relative group"
             >
-              {/* Icon Circle */}
-              <div className="bg-[#a89f82] w-10 h-10 flex items-center justify-center rounded-full mb-3 group-hover:scale-105 transition-transform duration-300">
-                {item.icon}
+              {/* Amenity Image */}
+              <div className="bg-[#a89f82] w-12 h-12 flex items-center justify-center rounded-full overflow-hidden">
+                <img
+                  src={item.amenityImage}
+                  alt={item.amenityName}
+                  className="w-6 h-6 object-contain"
+                />
               </div>
 
-              {/* Label */}
-              <p className="text-[#333] text-lg font-quicksand">{item.label}</p>
+              {/* Amenity Name */}
+              <p className="text-[#333] text-lg font-quicksand">
+                {item.amenityName}
+              </p>
 
-              {/* Divider line */}
-              <span className="absolute bottom-[-12px] left-0 right-0 h-[1px] bg-[#c8c0a6]"></span>
+              {/* Divider */}
+              <span className="absolute bottom-[-12px] left-0 right-0 h-[1px] bg-[#c8c0a6]" />
             </div>
           ))}
         </div>
@@ -93,4 +134,5 @@ const ActivitiesSection = ({ title, subtitle, description, activities }) => {
 };
 
 export default ActivitiesSection;
+
 

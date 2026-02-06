@@ -3,6 +3,7 @@ import React from "react";
 const JourneyOverview = ({
   title,
   subtitle,
+ 
   description,
   image,
   days,

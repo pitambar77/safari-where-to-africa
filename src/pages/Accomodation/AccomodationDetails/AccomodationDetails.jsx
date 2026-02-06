@@ -8,40 +8,6 @@ import RelatedCard from "../../../components/RelatedCard";
 import JourneyOverview from "../../../components/JourneyOverview";
 import { useParams } from "react-router-dom";
 import axiosInstance from "../../../api/axiosInstance";
-// import {
-//   FaSailboat,
-//   FaDove,
-//   FaHelicopter,
-//   FaPlane,
-//   FaFish,
- 
-//   FaHiking,
-//   FaChild,
-//   FaUtensils,
-//   FaMountain,
-//   FaSpa,
-//   FaWineBottle,
-// } from "react-icons/fa6"; // or "react-icons/fa" depending on version
-
-
-
-// const activitiesData = [
-//   { icon: <FaSailboat size={22} color="white" />, label: "Boat Trip" },
-//   { icon: <FaDove size={22} color="white" />, label: "Ocean Safari" },
-//   { icon: <FaHelicopter size={22} color="white" />, label: "Helicopter Flights" },
-//   { icon: <FaPlane size={22} color="white" />, label: "Scenic Flights" },
-//   { icon: <FaFish size={22} color="white" />, label: "Shark Diving" },
-//   { icon: <FaHiking size={22} color="white" />, label: "Hiking" },
-//   { icon: <FaGolfBall size={22} color="white" />, label: "Golf" },
-//   { icon: <FaChild size={22} color="white" />, label: "Kids Club" },
-//   { icon: <FaUtensils size={22} color="white" />, label: "Food Experiences" },
-//   { icon: <FaMountain size={22} color="white" />, label: "Natural Wonders" },
-//   { icon: <FaSpa size={22} color="white" />, label: "Wellness/Spa" },
-//   { icon: <FaWineBottle size={22} color="white" />, label: "Wine Tour" },
-// ];
-
-
-
 
 const AccomodationDetails = () => {
 
@@ -64,6 +30,8 @@ const AccomodationDetails = () => {
     fetchAccommodation();
   }, [id]);
 
+  console.log(accommodation);
+
   if (loading) return <p className="text-center py-10">Loading accomodation...</p>;
   if (!accommodation) return <p className="text-center py-10">Accommodation not found.</p>;
 
@@ -74,12 +42,12 @@ const AccomodationDetails = () => {
     
       <JourneyOverview
       title={accommodation.bannerTitle}
-      subtitle={"Discover"}
-      description=""
+      subtitle={accommodation.bannerSubtitle}
+      description={accommodation.bannerDescription}
       image={accommodation.bannerImages}
-      days="8"
+      days={accommodation.nightsStay}
       price={accommodation.pricePerPerson}
-      journeyType="River Cruising"
+      journeyType={accommodation.accommodationType}
       timeOfYear={accommodation.checkIn}
       cities={accommodation.location}
       />
@@ -94,8 +62,9 @@ const AccomodationDetails = () => {
      <GallerySection
     title="Gallery"
     subtitle="Picture yourself here"
-    description={accommodation.galleryDescription}
-    images={accommodation.galleryImages}
+    description="Take a journey through The Mount Nelson Hotel to get a flavour of
+            its unique style and character, designed to enchant every guest."
+    images={accommodation.gallery}
   />
       {/* <AccordionSection /> */}
       <AccordionSection aboutBooking={accommodation.aboutBooking} requirements={accommodation.requirements} />
