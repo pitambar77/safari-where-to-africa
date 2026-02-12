@@ -31,13 +31,13 @@ const TalkExpert = () => {
         {/* LEFT SIDE — 2/5 */}
         <div className="md:col-span-2">
           <p className="uppercase font-cormorant text-lg tracking-widest text-gray-700 mb-3">
-            Our Experts
+            Get Started
           </p>
           <h2 className="text-4xl md:text-6xl font-cormorant text-gray-900 mb-4">
             Want to chat?
           </h2>
           <p className="text-gray-700 mb-6 text-lg font-quicksand leading-relaxed max-w-md">
-            Get advice and suggestions to make this your perfect trip.
+            Talk with our team and start planning your African journey
           </p>
 
           <button className="bg-[#b1a47f] hover:bg-[#a0916d] font-quicksand text-white font-semibold text-sm uppercase tracking-widest py-2 px-5 rounded-sm transition">

@@ -47,9 +47,14 @@ const AccomodationDetails = () => {
       image={accommodation.bannerImages}
       days={accommodation.nightsStay}
       price={accommodation.pricePerPerson}
-      journeyType={accommodation.accommodationType}
-      timeOfYear={accommodation.checkIn}
-      cities={accommodation.location}
+      journeyType={accommodation.location}
+      timeOfYear={accommodation.accommodationType}
+      // cities={accommodation.location}
+       level={"Ratings"}
+        levelsec={"Price Per Person"}
+        levelthird={" Type"}
+        levelfourth={" Category "}
+        
       />
   
       <ActivitiesSection 

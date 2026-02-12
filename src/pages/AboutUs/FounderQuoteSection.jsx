@@ -30,22 +30,18 @@ const FounderQuoteSection = () => {
         <div className="space-y-4 w-[40%]">
           <blockquote className="text-xl md:text-2xl font-cormorant font-medium leading-relaxed relative text-[#636363]">
             <span className="absolute -left-3 -top-3 font-cormorant text-5xl ">“</span>
-            Timbuktu was shaped by local, insider knowledge, an obsession with
-            new tech and one big belief: that travel — and the planning — should
-            be easy, exciting and an all-round incredible experience from the
-            moment you enquire, to your first (and last) sunset cocktail in the
-            destination of your dreams.
+            Where to Africa began with a belief that travel planning should feel clear, engaging, and supportive, combining local knowledge, smart tools, and honest guidance so travellers feel confident from first conversation through final moments experienced in remarkable destinations across Africa without confusion, pressure, unnecessary complexity along the way.
+
             <span className="text-5xl font-cormorant  align-top">”</span>
           </blockquote>
 
           <p className="text-gray-700 leading-relaxed">
-            Discover how our trip planner works and how it’s changing the way
-            people travel.
+            Discover how our planning approach makes African travel simpler, clearer, and more rewarding.
           </p>
 
           <div>
-            <p className="font-semibold font-quicksand text-lg mb-2">Johnny Prince</p>
-            <p className="text-gray-600 font-quicksand text-sm">Founder & CEO</p>
+            <p className="font-semibold font-quicksand text-lg mb-2">John McMillan</p>
+            <p className="text-gray-600 font-quicksand text-sm">CEO, Where to Africa</p>
           </div>
         </div>
       </div>

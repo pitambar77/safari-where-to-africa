@@ -87,6 +87,11 @@ const Sidebar = () => {
     { name: "Experiences", icon: <FaUmbrellaBeach />, path: "/dashboard/experiences" },
     { name: "Trips", icon: <FaRoute />, path: "/dashboard/trips" },
     { name: "Accommodations", icon: <FaHotel />, path: "/dashboard/accommodations" },
+    { name: "Travel Guide", icon: <FaHotel />, path: "/dashboard/travelguide" },
+    { name: "Travel Guide List", icon: <FaHotel />, path: "/dashboard/blog" },
+
+    
+
   ];
 
   return (

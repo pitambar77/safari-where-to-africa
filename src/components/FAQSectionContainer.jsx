@@ -33,7 +33,6 @@
 
 // export default FAQSectionContainer; // Exported for reuse with different data
 
-
 // import React, { useState } from "react";
 // import { ChevronDown, ChevronUp } from "lucide-react";
 
@@ -145,11 +144,13 @@ const FAQSectionContainer = ({ title, items }) => {
             <div
               id={`accordion-content-${faq._id || index}`}
               className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                openIndex === index ? "max-h-96 opacity-100 py-2" : "max-h-0 opacity-0"
+                openIndex === index
+                  ? "max-h-auto opacity-100 py-2"
+                  : "max-h-0 opacity-0"
               }`}
             >
               <div className="pb-4 text-gray-600 font-quicksand text-base px-2 leading-relaxed border-t border-gray-100">
-                {faq.answer?.map((ans, i) => {
+                {/* {faq.answer?.map((ans, i) => {
                   if (ans.type === "header") {
                     return (
                       <h3
@@ -171,6 +172,45 @@ const FAQSectionContainer = ({ title, items }) => {
                   } else {
                     return null;
                   }
+                })} */}
+
+                {faq.answer?.map((ans, i) => {
+                  if (ans.type === "header") {
+                    return (
+                      <h3
+                        key={i}
+                        className="text-lg font-semibold text-[#636363] mt-4"
+                      >
+                        {ans.content}
+                      </h3>
+                    );
+                  }
+
+                  if (ans.type === "paragraph") {
+                    return (
+                      <p
+                        key={i}
+                        className="text-gray-700 font-light leading-relaxed mt-2"
+                      >
+                        {ans.content}
+                      </p>
+                    );
+                  }
+
+                  if (ans.type === "list" && Array.isArray(ans.content)) {
+                    return (
+                      <ul
+                        key={i}
+                        className="list-disc  mt-3 space-y-1 text-gray-700 marker:text-[#a89f81] marker:text-xl list-inside pl-8"
+                      >
+                        {ans.content.map((item, liIndex) => (
+                          <li key={liIndex}>{item}</li>
+                        ))}
+                      </ul>
+                    );
+                  }
+
+                  return null;
                 })}
               </div>
             </div>

@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import Overview from '../../../components/Overview'
-import Include from './Include'
-import GameDriveOption from './GameDriveOption'
-import PricingAvailabilitySection from '../../Accomodation/AccomodationDetails/PricingAvailabilitySection'
-import GameDriveHighlights from './GameDriveHighlights'
-import GallerySectionExactWidths from '../../Accomodation/AccomodationDetails/GallerySection'
-import JourneysCarousel from '../../Accomodation/AccomodationDetails/JourneysCarousel'
-import JourneyOverview from '../../../components/JourneyOverview'
-import { useParams } from 'react-router-dom'
-import axiosInstance from '../../../api/axiosInstance.js'
-import GallerySection from '../../Accomodation/AccomodationDetails/GallerySection'
+import React, { useEffect, useState } from "react";
+import Overview from "../../../components/Overview";
+import Include from "./Include";
+import GameDriveOption from "./GameDriveOption";
+import PricingAvailabilitySection from "../../Accomodation/AccomodationDetails/PricingAvailabilitySection";
+import GameDriveHighlights from "./GameDriveHighlights";
+import GallerySectionExactWidths from "../../Accomodation/AccomodationDetails/GallerySection";
+import JourneysCarousel from "../../Accomodation/AccomodationDetails/JourneysCarousel";
+import JourneyOverview from "../../../components/JourneyOverview";
+import { useParams } from "react-router-dom";
+import axiosInstance from "../../../api/axiosInstance.js";
+import GallerySection from "../../Accomodation/AccomodationDetails/GallerySection";
 
 const ExperienceDetails = () => {
-
-
-const { id } = useParams(); // 👈 get trip id from URL
+  const { id } = useParams(); // 👈 get trip id from URL
   const [experience, setExperience] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -33,31 +31,32 @@ const { id } = useParams(); // 👈 get trip id from URL
     fetchExperience();
   }, [id]);
 
-  if (loading) return <p className="text-center py-10">Loading experience...</p>;
-  if (!experience) return <p className="text-center py-10">Experience not found.</p>;
+  if (loading)
+    return <p className="text-center py-10">Loading experience...</p>;
+  if (!experience)
+    return <p className="text-center py-10">Experience not found.</p>;
 
-  console.log(experience)
-
+  console.log(experience);
 
   return (
     <>
-<JourneyOverview
-      subtitle="Experience"
-  title={experience.bannerTitle}
-  description={experience.bannerDescription}
-  image={experience.bannerImage}
-  days={experience.experienceInfo?.days}
-  price={`${experience.experienceInfo?.pricePerPerson}`}
-  journeyType={experience.experienceInfo?.journeyType}
-  timeOfYear={experience.experienceInfo?.location}
-  cities={experience.experienceInfo?.location}
-  level ={"Duration"}
-  levelsec={"Price"}
-  levelthird={"Min/Max person"}
-  levelfourth={`Timing`}
-    />
+      <JourneyOverview
+        subtitle="Experience"
+        title={experience.bannerTitle}
+        description={experience.bannerDescription}
+        image={experience.bannerImage}
+        days={experience.experienceInfo?.days}
+        price={`${experience.experienceInfo?.pricePerPerson}`}
+        journeyType={experience.experienceInfo?.journeyType}
+        timeOfYear={experience.experienceInfo?.location}
+        cities={experience.experienceInfo?.location}
+        level={"Duration"}
+        levelsec={"Price"}
+        levelthird={"Min/Max person"}
+        levelfourth={`Timing`}
+      />
 
-    <div className="bg-[#f6f1e9]">
+      <div className="bg-[#f6f1e9]">
         <Overview
           title={experience.overview.title}
           subtitle={experience.overview.subTitle}
@@ -67,21 +66,32 @@ const { id } = useParams(); // 👈 get trip id from URL
       </div>
       {/* <GameDriveOption 
       gameDrives={experience.gameDrives}   /> */}
-      <PricingAvailabilitySection/>
+      <PricingAvailabilitySection />
       <GameDriveHighlights
-      gamehighLight={experience.highlights}
+        gamehighLight={experience.highlights}
         sectionTitle="Chobe Game Drive Highlights"
       />
       {/* <GallerySectionExactWidths/> */}
-       <GallerySection
+      {/* <GallerySection
     title="Gallery"
     subtitle="Picture yourself here"
     description={experience.gallery.description}
     images={experience.gallery.images}
-  />
-      <JourneysCarousel/>
- </>
-  )
-}
+  /> */}
 
-export default ExperienceDetails
+      <GallerySection
+        title="Gallery"
+        subtitle="Picture yourself here"
+        description={experience.gallery.description}
+        images={experience.gallery.images.map((img) => ({
+          galleryImage: img.image,
+          galleryName: "Experience Image",
+        }))}
+      />
+
+      <JourneysCarousel />
+    </>
+  );
+};
+
+export default ExperienceDetails;

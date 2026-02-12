@@ -55,19 +55,20 @@ const PositiveImpact = () => {
           </p>
 
           <h1 className="text-4xl md:text-5xl  font-cormorant  mb-6">
-            We're proud to be making a positive impact
+            Meaningful African travel led responsibly
           </h1>
 
           <p className="text-lg mb-4 font-quicksand text-gray-200">
-            We're big believers in leaving a positive impact in the countries in which we operate. We're proud to donate $50 for every booking to projects focusing on female empowerment, tech education, and conservation.
+           We work with local partners to support community livelihoods through fair employment and respectful cultural experiences.
           </p>
 
           <p className="text-lg font-quicksand mb-8 text-gray-200">
-            Our dream is to empower our guests to travel with a purpose.
+            Wildlife activities follow responsible guidelines that reduce disturbance and support conservation and habitat protection.
           </p>
           
-          <p className="text-xl font-quicksand font-bold mb-6 ">
-            So far, we've donated $78,000 to projects across Africa.
+          <p className="ext-lg font-quicksand mb-8 text-gray-200 ">
+            Travel decisions focus on long-term benefits, ensuring tourism supports people, nature, and destinations beyond each visit.
+
           </p>
 
           {/* Learn More Button */}

@@ -7,7 +7,7 @@ const ImpactPage = () => {
   return (
     <>
      <Banner
-    title={"Impact"}
+    title={"Conservation"}
     imageUrl={"https://www.matriarchafrica.com/wp-content/uploads/2018/12/Kruger-Walking-Safari.jpg"}
     />
     <ImpactSection/>

@@ -13,9 +13,9 @@ const testimonials = [
   {
     id: 1,
     profile: profile1,
-    travelername: "Kristi Gerathy",
-    mainquote: "Where To Africa Safari is Excellent!",
-    para: "Our experience with Joanna of Where To Africa Safari was excellent. We have used her services in the past and will continue to use her services for future trips.",
+    travelername: "JAMES & STEVE",
+    mainquote: "AUSTIN, TEXAS, U.S.A.",
+    para: "On our first African Safari, I booked our Zimbabwe portion through Where To Africa Experiences - this was one of the best decisions I made on the entire trip.",
   },
   {
     id: 2,
@@ -27,24 +27,18 @@ const testimonials = [
   {
     id: 3,
     profile: profile1,
-    travelername: "Lisa Roberts",
-    mainquote: "Unforgettable Safari Adventure!",
-    para: "An incredible experience! The team at Where To Africa Safari ensured every detail was taken care of — we couldn’t have asked for more!",
+    travelername: "KENT KAUFFMAN",
+    mainquote: "USA",
+    para: "I took 13 people to Victoria Falls for 3 nights and had a trip with Where To Africa. They made everything very easy, and the payment process was straightforward.",
   },
   {
     id: 4,
     profile: profile1,
-    travelername: "Daniel White",
-    mainquote: "Amazing Safari Planning!",
-    para: "The organization and communication were excellent. I felt completely at ease throughout the trip. Thank you!",
+    travelername: "JUSTIN",
+    mainquote: "UNITED KINGDOM",
+    para: "I thoroughly enjoyed my African Safari experience from start to finish with Where to Africa. Everything went smoothly. I would recommend this company to any of my friends, colleagues, or family.",
   },
-  {
-    id: 5,
-    profile: profile1,
-    travelername: "Sarah Thompson",
-    mainquote: "Life-changing Experience!",
-    para: "From sunrise game drives to stunning lodges — every moment was unforgettable. Highly recommended!",
-  },
+
 ];
 
 const Testimonial = () => {

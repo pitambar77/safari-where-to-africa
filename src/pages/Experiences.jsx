@@ -579,6 +579,14 @@ const Experiences = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+//     for (const h of highlights) {
+//   if (!h.existingImage && !h.image) {
+//     alert("Please upload image for all new highlights");
+//     return;
+//   }
+// }
+
+
     if (!selectedDestinationId) {
       alert("Please select a destination!");
       return;
@@ -622,13 +630,24 @@ const Experiences = () => {
       name: g.name,
       description: g.description,
       pricePerPerson: g.pricePerPerson,
-      image: g.image ? `gameDriveImages[${i}]` : "",
+      // image: g.image ? `gameDriveImages[${i}]` : "",
+      image: g.existingImage || "",
     }));
-    const highlightData = highlights.map((h, i) => ({
-      name: h.name,
-      description: h.description,
-      image: h.image ? `highlightImages[${i}]` : "",
-    }));
+    // const highlightData = highlights.map((h, i) => ({
+    //   name: h.name,
+    //   description: h.description,
+      
+    //   // image: h.image ? `highlightImages[${i}]` : "",
+    //   image: h.existingImage || "", // keep existing URL
+    // }));
+
+    const highlightData = highlights.map((h) => ({
+  name: h.name,
+  description: h.description,
+  image: h.existingImage || "",
+  hasNewImage: Boolean(h.image),
+}));
+
 
     formData.append("includes", JSON.stringify(includesData));
     formData.append("gameDrives", JSON.stringify(gameDriveData));

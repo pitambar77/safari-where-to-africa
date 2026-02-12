@@ -101,6 +101,10 @@ const AccommodationForm = () => {
     }
   };
 
+  const removeAmenity = (index) => {
+    setAmenities((prev) => prev.filter((_, i) => i !== index));
+  };
+
   // edit added
 
   const handleEdit = async (id) => {
@@ -145,117 +149,127 @@ const AccommodationForm = () => {
     setRegions(selected?.regions || []);
   }, [selectedDestinationId, destinations]);
 
- 
-
   useEffect(() => {
-  if (selectedDestination && !editingId) {
-    setSubDestList(SUBDESTINATIONS[selectedDestination] || []);
-    setValue("subdestination", "");
-  }
-
-  if (editingId && selectedDestination) {
-    setSubDestList(SUBDESTINATIONS[selectedDestination] || []);
-  }
-}, [selectedDestination, editingId, setValue]);
-
-
-const onSubmit = async (data) => {
-  const formData = new FormData();
-
-  // Only for CREATE
-  if (!editingId) {
-    formData.append("destinationId", selectedDestinationId);
-    formData.append("regionId", selectedRegionId);
-    formData.append("destination", data.destination);
-    formData.append("subdestination", data.subdestination);
-  }
-
-  // Text fields
-  [
-    "bannerTitle",
-    "bannerSubtitle",
-    "bannerDescription",
-    "overviewTitle",
-    "overviewSubtitle",
-    "overviewDescription",
-    "name",
-    "location",
-    "pricePerPerson",
-    "nightsStay",
-    "accommodationType",
-    "checkIn",
-    "checkOut",
-  ].forEach((field) => {
-    if (data[field] !== undefined) {
-      formData.append(field, data[field]);
-    }
-  });
-
-  // Images
-  Array.from(data.bannerImages || []).forEach((file) =>
-    formData.append("bannerImages", file)
-  );
-
-  if (data.landingImage?.[0]) {
-    formData.append("landingImage", data.landingImage[0]);
-  }
-
-  // Amenities
-  formData.append(
-    "amenities",
-    JSON.stringify(
-      amenities.map((a) => ({
-        amenityName: a.amenityName,
-        amenityImage:
-          typeof a.amenityImage === "string" ? a.amenityImage : null,
-      }))
-    )
-  );
-
-  amenities.forEach((a) => {
-    if (a.amenityImage instanceof File) {
-      formData.append("amenityImages", a.amenityImage);
-    }
-  });
-
-  // Gallery
-  formData.append(
-    "gallery",
-    JSON.stringify(
-      gallery.map((g) => ({
-        galleryName: g.galleryName,
-        galleryImage:
-          typeof g.galleryImage === "string" ? g.galleryImage : null,
-      }))
-    )
-  );
-
-  gallery.forEach((g) => {
-    if (g.galleryImage instanceof File) {
-      formData.append("galleryImages", g.galleryImage);
-    }
-  });
-
-  formData.append("aboutBooking", JSON.stringify(aboutBooking));
-  formData.append("requirements", JSON.stringify(requirements));
-
-  try {
-    if (editingId) {
-      await updateAccommodation(editingId, formData);
-      alert("✅ Accommodation updated successfully");
-    } else {
-      await createAccommodation(formData);
-      alert("✅ Accommodation added successfully");
+    if (selectedDestination && !editingId) {
+      setSubDestList(SUBDESTINATIONS[selectedDestination] || []);
+      setValue("subdestination", "");
     }
 
-    reset();
-    setEditingId(null);
-    fetchAccommodationList();
-  } catch (err) {
-    console.error(err);
-    alert("❌ Failed to save accommodation");
-  }
-};
+    if (editingId && selectedDestination) {
+      setSubDestList(SUBDESTINATIONS[selectedDestination] || []);
+    }
+  }, [selectedDestination, editingId, setValue]);
+
+  const onSubmit = async (data) => {
+    const formData = new FormData();
+
+    // Only for CREATE
+    if (!editingId) {
+      formData.append("destinationId", selectedDestinationId);
+      formData.append("regionId", selectedRegionId);
+      formData.append("destination", data.destination);
+      formData.append("subdestination", data.subdestination);
+    }
+
+    // Text fields
+    [
+      "bannerTitle",
+      "bannerSubtitle",
+      "bannerDescription",
+      "overviewTitle",
+      "overviewSubtitle",
+      "overviewDescription",
+      "name",
+      "location",
+      "pricePerPerson",
+      "nightsStay",
+      "accommodationType",
+      "checkIn",
+      "checkOut",
+    ].forEach((field) => {
+      if (data[field] !== undefined) {
+        formData.append(field, data[field]);
+      }
+    });
+
+    // Images
+    Array.from(data.bannerImages || []).forEach((file) =>
+      formData.append("bannerImages", file),
+    );
+
+    if (data.landingImage?.[0]) {
+      formData.append("landingImage", data.landingImage[0]);
+    }
+
+    // Amenities
+    // formData.append(
+    //   "amenities",
+    //   JSON.stringify(
+    //     amenities.map((a) => ({
+    //       amenityName: a.amenityName,
+    //       amenityImage:
+    //         typeof a.amenityImage === "string" ? a.amenityImage : null,
+    //     })),
+    //   ),
+    // );
+
+    formData.append(
+  "amenities",
+  JSON.stringify(
+    amenities.map((a) => ({
+      amenityName: a.amenityName,
+      amenityImage:
+        typeof a.amenityImage === "string" ? a.amenityImage : null,
+      hasNewImage: a.amenityImage instanceof File, // 🔥 KEY
+    }))
+  )
+);
+
+
+    amenities.forEach((a) => {
+      if (a.amenityImage instanceof File) {
+        formData.append("amenityImages", a.amenityImage);
+      }
+    });
+
+    // Gallery
+    formData.append(
+      "gallery",
+      JSON.stringify(
+        gallery.map((g) => ({
+          galleryName: g.galleryName,
+          galleryImage:
+            typeof g.galleryImage === "string" ? g.galleryImage : null,
+        })),
+      ),
+    );
+
+    gallery.forEach((g) => {
+      if (g.galleryImage instanceof File) {
+        formData.append("galleryImages", g.galleryImage);
+      }
+    });
+
+    formData.append("aboutBooking", JSON.stringify(aboutBooking));
+    formData.append("requirements", JSON.stringify(requirements));
+
+    try {
+      if (editingId) {
+        await updateAccommodation(editingId, formData);
+        alert("✅ Accommodation updated successfully");
+      } else {
+        await createAccommodation(formData);
+        alert("✅ Accommodation added successfully");
+      }
+
+      reset();
+      setEditingId(null);
+      fetchAccommodationList();
+    } catch (err) {
+      console.error(err);
+      alert("❌ Failed to save accommodation");
+    }
+  };
 
   return (
     <>
@@ -311,7 +325,7 @@ const onSubmit = async (data) => {
           register={register}
         />
 
-         <ImageUpload
+        <ImageUpload
           label="Landing Image"
           name="landingImage"
           register={register}
@@ -359,7 +373,6 @@ const onSubmit = async (data) => {
           <select
             {...register("destination", { required: true })}
             className="border p-2 rounded"
-            
           >
             <option value="">Select Destination</option>
             {DESTINATIONS.map((dest) => (
@@ -497,6 +510,15 @@ const onSubmit = async (data) => {
                 setAmenities(updated);
               }}
             />
+
+            {/* ❌ Remove Button */}
+            <button
+              type="button"
+              onClick={() => removeAmenity(index)}
+              className="ml-auto text-red-600 text-sm hover:underline"
+            >
+              Remove
+            </button>
           </div>
         ))}
 
@@ -520,8 +542,6 @@ const onSubmit = async (data) => {
         multiple
         register={register}
       /> */}
-
-       
 
         <h3 className="font-semibold mt-6 mb-2">Gallery</h3>
 

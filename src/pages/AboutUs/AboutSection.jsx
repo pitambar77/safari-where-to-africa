@@ -1,8 +1,6 @@
 import React from "react";
 
 const AboutSection = () => {
-
-
   return (
     <section className="bg-[#f6f1e9] text-[#1a1a1a] py-16 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-28">
       {/* Top Row */}
@@ -18,14 +16,16 @@ const AboutSection = () => {
             <div className="absolute inset-0 bg-black/30 flex items-end">
               <div className="p-6 text-white">
                 <p className="text-3xl font-cormorant font-medium mb-4">
-                  “I’ve planned several trips with Timbuktu—Southeast Asia,
-                  Tanzania, Kenya, Egypt, and Uganda—and each experience has
-                  been incredible. ”
+                  “Africa is mystic; it is wild; it is a sweltering inferno; it
+                  is a photographer’s paradise, a hunter’s Valhalla, an
+                  escapist’s Utopia. ”
                 </p>
-                <p className="font-semibold font-quicksand mb-2">Paolo De Marchis</p>
-                <p className="text-sm text-gray-200 font-quicksand">
+                <p className="font-semibold font-quicksand mb-2">
+                  Beryl Markham
+                </p>
+                {/* <p className="text-sm text-gray-200 font-quicksand">
                   Uganda & Kenya Trip, May 2025 – Meg
-                </p>
+                </p> */}
               </div>
             </div>
           </div>
@@ -37,16 +37,17 @@ const AboutSection = () => {
             Who We Are
           </h2>
           <h3 className="text-xl md:text-3xl font-cormorant  leading-[1.3] relative text-[#636363] ">
-            When we founded Timbuktu in 2014, we knew exactly what we wanted to
-            do: make planning extraordinary trips to the far-flung corners of
-            the world as easy and fun as the adventures themselves. make planning extraordinary trips to the far-flung corners of
-            the world as easy 
+            We are a leading travel company dedicated to crafting journeys
+            across Africa, leveraging local insight, practical knowledge, and
+            careful coordination to deliver experiences that run smoothly on the
+            ground for travelers seeking reliable, well-planned trips across
+            diverse regions.
           </h3>
           <p className="text-gray-700 font-quicksand leading-relaxed">
-            Travel should never feel like admin. We don’t do lengthy emails or
-            spreadsheets (unless you’d like one), but instead, our planning
-            process is filled with daydreams, excitement, and “what if we went
-            there too?” moments.
+            Work is done closely with regional specialists, guides, and partners
+            to design itineraries that flow naturally, respect conditions, and
+            reflect everyday realities, without unnecessarily rushing travelers
+            during travel planning across different African regions.
           </p>
         </div>
       </div>
@@ -59,15 +60,18 @@ const AboutSection = () => {
         {/* Left: Description */}
         <div className="space-y-6">
           <p className="text-gray-700 font-quicksand leading-relaxed">
-            Armed with decades of travel experience and a healthy obsession with
-            tech, we built our digital trip planner: a tool that lets you mix
-            and match hotels and destinations with real-time prices and live
-            availability. And right from the beginning, our travel experts are
-            there alongside you, fine-tuning plans, taking care of logistics,
-            and adding their magic touch.
+            Planning considers timing, local rhythms, environmental limits, and
+            realistic travel pacing, helping protect destinations, support
+            livelihoods, and encourage responsible decisions. Our Tours remain
+            flexible, grounded, and considerate of long-term impact for both
+            visitors and host communities, allowing travel experiences to feel
+            balanced, respectful, and sustainable across Africa through careful
+            coordination, informed choices, shared responsibility, thoughtful
+            partnerships, and ongoing collaboration.
           </p>
           <p className="text-xl md:text-3xl font-cormorant  leading-relaxed relative text-[#636363]">
-            The result? A trip that’s truly yours... and totally unforgettable.
+            Good travel values people, places, patience, responsibility,
+            balance, and care.
           </p>
         </div>
 
@@ -82,15 +86,14 @@ const AboutSection = () => {
             <div className="absolute inset-0 bg-black/30 flex items-end">
               <div className="p-6 text-white">
                 <p className="text-3xl font-medium font-cormorant  mb-4">
-                  “
-                  This is our second vacation planned by Timbuktu and once
-                  again they knocked it out of the park. Carola was so patient
-                  with us in designing an itinerary. ”
+                  “ There is no place like Africa. There is something about the
+                  spirit of the people, the beauty of the land, and the
+                  diversity of the wildlife that touches the soul.”
                 </p>
-                <p className="font-semibold font-quicksand mb-2">Adam Kelley</p>
-                <p className="text-sm text-gray-200 font-quicksand">
+                <p className="font-semibold font-quicksand mb-2">Tony Fitzjohn</p>
+                {/* <p className="text-sm text-gray-200 font-quicksand">
                   Chile – Nov 2024 – Carola
-                </p>
+                </p> */}
               </div>
             </div>
           </div>
