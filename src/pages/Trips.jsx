@@ -21,6 +21,8 @@ const Trips = () => {
   const [duration, setDuration] = useState("");
   const [price, setPrice] = useState("");
   const [rating, setRating] = useState("");
+  const [link, setLink] = useState("");
+
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const [gallery, setGallery] = useState([]);
@@ -119,6 +121,7 @@ const Trips = () => {
     formData.append("duration", duration);
     formData.append("price", price);
     formData.append("rating", rating);
+    formData.append("link", link);
     formData.append("description", description);
     formData.append("overviewTitle", overviewTitle);
     formData.append("overviewSubTitle", overviewSubTitle);
@@ -229,6 +232,7 @@ const Trips = () => {
     setDuration("");
     setPrice("");
     setRating("");
+    setLink("");
     setDescription("");
     setOverviewTitle("");
     setOverviewSubTitle("");
@@ -280,6 +284,7 @@ const Trips = () => {
     setDuration(trip.duration);
     setPrice(trip.price);
     setRating(trip.rating);
+    setLink(trip.link);
     setDescription(trip.description);
 
     setOverviewTitle(trip.overviewTitle);
@@ -422,6 +427,14 @@ const Trips = () => {
             className="border p-2"
           />
         </div>
+
+         <input
+            type="text"
+            placeholder="Link"
+            value={link}
+            onChange={(e) => setLink(e.target.value)}
+            className="border p-2 w-full"
+          />
 
         <textarea
           placeholder="Description"
