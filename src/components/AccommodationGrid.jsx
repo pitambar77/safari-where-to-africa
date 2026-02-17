@@ -18,24 +18,19 @@ const AccommodationGrid = ({
         {/* Grid */}
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {data.map((item) => (
-
-<div
-key={item.id}
-    className="cursor-pointer"
-onClick={() => onCardClick && onCardClick(item.id)}
->
-
-            <AccommodationRelated
+            <div
               key={item.id}
-              image={item.image}
-              nights={item.nights}
-              title={item.title}
-              location={item.location}
-              tag={item.tag}
-              
-   
-    
-            />
+              className="cursor-pointer"
+              onClick={() => onCardClick && onCardClick(item.id)}
+            >
+              <AccommodationRelated
+                key={item.id}
+                image={item.image}
+                nights={item.nights}
+                title={item.title}
+                location={item.location}
+                tag={item.tag}
+              />
             </div>
           ))}
         </div>

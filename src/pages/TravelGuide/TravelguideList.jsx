@@ -78,7 +78,7 @@ const TravelguideList = () => {
             <div className="flex gap-3">
               {/* VIEW */}
               <Link
-                to={`/blog/${blog.slug}`}
+                to={`/travel-guide/${blog.slug}`}
                 target="_blank"
                 className="px-3 py-1 border rounded-lg text-green-600"
               >

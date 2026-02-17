@@ -12,14 +12,14 @@ import axiosInstance from "../../../api/axiosInstance.js";
 import GallerySection from "../../Accomodation/AccomodationDetails/GallerySection";
 
 const ExperienceDetails = () => {
-  const { id } = useParams(); // 👈 get trip id from URL
+  const { slug } = useParams(); // 👈 get trip id from URL
   const [experience, setExperience] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchExperience = async () => {
       try {
-        const res = await axiosInstance.get(`/api/experience/${id}`); // 👈 Adjust your backend route if needed
+        const res = await axiosInstance.get(`/api/experience/slug/${slug}`); // 👈 Adjust your backend route if needed
         setExperience(res.data);
       } catch (err) {
         console.error("Failed to load experience:", err);
@@ -29,7 +29,7 @@ const ExperienceDetails = () => {
     };
 
     fetchExperience();
-  }, [id]);
+  }, [slug]);
 
   if (loading)
     return <p className="text-center py-10">Loading experience...</p>;

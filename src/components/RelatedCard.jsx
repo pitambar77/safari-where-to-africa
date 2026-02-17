@@ -13,20 +13,20 @@ import safari4 from "../assets/safari4.webp";
 import safari5 from "../assets/safari5.webp";
 import SafariPackBox from '../pages/homePage/safariPackBox';
 
-const safariData = [
-  { id: 1, image: safari3, title: "Big Five Safaris", link: "#" },
-  { id: 2, image: safari2, title: "Serengeti Adventure", link: "#" },
-  { id: 3, image: safari3, title: "Wildlife Safari", link: "#" },
-  { id: 4, image: safari4, title: "Safari Honeymoon", link: "#" },
-  { id: 5, image: safari5, title: "Photography Safari", link: "#" },
-  { id: 1, image: safari2, title: "Big Five Safaris", link: "#" },
-  { id: 2, image: safari2, title: "Serengeti Adventure", link: "#" },
-  { id: 3, image: safari3, title: "Wildlife Safari", link: "#" },
-  { id: 4, image: safari4, title: "Safari Honeymoon", link: "#" },
-  { id: 5, image: safari5, title: "Photography Safari", link: "#" },
-];
+// const safariData = [
+//   { id: 1, image: safari3, title: "Big Five Safaris", link: "#" },
+//   { id: 2, image: safari2, title: "Serengeti Adventure", link: "#" },
+//   { id: 3, image: safari3, title: "Wildlife Safari", link: "#" },
+//   { id: 4, image: safari4, title: "Safari Honeymoon", link: "#" },
+//   { id: 5, image: safari5, title: "Photography Safari", link: "#" },
+//   { id: 1, image: safari2, title: "Big Five Safaris", link: "#" },
+//   { id: 2, image: safari2, title: "Serengeti Adventure", link: "#" },
+//   { id: 3, image: safari3, title: "Wildlife Safari", link: "#" },
+//   { id: 4, image: safari4, title: "Safari Honeymoon", link: "#" },
+//   { id: 5, image: safari5, title: "Photography Safari", link: "#" },
+// ];
 
-const RelatedCard = () => {
+const RelatedCard = ({ data = [], onCardClick }) => {
   return (
     <div className=' py-10'>
          <div className="font-cormorant text-center">
@@ -53,13 +53,15 @@ const RelatedCard = () => {
           }}
           className="packages-box-slider"
         >
-          {safariData.map((safari) => (
-            <SwiperSlide key={safari.id}>
-              <div className="safari-card-iteam">
+          {data.map((item) => (
+            <SwiperSlide key={item._id}>
+              <div
+                className="safari-card-iteam"
+                onClick={() => onCardClick(item.slug)}
+              >
                 <SafariPackBox
-                  image={safari.image}
-                  title={safari.title}
-                  link={safari.link}
+                  image={item.landingImage}
+                  title={item.name}
                 />
               </div>
             </SwiperSlide>
@@ -70,5 +72,58 @@ const RelatedCard = () => {
     </div>
   )
 }
+
+
+
+
+// const RelatedCard = ({ data = [], onCardClick }) => {
+//   if (!data.length) return null;
+
+//   return (
+//     <div className="py-10">
+//       <div className="font-cormorant text-center">
+//         <h2 className="text-3xl text-[#a89f82] uppercase">
+//           Related Accommodation
+//         </h2>
+
+//         <h5 className="text-6xl mb-10 mt-4 capitalize text-[#636363] font-normal">
+//           Check in to your other property
+//         </h5>
+//       </div>
+
+//       <div className="home-africa-pack">
+//         <Swiper
+//           modules={[Navigation, Pagination]}
+//           spaceBetween={20}
+//           slidesPerView={3}
+//           navigation
+//           loop
+//           pagination={{ type: "fraction" }}
+//           breakpoints={{
+//             0: { slidesPerView: 1 },
+//             600: { slidesPerView: 2 },
+//             1000: { slidesPerView: 3 },
+//           }}
+//         >
+//           {data.map((item) => (
+//             <SwiperSlide key={item._id}>
+//               <div
+//                 className="cursor-pointer"
+//                 onClick={() => onCardClick(item.slug)}
+//               >
+//                 <SafariPackBox
+//                   image={item.bannerImages?.[0]}
+//                   title={item.name}
+//                   link="#"
+//                 />
+//               </div>
+//             </SwiperSlide>
+//           ))}
+//         </Swiper>
+//       </div>
+//     </div>
+//   );
+// };
+
 
 export default RelatedCard

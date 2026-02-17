@@ -1,25 +1,125 @@
+// const Filters = ({
+//   destinations,
+//   selectedDestination,
+//   setSelectedDestination,
+//   selectedPriceRange,
+//   setSelectedPriceRange,
+//   sortBy,
+//   setSortBy,
+//   onReset,
+// }) => {
+//   return (
+//     <div className="">
+//       <div className=" flex flex-wrap gap-4 mb-8 items-center justify-between">
+//         <div className="flex flex-wrap gap-4 items-center font-quicksand">
+//           {/* Destination Filter */}
+
+//           <p className=" mt-3 font-quicksand font-semibold uppercase tracking-wider text-[#aaa086] ">
+//             Filter by:
+//           </p>
+
+//           <select
+//             className="border font-quicksand rounded-sm px-3 py-3 bg-white text-[#aaa086]"
+//             value={selectedDestination}
+//             onChange={(e) => setSelectedDestination(e.target.value)}
+//           >
+//             <option value="">Destinations</option>
+//             {destinations.map((dest) => (
+//               <option key={dest} value={dest}>
+//                 {dest}
+//               </option>
+//             ))}
+//           </select>
+
+//           <select
+//             className="border rounded-sm px-3 py-3 bg-white text-[#aaa086]"
+//             value={selectedDestination}
+//             onChange={(e) => setSelectedDestination(e.target.value)}
+//           >
+//             <option value="">Experiences</option>
+//             {destinations.map((dest) => (
+//               <option key={dest} value={dest}>
+//                 {dest}
+//               </option>
+//             ))}
+//           </select>
+
+//           {/* Price Range */}
+//           <select
+//             className="border rounded-sm px-3 py-3 bg-white text-[#aaa086]"
+//             value={selectedPriceRange}
+//             onChange={(e) => setSelectedPriceRange(e.target.value)}
+//           >
+//             <option value="">Price Range (Per Person)</option>
+//             <option value="below10k">Below $10,000</option>
+//             <option value="10kto15k">$10,000 - $15,000</option>
+//             <option value="above15k">Above $15,000</option>
+//           </select>
+//         </div>
+
+//         {/* Sort */}
+//         <div className="flex items-center gap-2">
+//           <p className="mt-3 font-quicksand font-semibold uppercase tracking-wider text-[#aaa086]">
+//             Sort By
+//           </p>
+//           <select
+//             className=" font-quicksand border rounded-sm px-3 py-3 bg-white text-[#aaa086]"
+//             value={sortBy}
+//             onChange={(e) => setSortBy(e.target.value)}
+//           >
+//             <option value="">Iconic</option>
+//             <option value="priceAsc">Price: Low to High</option>
+//             <option value="priceDesc">Price: High to Low</option>
+//             <option value="nameAsc">Name: A–Z</option>
+//           </select>
+//         </div>
+//       </div>
+
+//       <div className="flex items-center justify-between mb-4 font-quicksand">
+//         <div className="flex items-center gap-2">
+//           <button className="bg-[#aaa086] text-white text-sm px-4 py-2 rounded-md">
+//             Safaris
+//           </button>
+//           <button onClick={onReset} className="text-sm px-4 py-2 rounded-md">
+//             Reset
+//           </button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Filters;
+
+import { useState } from "react";
+import { RiResetLeftFill } from "react-icons/ri";
+
 const Filters = ({
   destinations,
+  regions,
   selectedDestination,
   setSelectedDestination,
+  selectedRegion,
+  setSelectedRegion,
   selectedPriceRange,
   setSelectedPriceRange,
   sortBy,
   setSortBy,
   onReset,
 }) => {
-  return (
-    <div className="">
-      <div className=" flex flex-wrap gap-4 mb-8 items-center justify-between">
-        <div className="flex flex-wrap gap-4 items-center font-quicksand">
-          {/* Destination Filter */}
+  const [spinning, setSpinning] = useState(false);
 
-          <p className=" mt-3 font-quicksand font-semibold uppercase tracking-wider text-[#aaa086] ">
+  return (
+    <div>
+      <div className="flex flex-wrap gap-4 mb-8 items-center justify-between">
+        <div className="flex flex-wrap gap-4 items-center font-quicksand">
+          <p className="mt-3 font-semibold uppercase tracking-wider text-[#aaa086]">
             Filter by:
           </p>
 
+          {/* DESTINATION DROPDOWN */}
           <select
-            className="border font-quicksand rounded-sm px-3 py-3 bg-white text-[#aaa086]"
+            className="border rounded-sm px-3 py-3 bg-white text-[#aaa086]"
             value={selectedDestination}
             onChange={(e) => setSelectedDestination(e.target.value)}
           >
@@ -31,20 +131,22 @@ const Filters = ({
             ))}
           </select>
 
+          {/* REGION DROPDOWN */}
           <select
             className="border rounded-sm px-3 py-3 bg-white text-[#aaa086]"
-            value={selectedDestination}
-            onChange={(e) => setSelectedDestination(e.target.value)}
+            value={selectedRegion}
+            onChange={(e) => setSelectedRegion(e.target.value)}
+            disabled={!selectedDestination}
           >
-            <option value="">Experiences</option>
-            {destinations.map((dest) => (
-              <option key={dest} value={dest}>
-                {dest}
+            <option value="">Regions</option>
+            {regions.map((region) => (
+              <option key={region} value={region}>
+                {region}
               </option>
             ))}
           </select>
 
-          {/* Price Range */}
+          {/* PRICE RANGE
           <select
             className="border rounded-sm px-3 py-3 bg-white text-[#aaa086]"
             value={selectedPriceRange}
@@ -54,16 +156,16 @@ const Filters = ({
             <option value="below10k">Below $10,000</option>
             <option value="10kto15k">$10,000 - $15,000</option>
             <option value="above15k">Above $15,000</option>
-          </select>
+          </select> */}
         </div>
 
-        {/* Sort */}
+        {/* SORT */}
         <div className="flex items-center gap-2">
-          <p className="mt-3 font-quicksand font-semibold uppercase tracking-wider text-[#aaa086]">
+          <p className="mt-3 font-semibold uppercase tracking-wider text-[#aaa086]">
             Sort By
           </p>
           <select
-            className=" font-quicksand border rounded-sm px-3 py-3 bg-white text-[#aaa086]"
+            className="border rounded-sm px-3 py-3 bg-white text-[#aaa086]"
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
           >
@@ -75,16 +177,40 @@ const Filters = ({
         </div>
       </div>
 
-      <div className="flex items-center justify-between mb-4 font-quicksand">
+      {/* <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <button className="bg-[#aaa086] text-white text-sm px-4 py-2 rounded-md">
             Safaris
           </button>
-          <button onClick={onReset} className="text-sm px-4 py-2 rounded-md">
-            Reset
+          <button
+            onClick={onReset}
+            className="text-sm px-4 py-2 rounded-md cursor-pointer"
+          >
+            Reset <RiResetLeftFill />
+
           </button>
         </div>
-      </div>
+      </div> */}
+
+      <button
+        onClick={() => {
+          setSpinning(true);
+          onReset();
+
+          // Stop spin after animation completes
+          setTimeout(() => {
+            setSpinning(false);
+          }, 600);
+        }}
+        className="flex items-center gap-2 mb-4 text-sm px-4 py-2 rounded-md border border-[#aaa086] text-[#aaa086] hover:bg-[#aaa086] hover:text-white transition-all duration-300"
+      >
+        Reset
+        <RiResetLeftFill
+          className={`text-lg transition-transform duration-500  ${
+            spinning ? "rotate-[360deg]" : ""
+          }`}
+        />
+      </button>
     </div>
   );
 };

@@ -194,14 +194,14 @@ const SafariItinerary = () => {
     },
   ];
 
-  const { id } = useParams(); // 👈 get trip id from URL
+  const { slug } = useParams(); // 👈 get trip id from URL
   const [trip, setTrip] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchTrip = async () => {
       try {
-        const res = await axiosInstance.get(`/api/trips/${id}`); // 👈 Adjust your backend route if needed
+        const res = await axiosInstance.get(`/api/trips/slug/${slug}`); // 👈 Adjust your backend route if needed
         setTrip(res.data);
       } catch (err) {
         console.error("Failed to load trip:", err);
@@ -211,7 +211,7 @@ const SafariItinerary = () => {
     };
 
     fetchTrip();
-  }, [id]);
+  }, [slug]);
 
   if (loading) return <p className="text-center py-10">Loading trip...</p>;
   if (!trip) return <p className="text-center py-10">Trip not found.</p>;

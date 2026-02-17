@@ -2,12 +2,16 @@
 
 import { useState } from "react";
 import { Heart } from "lucide-react";
+import { Link } from "react-router-dom";
 
-const SafariCard = ({ safari }) => {
+const SafariCard = ({ safari,link }) => {
   const [liked, setLiked] = useState(false);
 
   return (
     <div className="relative rounded-sm overflow-hidden shadow-md hover:shadow-lg transition-all  duration-300">
+      <Link to={link}>
+      
+      
       <img
         src={safari.image}
         alt={safari.title}
@@ -26,7 +30,7 @@ const SafariCard = ({ safari }) => {
 
       {/* 🌙 Nights Badge */}
       <div className="absolute top-4 font-quicksand right-4 bg-[#aaa086] text-white text-sm font-semibold px-3 py-1 rounded-md">
-        {safari.nights} Nights
+        {safari.nights} {safari.labeldata}
       </div>
 
       {/* 🖤 Bottom Overlay */}
@@ -36,9 +40,10 @@ const SafariCard = ({ safari }) => {
         </div>
         <div className="mb-4 font-cormorant text-3xl ">{safari.title}</div>
         <div className=" mt-1 font-quicksand">
-          Guide Price ${safari.price.toLocaleString()} Per Person
+          Per Person {safari.price.toLocaleString()} 
         </div>
       </div>
+      </Link>
     </div>
   );
 };

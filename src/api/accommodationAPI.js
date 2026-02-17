@@ -4,7 +4,7 @@ import axios from "axios";
 
 const API = axios.create({
   baseURL: "http://where-to-africa-safari-backend.manoramaseoservice.com/api/accommodation",
-  // baseURL: "http://localhost:8000/api/accommodation",
+  // baseURL: "http://localhost:8003/api/accommodation",
 
 });
 
@@ -12,6 +12,9 @@ export const createAccommodation = (formData) =>
   API.post("/", formData, { headers: { "Content-Type": "multipart/form-data" } });
 
 export const getAccommodations = () => API.get("/");
+export const getAccommodationBySlug = (slug) =>
+  API.get(`/slug/${slug}`);
+
 export const getAccommodationById = (id) => API.get(`/${id}`);
 export const deleteAccommodation = (id) => API.delete(`/${id}`);
 

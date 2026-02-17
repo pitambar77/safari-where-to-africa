@@ -1,42 +1,143 @@
-import { useEffect, useState } from "react";
-import safarisData from "../data/safaris.json";
+
+
+import { useEffect, useState, useMemo } from "react";
+import axios from "axios";
 import SafariCard from "../pages/Accomodation/LandingPage/SafariCard";
 import Filters from "./Filters";
 import Overview from "./Overview";
 
+
 const SafariList = () => {
-  const [filteredSafaris, setFilteredSafaris] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [destinationData, setDestinationData] = useState([]);
 
   const [selectedDestination, setSelectedDestination] = useState("");
+  const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedPriceRange, setSelectedPriceRange] = useState("");
   const [sortBy, setSortBy] = useState("");
 
+  const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 8;
 
-  // Extract unique destinations
-  const destinations = [...new Set(safarisData.map((s) => s.country))];
+  // =============================
+  // FETCH DESTINATIONS (WITH ACCOMMODATIONS INSIDE)
+  // =============================
+  useEffect(() => {
+    const fetchDestinations = async () => {
+      try {
+        const res = await axios.get(
+          "http://where-to-africa-safari-backend.manoramaseoservice.com/api/destinations",
+        );
+        setDestinationData(res.data || []);
+      } catch (error) {
+        console.log("Destination Fetch Error:", error);
+      }
+    };
+
+    fetchDestinations();
+  }, []);
+
+  // =============================
+  // DESTINATIONS DROPDOWN
+  // =============================
+
+
+  const destinations = useMemo(() => {
+    return destinationData
+      .filter((destination) =>
+        destination.regions?.some(
+          (region) => region.accommodations?.length > 0,
+        ),
+      )
+      .map((dest) => dest.name.trim());
+  }, [destinationData]);
 
   useEffect(() => {
-    let filtered = [...safarisData];
+    if (selectedDestination && !destinations.includes(selectedDestination)) {
+      setSelectedDestination("");
+    }
+  }, [destinations]);
 
-    // Destination filter
+  // =============================
+  // REGION DROPDOWN
+  // =============================
+ 
+
+  const regions = useMemo(() => {
+    if (!selectedDestination) return [];
+
+    const selectedDest = destinationData.find(
+      (d) => d.name.trim() === selectedDestination,
+    );
+
+    if (!selectedDest) return [];
+
+    return (
+      selectedDest.regions
+        ?.filter((region) => region.accommodations?.length > 0) // ✅ only regions with accommodations
+        .map((r) => r.name.trim()) || []
+    );
+  }, [selectedDestination, destinationData]);
+
+  useEffect(() => {
+    if (selectedRegion && !regions.includes(selectedRegion)) {
+      setSelectedRegion("");
+    }
+  }, [regions]);
+
+  // =============================
+  // EXTRACT ALL ACCOMMODATIONS
+  // =============================
+  const allAccommodations = useMemo(() => {
+    let result = [];
+
+    destinationData.forEach((destination) => {
+      destination.regions?.forEach((region) => {
+        region.accommodations?.forEach((acc) => {
+          result.push({
+            id: acc._id,
+            title: acc.name,
+            price: acc.pricePerPerson || "",
+            // parseFloat(acc.pricePerPerson?.replace(/[^0-9.]/g, "")) || 0,
+            nights: Number(acc.nightsStay ) || 0,
+            image: acc.landingImage || acc.bannerImages?.[0] || "",
+            slug: acc.slug,
+            destination: destination.name.trim(),
+            region: region.name.trim(),
+            labeldata:"Ratings"
+          });
+        });
+      });
+    });
+
+    return result;
+  }, [destinationData]);
+
+  // =============================
+  // FILTERING + SORTING
+  // =============================
+  const filteredSafaris = useMemo(() => {
+    let filtered = [...allAccommodations];
+
     if (selectedDestination) {
-      filtered = filtered.filter((s) => s.country === selectedDestination);
+      filtered = filtered.filter(
+        (item) => item.destination === selectedDestination,
+      );
     }
 
-    // Price filter
-    if (selectedPriceRange) {
-      if (selectedPriceRange === "below10k") {
-        filtered = filtered.filter((s) => s.price < 10000);
-      } else if (selectedPriceRange === "10kto15k") {
-        filtered = filtered.filter((s) => s.price >= 10000 && s.price <= 15000);
-      } else if (selectedPriceRange === "above15k") {
-        filtered = filtered.filter((s) => s.price > 15000);
-      }
+    if (selectedRegion) {
+      filtered = filtered.filter((item) => item.region === selectedRegion);
     }
 
-    // Sorting
+    if (selectedPriceRange === "below10k") {
+      filtered = filtered.filter((item) => item.price < 10000);
+    } else if (selectedPriceRange === "10kto15k") {
+      filtered = filtered.filter(
+        (item) => item.price >= 10000 && item.price <= 15000,
+      );
+    } else if (selectedPriceRange === "above15k") {
+      filtered = filtered.filter((item) => item.price > 15000);
+    }
+
     if (sortBy === "priceAsc") {
       filtered.sort((a, b) => a.price - b.price);
     } else if (sortBy === "priceDesc") {
@@ -45,86 +146,160 @@ const SafariList = () => {
       filtered.sort((a, b) => a.title.localeCompare(b.title));
     }
 
-    setFilteredSafaris(filtered);
-    setCurrentPage(1); // reset to first page when filters change
-  }, [selectedDestination, selectedPriceRange, sortBy]);
+    return filtered;
+  }, [
+    allAccommodations,
+    selectedDestination,
+    selectedRegion,
+    selectedPriceRange,
+    sortBy,
+  ]);
 
+  // =============================
+  // PAGINATION LOGIC
+  // =============================
   const totalPages = Math.ceil(filteredSafaris.length / cardsPerPage);
   const startIndex = (currentPage - 1) * cardsPerPage;
-  const currentCards = filteredSafaris.slice(startIndex, startIndex + cardsPerPage);
+  const currentCards = filteredSafaris.slice(
+    startIndex,
+    startIndex + cardsPerPage,
+  );
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedDestination, selectedRegion, selectedPriceRange, sortBy]);
 
   const handleReset = () => {
     setSelectedDestination("");
+    setSelectedRegion("");
     setSelectedPriceRange("");
     setSortBy("");
-    setFilteredSafaris(safarisData);
+    setCurrentPage(1);
   };
 
-  useEffect(() => {
-    setFilteredSafaris(safarisData);
-  }, []);
+  // =============================
+  // ADVANCED PAGINATION
+  // =============================
+  const renderPagination = () => {
+    if (totalPages <= 1) return null;
 
+    const pages = [];
+    const maxVisible = 3;
+    const half = Math.floor(maxVisible / 2);
+
+    let start = Math.max(2, currentPage - half);
+    let end = Math.min(totalPages - 1, currentPage + half);
+
+    if (currentPage <= half + 1) {
+      start = 2;
+      end = Math.min(1 + maxVisible, totalPages - 1);
+    }
+
+    if (currentPage >= totalPages - half) {
+      start = Math.max(totalPages - maxVisible, 2);
+      end = totalPages - 1;
+    }
+
+    pages.push(1);
+
+    if (start > 2) pages.push("leftDots");
+
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
+
+    if (end < totalPages - 1) pages.push("rightDots");
+
+    if (totalPages > 1) pages.push(totalPages);
+
+    return pages.map((p, index) => {
+      if (p === "leftDots" || p === "rightDots") {
+        return (
+          <span key={index} className="px-2 text-gray-500">
+            ...
+          </span>
+        );
+      }
+
+      return (
+        <button
+          key={index}
+          onClick={() => setCurrentPage(p)}
+          className={`w-8 h-8 rounded-md ${
+            currentPage === p
+              ? "bg-[#aaa086] text-white"
+              : "bg-white border text-[#aaa086]"
+          }`}
+        >
+          {p}
+        </button>
+      );
+    });
+  };
+
+  // =============================
+  // RENDER
+  // =============================
   return (
-    <div className=" pb-16 bg-[#fbf6ea] ">
-        <Overview
-         title='Welcome To Africa'
-         subtitle='African landscapes parading with the circle of life promise magical moments unlike any you have imagined before. You will find them...'
-         description='Here at Newmark, we have an incredible variety of restaurants and bars across our beautiful properties, from ocean-side dining to city-chic Asian tapas and whimsical bougainvillea-clad courtyards. Find out more information below'
-         />
-        <div className=" px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28">
-
-    
-      {/* Header */}
-     
-
-      {/* Filters */}
-      <Filters
-        destinations={destinations}
-        selectedDestination={selectedDestination}
-        setSelectedDestination={setSelectedDestination}
-        selectedPriceRange={selectedPriceRange}
-        setSelectedPriceRange={setSelectedPriceRange}
-        sortBy={sortBy}
-        setSortBy={setSortBy}
-        onReset={handleReset}
+    <div className="pb-16 bg-[#fbf6ea]">
+      <Overview
+        title="Signature Safari Stays"
+        subtitle="Handpicked lodges and camps across Africa are designed for comfort, location advantage, privacy, and an authentic connection with the surrounding landscapes."
+        description="Accommodation defines the tone of your safari. Where to Africa collaborates with distinguished lodges and camps that offer privacy, comfort, thoughtful service, and a strong sense of place."
       />
 
-      {/* Cards Grid */}
-      {currentCards.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {currentCards.map((safari) => (
-            <SafariCard key={safari.id} safari={safari} />
-          ))}
-        </div>
-      ) : (
-        <p className="text-center text-gray-600 mt-10">No safaris found.</p>
-      )}
+      <div className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28">
+        <Filters
+          destinations={destinations}
+          regions={regions}
+          selectedDestination={selectedDestination}
+          setSelectedDestination={setSelectedDestination}
+          selectedRegion={selectedRegion}
+          setSelectedRegion={setSelectedRegion}
+          selectedPriceRange={selectedPriceRange}
+          setSelectedPriceRange={setSelectedPriceRange}
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+          onReset={handleReset}
+        />
 
-      {/* Pagination */}
-      <div className="flex justify-center items-center mt-12 gap-2">
-        {[...Array(totalPages)].map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrentPage(i + 1)}
-            className={`w-8 h-8 rounded-md ${
-              currentPage === i + 1
-                ? "bg-[#aaa086] text-white"
-                : "bg-white border text-[#aaa086] hover:bg-gray-100"
-            }`}
-          >
-            {i + 1}
-          </button>
-        ))}
-        {currentPage < totalPages && (
-          <button
-            onClick={() => setCurrentPage(currentPage + 1)}
-            className="px-4 font-quicksand py-2 bg-[#aaa086] rounded-md text-gray-700 hover:bg-gray-200"
-          >
-            Next Page
-          </button>
-        )}
-      </div>
+        {/* Cards */}
+        {currentCards.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {currentCards.map((item) => (
+              <SafariCard key={item.id} safari={item} link={`/accommodation/${item.slug}`} />
+            ))}
           </div>
+        ) : (
+          <p className="text-center text-gray-600 mt-10">
+            No accommodations found.
+          </p>
+        )}
+
+        {/* Pagination */}
+        <div className="flex justify-center items-center mt-12 gap-2 flex-wrap">
+          {currentPage > 1 && (
+            <button
+              onClick={() => setCurrentPage(currentPage - 1)}
+              className="px-4 py-2 bg-white border text-[#aaa086] rounded-md"
+            >
+              Prev
+            </button>
+          )}
+
+          {renderPagination()}
+
+          {currentPage < totalPages && (
+            <button
+              onClick={() => setCurrentPage(currentPage + 1)}
+              className="px-4 py-2 bg-[#aaa086] text-white rounded-md"
+            >
+              Next
+            </button>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

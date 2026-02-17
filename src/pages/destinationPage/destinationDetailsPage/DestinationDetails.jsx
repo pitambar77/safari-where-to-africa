@@ -704,14 +704,14 @@ const DestinationDetails = () => {
         <AccommodationGrid
           title="Overnight Accommodations"
           data={accommodations.map((acc) => ({
-            id: acc._id,
+            id: acc.slug,
             image: acc.bannerImages?.[0],
             nights: `Nights ${acc.nightsStay || ""}`,
             title: acc.name,
             location: acc.location,
             tag: acc.accommodationType,
           }))}
-          onCardClick={(id) => navigate(`/accommodation/${id}`)}
+          onCardClick={(slug) => navigate(`/accommodation/${slug}`)}
         />
       )}
 

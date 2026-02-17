@@ -22,12 +22,12 @@ import AboutUs from "./pages/AboutUs/AboutUs";
 import ImpactPage from "./pages/Impact/ImpactPage";
 import ViewItineraries from "./pages/ViewItineraries";
 import BotswanaLandingPage from "./pages/Botswana/BotswanaLandingPage";
-import NamibiaLanding from "./pages/Namibia/NamibiaLanding";
-import ZimbabweLanding from "./pages/Zimbabwe/ZimbabweLanding";
-import ZambiaLanding from "./pages/Zambia/ZambiaLanding";
-import MozambiqueLanding from "./pages/Mozambique/MozambiqueLanding";
-import KenyaLanding from "./pages/Kenya/KenyaLanding";
-import TanzaniaLanding from "./pages/Tanzania/TanzaniaLanding";
+// import NamibiaLanding from "./pages/Namibia/NamibiaLanding";
+// import ZimbabweLanding from "./pages/Zimbabwe/ZimbabweLanding";
+// import ZambiaLanding from "./pages/Zambia/ZambiaLanding";
+// import MozambiqueLanding from "./pages/Mozambique/MozambiqueLanding";
+// import KenyaLanding from "./pages/Kenya/KenyaLanding";
+// import TanzaniaLanding from "./pages/Tanzania/TanzaniaLanding";
 import Icondisplay from "./components/Icondisplay";
 import AccommodationAdmin from "./pages/AccommodationAdmin";
 
@@ -42,6 +42,9 @@ import TravelGuideDetailsPage from "./pages/TravelGuide/TravelGuideDetailsPage";
 import TravelguideForm from "./pages/TravelGuide/TravelguideForm";
 import TravelguideList from "./pages/TravelGuide/TravelguideList";
 import TravelguideDetails from "./pages/TravelGuide/TravelguideDetails";
+import PackageLanding from "./pages/safariItinerary/PackageLanding";
+import ExperienceLanding from "./pages/experiencePage/ExperienceLanding";
+import ContactUs from "./pages/ContactUs/ContactUs";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -49,31 +52,38 @@ const router = createBrowserRouter(
       {/* 🌍 Main Website Routes */}
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="south-africa" element={<Experience />} />
+        {/* <Route path="south-africa" element={<Experience />} /> */}
         <Route
-          path="/destinations/:destinationSlug/:regionSlug"
+          path="/:destinationSlug/:regionSlug"
           element={<DestinationDetails />}
         />
-        <Route path="accomodation-landing" element={<AccomodationLanding />} />
+        <Route path="accommodations" element={<AccomodationLanding />} />
+        <Route path="packages" element={<PackageLanding />} />
+        <Route path="experiences" element={<ExperienceLanding />} />
+        <Route path="contact-us" element={<ContactUs />} />
+
+
+
         <Route path="about-us" element={<AboutUs />} />
         <Route path="conservation" element={<ImpactPage />} />
         <Route path="accommodation-admin" element={<AccommodationAdmin />} />
         <Route path="icondisplay" element={<Icondisplay />} />
         <Route path="viewitinery" element={<ViewItineraries />} />
-        <Route path="namibia" element={<NamibiaLanding />} />
+        {/* <Route path="namibia" element={<NamibiaLanding />} />
         <Route path="zimbabwe" element={<ZimbabweLanding />} />
         <Route path="zambia" element={<ZambiaLanding />} />
         <Route path="mozambique" element={<MozambiqueLanding />} />
         <Route path="kenya" element={<KenyaLanding />} />
-        <Route path="tanzania" element={<TanzaniaLanding />} />
+        <Route path="tanzania" element={<TanzaniaLanding />} /> */}
         <Route path="travel-guide" element={<TravelGuideDetailsPage />} />
 
         {/* Dynamic destination & details */}
-        <Route path="/destination/:slug" element={<BotswanaLandingPage />} />
-        <Route path="/trip/:id" element={<SafariItinerary />} />
-        <Route path="/accommodation/:id" element={<AccomodationDetails />} />
-        <Route path="/experience/:id" element={<ExperienceDetails />} />
-        <Route path="/blog/:slug" element={<TravelguideDetails />} />
+        <Route path="/:slug" element={<BotswanaLandingPage />} />
+        <Route path="/package/:slug" element={<SafariItinerary />} />
+        {/* <Route path="/accommodation/:id" element={<AccomodationDetails />} /> */}
+        <Route path="/accommodation/:slug" element={<AccomodationDetails />} />
+        <Route path="/experience/:slug" element={<ExperienceDetails />} />
+        <Route path="/travel-guide/:slug" element={<TravelguideDetails />} />
       </Route>
 
       {/* 🧭 Admin Dashboard Routes */}

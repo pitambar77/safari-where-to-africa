@@ -252,11 +252,11 @@
 //       data={accommodations}
 //       onCardClick={''}
 //     />
-    // <TravelguideSection
-    //   heading="Journey Collection"
-    //   subheading="On Safari with Where to Africa"
-    //   journeys={journeys}
-    // />
+// <TravelguideSection
+//   heading="Journey Collection"
+//   subheading="On Safari with Where to Africa"
+//   journeys={journeys}
+// />
 //     </div>
 //   );
 // };
@@ -266,6 +266,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getDestinationBySlug } from "../../api/destinationAPI.js";
+import axiosInstance from "../../api/axiosInstance";
 
 import Banner from "../../components/Banner";
 import Overview from "../../components/Overview";
@@ -285,7 +286,8 @@ const travelguide = [
     link: "/travel-guide",
   },
   {
-    image: "https://khwaiexpeditionscamp.com/wp-content/uploads/2024/06/The-African-Elephant.jpg",
+    image:
+      "https://khwaiexpeditionscamp.com/wp-content/uploads/2024/06/The-African-Elephant.jpg",
     title: "When's the Best Time to Safari",
     description:
       "Every season brings something special, so there's truly no 'best' time – just the time that's right for you.",
@@ -314,6 +316,7 @@ const BotswanaLandingPage = () => {
   const [destination, setDestination] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [travelGuides, setTravelGuides] = useState([]);
 
   const navigate = useNavigate();
 
@@ -335,30 +338,53 @@ const BotswanaLandingPage = () => {
     fetchDestination();
   }, [slug]);
 
-  console.log(destination)
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const { data } = await axiosInstance.get("/api/blog");
+
+        if (!destination?.name) return;
+
+        const filtered = data.filter(
+          (blog) =>
+            blog.category?.trim().toLowerCase() ===
+            destination.name?.trim().toLowerCase(),
+        );
+
+        setTravelGuides(filtered);
+      } catch (error) {
+        console.error("Failed to fetch blogs:", error);
+      }
+    };
+
+    if (destination?.name) {
+      fetchBlogs();
+    }
+  }, [destination]);
 
   if (loading)
     return <p className="text-center py-20 text-gray-600">Loading...</p>;
   if (error) return <p className="text-center py-20 text-red-500">{error}</p>;
   if (!destination) return <p className="text-center py-20">No data found.</p>;
 
-  
+  if (!destination) return <p className="text-center py-20">No data found.</p>;
 
+  // ✅ Destructure the fields properly from the destination object
+  const { hero, regions, trips, experiences, accommodations } = destination;
 
-if (!destination) return <p className="text-center py-20">No data found.</p>;
+  // ✅ Flatten region-based nested data
+  const allTrips = regions?.flatMap((region) => region.trips || []) || [];
+  const allExperiences =
+    regions?.flatMap((region) => region.experiences || []) || [];
+  const allAccommodations =
+    regions?.flatMap((region) => region.accommodations || []) || [];
 
-// ✅ Destructure the fields properly from the destination object
-const { hero, regions, trips, experiences, accommodations } = destination;
+  // ✅ Flatten region-based blogs (travel guides)
+  const allTravelGuides =
+    regions?.flatMap((region) => region.blogs || []) || [];
 
-// ✅ Flatten region-based nested data
-const allTrips = regions?.flatMap((region) => region.trips || []) || [];
-const allExperiences =
-  regions?.flatMap((region) => region.experiences || []) || [];
-const allAccommodations =
-  regions?.flatMap((region) => region.accommodations || []) || [];
-
-// ✅ Handle experiences data safely
-const experienceData = experiences?.[0];
+  // ✅ Handle experiences data safely
+  const experienceData = experiences?.[0];
 
   const journeys = [
     {
@@ -403,7 +429,7 @@ const experienceData = experiences?.[0];
               name: region.name,
               image: region.image,
               alt: region.description,
-              path: `/destinations/${slug}/${region.slug}`,
+              path: `/${slug}/${region.slug}`,
             }))}
             title=""
             buttonText={`More ${destination?.name || "Destination"} Areas`}
@@ -447,23 +473,22 @@ const experienceData = experiences?.[0];
       )} */}
 
       {allTrips?.length > 0 && (
-  <PackageCardGridSection
-    title="Your Journeys"
-    subtitle={`${destination?.name || "Botswana"} Trips to Inspire`}
-    data={allTrips.map((trip) => ({
-      id: trip._id,
-      title: trip.title,
-      country: destination?.name,
-      image: trip.image,
-      price: trip.price,
-      nights: trip.duration,
-    }))}
-    CardComponent={SafariCard}
-    onCardClick={(id) => navigate(`/trip/${id}`)}
-    emptyMessage="No trips found."
-  />
-)}
-
+        <PackageCardGridSection
+          title="Your Journeys"
+          subtitle={`${destination?.name || "Botswana"} Trips to Inspire`}
+          data={allTrips.map((trip) => ({
+            id: trip.slug, // 👈 IMPORTANT CHANGE
+            title: trip.title,
+            country: destination?.name,
+            image: trip.image,
+            price: trip.price,
+            nights: trip.duration,
+          }))}
+          CardComponent={SafariCard}
+          onCardClick={(slug) => navigate(`/package/${slug}`)}
+          emptyMessage="No trips found."
+        />
+      )}
 
       {/* ===== Experience Carousel ===== */}
       {/* {experienceData && experienceData.gallery?.images?.length > 0 && (
@@ -494,21 +519,20 @@ const experienceData = experiences?.[0];
       )} */}
 
       {allExperiences?.length > 0 && (
-  <ExperienceCarousel
-    title="Guest Favorites"
-    description={
-      allExperiences[0]?.gallery?.description || "Explore stunning experiences"
-    }
-    data={allExperiences.map((exp) => ({
-      id: exp._id,
-      image: exp.bannerImage,
-      title: exp.bannerTitle,
-    }))}
-    onCardClick={(id) => navigate(`/experience/${id}`)}
-  />
-)}
-
-
+        <ExperienceCarousel
+          title="Guest Favorites"
+          description={
+            allExperiences[0]?.gallery?.description ||
+            "Explore stunning experiences"
+          }
+          data={allExperiences.map((exp) => ({
+            id: exp.slug,
+            image: exp.bannerImage,
+            title: exp.bannerTitle,
+          }))}
+          onCardClick={(slug) => navigate(`/experience/${slug}`)}
+        />
+      )}
 
       {/* ===== Accommodations Section ===== */}
       {/* {accommodations?.length > 0 && (
@@ -527,20 +551,21 @@ const experienceData = experiences?.[0];
       )} */}
 
       {allAccommodations?.length > 0 && (
-  <AccommodationGrid
-    title="Overnight Accommodations"
-    data={allAccommodations.map((acc) => ({
-      id: acc._id,
-      image: acc.bannerImages?.[0],
-      nights: `Nights ${acc.nightsStay || ""}`,
-      title: acc.name,
-      location: acc.location,
-      tag: acc.accommodationType,
-    }))}
-    onCardClick={(id) => navigate(`/accommodation/${id}`)}
-  />
-)}
-
+        <AccommodationGrid
+          title="Overnight Accommodations"
+          data={allAccommodations
+             .slice(0, 12) // ✅ limit to 12
+            .map((acc) => ({
+            id: acc.slug,
+            image: acc.bannerImages?.[0],
+            nights: `Nights ${acc.nightsStay || ""}`,
+            title: acc.name,
+            location: acc.location,
+            tag: acc.accommodationType,
+          }))}
+          onCardClick={(slug) => navigate(`/accommodation/${slug}`)}
+        />
+      )}
 
       {/* ===== Travel Guide / Journeys Section ===== */}
       {/* {journeys.length > 0 && (
@@ -551,11 +576,27 @@ const experienceData = experiences?.[0];
         />
       )} */}
 
-          <TravelguideSection
+      {travelGuides.length > 0 && (
+        <TravelguideSection
+          heading="Journey Collection"
+          subheading={`Travel Insights for ${destination?.name}`}
+          journeys={travelGuides.map((blog) => ({
+            image: blog.thumbnail,
+            title: blog.title,
+            description:
+              blog.sections
+                ?.find((s) => s.type === "paragraph")
+                ?.text?.slice(0, 100) + "...",
+            link: `/travel-guide/${blog.slug}`,
+          }))}
+        />
+      )}
+
+      {/* <TravelguideSection
       heading="Journey Collection"
       subheading="On Safari with Where to Africa"
       journeys={travelguide}
-    />
+    /> */}
     </div>
   );
 };

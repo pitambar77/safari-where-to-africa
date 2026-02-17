@@ -6,7 +6,6 @@ import logo from "../assets/whereto-logo.webp";
 
 import { getAllDestinations } from "../api/destinationAPI.js"; // ✅ use this
 
-
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -20,12 +19,11 @@ const Header = () => {
   //    { name: "Namibia", path: "/namibia" },
   //       { name: "Zimbabwe", path: "/zimbabwe" },
   //    { name: "Zambia", path: "/zambia" },
-  //    { name: "Mozambique", path: "/mozambique" },   
+  //    { name: "Mozambique", path: "/mozambique" },
   //   { name: "Kenya", path: "/kenya" },
   //   { name: "Tanzania", path: "/tanzania" },
   // ];
 
- 
   useEffect(() => {
     const fetchDestinations = async () => {
       try {
@@ -92,7 +90,6 @@ const Header = () => {
                 />
               </button>
 
-         
               <AnimatePresence>
                 {isOpen && (
                   <motion.ul
@@ -102,18 +99,17 @@ const Header = () => {
                     transition={{ duration: 0.2 }}
                     className="absolute left-0 top-full mt-0 w-56 bg-white pt-2 rounded-lg  z-50"
                   >
-                  
                     {destinations.map((d) => (
-                <li key={d._id}>
-                  <Link
-                    to={`/destination/${d.slug}`}
-                     onClick={() => setIsOpen(false)}
-                    className="block px-5 py-2.5 hover:bg-[#f25922]/10 hover:text-[#f25922] transition-colors"
-                  >
-                    {d.name}
-                  </Link>
-                </li>
-              ))}
+                      <li key={d._id}>
+                        <Link
+                          to={`/${d.slug}`}
+                          onClick={() => setIsOpen(false)}
+                          className="block px-5 py-2.5 hover:bg-[#f25922]/10 hover:text-[#f25922] transition-colors"
+                        >
+                          {d.name}
+                        </Link>
+                      </li>
+                    ))}
                   </motion.ul>
                 )}
               </AnimatePresence>
@@ -137,22 +133,40 @@ const Header = () => {
           </div> */}
 
             {/* Other Nav Items */}
-            <Link to="/journey" className="hover:text-[#f25922] transition-colors">
+            <Link
+              to="/packages"
+              className="hover:text-[#f25922] transition-colors"
+            >
               Journey
             </Link>
-            <Link to="/retreats" className="hover:text-[#f25922] transition-colors">
+            <Link
+              to="/accommodations"
+              className="hover:text-[#f25922] transition-colors"
+            >
               Retreats
             </Link>
-            <Link to="/experiences" className="hover:text-[#f25922] transition-colors">
+            <Link
+              to="/experiences"
+              className="hover:text-[#f25922] transition-colors"
+            >
               Experiences
             </Link>
-            <Link to="/about-us" className="hover:text-[#f25922] transition-colors">
+            <Link
+              to="/about-us"
+              className="hover:text-[#f25922] transition-colors"
+            >
               About Us
             </Link>
-            <Link to="/blogs" className="hover:text-[#f25922] transition-colors">
+            <Link
+              to="#"
+              className="hover:text-[#f25922] transition-colors"
+            >
               Blogs
             </Link>
-            <Link to="/conservation" className="hover:text-[#f25922] transition-colors">
+            <Link
+              to="/conservation"
+              className="hover:text-[#f25922] transition-colors"
+            >
               Conservation
             </Link>
           </nav>
@@ -160,7 +174,7 @@ const Header = () => {
           {/* Right Buttons */}
           <div className="flex items-center space-x-3">
             <Link
-              to="/contact"
+              to="/contact-us"
               className="hidden md:inline-block text-sm font-quicksand uppercase bg-[#aaa086] border border-[#aaa086] text-white rounded-md px-4 py-2 hover:bg-[#f25922] transition-colors"
             >
               Contact Us
@@ -188,8 +202,6 @@ const Header = () => {
 };
 
 export default Header;
-
-
 
 // // components/Header.jsx
 // import { useEffect, useState } from "react";
