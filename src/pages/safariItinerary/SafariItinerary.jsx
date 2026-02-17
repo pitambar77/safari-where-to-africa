@@ -223,12 +223,11 @@ const SafariItinerary = () => {
           <div className=" font-cormorant text-center ">
             <h2 className=" text-[#aaa086] text-[24px] uppercase">
               {trip.subtitle}
-            
             </h2>
             <div className=" max-w-3xl mx-auto mt-4">
               <h5 className=" text-[64px] font-medium text-center leading-[1.2] text-[#686868]">
                 {/* Wildlife Odyssey: South Africa, Botswana & Zimbabwe */}
-                 {trip.title}
+                {trip.title}
               </h5>
             </div>
             <p className=" max-w-xl mx-auto mt-4 mb-10 tracking-wide font-quicksand text-[#686868] text-lg capitalize">
@@ -255,7 +254,7 @@ const SafariItinerary = () => {
                 From (Per Person)
               </p>
               <p className="text-2xl font-quicksand text-[#686868]">
-                {trip.price} 
+                {trip.price}
               </p>
             </div>
 
@@ -302,8 +301,19 @@ const SafariItinerary = () => {
           subtitle={trip.overviewSubTitle}
           description={trip.overviewDescription}
         />
-        <div className=" max-w-5xl mx-auto pb-16 ">
+        {/* <div className=" max-w-5xl mx-auto pb-16 ">
           <img src={map} alt="" className="w-full" />
+        </div> */}
+
+        <div className="max-w-5xl mx-auto pb-16">
+          {trip.link ? (
+            <div
+              className="w-full h-[800px]"
+              dangerouslySetInnerHTML={{ __html: trip.link }}
+            />
+          ) : (
+            <p className="text-center text-gray-500">Map not available</p>
+          )}
         </div>
       </div>
       <TripHighlights highlights={trip.tripHighlights} />
@@ -312,7 +322,10 @@ const SafariItinerary = () => {
       <Itinerary data={trip.itinerary} title="" />
 
       <div className=" py-10">
-        <AccordionSection aboutBooking={trip.aboutBooking} requirements={trip.requirements} />
+        <AccordionSection
+          aboutBooking={trip.aboutBooking}
+          requirements={trip.requirements}
+        />
       </div>
 
       <JourneysCarousel />
