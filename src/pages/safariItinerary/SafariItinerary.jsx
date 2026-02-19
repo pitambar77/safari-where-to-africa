@@ -9,6 +9,8 @@ import Itinerary from "./itinerary/Itinerary";
 import itinary from "../../assets/itinary-banner-2.webp";
 import { useParams } from "react-router-dom";
 import axiosInstance from "../../api/axiosInstance";
+import ItinenaryForm from "../../components/ItinenaryForm";
+import IncludeExl from "./IncludeExl";
 
 const SafariItinerary = () => {
   const itineraryData = [
@@ -197,6 +199,7 @@ const SafariItinerary = () => {
   const { slug } = useParams(); // 👈 get trip id from URL
   const [trip, setTrip] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [openForm, setOpenForm] = useState(false);
 
   useEffect(() => {
     const fetchTrip = async () => {
@@ -281,7 +284,7 @@ const SafariItinerary = () => {
             {/* Cities & Landmarks */}
             <div className="text-center md:border-l md:border-gray-300 md:pl-8 max-w-xs">
               <p className="uppercase text-xl tracking-wide font-medium text-[#9a8f70] mb-4">
-                Places to Visi
+                Places to Visit
               </p>
               <p className="text-xl font-quicksand text-[#686868] leading-relaxed">
                 {/* Amsterdam, Basel, Baden-Baden, Lucerne, Köln */}
@@ -321,12 +324,33 @@ const SafariItinerary = () => {
 
       <Itinerary data={trip.itinerary} title="" />
 
-      <div className=" py-10">
+      {/* <div className=" py-10">
         <AccordionSection
           aboutBooking={trip.aboutBooking}
           requirements={trip.requirements}
         />
+      </div> */}
+
+      <div className=" py-10">
+        <IncludeExl
+        aboutBooking={trip.aboutBooking}
+          requirements={trip.requirements}
+        />
       </div>
+
+      <div className="mt-16 text-center">
+        <button
+          onClick={() => setOpenForm(true)}
+          className="bg-[#ac9e86] text-white font-light tracking-widest py-3 px-8 text-xs sm:text-sm uppercase hover:bg-[#978973] rounded-sm transition duration-200 font-quicksand"
+        >
+          Book Package
+        </button>
+      </div>
+
+      {/* Modal */}
+      {openForm && (
+        <ItinenaryForm onClose={() => setOpenForm(false)} trip={trip} />
+      )}
 
       <JourneysCarousel />
     </>

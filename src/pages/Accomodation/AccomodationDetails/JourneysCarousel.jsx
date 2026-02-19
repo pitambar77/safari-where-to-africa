@@ -268,7 +268,7 @@ const JourneysCarousel = ({ journeys = [], destinationSlug }) => {
               {/* ---------- Journey Card ---------- */}
               <div
                 onClick={() =>
-                  navigate(`/destinations/${destinationSlug}/${region.slug}`)
+                  navigate(`/${destinationSlug}/${region.slug}`)
                 }
                 className="relative h-[420px] rounded-sm overflow-hidden cursor-pointer"
               >

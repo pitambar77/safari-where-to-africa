@@ -26,7 +26,7 @@ const JourneyOverview = ({
             {title}
           </h5>
         </div>
-        <p className="tracking-wider uppercase font-quicksand mt-2 text-[#686868]">
+        <p className="tracking-wider capitalize font-quicksand mt-2 text-[#686868]">
           {description}
         </p>
       </div>

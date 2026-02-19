@@ -36,7 +36,7 @@ const SafariCard = ({ item }) => {
         <div className="mb-4 font-cormorant text-3xl">{item.title}</div>
         {item.price && (
           <div className="mt-1 font-quicksand">
-            Guide Price ${item.price.toLocaleString()} Per Person
+            Guide Price {item.price.toLocaleString()} Per Person
           </div>
         )}
       </div>

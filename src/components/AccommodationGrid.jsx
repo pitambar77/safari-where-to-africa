@@ -1,6 +1,7 @@
 import React from "react";
 
 import AccommodationRelated from "./AccommodationRelated";
+import { Link } from "react-router-dom";
 
 const AccommodationGrid = ({
   title = "Overnight Accommodations",
@@ -33,6 +34,14 @@ const AccommodationGrid = ({
               />
             </div>
           ))}
+        </div>
+        <div className=" mt-16 text-center">
+          <Link
+            to={"/accommodations"}
+            className="bg-[#ac9e86] text-white font-light tracking-widest py-3 px-8 text-xs sm:text-sm uppercase hover:bg-[#978973] rounded-sm transition duration-200 font-quicksand"
+          >
+            View All Accommodations
+          </Link>
         </div>
       </div>
     </section>

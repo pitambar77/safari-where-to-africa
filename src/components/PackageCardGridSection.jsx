@@ -1,5 +1,6 @@
 import { div } from "framer-motion/client";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const PackageCardGridSection = ({
   title,
@@ -41,9 +42,9 @@ const PackageCardGridSection = ({
           <p className="text-center text-gray-600 mt-10">{emptyMessage}</p>
         )}
         <div className=" mt-16 text-center">
-          <button className="bg-[#ac9e86] text-white font-light tracking-widest py-3 px-8 text-xs sm:text-sm uppercase hover:bg-[#978973] rounded-sm transition duration-200 font-quicksand">
+          <Link to={"/packages"} className="bg-[#ac9e86] text-white font-light tracking-widest py-3 px-8 text-xs sm:text-sm uppercase hover:bg-[#978973] rounded-sm transition duration-200 font-quicksand">
             More Itinenary
-          </button>
+          </Link>
         </div>
       </div>
     </section>

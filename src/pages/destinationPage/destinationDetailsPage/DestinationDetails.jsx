@@ -726,12 +726,22 @@ const DestinationDetails = () => {
       {/* ✅ Journey Carousel (optional or static)
       <JourneysCarousel /> */}
 
-      {relatedRegions.length > 0 && (
+      {/* {relatedRegions.length > 0 && (
         <JourneysCarousel
           journeys={relatedRegions}
           destinationSlug={destinationSlug}
+          
         />
-      )}
+      )} */}
+      {relatedRegions.length > 0 && (
+  <JourneysCarousel
+    journeys={relatedRegions.filter((region) =>
+      !/package/i.test(region.name)
+    )}
+    destinationSlug={destinationSlug}
+  />
+)}
+
     </>
   );
 };

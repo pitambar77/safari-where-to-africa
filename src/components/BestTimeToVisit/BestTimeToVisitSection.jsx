@@ -109,11 +109,11 @@ const BestTimeToVisitSection = ({
                 ))}
               </div>
 
-              <div className="text-center mt-10">
+              {/* <div className="text-center mt-10">
                 <button className="px-6 py-3 border border-[#a89f82] text-[#a89f82] rounded-full uppercase text-sm tracking-[2px] hover:bg-[#f25922] hover:text-white transition">
                   Learn More
                 </button>
-              </div>
+              </div> */}
             </motion.div>
           )}
         </AnimatePresence>
