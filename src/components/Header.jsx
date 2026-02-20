@@ -181,7 +181,7 @@ const Header = () => {
             </Link>
 
             <Link
-              to="/brochure"
+              to="#"
               className="hidden lg:inline-block text-sm font-quicksand uppercase border border-gray-400 rounded-md px-4 py-2 hover:bg-[#f25922] hover:text-white transition-colors"
             >
               Brochure

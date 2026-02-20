@@ -7,9 +7,9 @@ const ExperienceLanding = () => {
   return (
       <div>
            <Banner
-      title=" Our Experiences "
-        subtitle="World Elephant Day 2025 unites experts and citizens to safeguard matriarchs, memories, and habitat. Discover why this mission matters and learn ways to help. "
-        imageUrl="https://www.tatapower.com/adobe/dynamicmedia/deliver/dm-p-oid--xoiKJFyY4kqwBXocriZrmRglbhyjMgNeoZG4whF-UwrRwMKccPcsDJ-OoCe9x0BA3MOy8_FdN0QieFcTr5u8FPlgOzA_ZV5IaZZbTwLln3Dy6e8MDh5L8q__QZtjkFNpdS-f4KHLbhktTWvlg92A26pVti3qQljifkBdVKIvwoA/body-image-02.png?preferwebp=true&quality=85"
+      title=" Africa Unfiltered "
+        subtitle="Explore Africa’s top wildlife zones with trusted guides, meaningful culture, and scenery that feels real from arrival to farewell."
+        imageUrl="/exparience-banner.webp"
       />
      <ExperienceList/>
     </div>

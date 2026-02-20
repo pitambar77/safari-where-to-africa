@@ -11,7 +11,7 @@ import ImpactOfYourStay from "./ImpactOfYourStay";
 const AboutUs = () => {
   return (
     <>
-      <Banner title={"About Us"} imageUrl={aboutusbanner} />
+      <Banner title={"About Us"} imageUrl={'/about-us-banner.webp'} />
       <div className="bg-[#f6f1e9]">
         <Overview
           title="Our Story Begins"
@@ -25,7 +25,7 @@ const AboutUs = () => {
         <div className="bg-white/5 rounded-sm overflow-hidden shadow-sm">
           <div className="relative">
             <img
-              src="https://tanzania-specialist.com/wp-content/uploads/2023/07/10-Days-Tanzania-safari-all-northern-parks-in-1-trip-wildebeest-migration.jpg"
+              src="/about-us-4.webp"
               alt="Kenya Safari"
               className="w-full h-64 md:h-[600px] object-cover"
             />

@@ -9,7 +9,7 @@ const AboutSection = () => {
         <div className="bg-white/5 rounded-sm overflow-hidden shadow-sm">
           <div className="relative">
             <img
-              src="https://tanzania-specialist.com/wp-content/uploads/2023/07/10-Days-Tanzania-safari-all-northern-parks-in-1-trip-wildebeest-migration.jpg"
+              src="/about-us-1.webp"
               alt="Kenya Safari"
               className="w-full h-64 md:h-[500px] object-cover"
             />
@@ -79,7 +79,7 @@ const AboutSection = () => {
         <div className="bg-white/5 rounded-sm overflow-hidden shadow-sm">
           <div className="relative">
             <img
-              src="https://www.andbeyond.com/wp-content/uploads/sites/5/Africa-Tanzania-Serengeti-National-Park-hot-air-balloons-Website-1920x1080-fill-gravityauto-Q_AutoBest.jpg"
+              src="/about-us-2.webp"
               alt="Chile Trip"
               className="w-full h-64 md:h-[500px] object-cover"
             />

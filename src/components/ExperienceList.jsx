@@ -16,7 +16,7 @@ const ExperienceList = () => {
     const fetchExperiences = async () => {
       try {
         const res = await axios.get(
-          "http://where-to-africa-safari-backend.manoramaseoservice.com/api/experience"
+          "http://where-to-africa-safari-backend.manoramaseoservice.com/api/experience",
         );
         setExperiences(res.data || []);
       } catch (error) {
@@ -49,7 +49,7 @@ const ExperienceList = () => {
   const startIndex = (currentPage - 1) * cardsPerPage;
   const currentCards = allExperiences.slice(
     startIndex,
-    startIndex + cardsPerPage
+    startIndex + cardsPerPage,
   );
 
   // =============================
@@ -58,9 +58,9 @@ const ExperienceList = () => {
   return (
     <div className="pb-16 bg-[#fbf6ea]">
       <Overview
-        title="Explore Experiences"
-        subtitle="Discover curated safari experiences across Africa."
-        description="Choose from premium adventure and wildlife experiences."
+        title="Journey Into Africa "
+        subtitle="“Where to Africa” brings you closer to wild places, local stories, and small details most travellers miss completely on safari trips."
+        description="Choose experiences across Zambia, Zimbabwe, South Africa, Botswana, Tanzania, Kenya, and Namibia, including game drives, guided walks, river journeys, desert days, and cultural visits, all smoothly planned to suit the seasons, your comfort, and your pace."
       />
 
       <div className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28">
@@ -122,5 +122,3 @@ const ExperienceList = () => {
 };
 
 export default ExperienceList;
-
-

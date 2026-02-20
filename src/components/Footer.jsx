@@ -1,5 +1,5 @@
 // import "./Footer.css";
-// import logo from "../assets/whereto-logo.webp"; 
+// import logo from "../assets/whereto-logo.webp";
 
 // const Footer =()=>{
 //     return(
@@ -61,21 +61,21 @@
 //                 </div>
 //             </div>
 //         </section>
-        // <section className="copywrite-sec">
-        //     <div class="copyy-write">
-        //         <p>AlI rights reserved© 2025 Where To Africa Travel Pty Ltd</p>
-                
-        //     </div>
-            
-        // </section>
+// <section className="copywrite-sec">
+//     <div class="copyy-write">
+//         <p>AlI rights reserved© 2025 Where To Africa Travel Pty Ltd</p>
+
+//     </div>
+
+// </section>
 //         </>
 //     );
 // };
 // export default Footer;
 
-
 import React from "react";
-import logo from "../assets/whereto-logo.webp";  // replace with your logo path
+import logo from "../assets/whereto-logo.webp"; // replace with your logo path
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -94,85 +94,115 @@ const Footer = () => {
           {/* Column 1 */}
           <div>
             <h4 className="text-[#c2bfae] text-lg font-semibold mb-4">
-              Travel Information
+              Quick links
             </h4>
-            <ul className="space-y-2 text-sm font-quicksand">
-              <li className="hover:text-[#c2bfae] cursor-pointer transition">
-                First Time to Africa
-              </li>
-              <li className="hover:text-[#c2bfae] cursor-pointer transition">
-                Sustainability
-              </li>
-              <li className="hover:text-[#c2bfae] cursor-pointer transition">
-                The Wildebeest Migration
-              </li>
+            <ul className="space-y-2 text-sm font-quicksand flex flex-col">
+              <Link
+                to={"/"}
+                className="hover:text-[#c2bfae] cursor-pointer transition"
+              >
+                Home
+              </Link>
+              <Link
+                to={"/about-us"}
+                className="hover:text-[#c2bfae] cursor-pointer transition"
+              >
+                About Us
+              </Link>
+
+              <Link
+                to={"/contact-us"}
+                className="hover:text-[#c2bfae] cursor-pointer transition"
+              >
+                Contact Us
+              </Link>
+            </ul>
+          </div>
+          {/* Column 2 */}
+          <div>
+            <h4 className="text-[#c2bfae] text-lg font-semibold mb-4  ">
+              Services
+            </h4>
+            <ul className="space-y-2 text-sm font-quicksand flex flex-col">
+              <Link
+                to={"/accommodations"}
+                className="hover:text-[#c2bfae] cursor-pointer transition"
+              >
+                Retreats
+              </Link>
+              <Link
+                to={"/packages"}
+                className="hover:text-[#c2bfae] cursor-pointer transition"
+              >
+                Journey
+              </Link>
+              <Link
+                to={"/experiences"}
+                className="hover:text-[#c2bfae] cursor-pointer transition"
+              >
+                Experience
+              </Link>
             </ul>
           </div>
 
-          {/* Column 2 */}
           <div>
             <h4 className="text-[#c2bfae] text-lg font-semibold mb-4">
-              About Us:
+              Useful Links
             </h4>
-            <ul className="space-y-2 text-sm font-quicksand">
-              <li className="hover:text-[#c2bfae] cursor-pointer transition">
-                Why book with us?
-              </li>
-              <li className="hover:text-[#c2bfae] cursor-pointer transition">
-                Our team
-              </li>
-              <li className="hover:text-[#c2bfae] cursor-pointer transition">
-                Guest Reviews
-              </li>
+            <ul className="space-y-2 text-sm font-quicksand flex flex-col">
+              <Link
+                to={"/conservation"}
+                className="hover:text-[#c2bfae] cursor-pointer transition"
+              >
+                Conservation
+              </Link>
+              <Link className="hover:text-[#c2bfae] cursor-pointer transition">
+                Blogs
+              </Link>
+              <Link className="hover:text-[#c2bfae] cursor-pointer transition">
+                Brochure
+              </Link>
             </ul>
           </div>
 
           {/* Column 3 */}
-          <div>
-            <h4 className="text-[#c2bfae] text-lg font-semibold mb-4">
-              Who is Travelling?
-            </h4>
-            <ul className="space-y-2 text-sm font-quicksand">
-              <li className="hover:text-[#c2bfae] cursor-pointer transition">
-                Couples and Honeymooners
-              </li>
-              <li className="hover:text-[#c2bfae] cursor-pointer transition">
-                Family Safari
-              </li>
-              <li className="hover:text-[#c2bfae] cursor-pointer transition">
-                Group of Friends
-              </li>
-            </ul>
-          </div>
 
-          {/* Column 4 */}
           <div>
-            <h4 className="text-[#c2bfae] text-lg font-semibold mb-4">
-              Safaris:
+            <h4 className="text-[#c2bfae] text-lg font-semibold mb-4  ">
+              Contact
             </h4>
-            <ul className="space-y-2 text-sm font-quicksand">
-              <li className="hover:text-[#c2bfae] cursor-pointer transition">
-                All Safaris
-              </li>
-              <li className="hover:text-[#c2bfae] cursor-pointer transition">
-                Sample Safaris
-              </li>
-              <li className="hover:text-[#c2bfae] cursor-pointer transition">
-                Set Departure Safaris
-              </li>
-            </ul>
+            <div className=" flex flex-col space-y-2">
+              <p>Phone: +27(0)315352811</p>
+              <p>Email:spiwe@whereto.africa</p>
+            </div>
+
           </div>
+          {/* Column 4 */}
         </div>
       </div>
-     <div className=" bg-black/80 py-6 flex gap-4 justify-center font-quicksand">
-        <p>AlI rights reserved © 2026 Safari Marketing Pro</p>
+      <div className=" bg-black/80 py-6 flex gap-4 justify-center font-quicksand">
+        <p>AlI rights reserved © 2026 Where to Africa, Design by <a href='https://safarimarketingpro.com/' className=" hover:underline">Safari Marketing Pro</a></p>
         <ul className=" flex gap-4">
-                    <li><a href="#" className=" text-amber-300/80">Privacy Policy</a></li>
-                    <li><a href="#" className="write_teram">Website Terms of Use</a></li>
-                    <li><a href="#" className=" text-amber-300/80">Payment Conditions</a></li>
-                    <li><a href="#">Al LLM Data</a></li>
-                </ul>
-     </div>
+          <li>
+            <a href="#" className=" text-amber-300/80">
+              Privacy Policy
+            </a>
+          </li>
+          <li>
+            <a href="#" className="write_teram">
+              Website Terms of Use
+            </a>
+          </li>
+          <li>
+            <a href="#" className=" text-amber-300/80">
+              Payment Conditions
+            </a>
+          </li>
+          <li>
+            <a href="#">Al LLM Data</a>
+          </li>
+        </ul>
+      </div>
     </footer>
   );
 };

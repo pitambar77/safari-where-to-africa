@@ -37,7 +37,6 @@
 //   // DESTINATIONS DROPDOWN
 //   // =============================
 
-
 //   const destinations = useMemo(() => {
 //     return destinationData
 //       .filter((destination) =>
@@ -57,7 +56,6 @@
 //   // =============================
 //   // REGION DROPDOWN
 //   // =============================
- 
 
 //   const regions = useMemo(() => {
 //     if (!selectedDestination) return [];
@@ -302,7 +300,6 @@
 
 // export default PackageList;
 
-
 import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import SafariCard from "../pages/Accomodation/LandingPage/SafariCard";
@@ -327,7 +324,7 @@ const PackageList = () => {
     const fetchDestinations = async () => {
       try {
         const res = await axios.get(
-          "http://where-to-africa-safari-backend.manoramaseoservice.com/api/destinations"
+          "http://where-to-africa-safari-backend.manoramaseoservice.com/api/destinations",
         );
         setDestinationData(res.data || []);
       } catch (error) {
@@ -344,9 +341,7 @@ const PackageList = () => {
   const destinations = useMemo(() => {
     return destinationData
       .filter((destination) =>
-        destination.regions?.some(
-          (region) => region.trips?.length > 0
-        )
+        destination.regions?.some((region) => region.trips?.length > 0),
       )
       .map((dest) => dest.name.trim());
   }, [destinationData]);
@@ -365,7 +360,7 @@ const PackageList = () => {
     if (!selectedDestination) return [];
 
     const selectedDest = destinationData.find(
-      (d) => d.name.trim() === selectedDestination
+      (d) => d.name.trim() === selectedDestination,
     );
 
     if (!selectedDest) return [];
@@ -398,11 +393,11 @@ const PackageList = () => {
             title: trip.title,
             price: trip.price || "",
             nights: trip.duration || 0,
-            image: trip.image  || "",
+            image: trip.image || "",
             slug: trip.slug,
             destination: destination.name.trim(),
             region: region.name.trim(),
-            labeldata:"",
+            labeldata: "",
           });
         });
       });
@@ -419,14 +414,12 @@ const PackageList = () => {
 
     if (selectedDestination) {
       filtered = filtered.filter(
-        (item) => item.destination === selectedDestination
+        (item) => item.destination === selectedDestination,
       );
     }
 
     if (selectedRegion) {
-      filtered = filtered.filter(
-        (item) => item.region === selectedRegion
-      );
+      filtered = filtered.filter((item) => item.region === selectedRegion);
     }
 
     // Price filtering (convert to number for comparison)
@@ -448,14 +441,16 @@ const PackageList = () => {
     }
 
     if (sortBy === "priceAsc") {
-      filtered.sort((a, b) =>
-        parseFloat(a.price.replace(/[^0-9.]/g, "")) -
-        parseFloat(b.price.replace(/[^0-9.]/g, ""))
+      filtered.sort(
+        (a, b) =>
+          parseFloat(a.price.replace(/[^0-9.]/g, "")) -
+          parseFloat(b.price.replace(/[^0-9.]/g, "")),
       );
     } else if (sortBy === "priceDesc") {
-      filtered.sort((a, b) =>
-        parseFloat(b.price.replace(/[^0-9.]/g, "")) -
-        parseFloat(a.price.replace(/[^0-9.]/g, ""))
+      filtered.sort(
+        (a, b) =>
+          parseFloat(b.price.replace(/[^0-9.]/g, "")) -
+          parseFloat(a.price.replace(/[^0-9.]/g, "")),
       );
     } else if (sortBy === "nameAsc") {
       filtered.sort((a, b) => a.title.localeCompare(b.title));
@@ -477,7 +472,7 @@ const PackageList = () => {
   const startIndex = (currentPage - 1) * cardsPerPage;
   const currentCards = filteredTrips.slice(
     startIndex,
-    startIndex + cardsPerPage
+    startIndex + cardsPerPage,
   );
 
   useEffect(() => {
@@ -558,9 +553,9 @@ const PackageList = () => {
   return (
     <div className="pb-16 bg-[#fbf6ea]">
       <Overview
-        title="Explore Our Packages"
-        subtitle="Discover curated safari trips across Africa."
-        description="Choose from premium safari packages tailored to your journey."
+        title="Travel Made Easy"
+        subtitle={`"Where to Africa" designs safari packages that bring together wildlife, landscapes, and culture into a clear, carefully planned journey.`}
+        description="Each package across Africa balances game drives, scenic routes, quality accommodation, and local expertise, ensuring your experience is organised, comfortable, and genuinely fulfilling throughout your time away."
       />
 
       <div className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28">
@@ -589,9 +584,7 @@ const PackageList = () => {
             ))}
           </div>
         ) : (
-          <p className="text-center text-gray-600 mt-10">
-            No packages found.
-          </p>
+          <p className="text-center text-gray-600 mt-10">No packages found.</p>
         )}
 
         <div className="flex justify-center items-center mt-12 gap-2 flex-wrap">
@@ -621,4 +614,3 @@ const PackageList = () => {
 };
 
 export default PackageList;
-

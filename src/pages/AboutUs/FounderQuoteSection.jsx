@@ -11,7 +11,7 @@ const FounderQuoteSection = () => {
         {/* Left: Image with Play Button */}
         <div className="relative rounded-sm overflow-hidden shadow-sm w-[56%] ">
           <img
-            src="https://tanzania-specialist.com/wp-content/uploads/2023/07/10-Days-Tanzania-safari-all-northern-parks-in-1-trip-wildebeest-migration.jpg"
+            src="/about-us-3.webp"
             alt="Timbuktu Travel Video"
             className="w-full h-[320px] md:h-[420px] object-cover"
           />

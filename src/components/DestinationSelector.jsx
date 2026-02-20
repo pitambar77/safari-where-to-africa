@@ -4,50 +4,42 @@ import { useNavigate } from "react-router-dom";
 const destinations = [
   {
     name: "South Africa",
-    image:
-      "https://tanzania-specialist.com/wp-content/uploads/2023/07/10-Days-Tanzania-safari-all-northern-parks-in-1-trip-wildebeest-migration.jpg",
+    image:"/south-africa-destination.webp",
     path: "/south-africa",
   },
   {
     name: "Botswana",
-    image:
-      "https://theincidentaltourist.com/wp-content/uploads/2024/08/Tanzania-Grumeti-Serengeti-River-Lodge-Experiences-safari-game-drive-sundowners-drinks-_5_-Collections-3000w-scaled.jpg",
+    image:"/botswana-destination.webp",
     path: "/botswana",
   },
   {
     name: "Namibia",
-    image:
-      "https://cdn-ajfhi.nitrocdn.com/KGztweKcUtUgsFQkUHxObgZRMXOaBfJI/assets/images/optimized/rev-e4b7f67/tanzania-specialist.com/wp-content/uploads/2025/02/Tanzania-Travel-Tanzania-Specialist-jeep-1960x800.jpg",
+    image:"/namibia-destination.webp",
     path: "/namibia",
   },
   {
     name: "Zimbabwe",
-    image:
-      "https://www.tanzania-experience.com/wp-content/uploads/2024/01/tanzania-safaris-.jpg",
+    image:"/zimbabwe-destination.webp",
     path: "/zimbabwe",
   },
   {
     name: "Zambia",
-    image:
-      "https://www.andbeyond.com/wp-content/uploads/sites/5/Africa-Tanzania-Serengeti-National-Park-hot-air-balloons-Website-1920x1080-fill-gravityauto-Q_AutoBest.jpg",
+    image:"/zambia-destination.webp",
     path: "/zambia",
   },
   {
     name: "Mozambique",
-    image:
-      "https://africanscenicsafaris.com/blog/wp-content/uploads/2025/05/festivals-of-tanzania-discover-cultural-diversity-on-tanzania-safaris-banner-scaled.webp",
+    image:"/mozambique-destination.webp",
     path: "/mozambique",
   },
   {
     name: "Kenya",
-    image:
-      "https://www.coxandkings.co.uk/-/media/cox-and-kings/images/page-header-images/destinations/africa/tanzania/zanzibar/zanzibar_0000_tanzania-zanzibar-shutterstock_479712880.jpg?la=en&hash=CD33C503F9B3A9205F2F1AF812700ECB476627C9",
+    image:"/kenya-destination.webp",
     path: "/kenya",
   },
   {
     name: "Tanzania",
-    image:
-      "https://a.travel-assets.com/findyours-php/viewfinder/images/res70/212000/212540-Zanzibar.jpg",
+    image:"/tanzania-destination.webp",
     path: "/kanzania",
   },
 ];
