@@ -13,7 +13,7 @@ const ExperienceCarousel = ({
   made this experience a joy for all of us. The animals we saw and the
   places we visited were amazing. Thank you for making this so special
   for me."`,
-  author = "Carol K",
+  author = "",
   data = [],
   slidesPerView = 2.5,
   slidesPerGroup = 2,

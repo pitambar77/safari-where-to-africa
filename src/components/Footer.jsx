@@ -188,7 +188,7 @@ const Footer = () => {
               Privacy Policy
             </a>
           </li>
-          <li>
+          {/* <li>
             <a href="#" className="write_teram">
               Website Terms of Use
             </a>
@@ -197,10 +197,8 @@ const Footer = () => {
             <a href="#" className=" text-amber-300/80">
               Payment Conditions
             </a>
-          </li>
-          <li>
-            <a href="#">Al LLM Data</a>
-          </li>
+          </li> */}
+         
         </ul>
       </div>
     </footer>

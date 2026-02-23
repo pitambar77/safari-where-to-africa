@@ -382,28 +382,54 @@ const PackageList = () => {
   // =============================
   // EXTRACT ALL TRIPS
   // =============================
+  // const allTrips = useMemo(() => {
+  //   let result = [];
+
+  //   destinationData.forEach((destination) => {
+  //     destination.regions?.forEach((region) => {
+  //       region.trips?.forEach((trip) => {
+  //         result.push({
+  //           id: trip._id,
+  //           title: trip.title,
+  //           price: trip.price || "",
+  //           nights: trip.duration || 0,
+  //           image: trip.image || "",
+  //           slug: trip.slug,
+  //           destination: destination.name.trim(),
+  //           region: region.name.trim(),
+  //           labeldata: "",
+  //         });
+  //       });
+  //     });
+  //   });
+
+  //   return result;
+  // }, [destinationData]);
+
   const allTrips = useMemo(() => {
-    let result = [];
+    const tripMap = new Map(); // ✅ prevents duplicates
 
     destinationData.forEach((destination) => {
       destination.regions?.forEach((region) => {
         region.trips?.forEach((trip) => {
-          result.push({
-            id: trip._id,
-            title: trip.title,
-            price: trip.price || "",
-            nights: trip.duration || 0,
-            image: trip.image || "",
-            slug: trip.slug,
-            destination: destination.name.trim(),
-            region: region.name.trim(),
-            labeldata: "",
-          });
+          if (!tripMap.has(trip._id)) {
+            tripMap.set(trip._id, {
+              id: trip._id,
+              title: trip.title,
+              price: trip.price || "",
+              nights: trip.duration || 0,
+              image: trip.image || "",
+              slug: trip.slug,
+              destination: destination.name.trim(),
+              region: region.name.trim(),
+              labeldata: "",
+            });
+          }
         });
       });
     });
 
-    return result;
+    return Array.from(tripMap.values()); // ✅ only unique trips
   }, [destinationData]);
 
   // =============================

@@ -85,7 +85,7 @@ const ExperienceDetails = () => {
         description={experience.gallery.description}
         images={experience.gallery.images.map((img) => ({
           galleryImage: img.image,
-          galleryName: "Experience Image",
+          galleryName: "",
         }))}
       />
 

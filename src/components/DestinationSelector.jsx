@@ -40,7 +40,7 @@ const destinations = [
   {
     name: "Tanzania",
     image:"/tanzania-destination.webp",
-    path: "/kanzania",
+    path: "/tanzania",
   },
 ];
 

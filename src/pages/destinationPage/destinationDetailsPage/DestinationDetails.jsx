@@ -492,135 +492,13 @@ const DestinationDetails = () => {
       description: month.description?.map((d) => d.content) || [],
     })) || [];
 
-  // ✅ Example static seasonal data
-  const monthData = [
-    {
-      name: "Jan",
-      season: "Summer Season",
-      rating: "Excellent",
-      color: "bg-[#A5D6A7]",
-      description: [
-        "January is one of the best months to visit South Africa, with warm temperatures and sunny days perfect for outdoor adventures.",
-        "Enjoy beautiful beaches, safari drives, and vibrant city life in Cape Town and Johannesburg.",
-        "Expect some crowds, as it’s peak travel season for locals and tourists alike.",
-      ],
-    },
-    {
-      name: "Feb",
-      season: "Summer Season",
-      rating: "Excellent",
-      color: "bg-[#A5D6A7]",
-      description: [
-        "February continues the warm, sunny conditions ideal for beach days and game drives.",
-        "Cape Town’s wine festivals and outdoor dining experiences are in full swing.",
-        "It’s a great time to enjoy both the coast and wildlife reserves.",
-      ],
-    },
-    {
-      name: "Mar",
-      season: "Autumn Begins",
-      rating: "Excellent",
-      color: "bg-[#A5D6A7]",
-      description: [
-        "March offers slightly cooler weather, fewer crowds, and amazing scenery.",
-        "Perfect for hiking, safari, and photography with clear skies and lush landscapes.",
-        "Still warm enough for coastal activities and cultural experiences.",
-      ],
-    },
-    {
-      name: "Apr",
-      season: "Autumn",
-      rating: "Good",
-      color: "bg-[#F1F8C0]",
-      description: [
-        "April brings mild temperatures and fewer tourists, great for relaxed travel.",
-        "Wildlife spotting improves as vegetation thins.",
-        "Ideal for exploring cities, vineyards, and nature reserves alike.",
-      ],
-    },
-    {
-      name: "May",
-      season: "Wet Season",
-      rating: "Mixed",
-      color: "bg-[#E1D7F8]",
-      description: [
-        "Expect some rain in Cape Town over the course of a lengthy stay, with day length shortening and temperatures remaining mild.",
-        "The shift in the weather means beach relaxation is not always an option, leaving the many boutique shops and beachfront eateries a must, especially in the nearby coastal towns of St James and Kalk Bay.",
-        "This is the perfect time of year to indulge the taste buds with culinary delights and wine tastings, both readily available with relatively few tourists around.",
-        "The indoor markets bursting with fresh produce and homemade delights combine well with cultural explorations or a trip to the trendy V&A Waterfront.",
-        "If you are wanting a little adventure, the winter months are considered the best for Great White shark cage diving, with the sharks at their most active.",
-      ],
-    },
-    {
-      name: "Jun",
-      season: "Winter",
-      rating: "Mixed",
-      color: "bg-[#E1D7F8]",
-      description: [
-        "Cooler weather makes it perfect for safaris and wildlife spotting.",
-        "Cape Town experiences rain, but landscapes are lush and green.",
-      ],
-    },
-    {
-      name: "Jul",
-      season: "Winter",
-      rating: "Mixed",
-      color: "bg-[#E1D7F8]",
-      description: [
-        "July is ideal for safari lovers as animals gather around water sources.",
-        "Expect chilly evenings and occasional rain in the Cape.",
-      ],
-    },
-    {
-      name: "Aug",
-      season: "Winter",
-      rating: "Good",
-      color: "bg-[#F1F8C0]",
-      description: [
-        "August marks the start of wildflower season in the Western Cape.",
-        "Great time for scenic drives and wildlife safaris.",
-      ],
-    },
-    {
-      name: "Sep",
-      season: "Spring",
-      rating: "Good",
-      color: "bg-[#F1F8C0]",
-      description: [
-        "Spring begins with mild temperatures and blooming landscapes.",
-        "A beautiful time to explore both coastal and inland areas.",
-      ],
-    },
-    {
-      name: "Oct",
-      season: "Spring",
-      rating: "Excellent",
-      color: "bg-[#A5D6A7]",
-      description: [
-        "October offers warm weather and fewer crowds — perfect for adventure and relaxation.",
-        "Ideal for whale watching and outdoor exploration.",
-      ],
-    },
-    {
-      name: "Nov",
-      season: "Early Summer",
-      rating: "Excellent",
-      color: "bg-[#A5D6A7]",
-      description: [
-        "November welcomes summer with long, sunny days and vibrant energy.",
-        "Perfect time for safaris, beaches, and festive events.",
-      ],
-    },
-    {
-      name: "Dec",
-      season: "Summer",
-      rating: "Excellent",
-      color: "bg-[#A5D6A7]",
-      description: [
-        "December is lively and festive, with perfect beach weather.",
-        "Expect crowds and higher prices, but amazing summer vibes.",
-      ],
-    },
+  // ✅ Get all trips from all regions of this destination
+  const allTrips = [
+    ...new Map(
+      (destination?.regions?.flatMap((r) => r.trips || []) || []).map(
+        (trip) => [trip._id, trip],
+      ),
+    ).values(),
   ];
 
   return (
@@ -654,7 +532,7 @@ const DestinationDetails = () => {
         />
 
         {/* ✅ Trips Section */}
-        {trips?.length > 0 && (
+        {/* {trips?.length > 0 && (
           <ParticularDestinationPackage
             data={trips.map((trip) => ({
               id: trip._id,
@@ -666,6 +544,21 @@ const DestinationDetails = () => {
             }))}
             CardComponent={SafariCard}
             onCardClick={(id) => navigate(`/trip/${id}`)}
+            emptyMessage="No safaris found."
+          />
+        )} */}
+        {allTrips?.length > 0 && (
+          <ParticularDestinationPackage
+            data={allTrips.map((trip) => ({
+              id: trip.slug, // ✅ use slug for navigation
+              title: trip.title,
+              image: trip.image,
+              nights: trip.duration,
+              price: trip.price,
+              country: destination?.name || "",
+            }))}
+            CardComponent={SafariCard}
+            onCardClick={(slug) => navigate(`/package/${slug}`)}
             emptyMessage="No safaris found."
           />
         )}
@@ -733,15 +626,30 @@ const DestinationDetails = () => {
           
         />
       )} */}
-      {relatedRegions.length > 0 && (
-  <JourneysCarousel
-    journeys={relatedRegions.filter((region) =>
-      !/package/i.test(region.name)
-    )}
-    destinationSlug={destinationSlug}
-  />
-)}
 
+      {relatedRegions.length > 0 && (
+        <JourneysCarousel
+          journeys={relatedRegions.filter((region) => {
+            const name = region.name?.toLowerCase().trim() || "";
+
+            return (
+              !/package/i.test(name) &&
+              !name.endsWith("accommodation") &&
+              !name.endsWith("accomodation") // 👈 in case spelling variation
+            );
+          })}
+          destinationSlug={destinationSlug}
+        />
+      )}
+
+      {/* {relatedRegions.length > 0 && (
+        <JourneysCarousel
+          journeys={relatedRegions.filter(
+            (region) => !/package/i.test(region.name),
+          )}
+          destinationSlug={destinationSlug}
+        />
+      )} */}
     </>
   );
 };

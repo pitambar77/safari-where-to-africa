@@ -1,5 +1,3 @@
-
-
 // import React, { useState, useRef } from "react";
 // import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
@@ -90,7 +88,7 @@
 //     <section className="bg-white py-12 font-cormorant">
 //       <div className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28">
 //         {/* Header + Navigation */}
-        
+
 //           <div className=" text-center">
 //             <h2 className="text-6xl font-normal text-[#636363]">Trip Highlights</h2>
 //             <p className="mt-4 text-lg font-quicksand text-gray-600">
@@ -189,7 +187,6 @@
 
 // export default TripHighlights;
 
-
 import React, { useState, useRef, useEffect } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
@@ -217,8 +214,7 @@ const TripHighlights = ({ highlights = [] }) => {
   const totalCards = highlights.length;
   const maxIndex = Math.max(0, totalCards - cardsPerView);
 
-  const goToPrevious = () =>
-    setCurrentIndex((prev) => Math.max(0, prev - 1));
+  const goToPrevious = () => setCurrentIndex((prev) => Math.max(0, prev - 1));
 
   const goToNext = () =>
     setCurrentIndex((prev) => Math.min(maxIndex, prev + 1));
@@ -227,10 +223,8 @@ const TripHighlights = ({ highlights = [] }) => {
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
 
-  const handleTouchStart = (e) =>
-    (touchStartX.current = e.touches[0].clientX);
-  const handleTouchMove = (e) =>
-    (touchEndX.current = e.touches[0].clientX);
+  const handleTouchStart = (e) => (touchStartX.current = e.touches[0].clientX);
+  const handleTouchMove = (e) => (touchEndX.current = e.touches[0].clientX);
   const handleTouchEnd = () => {
     const distance = touchStartX.current - touchEndX.current;
     if (distance > 50) goToNext();
@@ -240,7 +234,6 @@ const TripHighlights = ({ highlights = [] }) => {
   return (
     <section className="bg-white py-12 font-cormorant">
       <div className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28">
-
         {/* Header */}
         <div className="text-center mb-10">
           <h2 className="text-6xl font-normal text-[#636363]">
@@ -288,10 +281,7 @@ const TripHighlights = ({ highlights = [] }) => {
             }}
           >
             {highlights.map((item, i) => (
-              <div
-                key={i}
-                className="flex-none w-full sm:w-1/2 lg:w-1/3"
-              >
+              <div key={i} className="flex-none w-full sm:w-1/2 lg:w-1/3 py-2">
                 <div className="bg-white rounded-md shadow-sm overflow-hidden h-full flex flex-col">
                   <div className="relative">
                     <img
@@ -313,9 +303,9 @@ const TripHighlights = ({ highlights = [] }) => {
                     <p className="text-[#636363] font-quicksand mb-4 flex-grow">
                       {item.description}
                     </p>
-                    <div className="text-sm font-semibold pt-2 border-t">
+                    {/* <div className="text-sm font-semibold pt-2 border-t">
                       {item.status === "Include" ? "INCLUDED" : "OPTIONAL"}
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -330,9 +320,7 @@ const TripHighlights = ({ highlights = [] }) => {
               key={i}
               onClick={() => setCurrentIndex(i)}
               className={`w-3 h-3 rounded-full ${
-                i === currentIndex
-                  ? "bg-[#ae9d71]"
-                  : "bg-[#dbdad6]"
+                i === currentIndex ? "bg-[#ae9d71]" : "bg-[#dbdad6]"
               }`}
             />
           ))}

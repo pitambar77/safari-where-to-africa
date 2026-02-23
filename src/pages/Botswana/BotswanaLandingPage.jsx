@@ -157,6 +157,28 @@ const BotswanaLandingPage = () => {
         )} */}
 
         {regions?.length > 0 && (
+  <DestinationGrid
+    data={regions
+      .filter((region) => {
+        const name = region.name?.toLowerCase() || "";
+
+        return (
+          !name.includes("package") &&
+          !name.includes("accommodation") &&
+          !name.includes("accomodation")
+        );
+      })
+      .map((region) => ({
+        name: region.name,
+        image: region.image,
+        alt: region.description,
+        path: `/${slug}/${region.slug}`,
+      }))}
+    title=""
+  />
+)}
+
+        {/* {regions?.length > 0 && (
           <DestinationGrid
             data={regions
               .filter(
@@ -172,7 +194,7 @@ const BotswanaLandingPage = () => {
             // buttonText={`More ${destination?.name || "Destination"} Areas`}
             // onButtonClick={() => console.log("Load more areas")}
           />
-        )}
+        )} */}
       </div>
 
       {/* ===== Trips Section ===== */}
@@ -257,10 +279,10 @@ const BotswanaLandingPage = () => {
 
       {allExperiences?.length > 0 && (
         <ExperienceCarousel
-          title="Guest Favorites"
+          title="Our Experiences"
           description={
             allExperiences[0]?.gallery?.description ||
-            "Explore stunning experiences"
+            "Explore stunning experiences of Africa"
           }
           data={allExperiences.map((exp) => ({
             id: exp.slug,
@@ -281,7 +303,7 @@ const BotswanaLandingPage = () => {
             .map((acc) => ({
             id: acc.slug,
             image: acc.bannerImages?.[0],
-            nights: `Nights ${acc.nightsStay || ""}`,
+            nights: `Ratings ${acc.nightsStay || ""}`,
             title: acc.name,
             location: acc.location,
             tag: acc.accommodationType,
