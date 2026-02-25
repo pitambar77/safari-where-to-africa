@@ -404,6 +404,11 @@ const Destinations = () => {
     title: "",
     subtitle: "",
     description: "",
+
+    overviewTitle: "",
+    overviewSubTitle: "",
+    overviewDescription: "",
+
     bannerImage: null,
     regions: [
       {
@@ -551,6 +556,9 @@ const Destinations = () => {
       title: formData.title,
       subtitle: formData.subtitle,
       description: formData.description,
+      overviewTitle: formData.overviewTitle,
+      overviewSubTitle: formData.overviewSubTitle,
+      overviewDescription: formData.overviewDescription,
     };
     form.append("hero", JSON.stringify(hero));
 
@@ -570,26 +578,22 @@ const Destinations = () => {
     // });
 
     const regionData = formData.regions.map((r) => {
-  const { image, existingImage, ...rest } = r;
+      const { image, existingImage, ...rest } = r;
 
-  return {
-    ...rest,
-    image: editingId && !image ? existingImage : undefined,
+      return {
+        ...rest,
+        image: editingId && !image ? existingImage : undefined,
 
-    thingstodo: r.thingstodo.map((t) => ({
-      ...t,
-      section: t.section.map((s) => ({
-        title: s.title,
-        description: s.description,
-        image:
-          editingId && !s.image
-            ? s.existingImage
-            : undefined,
-      })),
-    })),
-  };
-});
-
+        thingstodo: r.thingstodo.map((t) => ({
+          ...t,
+          section: t.section.map((s) => ({
+            title: s.title,
+            description: s.description,
+            image: editingId && !s.image ? s.existingImage : undefined,
+          })),
+        })),
+      };
+    });
 
     form.append("regions", JSON.stringify(regionData));
 
@@ -599,8 +603,6 @@ const Destinations = () => {
         form.append(`regionImages[${r.slug}]`, r.image);
       }
     });
-
-
 
     formData.regions.forEach((r, rIndex) => {
       r.thingstodo.forEach((todo, tIndex) => {
@@ -630,6 +632,9 @@ const Destinations = () => {
         title: "",
         subtitle: "",
         description: "",
+        overviewTitle: "",
+        overviewSubTitle: "",
+        overviewDescription: "",
         bannerImage: null,
         regions: [
           {
@@ -703,189 +708,140 @@ const Destinations = () => {
   // };
 
   const handleEdit = (dest) => {
-  setEditingId(dest._id);
+    setEditingId(dest._id);
 
-  setFormData({
-    name: dest.name,
-    slug: dest.slug,
-    title: dest.hero?.title || "",
-    subtitle: dest.hero?.subtitle || "",
-    description: dest.hero?.description || "",
-    bannerImage: null,
+    setFormData({
+      name: dest.name,
+      slug: dest.slug,
+      title: dest.hero?.title || "",
+      subtitle: dest.hero?.subtitle || "",
+      description: dest.hero?.description || "",
+      overviewTitle: dest.hero?.overviewTitle || "",
+      overviewSubTitle: dest.hero?.overviewSubTitle || "",
+      overviewDescription: dest.hero?.overviewDescription || "",
+      bannerImage: null,
 
-    regions: dest.regions.map((r) => ({
-      ...r,
-      image: null,
-      existingImage: r.image || "",
+      regions: dest.regions.map((r) => ({
+        ...r,
+        image: null,
+        existingImage: r.image || "",
 
-      thingstodo: r.thingstodo.map((t) => ({
-        ...t,
-        section: t.section.map((s) => ({
-          ...s,
-          image: null,                  // file input
-          existingImage: s.image || "", // ✅ keep old image
+        thingstodo: r.thingstodo.map((t) => ({
+          ...t,
+          section: t.section.map((s) => ({
+            ...s,
+            image: null, // file input
+            existingImage: s.image || "", // ✅ keep old image
+          })),
         })),
+
+        whenvisit: r.whenvisit?.length
+          ? r.whenvisit
+          : [
+              {
+                heading: "",
+                months: [
+                  {
+                    monthname: "",
+                    title: "",
+                    description: createEmptyContentBlock(),
+                  },
+                ],
+              },
+            ],
       })),
-
-      whenvisit: r.whenvisit?.length
-        ? r.whenvisit
-        : [
-            {
-              heading: "",
-              months: [
-                {
-                  monthname: "",
-                  title: "",
-                  description: createEmptyContentBlock(),
-                },
-              ],
-            },
-          ],
-    })),
-  });
-};
-
-
-//   const handleEdit = (dest) => {
-//   setEditingId(dest._id);
-
-//   setFormData({
-//     name: dest.name,
-//     slug: dest.slug,
-//     title: dest.hero?.title || "",
-//     subtitle: dest.hero?.subtitle || "",
-//     description: dest.hero?.description || "",
-//     bannerImage: null,
-
-//     regions: dest.regions.map((r) => ({
-//       ...r,
-//       image: null,
-//       existingImage: r.image || "",
-
-//       thingstodo: r.thingstodo?.length
-//         ? r.thingstodo
-//         : [
-//             {
-//               thinstodoTitle: "",
-//               thingstododescription: createEmptyContentBlock(),
-//               section: [{ title: "", description: "", image: null }],
-//             },
-//           ],
-
-//        whenvisit: r.whenvisit?.length
-//         ? r.whenvisit
-//         : [
-//             {
-//               heading: "",
-//               months: [
-//                 {
-//                   monthname: "",
-//                   title: "",
-//                   description: createEmptyContentBlock(),
-//                 },
-//               ],
-//             },
-//           ],
-//     })),
-//   });
-// };
-
+    });
+  };
 
   const ContentBlocksEditor = ({ blocks = [], onChange }) => {
+    const updateBlock = (index, key, value) => {
+      const updated = structuredClone(blocks);
+      updated[index][key] = value;
+      onChange(updated);
+    };
 
-  const updateBlock = (index, key, value) => {
-    const updated = structuredClone(blocks);
-    updated[index][key] = value;
-    onChange(updated);
-  };
+    const addBlock = (type) => {
+      onChange([...blocks, { type, content: type === "list" ? [""] : "" }]);
+    };
 
-  const addBlock = (type) => {
-    onChange([
-      ...blocks,
-      { type, content: type === "list" ? [""] : "" },
-    ]);
-  };
+    const removeBlock = (index) => {
+      onChange(blocks.filter((_, i) => i !== index));
+    };
 
-  const removeBlock = (index) => {
-    onChange(blocks.filter((_, i) => i !== index));
-  };
+    return (
+      <div className="space-y-3 mt-2">
+        {blocks.map((block, i) => (
+          <div key={i} className="border p-3 rounded bg-gray-50">
+            <div className="flex gap-2 mb-2">
+              <select
+                value={block.type}
+                onChange={(e) => updateBlock(i, "type", e.target.value)}
+                className="border p-1 rounded"
+              >
+                <option value="header">Header</option>
+                <option value="paragraph">Paragraph</option>
+                <option value="list">List</option>
+              </select>
 
-  return (
-    <div className="space-y-3 mt-2">
-      {blocks.map((block, i) => (
-        <div key={i} className="border p-3 rounded bg-gray-50">
-          <div className="flex gap-2 mb-2">
-            <select
-              value={block.type}
-              onChange={(e) => updateBlock(i, "type", e.target.value)}
-              className="border p-1 rounded"
-            >
-              <option value="header">Header</option>
-              <option value="paragraph">Paragraph</option>
-              <option value="list">List</option>
-            </select>
-
-            <button
-              type="button"
-              onClick={() => removeBlock(i)}
-              className="text-sm bg-red-500 text-white px-2 rounded"
-            >
-              Remove
-            </button>
-          </div>
-
-          {block.type === "header" && (
-            <input
-              value={block.content}
-              onChange={(e) => updateBlock(i, "content", e.target.value)}
-              className="border p-2 w-full rounded"
-            />
-          )}
-
-          {block.type === "paragraph" && (
-            <textarea
-              value={block.content}
-              onChange={(e) => updateBlock(i, "content", e.target.value)}
-              className="border p-2 w-full rounded"
-              rows={4}
-            />
-          )}
-
-          {block.type === "list" && (
-            <div className="space-y-2">
-              {block.content.map((item, idx) => (
-                <input
-                  key={idx}
-                  value={item}
-                  onChange={(e) => {
-                    const updated = structuredClone(blocks);
-                    updated[i].content[idx] = e.target.value;
-                    onChange(updated);
-                  }}
-                  className="border p-2 w-full rounded"
-                />
-              ))}
+              <button
+                type="button"
+                onClick={() => removeBlock(i)}
+                className="text-sm bg-red-500 text-white px-2 rounded"
+              >
+                Remove
+              </button>
             </div>
-          )}
+
+            {block.type === "header" && (
+              <input
+                value={block.content}
+                onChange={(e) => updateBlock(i, "content", e.target.value)}
+                className="border p-2 w-full rounded"
+              />
+            )}
+
+            {block.type === "paragraph" && (
+              <textarea
+                value={block.content}
+                onChange={(e) => updateBlock(i, "content", e.target.value)}
+                className="border p-2 w-full rounded"
+                rows={4}
+              />
+            )}
+
+            {block.type === "list" && (
+              <div className="space-y-2">
+                {block.content.map((item, idx) => (
+                  <input
+                    key={idx}
+                    value={item}
+                    onChange={(e) => {
+                      const updated = structuredClone(blocks);
+                      updated[i].content[idx] = e.target.value;
+                      onChange(updated);
+                    }}
+                    className="border p-2 w-full rounded"
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+
+        <div className="flex gap-2">
+          <button type="button" onClick={() => addBlock("header")}>
+            + Header
+          </button>
+          <button type="button" onClick={() => addBlock("paragraph")}>
+            + Paragraph
+          </button>
+          <button type="button" onClick={() => addBlock("list")}>
+            + List
+          </button>
         </div>
-      ))}
-
-      <div className="flex gap-2">
-        <button type="button" onClick={() => addBlock("header")}>
-          + Header
-        </button>
-        <button type="button" onClick={() => addBlock("paragraph")}>
-          + Paragraph
-        </button>
-        <button type="button" onClick={() => addBlock("list")}>
-          + List
-        </button>
       </div>
-    </div>
-  );
-};
-
-
+    );
+  };
 
   return (
     <div>
@@ -947,6 +903,38 @@ const Destinations = () => {
           className="border p-2 rounded w-full mt-3"
           rows={4}
         />
+
+        {/* Overview Section */}
+        <div className="mt-6 border-t pt-4">
+          <h4 className="font-semibold text-lg mb-3"> Destination Overview</h4>
+
+          <input
+            type="text"
+            name="overviewTitle"
+            placeholder="Overview Title"
+            value={formData.overviewTitle}
+            onChange={handleChange}
+            className="border p-2 rounded w-full mb-3"
+          />
+
+          <input
+            type="text"
+            name="overviewSubTitle"
+            placeholder="Overview Subtitle"
+            value={formData.overviewSubTitle}
+            onChange={handleChange}
+            className="border p-2 rounded w-full mb-3"
+          />
+
+          <textarea
+            name="overviewDescription"
+            placeholder="Overview Description"
+            value={formData.overviewDescription}
+            onChange={handleChange}
+            className="border p-2 rounded w-full"
+            rows={4}
+          />
+        </div>
 
         {/* Regions Section */}
         <div className="mt-6 border-t pt-4">
@@ -1036,7 +1024,7 @@ const Destinations = () => {
                   className="border p-2 rounded"
                 />
 
-                 <input
+                <input
                   type="text"
                   name="levelthird"
                   placeholder="levelthird"
@@ -1054,7 +1042,7 @@ const Destinations = () => {
                   className="border p-2 rounded"
                 />
 
-                 <input
+                <input
                   type="text"
                   name="levelfourth"
                   placeholder="levelfourth"
@@ -1062,7 +1050,6 @@ const Destinations = () => {
                   onChange={(e) => handleRegionChange(index, e)}
                   className="border p-2 rounded"
                 />
-
 
                 <input
                   type="text"

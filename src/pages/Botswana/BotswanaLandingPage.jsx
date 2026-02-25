@@ -127,13 +127,13 @@ const BotswanaLandingPage = () => {
       {/* ===== Overview Section ===== */}
       <div className="bg-[#faf5e9]">
         <Overview
-          title={experienceData?.overview?.title || "Welcome to Safari"}
+          title={hero?.overviewTitle || "Welcome to Safari"}
           subtitle={
-            experienceData?.overview?.subTitle ||
+            hero?.overviewSubTitle ||
             "A place where nature, culture, and experiences come together to create unforgettable journeys. "
           }
           description={
-            experienceData?.overview?.description ||
+            hero?.overviewDescription ||
             " This destination offers a unique blend of natural beauty, diverse landscapes, and meaningful travel experiences. From remarkable scenery and wildlife to local traditions and welcoming communities, every visit reveals something special."
           }
         />
@@ -278,7 +278,6 @@ const BotswanaLandingPage = () => {
       {allExperiences?.length > 0 && (
         <ExperienceCarousel
           title="Our Experiences"
-          
           description={
             allExperiences[0]?.gallery?.description ||
             "Explore stunning experiences of Africa"
