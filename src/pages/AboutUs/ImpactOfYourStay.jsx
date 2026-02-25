@@ -53,7 +53,7 @@ const ImpactOfYourStay = () => {
       {/* Header */}
       <div className="text-center px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-28 mb-12">
         <div className="font-cormorant text-center  ">
-          <h2 className="text-3xl text-[#a89f82] uppercase">
+          <h2 className=" font-quicksand text-[#a89f82] uppercase">
             {" "}
             Travel Responsibly
           </h2>

@@ -62,7 +62,7 @@ const Header = () => {
   const toggleDropdown = () => setIsOpen((prev) => !prev);
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
+    <header className="bg-white shadow-sm sticky top-0 z-[100]">
       <div className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}

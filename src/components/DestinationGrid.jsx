@@ -43,8 +43,8 @@ const DestinationGrid = ({
                 className="w-full h-full object-cover rounded-l-[3px]"
               />
             </div>
-            <div className="flex-grow p-4 font-quicksand">
-              <p className="text-sm sm:text-base font-semibold tracking-[2px] text-[#252525]">
+            <div className="flex-grow p-4 font-cormorant">
+              <p className=" text-xl  font-semibold text-[#252525]">
                 {item.name}
               </p>
             </div>

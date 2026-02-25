@@ -3,21 +3,22 @@ import "./TalkExpert.css";
 import export1 from "../assets/expo1.avif";
 import export2 from "../assets/expo2.avif";
 import export3 from "../assets/expo3.avif";
+import { Link } from "react-router-dom";
 
 
 
 const experts = [
   {
-    name: "MEG",
-    img: export1, // replace with your image path
+    name: "LION",
+    img: '/wildlife-lion.webp'
   },
   {
-    name: "KEVIN",
-    img: export2,
+    name: "ELEPHANT",
+    img: '/wildlife-elephant.webp',
   },
   {
-    name: "JOANNA",
-    img: export3,
+    name: "ZEBRA",
+    img: '/wildlife-zebra.webp',
   },
 
 ];
@@ -30,23 +31,23 @@ const TalkExpert = () => {
       <div className="px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-28 grid grid-cols-1 md:grid-cols-5 gap-12 items-center">
         {/* LEFT SIDE — 2/5 */}
         <div className="md:col-span-2">
-          <p className="uppercase font-cormorant text-lg tracking-widest text-gray-700 mb-3">
+          <p className="uppercase font-quicksand   text-gray-700 mb-3">
             Get Started
           </p>
-          <h2 className="text-4xl md:text-6xl font-cormorant text-gray-900 mb-4">
+          <h5 className=" font-cormorant text-6xl mb-8 mt-4 text-[#636363] capitalize font-normal">
             Want to chat?
-          </h2>
+          </h5>
           <p className="text-gray-700 mb-6 text-lg font-quicksand leading-relaxed max-w-md">
             Talk with our team and start planning your African journey
           </p>
 
-          <button className="bg-[#b1a47f] hover:bg-[#a0916d] font-quicksand text-white font-semibold text-sm uppercase tracking-widest py-2 px-5 rounded-sm transition">
+          <Link to={'/contact-us'} className="bg-[#b1a47f] hover:bg-[#a0916d] font-quicksand text-white  text-sm uppercase py-2 px-5 rounded-sm transition">
             Help Me Plan
-          </button>
+          </Link>
 
           <p className="mt-4 font-quicksand text-sm text-gray-900 font-medium">
             <span className="font-bold">or call us on:</span>{" "}
-            +263 (0)77 5386228
+           +27(0)315352811
           </p>
         </div>
 

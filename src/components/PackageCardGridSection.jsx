@@ -11,15 +11,15 @@ const PackageCardGridSection = ({
   onCardClick, // 👈 Added missing prop
 }) => {
   return (
-    <section className="py-12">
+    <section className="py-14">
       <div className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28">
         {/* Section Heading */}
-        <div className="font-cormorant text-center">
+        <div className=" text-center">
           {title && (
-            <h2 className="text-3xl text-[#a89f82] uppercase">{title}</h2>
+            <p className=" text-[#a89f82] font-quicksand  uppercase">{title}</p>
           )}
           {subtitle && (
-            <h5 className="text-6xl mb-8 mt-4 text-[#636363] capitalize font-normal">
+            <h5 className="text-6xl font-cormorant mb-8 mt-4 text-[#636363] capitalize font-normal">
               {subtitle}
             </h5>
           )}
@@ -41,7 +41,7 @@ const PackageCardGridSection = ({
         ) : (
           <p className="text-center text-gray-600 mt-10">{emptyMessage}</p>
         )}
-        <div className=" mt-16 text-center">
+        <div className=" mt-14 text-center">
           <Link to={"/packages"} className="bg-[#ac9e86] text-white font-light tracking-widest py-3 px-8 text-xs sm:text-sm uppercase hover:bg-[#978973] rounded-sm transition duration-200 font-quicksand">
             More Itinenary
           </Link>

@@ -6,10 +6,13 @@ const Founder = () => {
       <div className=" px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-28 py-16 ">
         <div className=" grid grid-cols-1 md:grid-cols-2 gap-32 ">
           <div className="">
-            <h2 className=" font-cormorant mb-4 text-lg uppercase text-[#aaa086]">
+            {/* <h2 className=" font-cormorant text-2xl text-[#a89f82] uppercase">
               John McMillan, CEO at Where to Africa:
-            </h2>
-            <h5 className=" font-cormorant font-semibold text-6xl text-[#636363] mb-4">
+            </h2> */}
+                <p className=" font-quicksand text-[#a89f82] uppercase">
+              John McMillan, CEO at Where to Africa:
+            </p>
+            <h5 className=" font-cormorant text-6xl mb-8 mt-4 text-[#636363] capitalize font-normal">
               "Travel That Respects Africa’s Future"
             </h5>
             <p className=" font-quicksand mb-4">
@@ -23,12 +26,12 @@ const Founder = () => {
               protecting wildlife, and respecting cultural heritage remain
               central to every journey offered.
             </p>
-            <p className="font-quicksand mb-4">
+            {/* <p className="font-quicksand mb-4">
               Across Africa, responsible tourism has demonstrated its ability to
               create opportunities. When local guides lead, conservation is
               prioritized, and communities benefit directly; travel becomes
               meaningful and lasting.
-            </p>
+            </p> */}
             <p className="font-quicksand mb-4">
               Journeys designed by “Where to Africa” are built on trust and
               long-term partnerships across Southern and East Africa. Each trip

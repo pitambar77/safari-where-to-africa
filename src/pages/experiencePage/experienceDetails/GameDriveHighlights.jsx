@@ -1,5 +1,3 @@
-
-
 // import React from "react";
 // import { Swiper, SwiperSlide } from "swiper/react";
 // import { Navigation } from "swiper/modules";
@@ -137,7 +135,10 @@ const GameDriveCard = ({ image, title, description }) => (
  * @param {Array} props.gamehighLight - Array of game drive highlight objects
  * @param {string} [props.sectionTitle] - Optional custom section heading
  */
-const GameDriveHighlights = ({ gamehighLight = [], sectionTitle = "Game Drive Highlights" }) => {
+const GameDriveHighlights = ({
+  gamehighLight = [],
+  sectionTitle = "Game Drive Highlights",
+}) => {
   if (!Array.isArray(gamehighLight) || gamehighLight.length === 0) {
     return (
       <p className="text-center text-gray-500 py-10">
@@ -149,9 +150,14 @@ const GameDriveHighlights = ({ gamehighLight = [], sectionTitle = "Game Drive Hi
   return (
     <section className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28 py-16 relative">
       {/* Section Heading */}
-      <h2 className="text-6xl mb-16 text-[#636363] capitalize font-cormorant text-center">
-        {sectionTitle}
-      </h2>
+      <div className=" text-center">
+        <p className=" text-[#a89f82] uppercase font-quicksand ">
+          our highlits
+        </p>
+        <h2 className="text-6xl mb-16 mt-6 text-[#636363] capitalize font-cormorant text-center">
+          {sectionTitle}
+        </h2>
+      </div>
 
       {/* Swiper Carousel */}
       <div className="relative group">
@@ -195,4 +201,3 @@ const GameDriveHighlights = ({ gamehighLight = [], sectionTitle = "Game Drive Hi
 };
 
 export default GameDriveHighlights;
-

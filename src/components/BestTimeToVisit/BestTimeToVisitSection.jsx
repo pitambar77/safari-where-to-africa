@@ -42,7 +42,11 @@ const BestTimeToVisitSection = ({
     <section className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-48 py-16 text-[#2e2c2d] font-quicksand">
       {/* Header */}
       <div className="text-center mb-14 font-cormorant">
-        <p className="text-center text-2xl md:text-3xl font-normal text-[#a89f82] uppercase mb-6">
+        {/* <p className="text-center text-2xl md:text-3xl font-normal text-[#a89f82] uppercase mb-6">
+          {subtitle}
+        </p> */}
+
+        <p className="text-center font-quicksand text-[#a89f82] uppercase mb-6">
           {subtitle}
         </p>
         <h2 className="text-6xl mb-10 text-[#636363] capitalize font-normal">

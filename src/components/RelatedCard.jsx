@@ -30,7 +30,7 @@ const RelatedCard = ({ data = [], onCardClick }) => {
   return (
     <div className=' py-10'>
          <div className="font-cormorant text-center">
-          <h2 className="text-3xl text-[#a89f82] uppercase"> Your Journeys</h2>
+          <p className=" font-quicksand text-[#a89f82] uppercase"> Your Journeys</p>
 
           <h5 className="text-6xl  mb-10 mt-4 capitalize text-[#636363] font-normal">
             Check in to your other property

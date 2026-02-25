@@ -220,7 +220,7 @@ const JourneysCarousel = ({ journeys = [], destinationSlug }) => {
     <section className="py-16 relative bg-white">
       {/* ---------- Heading ---------- */}
       <div className="text-center max-w-6xl mx-auto mb-14 font-cormorant">
-        <p className="text-2xl md:text-3xl font-normal text-[#a89f82] uppercase mb-6">
+        <p className=" font-quicksand text-[#a89f82] uppercase mb-6">
           Related Journeys
         </p>
         <h2 className="text-6xl mb-10 text-[#636363] capitalize font-normal">

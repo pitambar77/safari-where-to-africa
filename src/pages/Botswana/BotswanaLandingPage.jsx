@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { getDestinationBySlug } from "../../api/destinationAPI.js";
@@ -12,8 +11,6 @@ import SafariCard from "../../components/SafariCard";
 import ExperienceCarousel from "../../components/ExperienceCarousel";
 import AccommodationGrid from "../../components/AccommodationGrid";
 import TravelguideSection from "../../components/TravelguideSection";
-
-
 
 const BotswanaLandingPage = () => {
   const { slug } = useParams();
@@ -78,11 +75,12 @@ const BotswanaLandingPage = () => {
 
   // ✅ Flatten region-based nested data
   // const allTrips = regions?.flatMap((region) => region.trips || []) || [];
-  const allTrips =
-  [
+  const allTrips = [
     ...new Map(
-      (regions?.flatMap((region) => region.trips || []) || [])
-        .map((trip) => [trip._id, trip])
+      (regions?.flatMap((region) => region.trips || []) || []).map((trip) => [
+        trip._id,
+        trip,
+      ]),
     ).values(),
   ];
 
@@ -157,26 +155,26 @@ const BotswanaLandingPage = () => {
         )} */}
 
         {regions?.length > 0 && (
-  <DestinationGrid
-    data={regions
-      .filter((region) => {
-        const name = region.name?.toLowerCase() || "";
+          <DestinationGrid
+            data={regions
+              .filter((region) => {
+                const name = region.name?.toLowerCase() || "";
 
-        return (
-          !name.includes("package") &&
-          !name.includes("accommodation") &&
-          !name.includes("accomodation")
-        );
-      })
-      .map((region) => ({
-        name: region.name,
-        image: region.image,
-        alt: region.description,
-        path: `/${slug}/${region.slug}`,
-      }))}
-    title=""
-  />
-)}
+                return (
+                  !name.includes("package") &&
+                  !name.includes("accommodation") &&
+                  !name.includes("accomodation")
+                );
+              })
+              .map((region) => ({
+                name: region.name,
+                image: region.image,
+                alt: region.description,
+                path: `/${slug}/${region.slug}`,
+              }))}
+            title=""
+          />
+        )}
 
         {/* {regions?.length > 0 && (
           <DestinationGrid
@@ -280,6 +278,7 @@ const BotswanaLandingPage = () => {
       {allExperiences?.length > 0 && (
         <ExperienceCarousel
           title="Our Experiences"
+          
           description={
             allExperiences[0]?.gallery?.description ||
             "Explore stunning experiences of Africa"
@@ -298,19 +297,19 @@ const BotswanaLandingPage = () => {
       {allAccommodations?.length > 0 && (
         <AccommodationGrid
           title="Overnight Accommodations"
+          subtitle={`Places to Stay in ${destination?.name || " Africa"}`}
           data={allAccommodations
-             .slice(0, 12) // ✅ limit to 12
+            .slice(0, 12) // ✅ limit to 12
             .map((acc) => ({
-            id: acc.slug,
-            image: acc.bannerImages?.[0],
-            nights: `Ratings ${acc.nightsStay || ""}`,
-            title: acc.name,
-            location: acc.location,
-            tag: acc.accommodationType,
-          }))}
+              id: acc.slug,
+              image: acc.bannerImages?.[0],
+              nights: `Ratings ${acc.nightsStay || ""}`,
+              title: acc.name,
+              location: acc.location,
+              tag: acc.bannerDescription,
+            }))}
           onCardClick={(slug) => navigate(`/accommodation/${slug}`)}
         />
-        
       )}
 
       {/* {allAccommodations?.length > 0 && (

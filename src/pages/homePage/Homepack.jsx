@@ -254,12 +254,7 @@ const Homepack = () => {
     }
   };
 
-  // Unique destinations
-  // const uniqueDestinations = [
-  //   ...new Map(
-  //     trips.map((trip) => [trip.destination._id, trip.destination]),
-  //   ).values(),
-  // ];
+
 
   const uniqueDestinations = [
   ...new Map(

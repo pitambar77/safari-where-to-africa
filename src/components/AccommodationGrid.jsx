@@ -5,19 +5,25 @@ import { Link } from "react-router-dom";
 
 const AccommodationGrid = ({
   title = "Overnight Accommodations",
+  subtitle = "Places to Stay in South Africa",
   data = [],
   onCardClick,
 }) => {
   return (
-    <section className="bg-white py-16 font-cormorant">
+    <section className=" bg-gray-50 py-16 ">
       <div className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28">
         {/* Heading */}
-        <h2 className="text-center text-2xl md:text-3xl font-normal uppercase text-[#a89f82] mb-12">
-          {title}
-        </h2>
+        <div className=" text-center">
+          {/* <h2 className="text-center text-2xl md:text-3xl font-normal uppercase text-[#a89f82] mb-4"> */}
+          <p className=" text-[#a89f82] font-quicksand  uppercase">{title}</p>
 
+          {/* </h2> */}
+          <h5 className="text-6xl mb-16 mt-4 text-[#636363] capitalize font-normal font-cormorant">
+            {subtitle}
+          </h5>
+        </div>
         {/* Grid */}
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 font-cormorant">
           {data.map((item) => (
             <div
               key={item.id}
@@ -29,8 +35,8 @@ const AccommodationGrid = ({
                 image={item.image}
                 nights={item.nights}
                 title={item.title}
-                location={item.location}
-                tag={item.tag}
+                location={item.tag}
+                tag={item.location}
               />
             </div>
           ))}

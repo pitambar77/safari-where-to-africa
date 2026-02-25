@@ -4,7 +4,6 @@ import { FaLeaf, FaSun, FaStar, FaCloud, FaMoon } from "react-icons/fa"; // icon
 import bird from "../../assets/enjoy-the-planning.svg";
 
 const features = [
-  
   {
     icon: <FaSun className="text-3xl text-[#aaa086]" />,
     title: "Local Expertise",
@@ -43,10 +42,13 @@ const WhyBookWithTimbuktu = () => {
       <div className="px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-28 grid lg:grid-cols-3 gap-12">
         {/* LEFT TEXT SECTION */}
         <div>
-          <p className="text-lg uppercase tracking-wider font-quicksand font-semibold mb-4 text-[#636363]">
+          <p className=" uppercase font-quicksand mb-4 text-[#636363]">
             Travel With Confidence
           </p>
-          <h2 className="text-4xl font-cormorant mb-4 text-[#636363]">
+          {/* <h2 className="text-4xl font-cormorant mb-4 text-[#636363]">
+            Why Book with Us
+          </h2> */}
+          <h2 className="text-5xl mb-4 text-[#636363] capitalize font-cormorant ">
             Why Book with Us
           </h2>
           <p className="text-gray-700 leading-relaxed font-quicksand">

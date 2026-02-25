@@ -29,11 +29,14 @@ const WhyTravel = () => {
 
   return (
     <div className="px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-28 flex flex-col items-center bg-white py-16">
-      <div className="font-cormorant text-center">
-        <h2 className="text-3xl text-[#a89f82] uppercase">
+      <div className=" text-center">
+        {/* <h2 className="text-3xl text-[#a89f82] uppercase">
          Trusted African Travel Experiences
-        </h2>
-        <h5 className="text-6xl mb-10 mt-4 text-[#636363] capitalize font-normal">
+        </h2> */}
+           <p className=" text-[#a89f82] uppercase font-quicksand">
+         Trusted African Travel Experiences
+        </p>
+        <h5 className="text-6xl mb-8 mt-4 text-[#636363] capitalize font-normal font-cormorant">
           Why Our Travelers Choose Us
         </h5>
         <p className="font-quicksand max-w-xl mx-auto mb-12">
@@ -60,7 +63,7 @@ const WhyTravel = () => {
 
             {/* Text */}
             <div className="p-6">
-              <h3 className="text-3xl font-cormorant font-medium text-[#636363] mb-4">
+              <h3 className="text-3xl font-cormorant font-medium  mb-4">
                 {reason.title}
               </h3>
               <p className="text-[#636363] font-quicksand">

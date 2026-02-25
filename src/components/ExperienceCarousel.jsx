@@ -25,26 +25,36 @@ const ExperienceCarousel = ({
   const [isEnd, setIsEnd] = useState(false);
 
   return (
-    <section className="py-16 pl-4 md:pl-10 lg:pl-16 xl:pl-20 2xl:pl-28 relative">
+    <section className="py-16  relative">
+
+      <div className=" px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28">
+
+     
       {/* Background Overlay */}
       <div className="absolute inset-0 before:absolute before:top-0 before:left-0 before:w-full before:h-2/3 before:bg-[#faf6ef] before:z-0"></div>
 
       {/* Header Section */}
-      <div className="max-w-3xl mx-auto text-center mb-14 relative">
-        <p className="text-3xl font-cormorant tracking-[2px] uppercase text-[#a89f82] mb-4">
+      <div className="max-w-full mx-auto text-center mb-14 relative">
+        <p className="text-[#a89f82] font-quicksand uppercase mb-4">
           {title}
         </p>
         {description && (
-          <p className="italic font-quicksand text-[#636363] text-lg md:text-xl leading-relaxed mb-6">
+         <h5 className="text-6xl font-cormorant mb-8 mt-4 text-[#636363] capitalize font-normal">
             {description}
-          </p>
+          </h5>
         )}
-        {author && (
+        {/* {author && (
           <p className="font-quicksand text-[#636363] text-lg md:text-xl leading-relaxed mb-4">
             {author}
           </p>
-        )}
+        )} */}
       </div>
+
+       </div>
+
+      <div className="pl-4 md:pl-10 lg:pl-16 xl:pl-20 2xl:pl-28">
+
+    
 
       {/* Carousel Section */}
       <div className="relative">
@@ -122,6 +132,7 @@ onClick={() => onCardClick && onCardClick(item.id)}
         </button>
       </div>
 
+  </div>
       {/* Pagination Controls */}
       <div className="flex items-center space-x-4 mt-12 text-[#a89f82] justify-center font-cormorant">
         <button

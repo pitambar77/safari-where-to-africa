@@ -7,13 +7,13 @@ const TravelguideSection = ({
   journeys = [],
 }) => {
   return (
-    <section className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28 py-16 bg-white font-cormorant">
+    <section className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28 py-16 bg-white ">
       {/* Section Heading */}
       <div className="text-center mb-14">
-        <p className="text-2xl md:text-3xl font-normal text-[#a89f82] uppercase mb-6">
+        <p className=" text-[#a89f82] font-quicksand  uppercase mb-6">
           {heading}
         </p>
-        <h2 className="text-5xl md:text-6xl mb-10 text-[#636363] capitalize font-normal">
+        <h2 className="text-5xl md:text-6xl mb-10 text-[#636363] capitalize font-normal font-cormorant">
           {subheading}
         </h2>
       </div>

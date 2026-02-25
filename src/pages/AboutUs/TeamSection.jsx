@@ -32,9 +32,9 @@ const MeetOurTeam = () => {
   return (
     <section className="py-16 bg-white px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-28">
       <div className="text-center mb-20">
-        <h2 className="text-6xl   text-[#636363] capitalize font-cormorant ">Meet our team</h2>
-        
-       
+        <h2 className="text-6xl   text-[#636363] capitalize font-cormorant ">
+          Meet our team
+        </h2>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 ">

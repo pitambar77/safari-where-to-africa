@@ -49,11 +49,11 @@ const Testimonial = () => {
     <section className="testimonial-sec py-16 bg-white">
       <div className="px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-28">
         {/* Heading */}
-        <div className="font-cormorant text-center">
-          <h2 className="text-2xl md:text-3xl text-[#a89f82] uppercase">
+        <div className=" text-center">
+          <p className=" text-[#a89f82] font-quicksand  uppercase">
             Reviews
-          </h2>
-          <h3 className="text-4xl md:text-6xl mb-10 mt-4 text-[#636363] font-normal">
+          </p>
+          <h3 className="text-4xl md:text-6xl mb-10 mt-4 text-[#636363] font-normal font-cormorant">
             Real Stories From Happy Travelers
           </h3>
         </div>

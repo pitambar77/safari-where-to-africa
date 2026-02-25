@@ -6,7 +6,7 @@ const AccommodationRelated = ({ image, nights, title, location, tag, onClick }) 
     <div className="bg-white rounded-sm hover:shadow-lg transition overflow-hidden font-cormorant">
       {/* Image Section */}
       <div className="relative">
-        <img src={image} alt={title} className="w-full h-48 object-cover" />
+        <img src={image} alt={title} className="w-full h-40 object-cover" />
         {tag && (
           <span className="absolute bottom-1 left-1 bg-[#a79353] text-white text-xs font-medium px-3 py-1 rounded-sm uppercase tracking-wide">
             {tag}
@@ -19,10 +19,10 @@ const AccommodationRelated = ({ image, nights, title, location, tag, onClick }) 
         <p className="text-sm font-semibold tracking-widest text-gray-600 uppercase">
           {nights}
         </p>
-        <h3 className="text-xl font-medium text-[#a79353] leading-snug">
+        <h3 className="text-xl font-semibold text-[#a79353] leading-snug">
           {title}
         </h3>
-        <p className="text-gray-500 font-quicksand">{location}</p>
+        <p className="text-gray-500 font-quicksand line-clamp-2">{location}</p>
 
         <div className="flex justify-end">
           <button

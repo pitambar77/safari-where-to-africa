@@ -21,11 +21,11 @@ const Partner = () => {
     <section className="partner-sec">
       <div className=" max-w-[1320px] mx-auto px-4">
 
-        <div className="font-cormorant text-center">
-           <h2 className="text-3xl text-[#a89f82] uppercase">
+        <div className=" text-center">
+           <p className=" text-[#a89f82] font-quicksand uppercase">
              Our Partners
-           </h2>
-           <h5 className="text-6xl max-w-4xl mx-auto  mb-8 mt-4 text-[#636363] font-normal">
+           </p>
+           <h5 className="text-6xl max-w-4xl mx-auto  mb-8 mt-4 text-[#636363] font-normal font-cormorant">
              Trusted Partners Powering Our Global Journey
            </h5>
            <p className=" font-quicksand max-w-xl mx-auto mb-10 ">

@@ -59,7 +59,7 @@ const SafariCard = ({ item }) => {
   return (
     <Link
       to={`/package/${item.id}`}   // 👈 IMPORTANT
-      className="block relative rounded-sm overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"
+      className="block relative rounded-sm overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 "
     >
       <img
         src={item.image}
@@ -85,16 +85,17 @@ const SafariCard = ({ item }) => {
         </div>
       )}
 
-      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-4 text-white">
+      <div className="absolute bottom-0 left-0 right-0  bg-gradient-to-t from-black via-black/70 to-transparent p-4 text-white flex flex-col justify-end">
+   
         {item.country && (
           <div className="text-xs uppercase tracking-wide opacity-80 mb-3 font-quicksand font-semibold">
             {item.country}
           </div>
         )}
-        <div className="mb-4 font-cormorant text-3xl">{item.title}</div>
+        <div className="mb-4 font-cormorant text-3xl line-clamp-3">{item.title}</div>
         {item.price && (
-          <div className="mt-1 font-quicksand">
-            Guide Price {Number(item.price).toLocaleString()} Per Person
+          <div className="mt-1 mb-4 font-quicksand">
+            Guide Price <span className=" font-semibold">{(item.price).toLocaleString()}</span>  Per Person
           </div>
         )}
       </div>

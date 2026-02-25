@@ -199,7 +199,7 @@ const GallerySection = ({
     <div className="flex flex-col items-center bg-white py-16 font-serif">
       {/* GALLERY Header (UNCHANGED) */}
       <div className="font-cormorant text-center px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28">
-        <h2 className="text-3xl text-[#a89f82] uppercase">{title}</h2>
+        <p className="text-[#a89f82] uppercase font-quicksand">{title}</p>
 
         <h5 className="text-6xl mb-8 mt-4 text-[#636363] capitalize font-normal">
           {subtitle}

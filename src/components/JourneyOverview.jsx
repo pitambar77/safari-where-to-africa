@@ -20,7 +20,7 @@ const JourneyOverview = ({
     <section className="px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-28 mt-10 font-cormorant">
       {/* Header Section */}
       <div className="text-center">
-        <h2 className="text-[#aaa086] text-[24px] uppercase">{subtitle}</h2>
+        <p className="text-[#aaa086]  font-quicksand  uppercase">{subtitle}</p>
         <div className="max-w-xl mx-auto mt-4">
           <h5 className="text-[64px] font-medium leading-[1.2] text-[#686868]">
             {title}
