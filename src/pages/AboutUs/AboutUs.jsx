@@ -11,7 +11,7 @@ import ImpactOfYourStay from "./ImpactOfYourStay";
 const AboutUs = () => {
   return (
     <>
-      <Banner title={"About Us"} imageUrl={'/about-us-banner.webp'} />
+      <Banner title={"About Us"} subtitle={"Driven by passion and expertise, we craft authentic African journeys, combining deep local knowledge with personalized service to create unforgettable travel experiences."} imageUrl={'/about-us-banner.webp'} />
       <div className="bg-[#f6f1e9]">
         <Overview
           title="Our Story Begins"

@@ -278,9 +278,7 @@ const BotswanaLandingPage = () => {
       {allExperiences?.length > 0 && (
         <ExperienceCarousel
           title="Our Experiences"
-          description={
-            allExperiences[0]?.gallery?.description ||
-            "Explore stunning experiences of Africa"
+          description={`Explore ${destination.name} Experiences`
           }
           data={allExperiences.map((exp) => ({
             id: exp.slug,
