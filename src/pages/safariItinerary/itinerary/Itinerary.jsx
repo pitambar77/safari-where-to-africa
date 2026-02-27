@@ -576,8 +576,7 @@ const Itinerary = ({ data = [], title = "Trip Itinerary" }) => {
 ${!isScrollable ? "flex-1 text-center" : ""}
                       px-8 py-3
                       text-base font-semibold
-                      border border-[#aaa086]
-                      rounded-full
+                      border border-[#aaa086] rounded-full
                       transition-all duration-300 cursor-pointer
                       ${
                         isActive

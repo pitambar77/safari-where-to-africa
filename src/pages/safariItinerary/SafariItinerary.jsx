@@ -12,6 +12,7 @@ import axiosInstance from "../../api/axiosInstance";
 import ItinenaryForm from "../../components/ItinenaryForm";
 import IncludeExl from "./IncludeExl";
 
+
 const SafariItinerary = () => {
   const itineraryData = [
     {
@@ -338,19 +339,20 @@ const SafariItinerary = () => {
         />
       </div>
 
-      <div className="mt-16 text-center">
+      {/* <div className="mt-16 text-center">
         <button
           onClick={() => setOpenForm(true)}
           className="bg-[#ac9e86] text-white font-light tracking-widest py-3 px-8 text-xs sm:text-sm uppercase hover:bg-[#978973] rounded-sm transition duration-200 font-quicksand"
         >
           Book Package
         </button>
-      </div>
+      </div> */}
 
       {/* Modal */}
-      {openForm && (
+      {/* {openForm && (
         <ItinenaryForm onClose={() => setOpenForm(false)} trip={trip} />
-      )}
+      )} */}
+<ItinenaryForm trip={trip}/>
 
       <JourneysCarousel />
     </>
