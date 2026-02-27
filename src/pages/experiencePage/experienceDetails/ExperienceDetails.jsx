@@ -10,6 +10,8 @@ import JourneyOverview from "../../../components/JourneyOverview";
 import { useParams } from "react-router-dom";
 import axiosInstance from "../../../api/axiosInstance.js";
 import GallerySection from "../../Accomodation/AccomodationDetails/GallerySection";
+import ItineraryDetailsSkeleton from "../../../components/skeletons/ItineraryDetailsSkeleton.jsx";
+import PageNotFound from "../../PageNotFound.jsx";
 
 const ExperienceDetails = () => {
   const { slug } = useParams(); // 👈 get trip id from URL
@@ -32,9 +34,9 @@ const ExperienceDetails = () => {
   }, [slug]);
 
   if (loading)
-    return <p className="text-center py-10">Loading experience...</p>;
+    return <ItineraryDetailsSkeleton/>;
   if (!experience)
-    return <p className="text-center py-10">Experience not found.</p>;
+    return <PageNotFound/>;
 
   console.log(experience);
 

@@ -11,6 +11,8 @@ import SafariCard from "../../components/SafariCard";
 import ExperienceCarousel from "../../components/ExperienceCarousel";
 import AccommodationGrid from "../../components/AccommodationGrid";
 import TravelguideSection from "../../components/TravelguideSection";
+import PageSkeleton from "../../components/skeletons/PageSkeleton.jsx";
+import PageNotFound from "../PageNotFound.jsx";
 
 const BotswanaLandingPage = () => {
   const { slug } = useParams();
@@ -63,12 +65,16 @@ const BotswanaLandingPage = () => {
     }
   }, [destination]);
 
-  if (loading)
-    return <p className="text-center py-20 text-gray-600">Loading...</p>;
-  if (error) return <p className="text-center py-20 text-red-500">{error}</p>;
-  if (!destination) return <p className="text-center py-20">No data found.</p>;
+  // if (loading)
+  //   return <PageSkeleton/>;
+  // if (error) return <p className="text-center py-20 text-red-500">{error}</p>;
+  // if (!destination) return <p className="text-center py-20">No data found.</p>;
 
-  if (!destination) return <p className="text-center py-20">No data found.</p>;
+  if (loading) return <PageSkeleton />;
+
+  if (!loading && (!destination || error)) {
+    return <PageNotFound />;
+  }
 
   // ✅ Destructure the fields properly from the destination object
   const { hero, regions, trips, experiences, accommodations } = destination;
@@ -278,8 +284,7 @@ const BotswanaLandingPage = () => {
       {allExperiences?.length > 0 && (
         <ExperienceCarousel
           title="Our Experiences"
-          description={`Explore ${destination.name} Experiences`
-          }
+          description={`Explore ${destination.name} Experiences`}
           data={allExperiences.map((exp) => ({
             id: exp.slug,
             image: exp.bannerImage,

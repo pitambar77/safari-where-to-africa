@@ -9,6 +9,8 @@ import JourneyOverview from "../../../components/JourneyOverview";
 import { useParams } from "react-router-dom";
 import axiosInstance from "../../../api/axiosInstance";
 import { useNavigate } from "react-router-dom";
+import ItineraryDetailsSkeleton from "../../../components/skeletons/ItineraryDetailsSkeleton";
+import PageNotFound from "../../PageNotFound";
 
 
 const AccomodationDetails = () => {
@@ -64,9 +66,9 @@ const navigate = useNavigate();
   console.log(accommodation);
 
   if (loading)
-    return <p className="text-center py-10">Loading accomodation...</p>;
+    return <ItineraryDetailsSkeleton/>;
   if (!accommodation)
-    return <p className="text-center py-10">Accommodation not found.</p>;
+    return <PageNotFound/>;
 
   return (
     <>

@@ -385,6 +385,7 @@ import BestTimeToVisitSection from "../../../components/BestTimeToVisit/BestTime
 import JourneysCarousel from "../../Accomodation/AccomodationDetails/JourneysCarousel";
 import { title } from "framer-motion/client";
 import { getDestinationBySlug } from "../../../api/destinationAPI";
+import ItineraryDetailsSkeleton from "../../../components/skeletons/ItineraryDetailsSkeleton.jsx";
 
 const DestinationDetails = () => {
   const { destinationSlug, regionSlug } = useParams();
@@ -446,7 +447,7 @@ const DestinationDetails = () => {
   }, [destinationSlug]);
 
   if (loading)
-    return <p className="text-center py-20 text-gray-600">Loading region...</p>;
+    return <ItineraryDetailsSkeleton/>;
   if (error) return <p className="text-center py-20 text-red-500">{error}</p>;
   if (!region)
     return <p className="text-center py-20 text-gray-600">No region found.</p>;

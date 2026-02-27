@@ -11,6 +11,8 @@ import { useParams } from "react-router-dom";
 import axiosInstance from "../../api/axiosInstance";
 import ItinenaryForm from "../../components/ItinenaryForm";
 import IncludeExl from "./IncludeExl";
+import ItineraryDetailsSkeleton from "../../components/skeletons/ItineraryDetailsSkeleton";
+import PageNotFound from "../PageNotFound";
 
 
 const SafariItinerary = () => {
@@ -217,8 +219,8 @@ const SafariItinerary = () => {
     fetchTrip();
   }, [slug]);
 
-  if (loading) return <p className="text-center py-10">Loading trip...</p>;
-  if (!trip) return <p className="text-center py-10">Trip not found.</p>;
+  if (loading) return <ItineraryDetailsSkeleton />;
+  if (!trip) return <PageNotFound/>;
 
   return (
     <>
