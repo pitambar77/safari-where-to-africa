@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import axiosInstance from "../../api/axiosInstance";
 import { TbHandFingerRight } from "react-icons/tb";
 import Banner from "../../components/Banner";
+import TravelGuideDetailsSkeleton from "../../components/skeletons/TravelGuideDetailsSkeleton";
+import PageNotFound from "../PageNotFound";
 
 const RenderSection = ({ section }) => {
   switch (section.type) {
@@ -81,8 +83,8 @@ const TravelguideDetails = () => {
     fetchBlog();
   }, [slug]);
 
-  if (loading) return <p className="p-6">Loading...</p>;
-  if (!blog) return <p className="p-6">Blog not found</p>;
+  if (loading) return <TravelGuideDetailsSkeleton/>;
+  if (!blog) return <PageNotFound/>;
 
   return (
     <div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Outlet, useNavigation } from 'react-router-dom'
+import { Outlet,ScrollRestoration, useNavigation } from 'react-router-dom'
 import Testimonial from './components/Testimonial'
 import TalkExpert from './components/TalkExpert'
 import Footer from './components/Footer'
@@ -10,19 +10,17 @@ import ScrollToTop from './components/ScrollToTop'
 
 const Layout = () => {
 
-
-
-
   return (
     <>
    
-    <ScrollToTop /> 
+    {/* <ScrollToTop />  */}
     <Header/>
     <Outlet/>
     <Testimonial/>
     <TalkExpert/>
     <Partner/>
     <Footer/>
+    <ScrollRestoration/>
     </>
   )
 }

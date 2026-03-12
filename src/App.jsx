@@ -46,6 +46,8 @@ import PackageLanding from "./pages/safariItinerary/PackageLanding";
 import ExperienceLanding from "./pages/experiencePage/ExperienceLanding";
 import ContactUs from "./pages/ContactUs/ContactUs";
 import PageNotFound from "./pages/PageNotFound";
+import Login from "./pages/Login";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 // const router = createBrowserRouter(
 //   createRoutesFromElements(
@@ -130,7 +132,30 @@ const router = createBrowserRouter(
       </Route>
 
       {/* ===== DASHBOARD ===== */}
-      <Route path="/dashboard" element={<DashboardLayout />}>
+      {/* <Route path="/dashboard" element={<DashboardLayout />}>
+        <Route index element={<Navigate to="/dashboard/destinations" />} />
+        <Route path="destinations" element={<DestinationPage />} />
+        <Route path="experiences" element={<Experiences />} />
+        <Route path="trips" element={<Trips />} />
+        <Route path="accommodations" element={<AccommodationForm />} />
+        <Route path="itineraries" element={<ItineraryForm />} />
+        <Route path="travelguide" element={<TravelguideForm />} />
+        <Route path="blog" element={<TravelguideList />} />
+        <Route path="blog/edit/:id" element={<TravelguideForm />} />
+      </Route> */}
+
+      {/* ===== LOGIN ROUTE ===== */}
+      <Route path="/login" element={<Login />} />
+
+      {/* ===== DASHBOARD (PROTECTED) ===== */}
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <DashboardLayout />
+          </ProtectedRoute>
+        }
+      >
         <Route index element={<Navigate to="/dashboard/destinations" />} />
         <Route path="destinations" element={<DestinationPage />} />
         <Route path="experiences" element={<Experiences />} />
