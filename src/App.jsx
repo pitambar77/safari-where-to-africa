@@ -47,7 +47,7 @@ import ExperienceLanding from "./pages/experiencePage/ExperienceLanding";
 import ContactUs from "./pages/ContactUs/ContactUs";
 import PageNotFound from "./pages/PageNotFound";
 import Login from "./pages/Login";
-import ProtectedRoute from "./components/ProtectedRoute";
+// import ProtectedRoute from "./components/ProtectedRoute";
 
 // const router = createBrowserRouter(
 //   createRoutesFromElements(
@@ -151,9 +151,9 @@ const router = createBrowserRouter(
       <Route
         path="/dashboard"
         element={
-          <ProtectedRoute>
+          // <ProtectedRoute>
             <DashboardLayout />
-          </ProtectedRoute>
+          // </ProtectedRoute>
         }
       >
         <Route index element={<Navigate to="/dashboard/destinations" />} />
