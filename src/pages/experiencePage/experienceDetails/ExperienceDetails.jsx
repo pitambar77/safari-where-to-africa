@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Overview from "../../../components/Overview";
 import Include from "./Include";
 import GameDriveOption from "./GameDriveOption";
-import PricingAvailabilitySection from "../../Accomodation/AccomodationDetails/PricingAvailabilitySection";
 import GameDriveHighlights from "./GameDriveHighlights";
 import GallerySectionExactWidths from "../../Accomodation/AccomodationDetails/GallerySection";
 import JourneysCarousel from "../../Accomodation/AccomodationDetails/JourneysCarousel";
@@ -68,7 +67,7 @@ const ExperienceDetails = () => {
       </div>
       {/* <GameDriveOption 
       gameDrives={experience.gameDrives}   /> */}
-      <PricingAvailabilitySection />
+      {/* <PricingAvailabilitySection /> */}
       <GameDriveHighlights
         gamehighLight={experience.highlights}
         sectionTitle="Chobe Game Drive Highlights"

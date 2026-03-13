@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ActivitiesSection from "./ActivitiesSection";
-import PricingAvailabilitySection from "./PricingAvailabilitySection";
+// import PricingAvailabilitySection from "./PricingAvailabilitySection";
 import GallerySection from "./GallerySection";
 import AccordionSection from "./AccordionSection";
 import JourneysCarousel from "./JourneysCarousel";
@@ -94,7 +94,7 @@ const navigate = useNavigate();
         description={accommodation.overviewDescription}
         activities={accommodation.amenities}
       />
-      <PricingAvailabilitySection />
+      {/* <PricingAvailabilitySection /> */}
       <GallerySection
         title="Gallery"
         subtitle="Picture yourself here"
