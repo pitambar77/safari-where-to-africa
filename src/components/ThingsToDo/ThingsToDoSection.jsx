@@ -43,8 +43,27 @@ const ThingsToDoSection = ({
 
   return (
     <section className="py-16 relative">
-      {/* heading same as yours */}
-
+      {/* --- Heading Section --- */}{" "}
+      <div className="text-center max-w-6xl mx-auto mb-14 font-cormorant">
+        {" "}
+        {/* <p className="text-2xl md:text-3xl font-normal text-[#a89f82] uppercase mb-6"> {subtitle || "Things to Do"} </p> */}{" "}
+        <p className=" font-quicksand text-[#a89f82] uppercase mb-6">
+          {" "}
+          {subtitle || "Things to Do"}{" "}
+        </p>{" "}
+        <h2 className="text-6xl mb-10 text-[#636363] capitalize font-normal">
+          {" "}
+          {title}{" "}
+        </h2>{" "}
+        {descriptions.length > 0 && (
+          <div className="font-quicksand space-y-5">
+            {" "}
+            {descriptions.map((block, index) => (
+              <p key={index}>{block.content}</p>
+            ))}{" "}
+          </div>
+        )}{" "}
+      </div>
       <div className="relative pl-4 md:pl-10 lg:pl-16 xl:pl-20 2xl:pl-28">
         <Swiper
           modules={[Navigation]}
@@ -110,7 +129,6 @@ const ThingsToDoSection = ({
           <FaArrowRightLong className="text-[#a89f82]" size={18} />
         </button>
       </div>
-
       {/* Bottom pagination */}
       {items.length > 0 && (
         <div className="flex items-center space-x-4 mt-12 text-[#a89f82] justify-center font-cormorant">
