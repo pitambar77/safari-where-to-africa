@@ -26,12 +26,7 @@ const Founder = () => {
               protecting wildlife, and respecting cultural heritage remain
               central to every journey offered.
             </p>
-            {/* <p className="font-quicksand mb-4">
-              Across Africa, responsible tourism has demonstrated its ability to
-              create opportunities. When local guides lead, conservation is
-              prioritized, and communities benefit directly; travel becomes
-              meaningful and lasting.
-            </p> */}
+          
             <p className="font-quicksand mb-4">
               Journeys designed by “Where to Africa” are built on trust and
               long-term partnerships across Southern and East Africa. Each trip
@@ -42,9 +37,7 @@ const Founder = () => {
               reflects a commitment to Africa’s future, its communities, and its
               wildlife for generations to come.
             </p>
-            {/* <h6 className=" font-quicksand font-medium">
-              Let's make the world a little wilder, one safari at a time.
-            </h6> */}
+            
           </div>
           <div>
             <div className=" ">

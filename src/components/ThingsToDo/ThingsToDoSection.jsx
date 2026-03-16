@@ -11,53 +11,40 @@ const ThingsToDoSection = ({
   title,
   subtitle,
   descriptions = [],
-
   apiUrl,
   staticData = [],
 }) => {
-  const [items, setItems] = useState(staticData);
+  const [items, setItems] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
-  // Fetch from backend if API provided
   useEffect(() => {
-    if (!apiUrl) return;
+    if (!apiUrl) {
+      setItems(staticData || []);
+      return;
+    }
+
     const fetchData = async () => {
       try {
         const res = await axios.get(apiUrl);
-        setItems(res.data?.thingsToDo || []); // assuming backend returns { thingsToDo: [ { image, title } ] }
+        setItems(res.data?.thingsToDo || []);
       } catch (err) {
-        console.error("Error fetching data:", err);
+        console.error(err);
+        setItems([]);
       }
     };
+
     fetchData();
-  }, [apiUrl]);
+  }, [apiUrl, staticData]);
+
+  if (!items || !items.length) return null;
 
   return (
     <section className="py-16 relative">
-      {/* --- Heading Section --- */}
-      <div className="text-center max-w-6xl mx-auto mb-14 font-cormorant">
-        {/* <p className="text-2xl md:text-3xl font-normal text-[#a89f82] uppercase mb-6">
-          {subtitle || "Things to Do"}
-        </p> */}
-         <p className=" font-quicksand text-[#a89f82] uppercase mb-6">
-          {subtitle || "Things to Do"}
-        </p>
-        <h2 className="text-6xl mb-10 text-[#636363] capitalize font-normal">
-          {title}
-        </h2>
-        {descriptions.length > 0 && (
-          <div className="font-quicksand space-y-5">
-            {descriptions.map((block, index) => (
-              <p key={index}>{block.content}</p>
-            ))}
-          </div>
-        )}
-      </div>
+      {/* heading same as yours */}
 
-      {/* --- Swiper Section --- */}
       <div className="relative pl-4 md:pl-10 lg:pl-16 xl:pl-20 2xl:pl-28">
         <Swiper
           modules={[Navigation]}
@@ -76,6 +63,7 @@ const ThingsToDoSection = ({
             const total = Math.ceil(
               items.length / swiper.params.slidesPerGroup,
             );
+
             setTotalPages(total);
             setIsBeginning(swiper.isBeginning);
             setIsEnd(swiper.isEnd);
@@ -84,6 +72,7 @@ const ThingsToDoSection = ({
             const group = swiper.params.slidesPerGroup || 2;
             const page = Math.ceil((swiper.activeIndex + 1) / group);
             const total = Math.ceil(items.length / group);
+
             setCurrentPage(page);
             setTotalPages(total);
             setIsBeginning(swiper.isBeginning);
@@ -98,9 +87,9 @@ const ThingsToDoSection = ({
           ))}
         </Swiper>
 
-        {/* --- Left/Right Buttons (side) --- */}
+        {/* Side arrows */}
         <button
-          className={`swiper-prev absolute left-9 top-1/2 -translate-y-1/2 bg-white shadow-md p-3 rounded-full transition z-10 ${
+          className={`swiper-prev absolute left-9 top-1/2 -translate-y-1/2 bg-white shadow-md p-3 rounded-full z-10 ${
             isBeginning
               ? "opacity-40 cursor-not-allowed"
               : "hover:bg-gray-100 cursor-pointer"
@@ -111,7 +100,7 @@ const ThingsToDoSection = ({
         </button>
 
         <button
-          className={`swiper-next absolute right-1/6 top-1/2 -translate-y-1/2 bg-white shadow-md p-3 rounded-full transition z-10 ${
+          className={`swiper-next absolute right-1/6 top-1/2 -translate-y-1/2 bg-white shadow-md p-3 rounded-full z-10 ${
             isEnd
               ? "opacity-40 cursor-not-allowed"
               : "hover:bg-gray-100 cursor-pointer"
@@ -122,38 +111,40 @@ const ThingsToDoSection = ({
         </button>
       </div>
 
-      {/* --- Bottom Navigation --- */}
-      <div className="flex items-center space-x-4 mt-12 text-[#a89f82] justify-center font-cormorant">
-        <button
-          className={`swiper-prev rounded-full transition ${
-            isBeginning
-              ? "opacity-40 cursor-not-allowed"
-              : "hover:bg-gray-100 cursor-pointer"
-          }`}
-          disabled={isBeginning}
-        >
-          <FaArrowLeftLong className="w-8 h-5" />
-        </button>
+      {/* Bottom pagination */}
+      {items.length > 0 && (
+        <div className="flex items-center space-x-4 mt-12 text-[#a89f82] justify-center font-cormorant">
+          <button
+            className={`swiper-prev ${
+              isBeginning
+                ? "opacity-40 cursor-not-allowed"
+                : "hover:bg-gray-100 cursor-pointer"
+            }`}
+            disabled={isBeginning}
+          >
+            <FaArrowLeftLong className="w-8 h-5" />
+          </button>
 
-        <div className="text-lg font-quicksand font-light flex items-center">
-          {String(currentPage).padStart(2, "0")}
-          <span className="text-gray-400">
-            <div className="w-16 flex-1 h-[1px] bg-[#a89f82] mx-3"></div>
-          </span>
-          {String(totalPages).padStart(2, "0")}
+          <div className="text-lg font-quicksand font-light flex items-center">
+            {String(currentPage).padStart(2, "0")}
+            <span className="mx-3 w-16 h-[1px] bg-[#a89f82]"></span>
+            <span className="text-gray-400">
+              {String(totalPages).padStart(2, "0")}
+            </span>
+          </div>
+
+          <button
+            className={`swiper-next ${
+              isEnd
+                ? "opacity-40 cursor-not-allowed"
+                : "hover:bg-gray-100 cursor-pointer"
+            }`}
+            disabled={isEnd}
+          >
+            <FaArrowRightLong className="text-[#a89f82] w-8 h-5" />
+          </button>
         </div>
-
-        <button
-          className={`swiper-next rounded-full transition ${
-            isEnd
-              ? "opacity-40 cursor-not-allowed"
-              : "hover:bg-gray-100 cursor-pointer"
-          }`}
-          disabled={isEnd}
-        >
-          <FaArrowRightLong className="text-[#a89f82] w-8 h-5" />
-        </button>
-      </div>
+      )}
     </section>
   );
 };

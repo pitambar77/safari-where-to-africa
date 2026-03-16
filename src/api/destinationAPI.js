@@ -1,37 +1,5 @@
 
 
-// import axiosInstance from "./axiosInstance";
-
-// // Get all destinations
-// export const getAllDestinations = () => axiosInstance.get("/api/destinations");
-
-// // Get a single destination by slug
-// export const getDestinationBySlug = (slug) =>
-//   axiosInstance.get(`/api/destinations/slug/${slug}`);
-
-
-// // Create new destination (if you have admin)
-// export const createDestination = (formData) =>
-//   axiosInstance.post("/destinations", formData, {
-//     headers: { "Content-Type": "multipart/form-data" },
-//   });
-
-// // Get all destinations
-// // export const getAllDestinations = () => API.get("/destinations");
-
-// // Get one destination by ID
-// export const getDestinationById = (id) => axiosInstance.get(`/destinations/${id}`);
-
-// // Update destination
-// export const updateDestination = (id, formData) =>
-//   axiosInstance.put(`/destinations/${id}`, formData, {
-//     headers: { "Content-Type": "multipart/form-data" },
-//   });
-
-// // Delete destination
-// export const deleteDestination = (id) => axiosInstance.delete(`/destinations/${id}`);
-
-
 // ✅ correct versions
 
 import axiosInstance from "./axiosInstance";

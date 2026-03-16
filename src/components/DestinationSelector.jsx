@@ -3,44 +3,44 @@ import { useNavigate } from "react-router-dom";
 
 const destinations = [
   {
-    name: "South Africa",
-    image:"/south-africa-destination.webp",
-    path: "/south-africa",
-  },
-  {
     name: "Botswana",
-    image:"/botswana-destination.webp",
+    image: "/botswana-destination.webp",
     path: "/botswana",
   },
   {
-    name: "Namibia",
-    image:"/namibia-destination.webp",
-    path: "/namibia",
-  },
-  {
-    name: "Zimbabwe",
-    image:"/zimbabwe-destination.webp",
-    path: "/zimbabwe",
-  },
-  {
-    name: "Zambia",
-    image:"/zambia-destination.webp",
-    path: "/zambia",
-  },
-  {
-    name: "Mozambique",
-    image:"/mozambique-destination.webp",
-    path: "/mozambique",
-  },
-  {
     name: "Kenya",
-    image:"/kenya-destination.webp",
+    image: "/kenya-destination.webp",
     path: "/kenya",
   },
   {
+    name: "Mozambique",
+    image: "/mozambique-destination.webp",
+    path: "/mozambique",
+  },
+  {
+    name: "Namibia",
+    image: "/namibia-destination.webp",
+    path: "/namibia",
+  },
+  {
+    name: "South Africa",
+    image: "/south-africa-destination.webp",
+    path: "/south-africa",
+  },
+  {
     name: "Tanzania",
-    image:"/tanzania-destination.webp",
+    image: "/tanzania-destination.webp",
     path: "/tanzania",
+  },
+  {
+    name: "Zambia",
+    image: "/zambia-destination.webp",
+    path: "/zambia",
+  },
+  {
+    name: "Zimbabwe",
+    image: "/zimbabwe-destination.webp",
+    path: "/zimbabwe",
   },
 ];
 
@@ -318,7 +318,7 @@ export default function DestinationHero({ speed = 15, resumeDelay = 3000 }) {
                 <button
                   onClick={handleGo}
                   onMouseEnter={() => setIsPaused(true)}
-                  className="bg-[#77775b] text-white px-4 py-2 uppercase tracking-wide ml-2 pointer-events-auto"
+                  className="bg-[#77775b] text-white px-4 py-2 cursor-pointer uppercase tracking-wide ml-2 pointer-events-auto"
                 >
                   Go
                 </button>

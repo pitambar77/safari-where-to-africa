@@ -29,6 +29,7 @@
 
 import "./PositiveImpact.css";
 import posipico from "../../assets/positive-pico.jpg";
+import { Link } from "react-router-dom";
 
 const PositiveImpact = () => {
     return (
@@ -72,9 +73,9 @@ const PositiveImpact = () => {
           </p>
 
           {/* Learn More Button */}
-          <button className="px-6 py-3 border border-white text-white uppercase text-sm tracking-widest hover:bg-white hover:text-black transition duration-300">
+          <Link to={'/contact-us'} className="px-6 py-3 border border-white text-white uppercase text-sm tracking-widest hover:bg-white hover:text-black transition duration-300">
             LEARN MORE
-          </button>
+          </Link>
         </div>
 
         {/* Right-Side Image/Visual Element (Simulated) */}

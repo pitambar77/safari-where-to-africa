@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { getDestinationBySlug } from "../../api/destinationAPI.js";
 import axiosInstance from "../../api/axiosInstance";
@@ -20,8 +20,12 @@ const BotswanaLandingPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [travelGuides, setTravelGuides] = useState([]);
+  const [activeRegion, setActiveRegion] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(12);
 
   const navigate = useNavigate();
+
+  const accommodationRef = useRef(null);
 
   useEffect(() => {
     const fetchDestination = async () => {
@@ -79,6 +83,24 @@ const BotswanaLandingPage = () => {
   // ✅ Destructure the fields properly from the destination object
   const { hero, regions, trips, experiences, accommodations } = destination;
 
+  // const regionAccommodations =
+  //   regions?.map((region) => ({
+  //     regionName: region.name,
+  //     slug: region.slug,
+  //     accommodations: region.accommodations || [],
+  //   })) || [];
+
+  const regionAccommodations =
+    regions
+      ?.filter(
+        (region) => region.accommodations && region.accommodations.length > 0,
+      )
+      .map((region) => ({
+        regionName: region.name,
+        slug: region.slug,
+        accommodations: region.accommodations,
+      })) || [];
+
   // ✅ Flatten region-based nested data
   // const allTrips = regions?.flatMap((region) => region.trips || []) || [];
   const allTrips = [
@@ -117,6 +139,9 @@ const BotswanaLandingPage = () => {
       link: "#",
     })) || []),
   ];
+
+  const totalAccommodations =
+    regionAccommodations[activeRegion]?.accommodations?.length || 0;
 
   return (
     <div>
@@ -296,7 +321,7 @@ const BotswanaLandingPage = () => {
 
       {/* ===== Accommodations Section ===== */}
 
-      {allAccommodations?.length > 0 && (
+      {/* {allAccommodations?.length > 0 && (
         <AccommodationGrid
           title="Overnight Accommodations"
           subtitle={`Places to Stay in ${destination?.name || " Africa"}`}
@@ -312,34 +337,115 @@ const BotswanaLandingPage = () => {
             }))}
           onCardClick={(slug) => navigate(`/accommodation/${slug}`)}
         />
-      )}
+      )} */}
 
-      {/* {allAccommodations?.length > 0 && (
-        <>
+      <div ref={accommodationRef}>
+        {regionAccommodations.length > 0 && (
           <AccommodationGrid
             title="Overnight Accommodations"
-            data={allAccommodations.slice(0, 12).map((acc) => ({
-              id: acc.slug,
-              image: acc.bannerImages?.[0],
-              nights: `Ratings ${acc.nightsStay || ""}`,
-              title: acc.name,
-              location: acc.location,
-              tag: acc.accommodationType,
-            }))}
+            subtitle={`Places to Stay in ${destination?.name || "Africa"}`}
+            data={regionAccommodations[activeRegion]?.accommodations
+              ?.slice(0, visibleCount)
+              .map((acc) => ({
+                id: acc.slug,
+                image: acc.bannerImages?.[0],
+                nights: `Ratings ${acc.nightsStay || ""}`,
+                title: acc.name,
+                location: acc.location,
+                tag: acc.bannerDescription,
+              }))}
             onCardClick={(slug) => navigate(`/accommodation/${slug}`)}
-          />
+            footer={
+              <div className="text-center mt-10 flex justify-center gap-4">
+                {visibleCount < totalAccommodations && (
+                  <button
+                    onClick={() => setVisibleCount((prev) => prev + 12)}
+                    className="bg-[#ac9e86] text-white cursor-pointer  py-3 px-8 text-xs sm:text-sm uppercase hover:bg-[#978973] rounded-sm transition duration-200 font-quicksand"
+                  >
+                    View More
+                  </button>
+                )}
 
-          {allAccommodations.length > 12 && (
-            <div className="text-center mt-6">
-              <Link
-                to="/accommodations"
-                className="bg-[#ac9e86] text-white cursor-pointer font-light tracking-widest py-3 px-8 text-xs sm:text-sm uppercase hover:bg-[#978973] rounded-sm transition duration-200 font-quicksand"
-              >
-                View All Accommodations
-              </Link>
+                {visibleCount >= totalAccommodations &&
+                  totalAccommodations > 12 && (
+                    <button
+                      onClick={() => {
+                        setVisibleCount(12);
+
+                        setTimeout(() => {
+                          accommodationRef.current?.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start",
+                          });
+                        }, 100);
+                      }}
+                      className="border border-[#ac9e86] text-[#ac9e86] cursor-pointer py-3 px-8 text-xs sm:text-sm uppercase hover:bg-[#ac9e86] hover:text-white rounded-sm transition duration-200 font-quicksand"
+                    >
+                      View Less
+                    </button>
+                  )}
+              </div>
+            }
+          >
+            <div className="flex flex-wrap justify-center gap-4 mb-12">
+              {regionAccommodations.map((region, index) => (
+                <button
+                  key={region.slug}
+                  onClick={() => {
+                    setActiveRegion(index);
+                    setVisibleCount(12);
+                  }}
+                  className={`px-6 py-2 text-sm uppercase cursor-pointer border rounded transition
+          ${
+            activeRegion === index
+              ? "bg-[#ac9e86] text-white border-[#ac9e86]"
+              : "bg-white text-gray-700 border-gray-300 hover:bg-[#ac9e86] hover:text-white"
+          }`}
+                >
+                  {region.regionName.replace(/accommodations?/gi, "").trim()}
+                </button>
+              ))}
             </div>
-          )}
-        </>
+          </AccommodationGrid>
+        )}
+      </div>
+      {/* {regionAccommodations.length > 0 && (
+        <div className="">
+          <div className="">
+            <div className="flex flex-wrap justify-center gap-4 mb-10">
+              {regionAccommodations.map((region, index) => (
+                <button
+                  key={region.slug}
+                  onClick={() => setActiveRegion(index)}
+                  className={`px-6 py-2 text-sm uppercase border rounded transition
+              ${
+                activeRegion === index
+                  ? "bg-[#ac9e86] text-white border-[#ac9e86]"
+                  : "bg-white text-gray-700 border-gray-300 hover:bg-[#ac9e86] hover:text-white"
+              }`}
+                >
+                  {region.regionName}
+                </button>
+              ))}
+            </div>
+
+            <AccommodationGrid
+              title="Overnight Accommodations"
+              subtitle={`Places to Stay in ${destination?.name || " Africa"}`}
+              data={regionAccommodations[activeRegion]?.accommodations
+                ?.slice(0, 12)
+                .map((acc) => ({
+                  id: acc.slug,
+                  image: acc.bannerImages?.[0],
+                  nights: `Ratings ${acc.nightsStay || ""}`,
+                  title: acc.name,
+                  location: acc.location,
+                  tag: acc.bannerDescription,
+                }))}
+              onCardClick={(slug) => navigate(`/accommodation/${slug}`)}
+            />
+          </div>
+        </div>
       )} */}
 
       {/* ===== Travel Guide / Journeys Section ===== */}

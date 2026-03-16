@@ -28,7 +28,12 @@ const Header = () => {
     const fetchDestinations = async () => {
       try {
         const res = await getAllDestinations();
-        setDestinations(res.data);
+        // setDestinations(res.data);
+        const sortedDestinations = res.data.sort((a, b) =>
+          a.name.localeCompare(b.name),
+        );
+
+        setDestinations(sortedDestinations);
       } catch (err) {
         console.error("Failed to fetch destinations", err);
       }
@@ -157,10 +162,7 @@ const Header = () => {
             >
               About Us
             </Link>
-            <Link
-              to="#"
-              className="hover:text-[#f25922] transition-colors"
-            >
+            <Link to="#" className="hover:text-[#f25922] transition-colors">
               Blogs
             </Link>
             <Link
@@ -180,12 +182,12 @@ const Header = () => {
               Contact Us
             </Link>
 
-            <Link
+            {/* <Link
               to="#"
               className="hidden lg:inline-block text-sm font-quicksand uppercase border border-gray-400 rounded-md px-4 py-2 hover:bg-[#f25922] hover:text-white transition-colors"
             >
               Brochure
-            </Link>
+            </Link> */}
 
             {/* Mobile Menu Icon */}
             <button

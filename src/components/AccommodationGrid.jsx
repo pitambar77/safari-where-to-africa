@@ -8,6 +8,8 @@ const AccommodationGrid = ({
   subtitle = "Places to Stay in South Africa",
   data = [],
   onCardClick,
+  children,
+  footer,
 }) => {
   return (
     <section className=" bg-gray-50 py-16 ">
@@ -22,6 +24,8 @@ const AccommodationGrid = ({
             {subtitle}
           </h5>
         </div>
+        {/* tab */}
+        {children}
         {/* Grid */}
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 font-cormorant">
           {data.map((item) => (
@@ -41,14 +45,17 @@ const AccommodationGrid = ({
             </div>
           ))}
         </div>
-        <div className=" mt-16 text-center">
+
+        {footer}
+
+        {/* <div className=" mt-16 text-center">
           <Link
             to={"/accommodations"}
             className="bg-[#ac9e86] text-white font-light tracking-widest py-3 px-8 text-xs sm:text-sm uppercase hover:bg-[#978973] rounded-sm transition duration-200 font-quicksand"
           >
             View All Accommodations
           </Link>
-        </div>
+        </div> */}
       </div>
     </section>
   );
