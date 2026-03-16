@@ -1,5 +1,5 @@
 import React from "react";
-import heroImage from "../../assets/where-home-banner.webp"; 
+import heroImage from "../../assets/where-home-banner.webp";
 
 import Homepack from "../homePage/Homepack";
 import Founder from "../homePage/Founder";
@@ -11,17 +11,13 @@ import DestinationSelector from "../../components/DestinationSelector";
 const Home = () => {
   return (
     <div>
-     
-     <DestinationSelector/>
-     <div className=" bg-[#fbf6ea]">
+      <DestinationSelector />
+      <div className=" bg-[#fbf6ea]"></div>
 
-     </div>
-     
-     <Homepack />
-     <Founder />
-     <WhyTravel />
-     <PositiveImpact />
-
+      <Homepack />
+      <Founder />
+      <WhyTravel />
+      <PositiveImpact />
     </div>
   );
 };

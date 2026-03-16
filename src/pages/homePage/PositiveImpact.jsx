@@ -1,6 +1,5 @@
 // import "./PositiveImpact.css";
 
-
 // const PositiveImpact = () => {
 //     return (
 //         <section class="positive_impact_secsec">
@@ -32,21 +31,17 @@ import posipico from "../../assets/positive-pico.jpg";
 import { Link } from "react-router-dom";
 
 const PositiveImpact = () => {
-    return (
-        <div className="relative bg-cover bg-center h-[600px] md:h-[700px] flex items-center "
-     
-      style={{ backgroundImage: `url('https://manoramaseoservice.com/scenic/assests/images/family-bush-beach-safari-banner.webp')` }} // Replace with actual path
+  return (
+    <div
+      className="relative bg-cover bg-center h-[600px] md:h-[700px] flex items-center "
+      style={{
+        backgroundImage: `url('https://manoramaseoservice.com/scenic/assests/images/family-bush-beach-safari-banner.webp')`,
+      }} // Replace with actual path
     >
+      <div className="absolute inset-0 bg-black opacity-30"></div>
 
-      <div className="absolute inset-0 bg-black opacity-30"></div> 
-      
-    
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center py-20">
-        
-      
         <div className="text-white md:w-1/2 lg:w-3/5 p-6 md:p-0">
-          
-         
           <div className="absolute left-[-2rem]  top-0 hidden md:block text-xs uppercase tracking-widest transform rotate-90 origin-top-left text-teal-200/70">
             ILEARNABOUT. PHOTO BY: FRANCOIS D'ELBEE 💡
           </div>
@@ -60,20 +55,25 @@ const PositiveImpact = () => {
           </h1>
 
           <p className="text-lg mb-4 font-quicksand text-gray-200">
-           We work with local partners to support community livelihoods through fair employment and respectful cultural experiences.
+            We work with local partners to support community livelihoods through
+            fair employment and respectful cultural experiences.
           </p>
 
           <p className="text-lg font-quicksand mb-8 text-gray-200">
-            Wildlife activities follow responsible guidelines that reduce disturbance and support conservation and habitat protection.
+            Wildlife activities follow responsible guidelines that reduce
+            disturbance and support conservation and habitat protection.
           </p>
-          
-          <p className="ext-lg font-quicksand mb-8 text-gray-200 ">
-            Travel decisions focus on long-term benefits, ensuring tourism supports people, nature, and destinations beyond each visit.
 
+          <p className="ext-lg font-quicksand mb-8 text-gray-200 ">
+            Travel decisions focus on long-term benefits, ensuring tourism
+            supports people, nature, and destinations beyond each visit.
           </p>
 
           {/* Learn More Button */}
-          <Link to={'/contact-us'} className="px-6 py-3 border border-white text-white uppercase text-sm tracking-widest hover:bg-white hover:text-black transition duration-300">
+          <Link
+            to={"/about-us"}
+            className="px-6 py-3 border border-white text-white uppercase text-sm tracking-widest hover:bg-white hover:text-black transition duration-300"
+          >
             LEARN MORE
           </Link>
         </div>
@@ -97,9 +97,8 @@ const PositiveImpact = () => {
         <div className="absolute right-1/4 bottom-1/4 animate-pulse text-yellow-300 text-3xl hidden md:block">
             ✨
         </div> */}
-
       </div>
     </div>
-    );
+  );
 };
 export default PositiveImpact;
