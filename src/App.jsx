@@ -47,6 +47,7 @@ import ExperienceLanding from "./pages/experiencePage/ExperienceLanding";
 import ContactUs from "./pages/ContactUs/ContactUs";
 import PageNotFound from "./pages/PageNotFound";
 import Login from "./pages/Login";
+import InquiryForm from "./components/InquiryForm";
 // import ProtectedRoute from "./components/ProtectedRoute";
 
 // const router = createBrowserRouter(
@@ -118,6 +119,8 @@ const router = createBrowserRouter(
         <Route path="about-us" element={<AboutUs />} />
         <Route path="conservation" element={<ImpactPage />} />
         <Route path="travel-guide" element={<TravelGuideDetailsPage />} />
+        <Route path="enquiry" element={<InquiryForm />} />
+
 
         <Route
           path=":destinationSlug/:regionSlug"

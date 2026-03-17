@@ -83,13 +83,6 @@ const BotswanaLandingPage = () => {
   // ✅ Destructure the fields properly from the destination object
   const { hero, regions, trips, experiences, accommodations } = destination;
 
-  // const regionAccommodations =
-  //   regions?.map((region) => ({
-  //     regionName: region.name,
-  //     slug: region.slug,
-  //     accommodations: region.accommodations || [],
-  //   })) || [];
-
   const regionAccommodations =
     regions
       ?.filter(
@@ -112,8 +105,15 @@ const BotswanaLandingPage = () => {
     ).values(),
   ];
 
-  const allExperiences =
-    regions?.flatMap((region) => region.experiences || []) || [];
+  // const allExperiences =
+  //   regions?.flatMap((region) => region.experiences || []) || [];
+  const allExperiences = [
+    ...new Map(
+      (regions?.flatMap((region) => region.experiences || []) || []).map(
+        (exp) => [exp.slug, exp], // use slug as unique key
+      ),
+    ).values(),
+  ];
   const allAccommodations =
     regions?.flatMap((region) => region.accommodations || []) || [];
 
@@ -293,20 +293,22 @@ const BotswanaLandingPage = () => {
       )} */}
 
       {/* ===== Experience Carousel ===== */}
-      {/* {experience?.length > 0 && (
+     
+
+      {allExperiences?.length > 0 && (
         <ExperienceCarousel
-          title="Guest Favorites"
-          description={experienceData.gallery?.description || ""}
-          data={experience.map((exp) => ({
-             id: exp._id, // ✅ include id for navigation
+          title="Our Experiences"
+          description={`Explore ${destination.name} Experiences`}
+          data={allExperiences.map((exp) => ({
+            id: exp.slug, // must exist
             image: exp.bannerImage,
             title: exp.bannerTitle,
           }))}
-          onCardClick={(id) => navigate(`/experience/${id}`)} // 👈 Add this
+          onCardClick={(slug) => navigate(`/experience/${slug}`)}
         />
-      )} */}
+      )}
 
-      {allExperiences?.length > 0 && (
+      {/* {allExperiences?.length > 0 && (
         <ExperienceCarousel
           title="Our Experiences"
           description={`Explore ${destination.name} Experiences`}
@@ -317,7 +319,7 @@ const BotswanaLandingPage = () => {
           }))}
           onCardClick={(slug) => navigate(`/experience/${slug}`)}
         />
-      )}
+      )} */}
 
       {/* ===== Accommodations Section ===== */}
 

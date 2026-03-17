@@ -33,18 +33,18 @@ import { Link } from "react-router-dom";
 const PositiveImpact = () => {
   return (
     <div
-      className="relative bg-cover bg-center h-[600px] md:h-[700px] flex items-center "
+      className="relative bg-cover bg-center h-[600px] md:h-[700px] "
       style={{
         backgroundImage: `url('https://manoramaseoservice.com/scenic/assests/images/family-bush-beach-safari-banner.webp')`,
       }} // Replace with actual path
     >
       <div className="absolute inset-0 bg-black opacity-30"></div>
 
-      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center py-20">
-        <div className="text-white md:w-1/2 lg:w-3/5 p-6 md:p-0">
-          <div className="absolute left-[-2rem]  top-0 hidden md:block text-xs uppercase tracking-widest transform rotate-90 origin-top-left text-teal-200/70">
+      <div className="relative z-10 mx-auto  px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-28 flex flex-col md:flex-row items-center py-20">
+        <div className="text-white  p-6 md:p-0">
+          {/* <div className="absolute left-[-2rem]  top-0 hidden md:block text-xs uppercase tracking-widest transform rotate-90 origin-top-left text-teal-200/70">
             ILEARNABOUT. PHOTO BY: FRANCOIS D'ELBEE 💡
-          </div>
+          </div> */}
 
           <p className="text-sm uppercase font-quicksand  tracking-widest mb-4 ">
             TRAVEL WITH A PURPOSE

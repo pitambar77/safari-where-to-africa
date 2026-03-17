@@ -41,7 +41,7 @@ const TalkExpert = () => {
             Talk with our team and start planning your African journey
           </p>
 
-          <Link to={'/contact-us'} className="bg-[#b1a47f] hover:bg-[#a0916d] font-quicksand text-white  text-sm uppercase py-2 px-5 rounded-sm transition">
+          <Link to={'/enquiry'} className="bg-[#b1a47f] hover:bg-[#a0916d] font-quicksand text-white  text-sm uppercase py-2 px-5 rounded-sm transition">
             Help Me Plan
           </Link>
 

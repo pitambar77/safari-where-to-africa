@@ -4,7 +4,7 @@ import React from "react";
 
 const InclusionCard = ({ name, icon }) => {
   return (
-    <div className="flex flex-col items-center justify-center text-center p-4 bg-white rounded-sm border border-[#e3e2e2]/80 transition duration-300 hover:shadow-md h-40">
+    <div className="flex flex-col items-center justify-center text-center p-4 bg-white rounded-sm border border-[#e3e2e2]/80 transition duration-300 hover:shadow-md h-28">
       {icon && (
         <img
           src={icon}
