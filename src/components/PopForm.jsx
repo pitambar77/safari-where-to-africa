@@ -7,7 +7,7 @@ export default function PopForm() {
     tripType: "",
     destinations: [],
     planningStage: "",
-    adults: 2,
+    adults: 1,
     children: 0,
     budget: "",
     travelDate: "",
@@ -56,17 +56,7 @@ export default function PopForm() {
   return (
     <>
       <div className="bg-[#ebe6dd]  ">
-        {/* <div className="text-center mb-16">
-          <h2 className="font-cormorant font-semibold text-6xl text-[#636363] mt-4">
-            Start Your Safari Journey
-          </h2>
-
-          <p className="mt-6  max-w-3xl mx-auto font-quicksand">
-            Ready for an unforgettable adventure? Let us know your travel plans,
-            and we’ll help you create the perfect safari experience filled with
-            wildlife, nature, and discovery.
-          </p>
-        </div> */}
+     
         <div className=" bg-[#f6f4f4cd] p-8 shadow-sm font-quicksand rounded">
           {/* Heading */}
           <div className=" font-quicksand text-center mb-10">

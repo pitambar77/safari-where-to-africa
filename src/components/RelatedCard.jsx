@@ -62,6 +62,7 @@ const RelatedCard = ({ data = [], onCardClick }) => {
                 <SafariPackBox
                   image={item.landingImage}
                   title={item.name}
+                  price={item.pricePerPerson}
                 />
               </div>
             </SwiperSlide>

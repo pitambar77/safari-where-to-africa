@@ -73,7 +73,7 @@ const ExperienceDetails = () => {
       {/* <PricingAvailabilitySection /> */}
       <GameDriveHighlights
         gamehighLight={experience.highlights}
-        sectionTitle="Chobe Game Drive Highlights"
+        sectionTitle={experience.highlightheading}
       />
       {/* <GallerySectionExactWidths/> */}
       {/* <GallerySection
@@ -85,7 +85,7 @@ const ExperienceDetails = () => {
 
       <GallerySection
         title="Gallery"
-        subtitle="Picture yourself here"
+        subtitle={experience.imageheading}
         description={experience.gallery.description}
         images={experience.gallery.images.map((img) => ({
           galleryImage: img.image,
