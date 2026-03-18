@@ -64,7 +64,10 @@ const ContactUs = () => {
     if (!validate()) return;
 
     try {
-      await axios.post("http://where-to-africa-safari-backend.manoramaseoservice.com/api/contact", formData);
+      await axios.post(
+        "http://where-to-africa-safari-backend.manoramaseoservice.com/api/contact",
+        formData,
+      );
 
       setSuccess("Message sent successfully!");
       setFormData({
@@ -94,9 +97,9 @@ const ContactUs = () => {
             </h2>
 
             <p className="mt-6  max-w-3xl mx-auto font-quicksand">
-              If you already have a reservation you can update information, make
-              payments and more at My Account access client reservations, update
-              information, make payments and more at Advisor Connect
+              Get in touch with our safari experts to plan your perfect African
+              adventure. We provide personalized travel planning, expert advice,
+              and full support for your journey.
             </p>
           </div>
 

@@ -20,11 +20,7 @@ const ImpactSection = () => {
 
         <h1 className="text-5xl font-cormorant text-[#1e2a57] mb-2">impact</h1> */}
 
-          <img
-            src="https://www.tauck.com/-/media/Tauck/Editorial/Images/Impact/Impact_logo_COLOR.jpg?rev=90ff7dd67525404eb17032a3d23d26af"
-            alt=""
-            className=" w-96"
-          />
+          <img src="conservation.png" alt="" className=" w-96" />
         </div>
         {/* <p className="italic text-gray-500 text-lg mb-10">supporting a thriving world</p> */}
 
@@ -44,16 +40,17 @@ const ImpactSection = () => {
 
         {/* Multi-color line */}
         <div className="h-[4px] w-full max-w-5xl mx-auto mt-10 flex">
-          <div className="flex-1 bg-[#f8d447]" />
-          <div className="flex-1 bg-[#b7e6a7]" />
-          <div className="flex-1 bg-[#a5e1dc]" />
-          <div className="flex-1 bg-[#c6f1ee]" />
+          <div className="flex-1 bg-[#8b6d4f]" />
+          <div className="flex-1 bg-[#ab8c51]" />
+          <div className="flex-1 bg-[#f7d386]" />
+
+          <div className="flex-1 bg-[#b9b39a]" />
         </div>
       </div>
 
       {/* Mission Statement */}
       <div className="mt-16 max-w-[820px] mx-auto">
-        <p className="text-3xl text-[#a89f82] uppercase font-cormorant mb-6">
+        <p className="text-3xl text-[#ab8c51] uppercase font-cormorant mb-6">
           Our Mission
         </p>
         <p className="italic text-xl text-[#636363]  font-medium font-quicksand leading-relaxed ">

@@ -1,98 +1,6 @@
-// const Filters = ({
-//   destinations,
-//   selectedDestination,
-//   setSelectedDestination,
-//   selectedPriceRange,
-//   setSelectedPriceRange,
-//   sortBy,
-//   setSortBy,
-//   onReset,
-// }) => {
-//   return (
-//     <div className="">
-//       <div className=" flex flex-wrap gap-4 mb-8 items-center justify-between">
-//         <div className="flex flex-wrap gap-4 items-center font-quicksand">
-//           {/* Destination Filter */}
-
-//           <p className=" mt-3 font-quicksand font-semibold uppercase tracking-wider text-[#aaa086] ">
-//             Filter by:
-//           </p>
-
-//           <select
-//             className="border font-quicksand rounded-sm px-3 py-3 bg-white text-[#aaa086]"
-//             value={selectedDestination}
-//             onChange={(e) => setSelectedDestination(e.target.value)}
-//           >
-//             <option value="">Destinations</option>
-//             {destinations.map((dest) => (
-//               <option key={dest} value={dest}>
-//                 {dest}
-//               </option>
-//             ))}
-//           </select>
-
-//           <select
-//             className="border rounded-sm px-3 py-3 bg-white text-[#aaa086]"
-//             value={selectedDestination}
-//             onChange={(e) => setSelectedDestination(e.target.value)}
-//           >
-//             <option value="">Experiences</option>
-//             {destinations.map((dest) => (
-//               <option key={dest} value={dest}>
-//                 {dest}
-//               </option>
-//             ))}
-//           </select>
-
-//           {/* Price Range */}
-//           <select
-//             className="border rounded-sm px-3 py-3 bg-white text-[#aaa086]"
-//             value={selectedPriceRange}
-//             onChange={(e) => setSelectedPriceRange(e.target.value)}
-//           >
-//             <option value="">Price Range (Per Person)</option>
-//             <option value="below10k">Below $10,000</option>
-//             <option value="10kto15k">$10,000 - $15,000</option>
-//             <option value="above15k">Above $15,000</option>
-//           </select>
-//         </div>
-
-//         {/* Sort */}
-//         <div className="flex items-center gap-2">
-//           <p className="mt-3 font-quicksand font-semibold uppercase tracking-wider text-[#aaa086]">
-//             Sort By
-//           </p>
-//           <select
-//             className=" font-quicksand border rounded-sm px-3 py-3 bg-white text-[#aaa086]"
-//             value={sortBy}
-//             onChange={(e) => setSortBy(e.target.value)}
-//           >
-//             <option value="">Iconic</option>
-//             <option value="priceAsc">Price: Low to High</option>
-//             <option value="priceDesc">Price: High to Low</option>
-//             <option value="nameAsc">Name: A–Z</option>
-//           </select>
-//         </div>
-//       </div>
-
-//       <div className="flex items-center justify-between mb-4 font-quicksand">
-//         <div className="flex items-center gap-2">
-//           <button className="bg-[#aaa086] text-white text-sm px-4 py-2 rounded-md">
-//             Safaris
-//           </button>
-//           <button onClick={onReset} className="text-sm px-4 py-2 rounded-md">
-//             Reset
-//           </button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Filters;
-
 import { useState } from "react";
 import { RiResetLeftFill } from "react-icons/ri";
+import { MdKeyboardArrowDown } from "react-icons/md";
 
 const Filters = ({
   destinations,
@@ -111,106 +19,95 @@ const Filters = ({
 
   return (
     <div>
-      <div className="flex flex-wrap gap-4 mb-8 items-center justify-between">
-        <div className="flex flex-wrap gap-4 items-center font-quicksand">
-          <p className="mt-3 font-semibold uppercase tracking-wider text-[#aaa086]">
+      <div className="flex flex-wrap md:flex-nowrap gap-4 mb-8 items-center justify-between">
+        {/* LEFT SIDE */}
+        <div className="flex flex-wrap md:flex-nowrap gap-4 items-center font-quicksand">
+          <p className="font-semibold uppercase tracking-wider text-[#aaa086] whitespace-nowrap">
             Filter by:
           </p>
 
-          {/* DESTINATION DROPDOWN */}
-          <select
-            className="border rounded-sm px-3 py-3 bg-white text-[#aaa086]"
-            value={selectedDestination}
-            onChange={(e) => setSelectedDestination(e.target.value)}
-          >
-            <option value="">Destinations</option>
-            {destinations.map((dest) => (
-              <option key={dest} value={dest}>
-                {dest}
-              </option>
-            ))}
-          </select>
+          {/* DESTINATION */}
+          <div className="relative">
+            <select
+              className="appearance-none border rounded-sm px-3 py-2 pr-10 cursor-pointer bg-white text-[#aaa086] w-full outline-none focus:outline-none focus:ring-0 focus:border-[#aaa086]"
+              value={selectedDestination}
+              onChange={(e) => setSelectedDestination(e.target.value)}
+            >
+              <option value="">Destinations</option>
+              {destinations.map((dest) => (
+                <option key={dest} value={dest}>
+                  {dest}
+                </option>
+              ))}
+            </select>
 
-          {/* REGION DROPDOWN */}
-          <select
-            className="border rounded-sm px-3 py-3 bg-white text-[#aaa086]"
-            value={selectedRegion}
-            onChange={(e) => setSelectedRegion(e.target.value)}
-            disabled={!selectedDestination}
-          >
-            <option value="">Regions</option>
-            {regions.map((region) => (
-              <option key={region} value={region}>
-                {region}
-              </option>
-            ))}
-          </select>
+            {/* Custom Icon */}
+            <MdKeyboardArrowDown className="absolute right-3 top-1/2 -translate-y-1/2 text-[#aaa086] pointer-events-none text-xl" />
+          </div>
+          {/* REGION */}
 
-          {/* PRICE RANGE
-          <select
-            className="border rounded-sm px-3 py-3 bg-white text-[#aaa086]"
-            value={selectedPriceRange}
-            onChange={(e) => setSelectedPriceRange(e.target.value)}
+          <div className="relative">
+            <select
+              className="appearance-none cursor-pointer border rounded-sm px-3 py-2 pr-10 bg-white text-[#aaa086] w-full outline-none focus:outline-none focus:ring-0 focus:border-[#aaa086]"
+              value={selectedRegion}
+              onChange={(e) => setSelectedRegion(e.target.value)}
+              disabled={!selectedDestination}
+            >
+              <option value="">Regions</option>
+              {regions.map((region) => (
+                <option key={region} value={region}>
+                  {region}
+                </option>
+              ))}
+            </select>
+
+            {/* Custom Icon */}
+            <MdKeyboardArrowDown className="absolute right-3 top-1/2 -translate-y-1/2 text-[#aaa086] pointer-events-none text-xl" />
+          </div>
+
+          {/* RESET BUTTON */}
+          <button
+            onClick={() => {
+              setSpinning(true);
+              onReset();
+
+              setTimeout(() => {
+                setSpinning(false);
+              }, 600);
+            }}
+            className="flex items-center cursor-pointer gap-2 text-sm px-4 py-2 rounded-md border border-[#aaa086] text-[#aaa086] hover:bg-[#aaa086] hover:text-white transition-all duration-300 whitespace-nowrap"
           >
-            <option value="">Price Range (Per Person)</option>
-            <option value="below10k">Below $10,000</option>
-            <option value="10kto15k">$10,000 - $15,000</option>
-            <option value="above15k">Above $15,000</option>
-          </select> */}
+            Reset
+            <RiResetLeftFill
+              className={`text-lg transition-transform duration-500 ${
+                spinning ? "rotate-[360deg]" : ""
+              }`}
+            />
+          </button>
         </div>
 
-        {/* SORT */}
-        <div className="flex items-center gap-2">
-          <p className="mt-3 font-semibold uppercase tracking-wider text-[#aaa086]">
-            Sort By
+        {/* RIGHT SIDE */}
+        <div className="flex items-center gap-2 whitespace-nowrap">
+          <p className="font-semibold uppercase tracking-wider text-[#aaa086] whitespace-nowrap">
+            Sort By :
           </p>
-          <select
-            className="border rounded-sm px-3 py-3 bg-white text-[#aaa086]"
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
-          >
-            <option value="">Iconic</option>
-            <option value="priceAsc">Price: Low to High</option>
-            <option value="priceDesc">Price: High to Low</option>
-            <option value="nameAsc">Name: A–Z</option>
-          </select>
+          <div className="relative">
+            <select
+              className="appearance-none cursor-pointer border rounded-sm px-3 py-2 pr-10 bg-white text-[#aaa086] w-full outline-none focus:outline-none focus:ring-0 focus:border-[#aaa086]"
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+            >
+              <option value="">Iconic</option>
+              <option value="priceAsc">Price: Low to High</option>
+              <option value="priceDesc">Price: High to Low</option>
+              <option value="nameAsc">Name: A–Z</option>
+            </select>
+
+            {/* Custom Icon */}
+            <MdKeyboardArrowDown className="absolute right-3 top-1/2 -translate-y-1/2 text-[#aaa086] pointer-events-none text-xl" />
+          </div>
         </div>
       </div>
-
-      {/* <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-2">
-          <button className="bg-[#aaa086] text-white text-sm px-4 py-2 rounded-md">
-            Safaris
-          </button>
-          <button
-            onClick={onReset}
-            className="text-sm px-4 py-2 rounded-md cursor-pointer"
-          >
-            Reset <RiResetLeftFill />
-
-          </button>
-        </div>
-      </div> */}
-
-      <button
-        onClick={() => {
-          setSpinning(true);
-          onReset();
-
-          // Stop spin after animation completes
-          setTimeout(() => {
-            setSpinning(false);
-          }, 600);
-        }}
-        className="flex items-center gap-2 mb-4 text-sm px-4 py-2 rounded-md border border-[#aaa086] text-[#aaa086] hover:bg-[#aaa086] hover:text-white transition-all duration-300"
-      >
-        Reset
-        <RiResetLeftFill
-          className={`text-lg transition-transform duration-500  ${
-            spinning ? "rotate-[360deg]" : ""
-          }`}
-        />
-      </button>
     </div>
   );
 };

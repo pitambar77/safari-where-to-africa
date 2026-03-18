@@ -1,23 +1,12 @@
-
-
 import { useState } from "react";
 import { Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const SafariCard = ({ safari,link }) => {
+const SafariCard = ({ safari, link }) => {
   const [liked, setLiked] = useState(false);
 
   return (
     <div className="relative rounded-sm overflow-hidden shadow-md hover:shadow-lg transition-all  duration-300">
-      <Link to={link}>
-      
-      
-      <img
-        src={safari.image}
-        alt={safari.title}
-        className="h-[450px] w-full object-cover  "
-      />
-
       {/* ❤️ Heart Button */}
       <div
         onClick={() => setLiked(!liked)}
@@ -27,22 +16,28 @@ const SafariCard = ({ safari,link }) => {
       >
         <Heart fill={liked ? "currentColor" : "none"} size={20} />
       </div>
+      <Link to={link}>
+        <img
+          src={safari.image}
+          alt={safari.title}
+          className="h-[450px] w-full object-cover  "
+        />
 
-      {/* 🌙 Nights Badge */}
-      <div className="absolute top-4 font-quicksand right-4 bg-[#aaa086] text-white text-sm font-semibold px-3 py-1 rounded-md">
-        {safari.nights} {safari.labeldata}
-      </div>
+        {/* 🌙 Nights Badge */}
+        <div className="absolute top-4 font-quicksand right-4 bg-[#aaa086] text-white text-sm font-semibold px-3 py-1 rounded-md">
+          {safari.nights} {safari.labeldata}
+        </div>
 
-      {/* 🖤 Bottom Overlay */}
-      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-4 text-white">
-        <div className="text-xs uppercase tracking-wide opacity-80 mb-3 font-quicksand font-semibold">
-          {safari.country}
+        {/* 🖤 Bottom Overlay */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-4 text-white">
+          <div className="text-xs uppercase tracking-wide opacity-80 mb-3 font-quicksand font-semibold">
+            {safari.country}
+          </div>
+          <div className="mb-4 font-cormorant text-3xl ">{safari.title}</div>
+          <div className=" mt-1 font-quicksand">
+            Per Person {safari.price.toLocaleString()}
+          </div>
         </div>
-        <div className="mb-4 font-cormorant text-3xl ">{safari.title}</div>
-        <div className=" mt-1 font-quicksand">
-          Per Person {safari.price.toLocaleString()} 
-        </div>
-      </div>
       </Link>
     </div>
   );

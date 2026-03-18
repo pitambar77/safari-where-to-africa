@@ -86,7 +86,7 @@ const ExperienceList = () => {
             {currentPage > 1 && (
               <button
                 onClick={() => setCurrentPage(currentPage - 1)}
-                className="px-4 py-2 bg-white border text-[#aaa086] rounded-md"
+                className="px-4 py-2 bg-white border text-[#aaa086] rounded-md cursor-pointer"
               >
                 Prev
               </button>
@@ -96,7 +96,7 @@ const ExperienceList = () => {
               <button
                 key={index}
                 onClick={() => setCurrentPage(index + 1)}
-                className={`w-8 h-8 rounded-md ${
+                className={`w-8 h-8 rounded-md cursor-pointer ${
                   currentPage === index + 1
                     ? "bg-[#aaa086] text-white"
                     : "bg-white border text-[#aaa086]"
@@ -109,7 +109,7 @@ const ExperienceList = () => {
             {currentPage < totalPages && (
               <button
                 onClick={() => setCurrentPage(currentPage + 1)}
-                className="px-4 py-2 bg-[#aaa086] text-white rounded-md"
+                className="px-4 py-2 bg-[#aaa086] text-white rounded-md cursor-pointer"
               >
                 Next
               </button>

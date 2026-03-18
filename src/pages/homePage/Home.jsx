@@ -8,6 +8,7 @@ import PositiveImpact from "../homePage/PositiveImpact";
 import Banner from "../../components/Banner";
 import Overview from "../../components/Overview";
 import DestinationSelector from "../../components/DestinationSelector";
+import MapSection from "../../components/MapSection/MapSection";
 const Home = () => {
   return (
     <div>
@@ -17,6 +18,7 @@ const Home = () => {
       <Homepack />
       <Founder />
       <WhyTravel />
+      <MapSection/>
       <PositiveImpact />
     </div>
   );

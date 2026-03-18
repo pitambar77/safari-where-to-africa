@@ -1,77 +1,4 @@
-// import "./Footer.css";
-// import logo from "../assets/whereto-logo.webp";
 
-// const Footer =()=>{
-//     return(
-//         <>
-//         <section className="footer-sec">
-//             <div className=" max-w-[1320px] mx-auto px-4">
-//                 <div className="foter_iner_box">
-//                     <div className=" flex  gap-8 ">
-//                         <div className="">
-//                             <div className="africa_footer_logo">
-//                                 <img src={logo} alt="" className=" w-1/2"/>
-//                             </div>
-//                         </div>
-//                         <div className="">
-//                             <div className=" flex justify-between gap-8 ">
-//                                 <div className="col-md-3">
-//                                     <div className="footer_list_box">
-//                                         <h3>Travel Information</h3>
-//                                         <ul className="footer_list">
-//                                             <li><a href="#">First Time to Africa </a></li>
-//                                             <li><a href="#">Sustainability</a></li>
-//                                             <li><a href="#">The Wildebeest Migration</a></li>
-//                                         </ul>
-//                                     </div>
-//                                 </div>
-//                                 <div className="col-md-3">
-//                                     <div className="footer_list_box">
-//                                         <h3>About Us</h3>
-//                                         <ul className="footer_list">
-//                                             <li><a href="#">Our team</a></li>
-//                                             <li><a href="#">Guest Reviews</a></li>
-//                                             <li><a href="#">Why book with us?</a></li>
-//                                         </ul>
-//                                     </div>
-//                                 </div>
-//                                 <div className="col-md-3">
-//                                     <div className="footer_list_box">
-//                                         <h3>Who is Travelling?</h3>
-//                                         <ul className="footer_list">
-//                                             <li><a href="#">Couples and Honeymooners</a></li>
-//                                             <li><a href="#">Family Safari</a></li>
-//                                             <li><a href="#">Group of Friends</a></li>
-//                                         </ul>
-//                                     </div>
-//                                 </div>
-//                                 <div className="col-md-3">
-//                                     <div className="footer_list_box">
-//                                         <h3>Safaris:</h3>
-//                                         <ul className="footer_list">
-//                                             <li><a href="#">All Safaris</a></li>
-//                                             <li><a href="#">Sample Safaris</a></li>
-//                                             <li><a href="#">Set Departure Safaris</a></li>
-//                                         </ul>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>
-//         </section>
-// <section className="copywrite-sec">
-//     <div class="copyy-write">
-//         <p>AlI rights reserved© 2025 Where To Africa Travel Pty Ltd</p>
-
-//     </div>
-
-// </section>
-//         </>
-//     );
-// };
-// export default Footer;
 
 import React from "react";
 import logo from "../assets/whereto-logo.webp"; // replace with your logo path
@@ -159,9 +86,9 @@ const Footer = () => {
               <Link className="hover:text-[#c2bfae] cursor-pointer transition">
                 Blogs
               </Link>
-              <Link className="hover:text-[#c2bfae] cursor-pointer transition">
+              {/* <Link className="hover:text-[#c2bfae] cursor-pointer transition">
                 Brochure
-              </Link>
+              </Link> */}
             </ul>
           </div>
 

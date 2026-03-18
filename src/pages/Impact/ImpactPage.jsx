@@ -9,7 +9,7 @@ const ImpactPage = () => {
      <Banner
     title={"Conservation"}
     subtitle={"Protecting Africa’s wildlife, empowering communities, and supporting sustainable tourism initiatives that safeguard ecosystems while creating responsible travel experiences."}
-    imageUrl={"https://www.matriarchafrica.com/wp-content/uploads/2018/12/Kruger-Walking-Safari.jpg"}
+    imageUrl={"conservation-banner-image.jpg"}
     />
     <ImpactSection/>
     <div className='bg-[#f6f1e9]'>

@@ -143,7 +143,78 @@ const AccommodationForm = () => {
     }
   };
 
+  // const handleEdit = async (id) => {
+  //   try {
+  //     const { data } = await getAccommodationById(id);
+
+  //     reset(data);
+  //     setEditingId(id);
+
+  //     // ✅ NEW DATA (has IDs)
+  //     if (data.destinationId && data.regionId) {
+  //       setSelectedDestinationId(data.destinationId);
+  //       setSelectedRegionId(data.regionId);
+  //     } else {
+  //       // ⚠️ OLD DATA fallback
+  //       const selectedDest = destinations.find(
+  //         (d) => d.name === data.destination,
+  //       );
+
+  //       if (selectedDest) {
+  //         setSelectedDestinationId(selectedDest._id);
+
+  //         const selectedRegion = selectedDest.regions.find(
+  //           (r) => r.name === data.subdestination,
+  //         );
+
+  //         if (selectedRegion) {
+  //           setSelectedRegionId(selectedRegion._id);
+  //         }
+  //       }
+  //     }
+
+  //     setAmenities(
+  //       data.amenities.map((a) => ({
+  //         amenityName: a.amenityName,
+  //         amenityImage: a.amenityImage,
+  //       })),
+  //     );
+
+  //     setGallery(
+  //       data.gallery.map((g) => ({
+  //         galleryName: g.galleryName,
+  //         galleryImage: g.galleryImage,
+  //       })),
+  //     );
+
+  //     setAboutBooking(data.aboutBooking || []);
+  //     setRequirements(data.requirements || []);
+
+  //     window.scrollTo({ top: 0, behavior: "smooth" });
+  //   } catch (err) {
+  //     console.error(err);
+  //     alert("Failed to load accommodation");
+  //   }
+  // };
+
   // Handle region update when destination changes
+  // useEffect(() => {
+  //   const selected = destinations.find((d) => d._id === selectedDestinationId);
+  //   setRegions(selected?.regions || []);
+  // }, [selectedDestinationId, destinations]);
+
+  // useEffect(() => {
+  //   if (editingId && selectedDestinationId && selectedRegionId) {
+  //     const selected = destinations.find(
+  //       (d) => d._id === selectedDestinationId,
+  //     );
+
+  //     if (selected) {
+  //       setRegions(selected.regions || []);
+  //     }
+  //   }
+  // }, [editingId, selectedDestinationId, selectedRegionId, destinations]);
+
   useEffect(() => {
     const selected = destinations.find((d) => d._id === selectedDestinationId);
     setRegions(selected?.regions || []);
@@ -171,6 +242,16 @@ const AccommodationForm = () => {
       formData.append("subdestination", data.subdestination);
     }
 
+    // ✅ ALWAYS send IDs
+    // formData.append("destinationId", selectedDestinationId);
+    // formData.append("regionId", selectedRegionId);
+
+    // // Only for create
+    // if (!editingId) {
+    //   formData.append("destination", data.destination);
+    //   formData.append("subdestination", data.subdestination);
+    // }
+
     // Text fields
     [
       "bannerTitle",
@@ -186,6 +267,8 @@ const AccommodationForm = () => {
       "accommodationType",
       "checkIn",
       "checkOut",
+      "galleyheading",
+      "galleryDescription",
     ].forEach((field) => {
       if (data[field] !== undefined) {
         formData.append(field, data[field]);
@@ -214,17 +297,16 @@ const AccommodationForm = () => {
     // );
 
     formData.append(
-  "amenities",
-  JSON.stringify(
-    amenities.map((a) => ({
-      amenityName: a.amenityName,
-      amenityImage:
-        typeof a.amenityImage === "string" ? a.amenityImage : null,
-      hasNewImage: a.amenityImage instanceof File, // 🔥 KEY
-    }))
-  )
-);
-
+      "amenities",
+      JSON.stringify(
+        amenities.map((a) => ({
+          amenityName: a.amenityName,
+          amenityImage:
+            typeof a.amenityImage === "string" ? a.amenityImage : null,
+          hasNewImage: a.amenityImage instanceof File, // 🔥 KEY
+        })),
+      ),
+    );
 
     amenities.forEach((a) => {
       if (a.amenityImage instanceof File) {
@@ -544,6 +626,19 @@ const AccommodationForm = () => {
       /> */}
 
         <h3 className="font-semibold mt-6 mb-2">Gallery</h3>
+
+        <input
+          type="text"
+          placeholder="Gallery Heading"
+          {...register("galleyheading")}
+          className="w-full border p-2 mb-3 rounded"
+        />
+
+        <textarea
+          placeholder="Gallery Description"
+          {...register("galleryDescription")}
+          className="w-full border p-2 mb-4 rounded"
+        />
 
         {gallery.map((item, index) => (
           <div key={index} className="flex gap-3 mb-3">
